@@ -1,0 +1,10 @@
+KThinkBat 0.1.5:
+   * prepared for current power consumption display right instead below 
+     the battery gauge (enabled with 'ConsumptionPositionBelowGauge = 1')
+
+KThinkBat 0.1.4:
+   * Support for ASUS Laptops wich report values in mAh instead of mWh 
+     in /proc/acpi/battery/BAT0 which fixes Bug #KTB001
+
+KThinkBat 0.1.3:
+   * Inital release after 3 month of personal using

@@ -1,0 +1,8 @@
+Please see at 
+https://lepetitfou.dyndns.org/KThinkBat
+
+- Support more than one battery
+- good error messages if getting /proc values fail
+- better size-adjustment/reporting/calculation
+- ASUS: calculate W from the values provided by ACPI
+- use kdeutils/klaptopdaemon function eps. laptop_portable
