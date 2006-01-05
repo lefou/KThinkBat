@@ -103,7 +103,9 @@ void KThinkBat::resizeEvent(QResizeEvent *e)
 
 void KThinkBat::paintEvent(QPaintEvent* event)
 {
-    // Werte fr Gauge und Rand
+    // TODO Gauge auslagern als Funktion, später als extra Control
+
+    // Values for Gauge and Border
     static QSize gaugeFill(40, 18);
     static QSize gHalfDot(4, 4);
     static QSize offset(4, 4);
@@ -127,7 +129,7 @@ void KThinkBat::paintEvent(QPaintEvent* event)
     QPainter painter(&pixmap);
 
     //-------------------------------------------------------------------------
-    // Gauge zeichnen
+    // Paint Gauge
     painter.fillRect(offset.width(), offset.height(), gaugeFill.width() + 2, gaugeFill.height(), QColor( "gray"));
     int showValue = (batValue <0 || batValue > 100 ) ? 0 : batValue;
     int xFill = (showValue>0 ? showValue * gaugeFill.width() / 100 : 0);
@@ -135,11 +137,11 @@ void KThinkBat::paintEvent(QPaintEvent* event)
     // Plus-Pol zeichnen
     painter.fillRect( offset.width() + gaugeFill.width() + 2, offset.height() + (gaugeFill.height() / 2) - gHalfDot.height(), gHalfDot.width(), gHalfDot.height() * 2, QColor( online ? "yellow" : "gray" ));
 
-    // Rahmen zeichnen
+    // Paint Border
     painter.drawPolyline(border);
 
     // Prozent-Anzeige
-    QString precentageString = (batValue >= 0) ? QString().number(batValue) : "?" ;
+    QString percentageString = (batValue >= 0) ? QString().number(batValue) : "?" ;
     painter.drawText( offset.width() + 12, offset.height() + gaugeFill.height() - 5, percentageString );
 
     //-------------------------------------------------------------------------
