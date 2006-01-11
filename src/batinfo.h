@@ -50,8 +50,10 @@ public:
     bool isOnline() { return acConnected; }
     QString getState() { return batState; }
 
+    /// Get battery info from /proc/acpi interface.
     bool parseProcACPI();
 
+    /// Get battery info form tp_smapi sysfs interface.
     bool parseSysfsTP();
 
 protected:

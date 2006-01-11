@@ -176,11 +176,13 @@ void KThinkBat::paintEvent(QPaintEvent* event)
 
 void KThinkBat::timeout()
 {
-    // Ermittle die Werte von /proc/acpi/BAT0
-    // batInfo1.parseProcACPI();
-
     // Ermittle die Werte von /sys/devices/platform/smapi/
-    batInfo1.parseSysfsTP();
+    bool tpGood = batInfo1.parseSysfsTP();
+
+    if ( ! tpGood ) {
+        // Ermittle die Werte von /proc/acpi/BAT0
+        batInfo1.parseProcACPI();
+    }
 
     // Aktualisierte Interface
     update();

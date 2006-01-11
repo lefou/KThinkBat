@@ -22,13 +22,14 @@
 #include <qtextstream.h>
 #include <qregexp.h>
 #include <qfile.h>
+#include <qdir.h>
 #include <qtextstream.h>
 
 #include "batinfo.h"
 
 BatInfo::BatInfo() 
-    : lastFuell( -1 )
-    , designFuell( -1 )
+    : lastFuell( 0 )
+    , designFuell( 0 )
     , criticalFuell( -1 )
     , curFuell( -1 )
     , curPower( -1 )
@@ -183,6 +184,15 @@ BatInfo::parseSysfsTP() {
     QRegExp mW( "^([-]?\\d{1,6})\\s*mW\\s*$" );
     bool check;
     
+    if( ! QDir().exists( "/sys/devices/platform/smapi" ) ) {
+        static bool sayTheProblem = true;
+        if( sayTheProblem ) {
+            qDebug( "There is no directory /sys/devices/platform/smapi. Do you have tp_smapi loaded?" );
+            sayTheProblem = false;
+        }
+        return false;
+    }
+
     file.setName( tpPath + "last_full_capacity" );
     if( file.exists() && file.open(IO_ReadOnly) ) {
         stream.setDevice( &file );
@@ -192,7 +202,10 @@ BatInfo::parseSysfsTP() {
         }
         file.close();
     }
-    
+    else {
+        lastFuell = 0;
+    }
+
     file.setName( tpPath + "design_capacity" );
     if( file.exists() && file.open(IO_ReadOnly) ) {
         stream.setDevice( &file );
@@ -201,6 +214,9 @@ BatInfo::parseSysfsTP() {
             designFuell = mWh.cap(1).toInt( &check );
         }
         file.close();
+    }
+    else {
+        designFuell = 0;
     }
     
     file.setName( tpPath + "remaining_capacity" );
@@ -211,6 +227,9 @@ BatInfo::parseSysfsTP() {
             curFuell = mWh.cap(1).toInt( &check );
         }
         file.close();
+    }
+    else {
+        curFuell = -1;
     }
     
     file.setName( tpPath + "power_now" );
@@ -223,12 +242,18 @@ BatInfo::parseSysfsTP() {
         }
         file.close();
     }
+    else {
+        curPower = -1;
+    }
 
     file.setName( tpPath + "state" );
     if( file.exists() && file.open(IO_ReadOnly) ) {
         stream.setDevice( &file );
         batState = stream.readLine();
         file.close();
+    }
+    else {
+        batState = "";
     }
 
     file.setName( "/sys/devices/platform/smapi/ac_connected" );
@@ -237,7 +262,9 @@ BatInfo::parseSysfsTP() {
         acConnected = stream.readLine().toInt( &check );
         file.close();
     }
+    else {
+        acConnected = false;
+    }
 
     return true;
 }
-
