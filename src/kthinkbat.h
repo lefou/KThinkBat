@@ -128,24 +128,12 @@ protected:
 private:
     KConfig *ksConfig;
     
-    /// Ladestand des ersten Akkus in Prozent. -1 if unaware.
-    int batValue;
     /// Aktualisierungs-Interval fr die ACPI-Werte
     int intervall;
-    /// aktueller Verbrauch in mW (oder unity)
-    int mWH;
-    /// \c true, wenn online
-    bool online;
-    /// \c true, wenn nur noch sehr wenig Ladung
-    bool critical;
-    /// Betriebs-zustand des Akkus
-    QString state;
 
     QColor borderColor, emptyColor, chargedColor;
 
     QTimer* timer;
-
-    QString unity;
 
     /// Anzeige des Verbrauchs unterhalb der Gauge anzeigen (oder rechts davon)
     bool wastePosBelow;

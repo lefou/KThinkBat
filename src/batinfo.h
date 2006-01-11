@@ -38,6 +38,8 @@ public:
 
     float getLastFuell() { return lastFuell; }
     float getDesignFuell() { return designFuell; }
+    float getCriticalFuell() { return criticalFuell; }
+    float getCurFuell() { return curFuell; }
 
     float getPowerConsumption() { return curPower; }
 
@@ -49,6 +51,8 @@ public:
     QString getState() { return batState; }
 
     bool parseProcACPI();
+
+    bool parseSysTPsmapi();
 
 protected:
 

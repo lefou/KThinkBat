@@ -163,3 +163,15 @@ BatInfo::parseProcACPI() {
 
     return true;
 }
+
+bool 
+BatInfo::parseSysTPsmapi() {
+
+    QString tpPath = "/sys/devices/platform/smapi/BAT" + QString::number(batNr) + "/";
+
+    QFile file( tpPath + "last_full_capacity" );
+    
+
+    return false;
+}
+
