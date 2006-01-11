@@ -31,6 +31,8 @@
 #include <kconfig.h>
 #include <qtimer.h>
 
+#include "batinfo.h"
+
 class KThinkBat : public KPanelApplet
 {
     Q_OBJECT
@@ -147,6 +149,8 @@ private:
 
     /// Anzeige des Verbrauchs unterhalb der Gauge anzeigen (oder rechts davon)
     bool wastePosBelow;
+
+    BatInfo batInfo1;
 
 };
 

@@ -47,6 +47,7 @@ KThinkBat::KThinkBat(const QString& configFile, Type type, int actions, QWidget 
     , timer(NULL)
     , unity("W")
     , wastePosBelow( true )
+    , batInfo1( BatInfo() )
 {
     // Get the current application configuration handle
     ksConfig = config();
@@ -131,8 +132,9 @@ void KThinkBat::paintEvent(QPaintEvent* event)
     //-------------------------------------------------------------------------
     // Paint Gauge
     painter.fillRect(offset.width(), offset.height(), gaugeFill.width() + 2, gaugeFill.height(), QColor( "gray"));
-    int showValue = (batValue <0 || batValue > 100 ) ? 0 : batValue;
-    int xFill = (showValue>0 ? showValue * gaugeFill.width() / 100 : 0);
+    // old: int showValue = (batValue <0 || batValue > 100 ) ? 0 : batValue;
+    int batValue = batInfo1.getChargeLevel();
+    int xFill = (batValue>0 ? batValue * gaugeFill.width() / 100 : 0);
     painter.fillRect(offset.width(), offset.height(), xFill, gaugeFill.height(), QColor( critical ? "red" : "green"));
     // Plus-Pol zeichnen
     painter.fillRect( offset.width() + gaugeFill.width() + 2, offset.height() + (gaugeFill.height() / 2) - gHalfDot.height(), gHalfDot.width(), gHalfDot.height() * 2, QColor( online ? "yellow" : "gray" ));
@@ -156,7 +158,7 @@ void KThinkBat::paintEvent(QPaintEvent* event)
         wastePos = QSize( offset.width() + gaugeFill.width() + gHalfDot.width() + 12, offset.height() );
     }
     // aktuellen Verbrauch in W (oder A bei Asus-Laptops) anzeigen
-    painter.drawText( wastePos.width(), wastePos.height(), QString().number((mWH + 500)/1000) + " " + unity );
+    painter.drawText( wastePos.width(), wastePos.height(), QString().number((batInfo1.getPowerConsumption() + 500)/1000) + " " + batInfo1.getPowerUnit() );
 
     //-------------------------------------------------------------------------
     painter.end();
@@ -170,6 +172,9 @@ void KThinkBat::paintEvent(QPaintEvent* event)
 
 void KThinkBat::timeout()
 {
+    batInfo1.parseProcACPI();
+    return;
+
     // die aktuelle Zeile beim parsen des proc-fs
     QString line = "";
     QString mWHstring = "";
