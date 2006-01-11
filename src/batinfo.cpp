@@ -22,6 +22,7 @@
 #include <qtextstream.h>
 #include <qregexp.h>
 #include <qfile.h>
+#include <qtextstream.h>
 
 #include "batinfo.h"
 
@@ -161,17 +162,82 @@ BatInfo::parseProcACPI() {
         curPower = -1;
     }
 
+    // TODO better read /proc/acpi/ac_adapter/AC/state an evaluate "on-line"
+    acConnected = (batState != "discharging");
+
     return true;
 }
 
 bool 
-BatInfo::parseSysTPsmapi() {
+BatInfo::parseSysfsTP() {
+
+    // critical Fuell can not be set via tp_smapi, so we decide is statically
+    criticalFuell = 1000;
+    powerUnit = "W";
 
     QString tpPath = "/sys/devices/platform/smapi/BAT" + QString::number(batNr) + "/";
-
-    QFile file( tpPath + "last_full_capacity" );
+    QFile file;
+    QTextStream stream;
+    QString line;
+    QRegExp mWh( "^([-]?\\d{1,6})\\s*mWh\\s*$" );
+    QRegExp mW( "^([-]?\\d{1,6})\\s*mW\\s*$" );
+    bool check;
     
+    file.setName( tpPath + "last_full_capacity" );
+    if( file.exists() && file.open(IO_ReadOnly) ) {
+        stream.setDevice( &file );
+        line = stream.readLine();
+        if( -1 != mWh.search( line ) ) {
+            lastFuell = mWh.cap(1).toInt( &check );
+        }
+        file.close();
+    }
+    
+    file.setName( tpPath + "design_capacity" );
+    if( file.exists() && file.open(IO_ReadOnly) ) {
+        stream.setDevice( &file );
+        line = stream.readLine();
+        if( -1 != mWh.search( line ) ) {
+            designFuell = mWh.cap(1).toInt( &check );
+        }
+        file.close();
+    }
+    
+    file.setName( tpPath + "remaining_capacity" );
+    if( file.exists() && file.open(IO_ReadOnly) ) {
+        stream.setDevice( &file );
+        line = stream.readLine();
+        if( -1 != mWh.search( line ) ) {
+            curFuell = mWh.cap(1).toInt( &check );
+        }
+        file.close();
+    }
+    
+    file.setName( tpPath + "power_now" );
+    if( file.exists() && file.open(IO_ReadOnly) ) {
+        stream.setDevice( &file );
+        line = stream.readLine();
+        if( -1 != mW.search( line ) ) {
+            curPower = mW.cap(1).toInt( &check );
+            if( curPower < 0 ) { curPower = (0 - curPower); }
+        }
+        file.close();
+    }
 
-    return false;
+    file.setName( tpPath + "state" );
+    if( file.exists() && file.open(IO_ReadOnly) ) {
+        stream.setDevice( &file );
+        batState = stream.readLine();
+        file.close();
+    }
+
+    file.setName( "/sys/devices/platform/smapi/ac_connected" );
+    if( file.exists() && file.open(IO_ReadOnly) ) {
+        stream.setDevice( &file );
+        acConnected = stream.readLine().toInt( &check );
+        file.close();
+    }
+
+    return true;
 }
 
