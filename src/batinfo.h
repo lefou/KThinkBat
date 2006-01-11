@@ -45,6 +45,9 @@ public:
 
     void invalidateAll();
 
+    bool isOnline() { return batState == "charging" || batState == "charged"; }
+    QString getState() { return batState; }
+
     bool parseProcACPI();
 
 protected:
@@ -59,7 +62,7 @@ private:
     int batNr;
 
     QString powerUnit;
-    QString acState;
+    QString batState;
 };
 
 #endif // KTHINKBAT_BATINFO_H

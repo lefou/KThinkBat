@@ -33,7 +33,7 @@ BatInfo::BatInfo()
     , curPower( -1 )
     , batNr( 0 )
     , powerUnit( "W" )
-    , acState( "" )
+    , batState( "?" )
 {
 }
 
@@ -133,7 +133,7 @@ BatInfo::parseProcACPI() {
             //KMessageBox::information(0, "fount cur: "+cur);
         }
         if( -1 != rxOffline.search( line ) ) {
-            acState = rxOffline.cap(1);
+            batState = rxOffline.cap(1);
         }
         if( -1 != rxMWH.search( line ) ) {
             mWHstring = rxMWH.cap(1);
@@ -157,6 +157,9 @@ BatInfo::parseProcACPI() {
     
     // current cosumption
     curPower = mWHstring.toInt(&ok2);
+    if( ! ok2 ) {
+        curPower = -1;
+    }
 
     return true;
 }

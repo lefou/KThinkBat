@@ -137,7 +137,7 @@ void KThinkBat::paintEvent(QPaintEvent* event)
     int xFill = (batValue>0 ? batValue * gaugeFill.width() / 100 : 0);
     painter.fillRect(offset.width(), offset.height(), xFill, gaugeFill.height(), QColor( critical ? "red" : "green"));
     // Plus-Pol zeichnen
-    painter.fillRect( offset.width() + gaugeFill.width() + 2, offset.height() + (gaugeFill.height() / 2) - gHalfDot.height(), gHalfDot.width(), gHalfDot.height() * 2, QColor( online ? "yellow" : "gray" ));
+    painter.fillRect( offset.width() + gaugeFill.width() + 2, offset.height() + (gaugeFill.height() / 2) - gHalfDot.height(), gHalfDot.width(), gHalfDot.height() * 2, QColor( batInfo1.isOnline() ? "yellow" : "gray" ));
 
     // Paint Border
     painter.drawPolyline(border);
@@ -157,8 +157,16 @@ void KThinkBat::paintEvent(QPaintEvent* event)
         // Verbrauchsanzeige rechts von der Gauge
         wastePos = QSize( offset.width() + gaugeFill.width() + gHalfDot.width() + 12, offset.height() );
     }
-    // aktuellen Verbrauch in W (oder A bei Asus-Laptops) anzeigen
-    painter.drawText( wastePos.width(), wastePos.height(), QString().number((batInfo1.getPowerConsumption() + 500)/1000) + " " + batInfo1.getPowerUnit() );
+    
+    // Power consumption: For correct rounding we add 500 mW (resp. 50 mA)
+    if( "W" == batInfo1.getPowerUnit() ) {
+        // aktuellen Verbrauch in W 
+        painter.drawText( wastePos.width(), wastePos.height(), QString().number((int) (batInfo1.getPowerConsumption() + 500)/1000) + " " + batInfo1.getPowerUnit() );
+    }
+    else {
+        // aktuellen Verbrauch in A (bei Asus-Laptops) anzeigen
+        painter.drawText( wastePos.width(), wastePos.height(), QString().number((float) (((int) batInfo1.getPowerConsumption() + 50)/100) / 10 )  + " " + batInfo1.getPowerUnit() );
+    }
 
     //-------------------------------------------------------------------------
     painter.end();
@@ -174,6 +182,8 @@ void KThinkBat::timeout()
 {
     batInfo1.parseProcACPI();
     return;
+
+    // ALT - jetzt ausgelagert in BatInfo
 
     // die aktuelle Zeile beim parsen des proc-fs
     QString line = "";

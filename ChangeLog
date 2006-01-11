@@ -1,6 +1,8 @@
 KThinkBat 0.1.5:
    * prepared for current power consumption display right instead below 
      the battery gauge (enabled with 'ConsumptionPositionBelowGauge = 1')
+   * Battery handling refactored into a separate class
+   * show Asus power consumption in 100 mA steps
 
 KThinkBat 0.1.4:
    * Support for ASUS Laptops wich report values in mAh instead of mWh 
