@@ -120,11 +120,11 @@
   <kdevdebugger>
     <general>
       <dbgshell>libtool</dbgshell>
-      <programargs/>
-      <gdbpath/>
-      <configGdbScript/>
-      <runShellScript/>
-      <runGdbScript/>
+      <programargs></programargs>
+      <gdbpath></gdbpath>
+      <configGdbScript></configGdbScript>
+      <runShellScript></runShellScript>
+      <runGdbScript></runGdbScript>
       <breakonloadinglibs>true</breakonloadinglibs>
       <separatetty>false</separatetty>
       <floatingtoolbar>false</floatingtoolbar>
@@ -183,7 +183,7 @@
       <root>/usr/qt/3</root>
     </qt>
     <creategettersetter>
-      <prefixGet/>
+      <prefixGet></prefixGet>
       <prefixSet>set</prefixSet>
       <prefixVariable>m_,_</prefixVariable>
       <parameterName>theValue</parameterName>
@@ -204,17 +204,17 @@
   <dist>
     <custom>false</custom>
     <bzip>true</bzip>
-    <archname/>
+    <archname></archname>
     <appname>kthinkbat</appname>
-    <version>0.1.5_alpha1</version>
-    <release/>
+    <version>0.1.5_alpha2</version>
+    <release></release>
     <vendor>Tobias Roeser</vendor>
     <licence>GPL</licence>
-    <summary/>
-    <group/>
+    <summary></summary>
+    <group></group>
     <packager>Tobias Roeser</packager>
-    <description/>
-    <changelog/>
+    <description></description>
+    <changelog></changelog>
     <devpackage>false</devpackage>
     <docspackage>false</docspackage>
     <appicon>false</appicon>
@@ -223,6 +223,6 @@
     <useRPM>false</useRPM>
     <ftpkde>false</ftpkde>
     <appskde>false</appskde>
-    <url/>
+    <url></url>
   </dist>
 </kdevelop>

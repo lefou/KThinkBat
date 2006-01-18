@@ -27,13 +27,13 @@
 
 #include "batinfo.h"
 
-BatInfo::BatInfo() 
+BatInfo::BatInfo( int number ) 
     : lastFuell( 0 )
     , designFuell( 0 )
     , criticalFuell( -1 )
     , curFuell( -1 )
     , curPower( -1 )
-    , batNr( 0 )
+    , batNr( number - 1 )
     , powerUnit( "W" )
     , batState( "?" )
 {
@@ -189,6 +189,15 @@ BatInfo::parseSysfsTP() {
         if( sayTheProblem ) {
             qDebug( "There is no directory /sys/devices/platform/smapi. Do you have tp_smapi loaded?" );
             sayTheProblem = false;
+        }
+        return false;
+    }
+
+    if( ! QDir().exists( tpPath ) ) {
+        static bool sayTheProblem2 = true;
+        if( sayTheProblem2 ) {
+            qDebug( "There is no directory " + tpPath + ". Do you have tp_smapi loaded?" );
+            sayTheProblem2 = false;
         }
         return false;
     }

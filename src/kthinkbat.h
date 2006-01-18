@@ -30,6 +30,8 @@
 #include <qstring.h>
 #include <kconfig.h>
 #include <qtimer.h>
+#include <qpainter.h>
+#include <qcolor.h>
 
 #include "batinfo.h"
 
@@ -124,6 +126,8 @@ protected:
     void resizeEvent(QResizeEvent *);
     void paintEvent(QPaintEvent* event);
 
+    void drawGauge( QPainter& painter, QSize gaugePos, QSize gaugeSize, int value, QColor fillColor, QColor dotColor );
+
 
 private:
     KConfig *ksConfig;
@@ -139,6 +143,7 @@ private:
     bool wastePosBelow;
 
     BatInfo batInfo1;
+    BatInfo batInfo2;
 
 };
 

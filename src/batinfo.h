@@ -30,10 +30,16 @@
 class BatInfo {
 
 public:
-    BatInfo();
+    /** Constructor.
+
+        @param number The number of the battery, starting with 1
+    */
+    BatInfo( int number = 1 );
     virtual ~BatInfo();
 
-    /// Charge level is between 0 and 100, or negative, if there are errors
+    /** Get the current charge level.
+        @return the carge level between 0 and 100, or a negative value, if there are errors
+    */
     float getChargeLevel();
 
     float getLastFuell() { return lastFuell; }

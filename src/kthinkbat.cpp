@@ -43,6 +43,7 @@ KThinkBat::KThinkBat(const QString& configFile, Type type, int actions, QWidget 
     , timer(NULL)
     , wastePosBelow( true )
     , batInfo1( BatInfo() )
+    , batInfo2( BatInfo( 2 ) )
 {
     // Get the current application configuration handle
     ksConfig = config();
@@ -106,41 +107,34 @@ void KThinkBat::paintEvent(QPaintEvent* event)
     static QSize gHalfDot(4, 4);
     static QSize offset(4, 4);
 
-    // Rahmen
-    QPointArray border(9);
-    border.putPoints( 0, 9
-        , 0, 0
-        , gaugeFill.width() + 2, 0
-        , gaugeFill.width() + 2, (gaugeFill.height() / 2) - gHalfDot.height()
-        , gaugeFill.width() + 2 + gHalfDot.width(), (gaugeFill.height() / 2) - gHalfDot.height()
-        , gaugeFill.width() + 2 + gHalfDot.width(), (gaugeFill.height() / 2) + gHalfDot.height()
-        , gaugeFill.width() + 2, (gaugeFill.height() / 2) + gHalfDot.height()
-        , gaugeFill.width() + 2, gaugeFill.height()
-        , 0 , gaugeFill.height()
-        , 0 , 0);
-    border.translate(offset.width() - 1, offset.height() - 1);
-
     QPixmap pixmap(width(), height());
     pixmap.fill(this, 0, 0);
     QPainter painter(&pixmap);
 
-    //-------------------------------------------------------------------------
-    // Paint Gauge
-    painter.fillRect(offset.width(), offset.height(), gaugeFill.width() + 2, gaugeFill.height(), QColor( "gray"));
-    // old: int showValue = (batValue <0 || batValue > 100 ) ? 0 : batValue;
-    int batValue = batInfo1.getChargeLevel();
-    int xFill = (batValue>0 ? batValue * gaugeFill.width() / 100 : 0);
-    // TODO criticalFuell comes from batInfo, but it could also be set by user ???
-    painter.fillRect(offset.width(), offset.height(), xFill, gaugeFill.height(), QColor( batInfo1.getCurFuell() <= batInfo1.getCriticalFuell() ? "red" : "green"));
-    // Plus-Pol zeichnen
-    painter.fillRect( offset.width() + gaugeFill.width() + 2, offset.height() + (gaugeFill.height() / 2) - gHalfDot.height(), gHalfDot.width(), gHalfDot.height() * 2, QColor( batInfo1.isOnline() ? "yellow" : "gray" ));
+    drawGauge( painter
+        , QSize( 3, 3 )
+        , QSize( 44, 18 )
+        , batInfo1.getChargeLevel()
+        , QColor( batInfo1.getCurFuell() <= batInfo1.getCriticalFuell() ? "red" : "green")
+        , QColor( batInfo1.isOnline() ? "yellow" : "gray" ) );
 
-    // Paint Border
-    painter.drawPolyline(border);
-
-    // Prozent-Anzeige
-    QString percentageString = (batValue >= 0) ? QString().number(batValue) : "?" ;
-    painter.drawText( offset.width() + 12, offset.height() + gaugeFill.height() - 5, percentageString );
+//     //-------------------------------------------------------------------------
+//     // Paint Gauge
+//     painter.fillRect(offset.width(), offset.height(), gaugeFill.width() + 2, gaugeFill.height(), QColor( "gray"));
+//     // old: int showValue = (batValue <0 || batValue > 100 ) ? 0 : batValue;
+//     int batValue = batInfo1.getChargeLevel();
+//     int xFill = (batValue>0 ? batValue * gaugeFill.width() / 100 : 0);
+//     // TODO criticalFuell comes from batInfo, but it could also be set by user ???
+//     painter.fillRect(offset.width(), offset.height(), xFill, gaugeFill.height(), QColor( batInfo1.getCurFuell() <= batInfo1.getCriticalFuell() ? "red" : "green"));
+//     // Plus-Pol zeichnen
+//     painter.fillRect( offset.width() + gaugeFill.width() + 2, offset.height() + (gaugeFill.height() / 2) - gHalfDot.height(), gHalfDot.width(), gHalfDot.height() * 2, QColor( batInfo1.isOnline() ? "yellow" : "gray" ));
+// 
+//     // Paint Border
+//     painter.drawPolyline(border);
+// 
+//     // Prozent-Anzeige
+//     QString percentageString = (batValue >= 0) ? QString().number(batValue) : "?" ;
+//     painter.drawText( offset.width() + 12, offset.height() + gaugeFill.height() - 5, percentageString );
 
     //-------------------------------------------------------------------------
     // Position für Verbrauchsanzeige
@@ -174,6 +168,45 @@ void KThinkBat::paintEvent(QPaintEvent* event)
     //   height: (3 x offset) + gaugeFill ( + wasteSite )
 }
 
+void
+KThinkBat::drawGauge( QPainter& painter, QSize gaugePos, QSize gaugeSize, int value, QColor fillColor, QColor dotColor ) {
+
+    // Values for Gauge and Border
+    QSize offset( gaugePos.width() + 1, gaugePos.height() + 1 );
+    QSize gHalfDot(4, 4);
+    QSize gaugeFill(gaugeSize.width() - gHalfDot.width(), gaugeSize.height() );
+
+    // Rahmen
+    QPointArray border(9);
+    border.putPoints( 0, 9
+        , 0, 0
+        , gaugeFill.width() + 2, 0
+        , gaugeFill.width() + 2, (gaugeFill.height() / 2) - gHalfDot.height()
+        , gaugeFill.width() + 2 + gHalfDot.width(), (gaugeFill.height() / 2) - gHalfDot.height()
+        , gaugeFill.width() + 2 + gHalfDot.width(), (gaugeFill.height() / 2) + gHalfDot.height()
+        , gaugeFill.width() + 2, (gaugeFill.height() / 2) + gHalfDot.height()
+        , gaugeFill.width() + 2, gaugeFill.height()
+        , 0 , gaugeFill.height()
+        , 0 , 0);
+    border.translate(offset.width() - 1, offset.height() - 1);
+
+    //-------------------------------------------------------------------------
+    // Paint Gauge
+    painter.fillRect(offset.width(), offset.height(), gaugeFill.width() + 2, gaugeFill.height(), QColor( "gray"));
+
+    int xFill = (value>0 ? value * gaugeFill.width() / 100 : 0);
+    painter.fillRect(offset.width(), offset.height(), xFill, gaugeFill.height(), fillColor );
+    // Plus-Pol zeichnen
+    painter.fillRect( offset.width() + gaugeFill.width() + 2, offset.height() + (gaugeFill.height() / 2) - gHalfDot.height(), gHalfDot.width(), gHalfDot.height() * 2, dotColor );
+
+    // Paint Border
+    painter.drawPolyline(border);
+
+    // Prozent-Anzeige
+    QString percentageString = (value >= 0) ? QString().number(value) : "?" ;
+    painter.drawText( offset.width() + 12, offset.height() + gaugeFill.height() - 5, percentageString );
+}
+
 void KThinkBat::timeout()
 {
     // Ermittle die Werte von /sys/devices/platform/smapi/
@@ -182,6 +215,15 @@ void KThinkBat::timeout()
     if ( ! tpGood ) {
         // Ermittle die Werte von /proc/acpi/BAT0
         batInfo1.parseProcACPI();
+    }
+
+    // Zweite Battery
+    // Ermittle die Werte von /sys/devices/platform/smapi/
+    tpGood = batInfo2.parseSysfsTP();
+
+    if ( ! tpGood ) {
+        // Ermittle die Werte von /proc/acpi/BAT0
+        batInfo2.parseProcACPI();
     }
 
     // Aktualisierte Interface
