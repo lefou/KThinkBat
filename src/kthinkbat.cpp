@@ -191,6 +191,8 @@ void KThinkBat::timeout()
         else {
             gauge1.setPercentValue( -1 );
         }
+        gauge1.setColors( QColor( batInfo1.getCurFuell() <= ( batInfo1.getCriticalFuell() + batInfo2.getCriticalFuell() ) ? "red" : "green")
+                        , QColor( batInfo1.isOnline() ? "yellow" : "gray" ) );
         powerUnit = batInfo1.getPowerUnit();
         curPower = batInfo1.getPowerConsumption() + batInfo2.getPowerConsumption();
 
