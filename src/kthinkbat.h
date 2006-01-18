@@ -34,7 +34,11 @@
 #include <qcolor.h>
 
 #include "batinfo.h"
+#include "batgauge.h"
 
+/**
+    @author Tobias Roeser <le.petit.fou@web.de>
+*/
 class KThinkBat : public KPanelApplet
 {
     Q_OBJECT
@@ -52,7 +56,7 @@ public:
     KThinkBat(const QString& configFile, Type t = Normal, int actions = 0,
         QWidget *parent = 0, const char *name = 0);
     /** destructor */
-    ~KThinkBat();
+    virtual ~KThinkBat();
     
     /**
      * Retrieve a suggested width for a given height.
@@ -126,7 +130,6 @@ protected:
     void resizeEvent(QResizeEvent *);
     void paintEvent(QPaintEvent* event);
 
-    void drawGauge( QPainter& painter, QSize gaugePos, QSize gaugeSize, int value, QColor fillColor, QColor dotColor );
 
 
 private:
@@ -136,6 +139,7 @@ private:
     int intervall;
 
     QColor borderColor, emptyColor, chargedColor;
+    QSize gaugeSize, border;
 
     QTimer* timer;
 
@@ -145,6 +149,10 @@ private:
     BatInfo batInfo1;
     BatInfo batInfo2;
 
+    BatGauge gauge1;
+
+    float curPower;
+    QString powerUnit;
 };
 
 #endif

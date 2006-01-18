@@ -40,6 +40,8 @@ KThinkBat::KThinkBat(const QString& configFile, Type type, int actions, QWidget 
     , borderColor("black")
     , emptyColor("grey")
     , chargedColor("green")
+    , gaugeSize( QSize( 46, 20 ) )
+    , border( QSize( 3, 3 ) ) 
     , timer(NULL)
     , wastePosBelow( true )
     , batInfo1( BatInfo() )
@@ -86,12 +88,12 @@ void KThinkBat::preferences()
 
 int KThinkBat::widthForHeight(int height) const
 {
-    return 55;
+    return 52;
 }
 
 int KThinkBat::heightForWidth(int width) const
 {
-    return 30;
+    return 40;
 }
 
 void KThinkBat::resizeEvent(QResizeEvent *e)
@@ -102,22 +104,11 @@ void KThinkBat::paintEvent(QPaintEvent* event)
 {
     // TODO Gauge auslagern als Funktion, später als extra Control
 
-    // Values for Gauge and Border
-    static QSize gaugeFill(40, 18);
-    static QSize gHalfDot(4, 4);
-    static QSize offset(4, 4);
-
     QPixmap pixmap(width(), height());
     pixmap.fill(this, 0, 0);
     QPainter painter(&pixmap);
 
-    drawGauge( painter
-        , QSize( 3, 3 )
-        , QSize( 44, 18 )
-        , batInfo1.getChargeLevel()
-        , QColor( batInfo1.getCurFuell() <= batInfo1.getCriticalFuell() ? "red" : "green")
-        , QColor( batInfo1.isOnline() ? "yellow" : "gray" ) );
-
+    gauge1.drawGauge( painter, border, gaugeSize );
 //     //-------------------------------------------------------------------------
 //     // Paint Gauge
 //     painter.fillRect(offset.width(), offset.height(), gaugeFill.width() + 2, gaugeFill.height(), QColor( "gray"));
@@ -141,21 +132,21 @@ void KThinkBat::paintEvent(QPaintEvent* event)
     QSize wastePos;
     if( wastePosBelow ) {
         // Verbrauchsanzeige unterhalb der Gauge
-        wastePos = QSize( offset.width(), offset.height() + gaugeFill.height() + 12 );
+        wastePos = QSize( border.width(), border.height() + gaugeSize.height() + 12 );
     }
     else {
         // Verbrauchsanzeige rechts von der Gauge
-        wastePos = QSize( offset.width() + gaugeFill.width() + gHalfDot.width() + 12, offset.height() );
+        wastePos = QSize( ( 3 * border.width() ) + gaugeSize.width(), border.height() );
     }
     
     // Power consumption: For correct rounding we add 500 mW (resp. 50 mA)
-    if( "W" == batInfo1.getPowerUnit() ) {
+    if( "W" == powerUnit ) {
         // aktuellen Verbrauch in W 
-        painter.drawText( wastePos.width(), wastePos.height(), QString().number((int) (batInfo1.getPowerConsumption() + 500)/1000) + " " + batInfo1.getPowerUnit() );
+        painter.drawText( wastePos.width(), wastePos.height(), QString().number((int) (curPower + 500)/1000) + " " + powerUnit );
     }
     else {
         // aktuellen Verbrauch in A (bei Asus-Laptops) anzeigen
-        painter.drawText( wastePos.width(), wastePos.height(), QString().number((float) (((int) batInfo1.getPowerConsumption() + 50)/100) / 10 )  + " " + batInfo1.getPowerUnit() );
+        painter.drawText( wastePos.width(), wastePos.height(), QString().number((float) (((int) curPower + 50)/100) / 10 )  + " " + powerUnit );
     }
 
     //-------------------------------------------------------------------------
@@ -168,62 +159,57 @@ void KThinkBat::paintEvent(QPaintEvent* event)
     //   height: (3 x offset) + gaugeFill ( + wasteSite )
 }
 
-void
-KThinkBat::drawGauge( QPainter& painter, QSize gaugePos, QSize gaugeSize, int value, QColor fillColor, QColor dotColor ) {
-
-    // Values for Gauge and Border
-    QSize offset( gaugePos.width() + 1, gaugePos.height() + 1 );
-    QSize gHalfDot(4, 4);
-    QSize gaugeFill(gaugeSize.width() - gHalfDot.width(), gaugeSize.height() );
-
-    // Rahmen
-    QPointArray border(9);
-    border.putPoints( 0, 9
-        , 0, 0
-        , gaugeFill.width() + 2, 0
-        , gaugeFill.width() + 2, (gaugeFill.height() / 2) - gHalfDot.height()
-        , gaugeFill.width() + 2 + gHalfDot.width(), (gaugeFill.height() / 2) - gHalfDot.height()
-        , gaugeFill.width() + 2 + gHalfDot.width(), (gaugeFill.height() / 2) + gHalfDot.height()
-        , gaugeFill.width() + 2, (gaugeFill.height() / 2) + gHalfDot.height()
-        , gaugeFill.width() + 2, gaugeFill.height()
-        , 0 , gaugeFill.height()
-        , 0 , 0);
-    border.translate(offset.width() - 1, offset.height() - 1);
-
-    //-------------------------------------------------------------------------
-    // Paint Gauge
-    painter.fillRect(offset.width(), offset.height(), gaugeFill.width() + 2, gaugeFill.height(), QColor( "gray"));
-
-    int xFill = (value>0 ? value * gaugeFill.width() / 100 : 0);
-    painter.fillRect(offset.width(), offset.height(), xFill, gaugeFill.height(), fillColor );
-    // Plus-Pol zeichnen
-    painter.fillRect( offset.width() + gaugeFill.width() + 2, offset.height() + (gaugeFill.height() / 2) - gHalfDot.height(), gHalfDot.width(), gHalfDot.height() * 2, dotColor );
-
-    // Paint Border
-    painter.drawPolyline(border);
-
-    // Prozent-Anzeige
-    QString percentageString = (value >= 0) ? QString().number(value) : "?" ;
-    painter.drawText( offset.width() + 12, offset.height() + gaugeFill.height() - 5, percentageString );
-}
 
 void KThinkBat::timeout()
 {
     // Ermittle die Werte von /sys/devices/platform/smapi/
-    bool tpGood = batInfo1.parseSysfsTP();
+    bool tp1Good = batInfo1.parseSysfsTP();
+    bool acpi1Good = false;
 
-    if ( ! tpGood ) {
+    if ( ! tp1Good ) {
         // Ermittle die Werte von /proc/acpi/BAT0
-        batInfo1.parseProcACPI();
+        acpi1Good = batInfo1.parseProcACPI();
     }
 
     // Zweite Battery
     // Ermittle die Werte von /sys/devices/platform/smapi/
-    tpGood = batInfo2.parseSysfsTP();
+    bool tp2Good = batInfo2.parseSysfsTP();
+    bool acpi2Good = false;
 
-    if ( ! tpGood ) {
+    if ( ! tp2Good ) {
         // Ermittle die Werte von /proc/acpi/BAT0
-        batInfo2.parseProcACPI();
+        acpi2Good = batInfo2.parseProcACPI();
+    }
+
+    if( ( tp1Good || acpi1Good ) && ( tp2Good || acpi2Good ) ) {
+        // we have tho batteries
+        float lastFuell = batInfo1.getLastFuell() + batInfo2.getLastFuell();
+        float curFuell = batInfo1.getCurFuell() + batInfo2.getCurFuell();
+        if( curFuell >= 0 && lastFuell > 0 ) {
+            gauge1.setPercentValue( (int) (( 100.0 / lastFuell ) * curFuell ) );
+        }
+        else {
+            gauge1.setPercentValue( -1 );
+        }
+        powerUnit = batInfo1.getPowerUnit();
+        curPower = batInfo1.getPowerConsumption() + batInfo2.getPowerConsumption();
+
+    }
+    else if( tp1Good || acpi1Good ) {
+        // we have just battery one
+        gauge1.setPercentValue( (int) batInfo1.getChargeLevel() );
+        gauge1.setColors( QColor( batInfo1.getCurFuell() <= batInfo1.getCriticalFuell() ? "red" : "green")
+                        , QColor( batInfo1.isOnline() ? "yellow" : "gray" ) );
+        powerUnit = batInfo1.getPowerUnit();
+        curPower = batInfo1.getPowerConsumption();
+    }
+    else {
+        // we have just battery two
+        gauge1.setPercentValue( (int) batInfo2.getChargeLevel() );
+        gauge1.setColors( QColor( batInfo2.getCurFuell() <= batInfo2.getCriticalFuell() ? "red" : "green")
+                        , QColor( batInfo2.isOnline() ? "yellow" : "gray" ) );
+        powerUnit = batInfo2.getPowerUnit();
+        curPower = batInfo2.getPowerConsumption();
     }
 
     // Aktualisierte Interface

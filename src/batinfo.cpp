@@ -28,15 +28,9 @@
 #include "batinfo.h"
 
 BatInfo::BatInfo( int number ) 
-    : lastFuell( 0 )
-    , designFuell( 0 )
-    , criticalFuell( -1 )
-    , curFuell( -1 )
-    , curPower( -1 )
-    , batNr( number - 1 )
-    , powerUnit( "W" )
-    , batState( "?" )
+    : batNr( number -1 )
 {
+    resetValues();
 }
 
 BatInfo::~BatInfo() {
@@ -193,13 +187,18 @@ BatInfo::parseSysfsTP() {
         return false;
     }
 
-    if( ! QDir().exists( tpPath ) ) {
-        static bool sayTheProblem2 = true;
-        if( sayTheProblem2 ) {
-            qDebug( "There is no directory " + tpPath + ". Do you have tp_smapi loaded?" );
-            sayTheProblem2 = false;
+    file.setName( tpPath + "installed" );
+    if( file.exists() && file.open(IO_ReadOnly) ) {
+        stream.setDevice( &file );
+        batInstalled = ( 1 == stream.readLine().toInt( &check ) ? true : false );
+        file.close();
+        if( ! batInstalled ) {
+            resetValues();
+            return true;
         }
-        return false;
+    }
+    else {
+        batInstalled = false;
     }
 
     file.setName( tpPath + "last_full_capacity" );
@@ -276,4 +275,16 @@ BatInfo::parseSysfsTP() {
     }
 
     return true;
+}
+
+void 
+BatInfo::resetValues() {
+    lastFuell = 0;
+    designFuell = 0;
+    criticalFuell = 0;
+    curFuell = 0;
+    curPower = 0;
+    batInstalled = false;
+    powerUnit = "W";
+    batState = "not installed";
 }

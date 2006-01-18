@@ -17,3 +17,32 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
+#ifndef BATGAUGE_H
+#define BATGAUGE_H
+
+#include <qpainter.h>
+
+/**
+	@author Tobias Roeser <le.petit.fou@web.de>
+*/
+class BatGauge {
+
+public:
+    BatGauge();
+
+    virtual ~BatGauge();
+
+    void setPercentValue( int value );
+
+    void setColors( QColor fillColor, QColor dotColor );
+
+    void drawGauge( QPainter& painter, QSize gaugePos, QSize gaugeSize );
+
+private:
+    QColor fillColor;
+    QColor dotColor;
+
+    int percentValue;
+};
+
+#endif

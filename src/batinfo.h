@@ -27,8 +27,11 @@
 
 #include <qstring.h>
 
+/**
+    @author Tobias Roeser <le.petit.fou@web.de>
+*/
 class BatInfo {
-
+    
 public:
     /** Constructor.
 
@@ -53,6 +56,7 @@ public:
 
     void invalidateAll();
 
+    bool isInstalled() { return batInstalled; }
     bool isOnline() { return acConnected; }
     QString getState() { return batState; }
 
@@ -63,6 +67,7 @@ public:
     bool parseSysfsTP();
 
 protected:
+    void resetValues();
 
 private:
     float lastFuell;
@@ -72,6 +77,7 @@ private:
     float curPower;
 
     int batNr;
+    bool batInstalled;
 
     QString powerUnit;
     QString batState;
