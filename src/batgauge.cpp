@@ -80,5 +80,5 @@ BatGauge::drawGauge( QPainter& painter, QSize gaugePos, QSize gaugeSize ) {
 
     // Prozent-Anzeige
     QString percentageString = ( percentValue >= 0) ? QString().number( percentValue ) : "?" ;
-    painter.drawText( offset.width() + 12, offset.height() + gaugeFill.height() - 5, percentageString );
+    painter.drawText( offset.width() + 11, offset.height() + gaugeFill.height() - 5, percentageString );
 }
