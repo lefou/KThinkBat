@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2005 by Tobias Roeser   *
+ *   Copyright (C) 2005-2006 by Tobias Roeser   *
  *   le.petit.fou@web.de   *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -68,7 +68,7 @@ KThinkBat::~KThinkBat()
 
 void KThinkBat::about()
 {
-    KMessageBox::information(0, i18n("A KDE panel applet to display the current laptop battery status.\n\n(c) Copyrigth 2005 Tobias Roeser\nDistributed under the terms of the GNU General Public License v2"));
+    KMessageBox::information(0, i18n("A KDE panel applet to display the current laptop battery status.\n\nCopyrigth (c) 2005-2006 Tobias Roeser\nDistributed under the terms of the GNU General Public License v2"));
     timeout();
 }
 

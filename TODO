@@ -6,3 +6,5 @@ https://lepetitfou.dyndns.org/KThinkBat
 - better size-adjustment/reporting/calculation
 - ASUS: calculate W from the values provided by ACPI
 - use kdeutils/klaptopdaemon function eps. laptop_portable
+- integrate ibam battery monitoring fassility
+- need an icon
