@@ -149,6 +149,7 @@ BatInfo::parseProcACPI() {
     acConnected = (batState != "discharging");
 
     parseProcAcpiBatAlarm();
+    // criticalFuell = 0;
 
     return true;
 }
@@ -156,25 +157,23 @@ BatInfo::parseProcACPI() {
 bool 
 BatInfo::parseProcAcpiBatAlarm() {
 
-    QString warnCap = "";
-    QString line = "";
     bool ok = false;
+    QRegExp rxWarnCap("^alarm:\\s*(\\d{1,5})\\s*m" + powerUnit + "h");
 
     // Get Alarm Fuell
     QFile file("/proc/acpi/battery/BAT" + QString::number( batNr ) + "/alarm");
     if( ! file.exists() || ! file.open(IO_ReadOnly) ) {
-       curFuell = -1;
-       qDebug("could not open %s", file.name().latin1() );
-       return false;
+        qDebug("could not open %s", file.name().latin1() );
+        criticalFuell = 0;
+        return false;
     }
     
     QTextStream stream( (QIODevice*) &file );
     
-    QRegExp rxWarnCap("^alarm:\\s*(\\d{1,5})\\s*m" + powerUnit + "h");
-    
     while( ! stream.atEnd() ) {
+        QString line = stream.readLine();
         if( -1 != rxWarnCap.search( line ) ) {
-            warnCap = rxWarnCap.cap(1);
+            QString warnCap = rxWarnCap.cap(1);
             criticalFuell = warnCap.toInt(&ok);
         }
     }
