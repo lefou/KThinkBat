@@ -1,10 +1,22 @@
 Please see at 
 https://lepetitfou.dyndns.org/KThinkBat
 
-- Support more than one battery
 - good error messages if getting /proc values fail
 - better size-adjustment/reporting/calculation
 - ASUS: calculate W from the values provided by ACPI
 - use kdeutils/klaptopdaemon function eps. laptop_portable
 - integrate ibam battery monitoring fassility
 - need an icon
+- Config-Dialog: Color, ACPI proc path, update intervall, action on click 
+  Can anybody point me to a good tutorial for Kxconfig? 
+- show remaining time 
+- scons+bksys based build system 
+- update intervall configurable 
+- better font support 
+- calculate real TextExtend and use it to layout Text 
+- centering persentage display 
+- add an option to show the Watt consumption on the right or left of the batt icon instead of under it (Emmanuel Schroeder) 
+  (allmost done in 0.1.5_alpha1)
+- there should be a symbol such as power plug next to it when connected
+- hav to paint one and decide what to do, wenn the power conuption display is also displayed next to it 
+- get a (transparent) Icon for the Applet and the 'Add Applet Tool' (maybe contributed by Delvien) 
