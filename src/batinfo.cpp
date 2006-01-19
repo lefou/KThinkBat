@@ -170,7 +170,7 @@ BatInfo::parseProcAcpiBatAlarm() {
     
     QTextStream stream( (QIODevice*) &file );
     
-    static QRegExp rxWarnCap("^alarm:\\s*(\\d{1,5})\\s*m" + powerUnit + "h");
+    QRegExp rxWarnCap("^alarm:\\s*(\\d{1,5})\\s*m" + powerUnit + "h");
     
     while( ! stream.atEnd() ) {
         if( -1 != rxWarnCap.search( line ) ) {
