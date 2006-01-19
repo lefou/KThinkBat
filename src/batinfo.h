@@ -62,6 +62,7 @@ public:
 
     /// Get battery info from /proc/acpi interface.
     bool parseProcACPI();
+    bool parseProcAcpiBatAlarm();
 
     /// Get battery info form tp_smapi sysfs interface.
     bool parseSysfsTP();

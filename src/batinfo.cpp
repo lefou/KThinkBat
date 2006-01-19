@@ -51,19 +51,17 @@ BatInfo::parseProcACPI() {
     QString line = "";
     QString mWHstring = "";
     // normale Angaben: Kapzität, Max Kap., aktuelle Kap.
-    QString cap = "", designCap = "", cur = "", warnCap = "";
+    QString cap = "", designCap = "", cur = "";
     // dieselben Angaben, aber in mAh statt in mWh
-    QString capA = "", designCapA = "", warnCapA = "";
+    QString capA = "", designCapA = "";
 
     // Pattern für /proc/acpi/battery/BATx/info
     // ThinkPad (mWh)
     static QRegExp rxCap("^last full capacity:\\s*(\\d{1,5})\\s*mWh");
     static QRegExp rxDesignCap("^design capacity low:\\s*(\\d{1,5})\\s*mWh");
-    static QRegExp rxWarnCap("^design capacity warning:\\s*(\\d{1,5})\\s*mWh");
     // Asus (mAh)
     static QRegExp rxCapA("^last full capacity:\\s*(\\d{1,5})\\s*mAh");
     static QRegExp rxDesignCapA("^design capacity low:\\s*(\\d{1,5})\\s*mAh");
-    static QRegExp rxWarnCapA("^design capacity warning:\\s*(\\d{1,5})\\s*mAh");
 
     QFile file( "/proc/acpi/battery/BAT" + QString::number(batNr) + "/info" );
     if( ! file.exists() || ! file.open(IO_ReadOnly) ) {
@@ -82,18 +80,12 @@ BatInfo::parseProcACPI() {
         if( -1 != rxDesignCap.search( line ) ) {
             designCap = rxDesignCap.cap(1);
         }
-        if( -1 != rxWarnCap.search( line ) ) {
-            warnCap = rxWarnCap.cap(1);
-        }
         if( -1 != rxCapA.search( line ) ) {
             capA = rxCapA.cap(1);
             //KMessageBox::information(0, "fount cap: "+cap);
         }
         if( -1 != rxDesignCapA.search( line ) ) {
             designCapA = rxDesignCapA.cap(1);
-        }
-        if( -1 != rxWarnCapA.search( line ) ) {
-            warnCapA = rxWarnCapA.cap(1);
         }
     }
     file.close();
@@ -105,7 +97,6 @@ BatInfo::parseProcACPI() {
         // so copy this values and set default unity
         cap = capA;
         designCap = designCapA;
-        warnCap = warnCapA;
         powerUnit = "A";
     }
 
@@ -147,9 +138,6 @@ BatInfo::parseProcACPI() {
     if( ok2 ) {
         lastFuell = capValue;
     }
-
-    // if we got a warn value and the cur capacity is below warn, the set critical to true
-    criticalFuell = warnCap.toInt(&ok2);
     
     // current cosumption
     curPower = mWHstring.toInt(&ok2);
@@ -160,7 +148,42 @@ BatInfo::parseProcACPI() {
     // TODO better read /proc/acpi/ac_adapter/AC/state an evaluate "on-line"
     acConnected = (batState != "discharging");
 
+    parseProcAcpiBatAlarm();
+
     return true;
+}
+
+bool 
+BatInfo::parseProcAcpiBatAlarm() {
+
+    QString warnCap = "";
+    QString line = "";
+    bool ok = false;
+
+    // Get Alarm Fuell
+    QFile file("/proc/acpi/battery/BAT" + QString::number( batNr ) + "/alarm");
+    if( ! file.exists() || ! file.open(IO_ReadOnly) ) {
+       curFuell = -1;
+       qDebug("could not open %s", file.name().latin1() );
+       return false;
+    }
+    
+    QTextStream stream( (QIODevice*) &file );
+    
+    static QRegExp rxWarnCap("^alarm:\\s*(\\d{1,5})\\s*m" + powerUnit + "h");
+    
+    while( ! stream.atEnd() ) {
+        if( -1 != rxWarnCap.search( line ) ) {
+            criticalFuell = rxWarnCap.cap(1).toInt(&ok);
+        }
+    }
+    file.close();
+
+    if( ! ok ) {
+        criticalFuell = 0;
+    }
+
+    return ok;
 }
 
 bool 
@@ -273,6 +296,8 @@ BatInfo::parseSysfsTP() {
     else {
         acConnected = false;
     }
+
+    parseProcAcpiBatAlarm();
 
     return true;
 }
