@@ -149,7 +149,6 @@ BatInfo::parseProcACPI() {
     acConnected = (batState != "discharging");
 
     parseProcAcpiBatAlarm();
-    // criticalFuell = 0;
 
     return true;
 }
@@ -189,8 +188,6 @@ BatInfo::parseProcAcpiBatAlarm() {
 bool 
 BatInfo::parseSysfsTP() {
 
-    // critical Fuell can not be set via tp_smapi, so we decide is statically
-    // criticalFuell = 1000;
     powerUnit = "W";
 
     QString tpPath = "/sys/devices/platform/smapi/BAT" + QString::number(batNr) + "/";
@@ -297,8 +294,8 @@ BatInfo::parseSysfsTP() {
         acConnected = false;
     }
 
-    // parseProcAcpiBatAlarm();
-    criticalFuell = 1000;
+    // critical Fuell can not be set via tp_smapi, so we try to read /proc/acpi for that
+    parseProcAcpiBatAlarm();
 
     return true;
 }
