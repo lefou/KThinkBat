@@ -174,7 +174,8 @@ BatInfo::parseProcAcpiBatAlarm() {
     
     while( ! stream.atEnd() ) {
         if( -1 != rxWarnCap.search( line ) ) {
-            criticalFuell = rxWarnCap.cap(1).toInt(&ok);
+            warnCap = rxWarnCap.cap(1);
+            criticalFuell = warnCap.toInt(&ok);
         }
     }
     file.close();
@@ -190,7 +191,7 @@ bool
 BatInfo::parseSysfsTP() {
 
     // critical Fuell can not be set via tp_smapi, so we decide is statically
-    criticalFuell = 1000;
+    // criticalFuell = 1000;
     powerUnit = "W";
 
     QString tpPath = "/sys/devices/platform/smapi/BAT" + QString::number(batNr) + "/";
@@ -297,7 +298,8 @@ BatInfo::parseSysfsTP() {
         acConnected = false;
     }
 
-    parseProcAcpiBatAlarm();
+    // parseProcAcpiBatAlarm();
+    criticalFuell = 1000;
 
     return true;
 }
