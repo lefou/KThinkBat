@@ -46,6 +46,7 @@ KThinkBat::KThinkBat(const QString& configFile, Type type, int actions, QWidget 
     , wastePosBelow( true )
     , batInfo1( BatInfo() )
     , batInfo2( BatInfo( 2 ) )
+    , neededSize( QSize( 52, 40) )
 {
     // Get the current application configuration handle
     ksConfig = config();
@@ -88,12 +89,12 @@ void KThinkBat::preferences()
 
 int KThinkBat::widthForHeight(int height) const
 {
-    return 52;
+    return neededSize.width();
 }
 
 int KThinkBat::heightForWidth(int width) const
 {
-    return 40;
+    return neededSize.height();
 }
 
 void KThinkBat::resizeEvent(QResizeEvent *e)
@@ -113,6 +114,8 @@ void KThinkBat::paintEvent(QPaintEvent* event)
     //-------------------------------------------------------------------------
     // Position for power consumtion display
     QSize wastePos;
+    QRect powerTextExtend( 0, 0, 0, 0 );
+
     if( wastePosBelow ) {
         // Verbrauchsanzeige unterhalb der Gauge
         wastePos = QSize( border.width(), ( 2 * border.height() ) + gaugeSize.height() );
@@ -129,8 +132,10 @@ void KThinkBat::paintEvent(QPaintEvent* event)
         painter.drawText( wastePos.width(), wastePos.height()
                         , 1, 1
                         , Qt::AlignLeft | Qt::AlignTop
-                        , QString().number((int) (curPower + 500)/1000) + " " + powerUnit );
+                        , QString().number((int) (curPower + 500)/1000) + " " + powerUnit
+                        , -1,  &powerTextExtend );
         // painter.drawText( wastePos.width(), wastePos.height(), QString().number((int) (curPower + 500)/1000) + " " + powerUnit );
+
     }
     else {
         // aktuellen Verbrauch in A (bei Asus-Laptops) anzeigen
@@ -138,7 +143,18 @@ void KThinkBat::paintEvent(QPaintEvent* event)
         painter.drawText( wastePos.width(), wastePos.height()
                         , 1, gaugeSize.height()
                         , Qt::AlignLeft | Qt::AlignVCenter
-                        , QString().number((float) (((int) curPower + 50)/100) / 10 ) + " " + powerUnit );
+                        , QString().number((float) (((int) curPower + 50)/100) / 10 ) + " " + powerUnit 
+                        , -1, &powerTextExtend );
+    }
+
+    // recalculate the needed Size
+    if( wastePosBelow ) {
+        neededSize.setWidth( (2 * border.width() ) + gaugeSize.width() );
+        neededSize.setHeight( wastePos.height() + powerTextExtend.height() + border.height() );
+    }
+    else {
+        neededSize.setWidth( wastePos.width() + powerTextExtend.width() + border.width() );
+        neededSize.setHeight( ( 3 * border.height() ) + gaugeSize.height() );
     }
 
     //-------------------------------------------------------------------------

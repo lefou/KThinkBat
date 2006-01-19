@@ -153,6 +153,8 @@ private:
 
     float curPower;
     QString powerUnit;
+
+    QSize neededSize;
 };
 
 #endif
