@@ -80,5 +80,12 @@ BatGauge::drawGauge( QPainter& painter, QSize gaugePos, QSize gaugeSize ) {
 
     // Prozent-Anzeige
     QString percentageString = ( percentValue >= 0) ? QString().number( percentValue ) : "?" ;
-    painter.drawText( offset.width() + 11, offset.height() + gaugeFill.height() - 5, percentageString );
+    // OLD: painter.drawText( offset.width() + 11, offset.height() + gaugeFill.height() - 5, percentageString );
+    // void QPainter::drawText ( int x, int y, int w, int h, int flags, const QString &, int len = -1, QRect * br = 0, QTextParag ** internal = 0 )
+    // assuming, the drawn border arround the gauge is just 1 Point large
+    //  <- offset -> | <- 1pt ->  xx %  <- 1pt -> | <- offset ->
+   painter .drawText( offset.width(), offset.height()
+                    , offset.width() + gaugeFill.width(), offset.height() + gaugeFill.height()
+                    , Qt::AlignHCenter | Qt::AlignVCenter
+                    , percentageString );
 }

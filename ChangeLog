@@ -1,3 +1,6 @@
+KThinkBat 0.1.5 Beta 2:
+   * better Text justification (Alignment of Values in Gauge)
+
 KThinkBat 0.1.5 Beta 1:
    * Support a second battery
    * change gauge fill color, if battery reached its alarm capacity

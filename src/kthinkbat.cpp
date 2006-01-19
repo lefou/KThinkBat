@@ -109,44 +109,36 @@ void KThinkBat::paintEvent(QPaintEvent* event)
     QPainter painter(&pixmap);
 
     gauge1.drawGauge( painter, border, gaugeSize );
-//     //-------------------------------------------------------------------------
-//     // Paint Gauge
-//     painter.fillRect(offset.width(), offset.height(), gaugeFill.width() + 2, gaugeFill.height(), QColor( "gray"));
-//     // old: int showValue = (batValue <0 || batValue > 100 ) ? 0 : batValue;
-//     int batValue = batInfo1.getChargeLevel();
-//     int xFill = (batValue>0 ? batValue * gaugeFill.width() / 100 : 0);
-//     // TODO criticalFuell comes from batInfo, but it could also be set by user ???
-//     painter.fillRect(offset.width(), offset.height(), xFill, gaugeFill.height(), QColor( batInfo1.getCurFuell() <= batInfo1.getCriticalFuell() ? "red" : "green"));
-//     // Plus-Pol zeichnen
-//     painter.fillRect( offset.width() + gaugeFill.width() + 2, offset.height() + (gaugeFill.height() / 2) - gHalfDot.height(), gHalfDot.width(), gHalfDot.height() * 2, QColor( batInfo1.isOnline() ? "yellow" : "gray" ));
-// 
-//     // Paint Border
-//     painter.drawPolyline(border);
-// 
-//     // Prozent-Anzeige
-//     QString percentageString = (batValue >= 0) ? QString().number(batValue) : "?" ;
-//     painter.drawText( offset.width() + 12, offset.height() + gaugeFill.height() - 5, percentageString );
 
     //-------------------------------------------------------------------------
-    // Position für Verbrauchsanzeige
+    // Position for power consumtion display
     QSize wastePos;
     if( wastePosBelow ) {
         // Verbrauchsanzeige unterhalb der Gauge
-        wastePos = QSize( border.width(), border.height() + gaugeSize.height() + 12 );
+        wastePos = QSize( border.width(), ( 2 * border.height() ) + gaugeSize.height() );
     }
     else {
         // Verbrauchsanzeige rechts von der Gauge
-        wastePos = QSize( ( 3 * border.width() ) + gaugeSize.width(), border.height() );
+        wastePos = QSize( ( 2 * border.width() ) + gaugeSize.width(), border.height() );
     }
     
     // Power consumption: For correct rounding we add 500 mW (resp. 50 mA)
     if( "W" == powerUnit ) {
         // aktuellen Verbrauch in W 
-        painter.drawText( wastePos.width(), wastePos.height(), QString().number((int) (curPower + 500)/1000) + " " + powerUnit );
+        // void QPainter::drawText ( int x, int y, int w, int h, int flags, const QString &, int len = -1, QRect * br = 0, QTextParag ** internal = 0 )
+        painter.drawText( wastePos.width(), wastePos.height()
+                        , 1, 1
+                        , Qt::AlignLeft | Qt::AlignTop
+                        , QString().number((int) (curPower + 500)/1000) + " " + powerUnit );
+        // painter.drawText( wastePos.width(), wastePos.height(), QString().number((int) (curPower + 500)/1000) + " " + powerUnit );
     }
     else {
         // aktuellen Verbrauch in A (bei Asus-Laptops) anzeigen
-        painter.drawText( wastePos.width(), wastePos.height(), QString().number((float) (((int) curPower + 50)/100) / 10 )  + " " + powerUnit );
+        // painter.drawText( wastePos.width(), wastePos.height(), QString().number((float) (((int) curPower + 50)/100) / 10 )  + " " + powerUnit );
+        painter.drawText( wastePos.width(), wastePos.height()
+                        , 1, gaugeSize.height()
+                        , Qt::AlignLeft | Qt::AlignVCenter
+                        , QString().number((float) (((int) curPower + 50)/100) / 10 ) + " " + powerUnit );
     }
 
     //-------------------------------------------------------------------------
@@ -177,7 +169,7 @@ void KThinkBat::timeout()
     bool acpi2Good = false;
 
     if ( ! tp2Good ) {
-        // Ermittle die Werte von /proc/acpi/BAT0
+        // Ermittle die Werte von /proc/acpi/BAT1
         acpi2Good = batInfo2.parseProcACPI();
     }
 
@@ -205,13 +197,17 @@ void KThinkBat::timeout()
         powerUnit = batInfo1.getPowerUnit();
         curPower = batInfo1.getPowerConsumption();
     }
-    else {
+    else if( tp2Good || acpi2Good ) {
         // we have just battery two
         gauge1.setPercentValue( (int) batInfo2.getChargeLevel() );
         gauge1.setColors( QColor( batInfo2.getCurFuell() <= batInfo2.getCriticalFuell() ? "red" : "green")
                         , QColor( batInfo2.isOnline() ? "yellow" : "gray" ) );
         powerUnit = batInfo2.getPowerUnit();
         curPower = batInfo2.getPowerConsumption();
+    }
+    else {
+        // no battery reports good values :(
+        // maybe, we should colorize the background of the applet ?
     }
 
     // Aktualisierte Interface
