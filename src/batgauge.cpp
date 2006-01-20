@@ -84,8 +84,17 @@ BatGauge::drawGauge( QPainter& painter, QSize gaugePos, QSize gaugeSize ) {
     // void QPainter::drawText ( int x, int y, int w, int h, int flags, const QString &, int len = -1, QRect * br = 0, QTextParag ** internal = 0 )
     // assuming, the drawn border arround the gauge is just 1 Point large
     //  <- offset -> | <- 1pt ->  xx %  <- 1pt -> | <- offset ->
-   painter .drawText( offset.width(), offset.height()
-                    , offset.width() + gaugeFill.width(), offset.height() + gaugeFill.height()
-                    , Qt::AlignHCenter | Qt::AlignVCenter
+
+    // Calculate, haw much space is needed by the Text string
+    QRect reqTextSize = painter.drawText( 1,1,1,1, Qt::AlignHCenter | Qt::AlignVCenter, percentageString );
+
+    // Text will be painted from it base line, so we have to calculate from the bottom
+    painter.drawText( offset.width() + ( (gaugeFill.width() - reqTextSize.width()) / 2 )
+                    , offset.height() + gaugeFill.height() - ( (gaugeFill.height() - reqTextSize.height()) / 2 )
                     , percentageString );
+
+//     painter .drawText( offset.width(), offset.height()
+//                     , offset.width() + gaugeFill.width(), offset.height() + gaugeFill.height()
+//                     , Qt::AlignHCenter | Qt::AlignVCenter
+//                     , percentageString );
 }
