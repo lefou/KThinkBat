@@ -118,35 +118,38 @@ void KThinkBat::paintEvent(QPaintEvent* event)
 
     if( wastePosBelow ) {
         // Verbrauchsanzeige unterhalb der Gauge
-        wastePos = QSize( border.width(), ( 2 * border.height() ) + gaugeSize.height() );
+        wastePos = QSize( border.width(), border.height() + gaugeSize.height() + 12 );
+        // wastePos = QSize( border.width(), ( 2 * border.height() ) + gaugeSize.height() );
     }
     else {
         // Verbrauchsanzeige rechts von der Gauge
-        wastePos = QSize( ( 2 * border.width() ) + gaugeSize.width(), border.height() );
+        wastePos = QSize( ( 3 * border.width() ) + gaugeSize.width(), border.height() );
+        // wastePos = QSize( ( 2 * border.width() ) + gaugeSize.width(), border.height() );
     }
     
     // Power consumption: For correct rounding we add 500 mW (resp. 50 mA)
     if( "W" == powerUnit ) {
         // aktuellen Verbrauch in W 
         // void QPainter::drawText ( int x, int y, int w, int h, int flags, const QString &, int len = -1, QRect * br = 0, QTextParag ** internal = 0 )
-        powerTextExtend = painter.boundingRect( wastePos.width(), wastePos.height(), 1, 1
-                                              , Qt::AlignLeft | Qt::AlignTop
-                                              , QString().number((int) (curPower + 500)/1000) + " " + powerUnit );
-        painter.drawText( powerTextExtend.left(), powerTextExtend.top(), powerTextExtend.width(), powerTextExtend.height()
-                        , Qt::AlignLeft | Qt::AlignTop
-                        , QString().number((int) (curPower + 500)/1000) + " " + powerUnit );
-        // painter.drawText( wastePos.width(), wastePos.height(), QString().number((int) (curPower + 500)/1000) + " " + powerUnit );
+//         powerTextExtend = painter.boundingRect( wastePos.width(), wastePos.height(), 1, 1
+//                                               , Qt::AlignLeft | Qt::AlignTop
+//                                               , QString().number((int) (curPower + 500)/1000) + " " + powerUnit );
+//         painter.drawText( powerTextExtend.left(), powerTextExtend.top(), powerTextExtend.width(), powerTextExtend.height()
+//                         , Qt::AlignLeft | Qt::AlignTop
+//                         , QString().number((int) (curPower + 500)/1000) + " " + powerUnit );
+
+        painter.drawText( wastePos.width(), wastePos.height(), QString().number((int) (curPower + 500)/1000) + " " + powerUnit );
 
     }
     else {
         // aktuellen Verbrauch in A (bei Asus-Laptops) anzeigen
-        // painter.drawText( wastePos.width(), wastePos.height(), QString().number((float) (((int) curPower + 50)/100) / 10 )  + " " + powerUnit );
-        powerTextExtend = painter.boundingRect( wastePos.width(), wastePos.height(), 1, gaugeSize.height()
-                        , Qt::AlignLeft | Qt::AlignVCenter
-                        , QString().number((float) (((int) curPower + 50)/100) / 10 ) + " " + powerUnit );
-        painter.drawText( powerTextExtend.left(), powerTextExtend.top(), powerTextExtend.width(), powerTextExtend.height()
-                        , Qt::AlignLeft | Qt::AlignTop
-                        , QString().number((int) (curPower + 500)/1000) + " " + powerUnit );
+        painter.drawText( wastePos.width(), wastePos.height(), QString().number((float) (((int) curPower + 50)/100) / 10 )  + " " + powerUnit );
+//         powerTextExtend = painter.boundingRect( wastePos.width(), wastePos.height(), 1, gaugeSize.height()
+//                         , Qt::AlignLeft | Qt::AlignVCenter
+//                         , QString().number((float) (((int) curPower + 50)/100) / 10 ) + " " + powerUnit );
+//         painter.drawText( powerTextExtend.left(), powerTextExtend.top(), powerTextExtend.width(), powerTextExtend.height()
+//                         , Qt::AlignLeft | Qt::AlignTop
+//                         , QString().number((int) (curPower + 500)/1000) + " " + powerUnit );
     }
 
     // recalculate the needed Size
