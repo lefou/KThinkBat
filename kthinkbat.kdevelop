@@ -3,7 +3,7 @@
   <general>
     <author>Tobias Roeser</author>
     <email>le.petit.fou@web.de</email>
-    <version>0.1.5_beta1</version>
+    <version>0.1.5_beta2</version>
     <projectmanagement>KDevKDEAutoProject</projectmanagement>
     <primarylanguage>C++</primarylanguage>
     <keywords>

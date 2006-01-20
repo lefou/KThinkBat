@@ -39,10 +39,9 @@
 /**
     @author Tobias Roeser <le.petit.fou@web.de>
 */
-class KThinkBat : public KPanelApplet
-{
+class KThinkBat : public KPanelApplet {
     Q_OBJECT
-    
+
 public:
     /**
      * Construct a @ref KPanelApplet just like any other widget.
@@ -54,10 +53,10 @@ public:
      * @param name A Qt object name for your applet.
      **/
     KThinkBat(const QString& configFile, Type t = Normal, int actions = 0,
-        QWidget *parent = 0, const char *name = 0);
+              QWidget *parent = 0, const char *name = 0);
     /** destructor */
     virtual ~KThinkBat();
-    
+
     /**
      * Retrieve a suggested width for a given height.
      *
@@ -125,7 +124,7 @@ public:
 
 public slots:
     void timeout();
-    
+
 protected:
     void resizeEvent(QResizeEvent *);
     void paintEvent(QPaintEvent* event);
@@ -134,7 +133,7 @@ protected:
 
 private:
     KConfig *ksConfig;
-    
+
     /// Aktualisierungs-Interval fr die ACPI-Werte
     int intervall;
 

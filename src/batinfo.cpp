@@ -28,7 +28,7 @@
 #include "batinfo.h"
 
 BatInfo::BatInfo( int number ) 
-    : batNr( number -1 )
+    : batNr( number - 1 )
 {
     resetValues();
 }
