@@ -86,7 +86,7 @@ BatGauge::drawGauge( QPainter& painter, QSize gaugePos, QSize gaugeSize ) {
     //  <- offset -> | <- 1pt ->  xx %  <- 1pt -> | <- offset ->
 
     // Calculate, haw much space is needed by the Text string
-    QRect reqTextSize = painter.drawText( 1,1,1,1, Qt::AlignHCenter | Qt::AlignVCenter, percentageString );
+    QRect reqTextSize = painter.boundingRect( 1,1,1,1, Qt::AlignHCenter | Qt::AlignVCenter, percentageString );
 
     // Text will be painted from it base line, so we have to calculate from the bottom
     painter.drawText( offset.width() + ( (gaugeFill.width() - reqTextSize.width()) / 2 )
