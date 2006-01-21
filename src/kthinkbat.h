@@ -97,14 +97,7 @@ public:
      * The height you return is granted.
      **/
     virtual int heightForWidth(int width) const;
-    /**
-     * Is called when the user selects "About" from the applets RMB menu.
-     * Reimplement this function to launch a about dialog.
-     *
-     * Note that this is called only when your applet supports the About action.
-     * See @ref Action and @ref KPanelApplet().
-     **/
-    virtual void about();
+
     /**
      * Is called when the user selects "Help" from the applets RMB menu.
      * Reimplement this function to launch a manual or help page.
@@ -124,7 +117,13 @@ public:
 
 public slots:
     void timeout();
+
     void setPowerMeterPosition();
+
+    /**
+     * Is called when the user selects "About" from the applets RMB menu.
+     **/
+    virtual void about();
 
 protected:
     void resizeEvent(QResizeEvent *);

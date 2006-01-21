@@ -74,7 +74,6 @@ KThinkBat::KThinkBat(const QString& configFile, Type type, int actions, QWidget 
     setCustomMenu( popupMenu );
 }
 
-
 KThinkBat::~KThinkBat() {
     timer->stop();
     delete timer;
@@ -82,6 +81,10 @@ KThinkBat::~KThinkBat() {
 }
 
 void KThinkBat::setPowerMeterPosition() {
+
+    // FIXME remove this dialog
+    KMessageBox::information( 0, "SLOT setPowerMeterPosition() called" );
+
     if( customMenu() ) {
         wastePosBelow = customMenu()->isItemEnabled( powerPosID );
     }
@@ -91,6 +94,10 @@ void KThinkBat::setPowerMeterPosition() {
 
 void KThinkBat::about() {
     // KMessageBox::information(0, i18n("A KDE panel applet to display the current laptop battery status.\n\nCopyrigth (c) 2005-2006 Tobias Roeser\nDistributed under the terms of the GNU General Public License v2"));
+
+    // FIXME remove this dialog
+    KMessageBox::information( 0, "SLOT about() called" );
+
     KAboutApplication about( this );
     about.show();
     //timeout();
