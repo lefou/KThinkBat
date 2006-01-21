@@ -30,7 +30,7 @@
 #include <qtextstream.h>
 #include <qregexp.h>
 #include <qtimer.h>
-#include <qpopupmenu.h>
+#include <kpopupmenu.h>
 #include <kaboutapplication.h>
 
 #include "kthinkbat.h"
@@ -63,10 +63,11 @@ KThinkBat::KThinkBat(const QString& configFile, Type type, int actions, QWidget 
     timer->start(intervall);
 
     // Create a popup menu to show KThinkBats specific options.
-    QPopupMenu* popupMenu = new QPopupMenu();
+    KPopupMenu* popupMenu = new KPopupMenu();
     assert( popupMenu );
-    popupMenu->setCheckable( true );
-    popupMenu->insertItem( i18n("About") + " " + PACKAGE, this, SLOT(about()) );
+    // popupMenu->setCheckable( true );
+    popupMenu->insertTitle( i18n("KThinkBat %1").arg(VERSION) );
+    popupMenu->insertItem( i18n("About %1").arg(PACKAGE), this, SLOT(about()) );
     powerPosID = popupMenu->insertItem( i18n("Power Meter below Gauge"), this, SLOT(setPowerMeterPosition()) );
     popupMenu->setItemEnabled( powerPosID, wastePosBelow );
 
@@ -80,48 +81,63 @@ KThinkBat::~KThinkBat() {
     timer = NULL;
 }
 
-void KThinkBat::setPowerMeterPosition() {
+void 
+KThinkBat::setPowerMeterPosition() {
 
-    if( customMenu() ) {
-        wastePosBelow = customMenu()->isItemEnabled( powerPosID );
-    }
+//     if( customMenu() ) {
+//         wastePosBelow = customMenu()->isItemEnabled( powerPosID );
+//     }
+
+    wastePosBelow = !wastePosBelow;
 
     // FIXME remove this dialog
-    KMessageBox::information( 0, "SLOT setPowerMeterPosition() called. wastePosBelow = " + QString( wastePosBelow ? "true" : "false" ) );
+    KMessageBox::information( 0, QString("SLOT setPowerMeterPosition() called. wastePosBelow = %1").arg( wastePosBelow ? "true" : "false" ) );
 
     // force an update, as we have a new layout
     update();
 }
 
-void KThinkBat::about() {
-    // KMessageBox::information(0, i18n("A KDE panel applet to display the current laptop battery status.\n\nCopyrigth (c) 2005-2006 Tobias Roeser\nDistributed under the terms of the GNU General Public License v2"));
-    //timeout();
+void 
+KThinkBat::about() {
 
-    KAboutApplication about( this );
+    KAboutData aboutData("KTinkBat", "KThinkbat", "0.1.5",
+            I18N_NOOP("A KDE panel applet to display the current laptop battery status.")
+            , KAboutData::License_GPL_V2, "(c)2005-2006, Tobias Roeser", "", "https://lepetitfou.dyndns.org/KThinkBat" );
+    aboutData.addAuthor("Tobias Roeser", "", "le.petitfou@web.de",
+            "https://lepetitfou.dyndns.org/KThinkBat");
+
+    KAboutApplication about( &aboutData, this );
+//     about.setIcon( KGlobal::instance()->iconLoader()->iconPath( "kthinkbat", -KIcon::SizeLarge ) );
     about.exec();
 }
 
 
-void KThinkBat::help() {
+void 
+KThinkBat::help() {
     KMessageBox::information(0, i18n("A KDE panel applet to display the current laptop battery status.\n\nThere is no real help box at the moment"));
 }
 
 
-void KThinkBat::preferences() {
+void 
+KThinkBat::preferences() {
     KMessageBox::information(0, i18n("A KDE panel applet to display the current laptop battery status."));
 }
 
-int KThinkBat::widthForHeight(int height) const {
+int 
+KThinkBat::widthForHeight(int height) const {
     return neededSize.width();
 }
 
-int KThinkBat::heightForWidth(int width) const {
+int 
+KThinkBat::heightForWidth(int width) const {
     return neededSize.height();
 }
 
-void KThinkBat::resizeEvent(QResizeEvent *e) {}
+void 
+KThinkBat::resizeEvent(QResizeEvent *e) {}
 
-void KThinkBat::paintEvent(QPaintEvent* event) {
+void 
+KThinkBat::paintEvent(QPaintEvent* event) {
     // TODO Gauge auslagern als Funktion, später als extra Control
 
     QPixmap pixmap(width(), height());
@@ -189,7 +205,8 @@ void KThinkBat::paintEvent(QPaintEvent* event) {
 }
 
 
-void KThinkBat::timeout() {
+void 
+KThinkBat::timeout() {
     // 1. First try TP SMAPI on BAT0
     // 2. If that fails try ACPI /proc interface for BAT0
     bool battery1 = batInfo1.parseSysfsTP() || batInfo1.parseProcACPI();
