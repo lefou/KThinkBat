@@ -137,8 +137,15 @@ private:
     int intervall;
 
     QColor borderColor, emptyColor, chargedColor;
-    QSize gaugeSize, border;
 
+    /// The Size of be battery gauge
+    QSize gaugeSize;
+    /// The border around the gauge
+    QSize border;
+    /// The space between gauge and power consuption label
+    QSize padding;
+
+    /// The timer, that controls the update of the battery values
     QTimer* timer;
 
     /// Anzeige des Verbrauchs unterhalb der Gauge anzeigen (oder rechts davon)
