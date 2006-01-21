@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.1.2-Based Variant V1.1//EN" "dtd/kdex.dtd" [
-  <!ENTITY kthinkbat "<application>KThinkBat 0.1.5</application>">
+  <!ENTITY kthinkbat "<application>KThinkBat 0.1</application>">
   <!ENTITY kappname "&kthinkbat;"><!-- Do *not* replace kappname-->
   <!ENTITY package "kde-module"><!-- kdebase, kdeadmin, etc -->
   <!ENTITY % addindex "IGNORE">
@@ -76,8 +76,8 @@ Please respect the format of the date (YYYY-MM-DD) and of the version
 (V.MM.LL), it could be used by automation scripts.
 Do NOT change these in the translation. -->
 
-<date>2005-01-20</date>
-<releaseinfo>0.1.5</releaseinfo>
+<date>2001-10-18</date>
+<releaseinfo>0.1</releaseinfo>
 
 <!-- Abstract about this handbook -->
 
@@ -91,8 +91,6 @@ ever want.
 <!-- This is a set of Keywords for indexing by search engines.
 Please at least include KDE, the KDE package it is in, the name
  of your application, and a few relevant keywords. -->
-
-KDE, KThinkBat, kthinkbat, Applet, Battery, Akku, Gauge, Battery Monitor, Power Management, ACPI, SMAPI BIOS, ThinkPad
 
 <keywordset>
 <keyword>KDE</keyword>
@@ -122,7 +120,7 @@ revision history. (see installation appendix comment) -->
 
 <para>
 &kthinkbat; is a program that lets you do absolutely nothing. Please report
-any problems or feature requests to <email>le.petit.fou@web.de</email>.
+any problems or feature requests to the &kde; mailing lists.
 </para>
 </chapter>
 
@@ -451,7 +449,7 @@ Contributors:
 </para>
 
 <para>
-Documentation copyright 2005-2006 Tobias Roeser <email>le.petit.fou@web.de</email>
+Documentation copyright 2005 Tobias Roeser <email>le.petit.fou@web.de</email>
 </para>
 
 <!-- TRANS:CREDIT_FOR_TRANSLATORS -->

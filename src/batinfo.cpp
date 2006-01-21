@@ -57,22 +57,29 @@ BatInfo::parseProcACPI() {
 
     // Pattern für /proc/acpi/battery/BATx/info
     // ThinkPad (mWh)
-    static QRegExp rxCap("^last full capacity:\\s*(\\d{1,5})\\s*mWh");
-    static QRegExp rxDesignCap("^design capacity low:\\s*(\\d{1,5})\\s*mWh");
-    // Asus (mAh)
-    static QRegExp rxCapA("^last full capacity:\\s*(\\d{1,5})\\s*mAh");
-    static QRegExp rxDesignCapA("^design capacity low:\\s*(\\d{1,5})\\s*mAh");
+    QRegExp rxInstalled( "^present:\\s*(yes)" );
+    QRegExp rxCap("^last full capacity:\\s*(\\d{1,5})\\s*mWh");
+    QRegExp rxDesignCap("^design capacity low:\\s*(\\d{1,5})\\s*mWh");
+    // Asus/Acer (mAh)
+    QRegExp rxCapA("^last full capacity:\\s*(\\d{1,5})\\s*mAh");
+    QRegExp rxDesignCapA("^design capacity low:\\s*(\\d{1,5})\\s*mAh");
 
     QFile file( "/proc/acpi/battery/BAT" + QString::number(batNr) + "/info" );
     if( ! file.exists() || ! file.open(IO_ReadOnly) ) {
-       curFuell = -1;
-       qDebug( "could not open %s", file.name().latin1() );
-       return false;
+        qDebug( "could not open %s", file.name().latin1() );
+        resetValues();
+        return false;
     }
-    QTextStream stream( (QIODevice*) &file );
 
+    batInstalled = true;
+
+    QTextStream stream( (QIODevice*) &file );
     while( ! stream.atEnd() ) {
         line = stream.readLine();
+        if( -1 != rxInstalled.search( line ) ) {
+            batInstalled = rxInstalled.cap(1) == "yes";
+            //KMessageBox::information(0, "fount cap: "+cap);
+        }
         if( -1 != rxCap.search( line ) ) {
             cap = rxCap.cap(1);
             //KMessageBox::information(0, "fount cap: "+cap);
@@ -90,25 +97,32 @@ BatInfo::parseProcACPI() {
     }
     file.close();
 
+    if( ! batInstalled ) {
+        resetValues();
+        batInstalled = false;
+        return false;
+    }   
+
     // Falls keine Angaben in mWh, dafür aber welche in mAh, 
     // dann verwenden wir A als Einheit
-    if( cap.isEmpty() && ! capA.isEmpty() ) {
-        // no relevant values found, (maybe) wa are using mAh instead of mWh
-        // so copy this values and set default unity
+    if( ! capA.isEmpty() ) {
         cap = capA;
         designCap = designCapA;
         powerUnit = "A";
     }
+    else {
+        powerUnit = "W";
+    }
 
     file.setName("/proc/acpi/battery/BAT" + QString::number( batNr ) + "/state");
     if( ! file.exists() || ! file.open(IO_ReadOnly) ) {
-       curFuell = -1;
-       qDebug("could not open %s", file.name().latin1() );
-       return false;
+        qDebug("could not open %s", file.name().latin1() );
+        resetValues();
+        return false;
     }
     stream.setDevice( &file );
 
-    // Pattern für /proc/acpi/battery/BATx/state
+    // Pattern for /proc/acpi/battery/BATx/state
     QRegExp rxCur("^remaining capacity:\\s*(\\d{1,5})\\s*m" + powerUnit + "h");
     QRegExp rxOffline("^charging state:\\s*(discharging|charging|charged)");
     QRegExp rxMWH("^present rate:\\s*(\\d{1,5})\\s*m" + powerUnit );
@@ -128,22 +142,16 @@ BatInfo::parseProcACPI() {
     }
     file.close();
 
-    bool ok1 = true, ok2 = true;
-    int curValue = cur.toInt(&ok1);
-    int capValue = cap.toInt(&ok2);
+    bool ok;
+    int curFuell = cur.toInt(&ok);
+    if( ! ok ) { curFuell = 0; }
 
-    if( ok1 ) {
-        curFuell = curValue;
-    }
-    if( ok2 ) {
-        lastFuell = capValue;
-    }
+    int lastFuell = cap.toInt(&ok);
+    if( ! ok ) { lastFuell = 0; }
     
     // current cosumption
-    curPower = mWHstring.toInt(&ok2);
-    if( ! ok2 ) {
-        curPower = -1;
-    }
+    curPower = mWHstring.toInt(&ok);
+    if( ! ok ) { curPower = 0; }
 
     // TODO better read /proc/acpi/ac_adapter/AC/state an evaluate "on-line"
     acConnected = (batState != "discharging");
@@ -166,9 +174,8 @@ BatInfo::parseProcAcpiBatAlarm() {
         criticalFuell = 0;
         return false;
     }
-    
+
     QTextStream stream( (QIODevice*) &file );
-    
     while( ! stream.atEnd() ) {
         QString line = stream.readLine();
         if( -1 != rxWarnCap.search( line ) ) {

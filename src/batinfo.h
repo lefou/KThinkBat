@@ -80,6 +80,9 @@ private:
     int batNr;
     bool batInstalled;
 
+    /** Note: On Acer and Asus Laptops we have mA(h) instead of mW(h), 
+        so @c powerUnit is "W" or "A", depending on the battery and 
+        laptop type. */
     QString powerUnit;
     QString batState;
     bool acConnected;

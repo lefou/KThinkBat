@@ -161,26 +161,15 @@ void KThinkBat::paintEvent(QPaintEvent* event) {
 
 
 void KThinkBat::timeout() {
-    // Ermittle die Werte von /sys/devices/platform/smapi/
-    bool tp1Good = batInfo1.parseSysfsTP();
-    bool acpi1Good = false;
+    // 1. First try TP SMAPI on BAT0
+    // 2. If that fails try ACPI /proc interface for BAT0
+    bool battery1 = batInfo1.parseSysfsTP() || batInfo1.parseProcACPI();
 
-    if ( ! tp1Good ) {
-        // Ermittle die Werte von /proc/acpi/BAT0
-        acpi1Good = batInfo1.parseProcACPI();
-    }
+    // 3. Now try BAT1, first TP SMAPI agian
+    // 4. And, if that failed, try ACPi /proc interface for BAT1
+    bool battery2 = batInfo2.parseSysfsTP() || batInfo2.parseProcACPI();
 
-    // Zweite Battery
-    // Ermittle die Werte von /sys/devices/platform/smapi/
-    bool tp2Good = batInfo2.parseSysfsTP();
-    bool acpi2Good = false;
-
-    if ( ! tp2Good ) {
-        // Ermittle die Werte von /proc/acpi/BAT1
-        acpi2Good = batInfo2.parseProcACPI();
-    }
-
-    if( ( tp1Good || acpi1Good ) && ( tp2Good || acpi2Good ) ) {
+    if( battery1 && battery2 ) {
         // we have tho batteries
         float lastFuell = batInfo1.getLastFuell() + batInfo2.getLastFuell();
         float curFuell = batInfo1.getCurFuell() + batInfo2.getCurFuell();
@@ -194,14 +183,14 @@ void KThinkBat::timeout() {
         powerUnit = batInfo1.getPowerUnit();
         curPower = batInfo1.getPowerConsumption() + batInfo2.getPowerConsumption();
 
-    } else if( tp1Good || acpi1Good ) {
+    } else if( battery1 ) {
         // we have just battery one
         gauge1.setPercentValue( (int) batInfo1.getChargeLevel() );
         gauge1.setColors( QColor( batInfo1.getCurFuell() <= batInfo1.getCriticalFuell() ? "red" : "green")
                           , QColor( batInfo1.isOnline() ? "yellow" : "gray" ) );
         powerUnit = batInfo1.getPowerUnit();
         curPower = batInfo1.getPowerConsumption();
-    } else if( tp2Good || acpi2Good ) {
+    } else if( battery2 ) {
         // we have just battery two
         gauge1.setPercentValue( (int) batInfo2.getChargeLevel() );
         gauge1.setColors( QColor( batInfo2.getCurFuell() <= batInfo2.getCriticalFuell() ? "red" : "green")
