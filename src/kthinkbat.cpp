@@ -108,7 +108,7 @@ KThinkBat::setPowerMeterPosition() {
 void 
 KThinkBat::about() {
 
-    KAboutData aboutData( "KThinkBat", "KThinkbat", QString("%1").arg(VERSION),
+    KAboutData aboutData( "KThinkBat", "KThinkBat", VERSION,
                           I18N_NOOP("A KDE panel applet to display the current laptop battery status."),
                           KAboutData::License_GPL_V2, 
                           "(c) 2005-2006, Tobias Roeser",

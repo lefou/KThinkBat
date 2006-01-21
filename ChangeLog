@@ -1,6 +1,8 @@
 KThinkBat 0.1.5 Beta 2:
    * better Text justification (Alignment of Values in Gauge)
    * code cleanup for querying sysfs and proc interfaces
+   * it is now optionally possible, to display the current power 
+     consumption to the right instead of below the battery gauge 
 
 KThinkBat 0.1.5 Beta 1:
    * Support a second battery
