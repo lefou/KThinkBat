@@ -31,6 +31,7 @@
 #include <qregexp.h>
 #include <qtimer.h>
 #include <qpopupmenu.h>
+#include <kaboutapplication.h>
 
 #include "kthinkbat.h"
 
@@ -54,16 +55,22 @@ KThinkBat::KThinkBat(const QString& configFile, Type type, int actions, QWidget 
 
     wastePosBelow = ksConfig->readBoolEntry( "PowerMeterBelowGauge", wastePosBelow );
 
-    // Timer der die Aktualisierung von ACPI-Werten und deren Anzeige steuert
+    // Timer der die Aktualisierung von ACPI/SMAPI-Werten und deren Anzeige veranlasst.
     timeout();
     timer = new QTimer(this);
+    assert( timer );
     connect(timer, SIGNAL(timeout()), this, SLOT(timeout()));
     timer->start(intervall);
 
+    // Create a popup menu to show KThinkBats specific options.
     QPopupMenu* popupMenu = new QPopupMenu();
-    powerPosID = popupMenu->insertItem( tr("Power Meter below Gauge"), this, SLOT(setPowerMeterPosition()) );
+    assert( popupMenu );
+    popupMenu->setCheckable( true );
+    popupMenu->insertItem( i18n("About") + " " + PACKAGE, this, SLOT(about()) );
+    powerPosID = popupMenu->insertItem( i18n("Power Meter below Gauge"), this, SLOT(setPowerMeterPosition()) );
     popupMenu->setItemEnabled( powerPosID, wastePosBelow );
 
+    // KPanelApplet takes ownership of this menu, so we don't have to delete it.
     setCustomMenu( popupMenu );
 }
 
@@ -83,8 +90,10 @@ void KThinkBat::setPowerMeterPosition() {
 }
 
 void KThinkBat::about() {
-    KMessageBox::information(0, i18n("A KDE panel applet to display the current laptop battery status.\n\nCopyrigth (c) 2005-2006 Tobias Roeser\nDistributed under the terms of the GNU General Public License v2"));
-    timeout();
+    // KMessageBox::information(0, i18n("A KDE panel applet to display the current laptop battery status.\n\nCopyrigth (c) 2005-2006 Tobias Roeser\nDistributed under the terms of the GNU General Public License v2"));
+    KAboutApplication about( this );
+    about.show();
+    //timeout();
 }
 
 
@@ -226,7 +235,7 @@ extern "C" {
         KGlobal::locale()->insertCatalogue("kthinkbat");
         return new KThinkBat(configFile, KPanelApplet::Normal,
 //                              KPanelApplet::About | KPanelApplet::Help | KPanelApplet::Preferences,
-                             KPanelApplet::About,
+                             0,
                              parent, "kthinkbat");
     }
 }
