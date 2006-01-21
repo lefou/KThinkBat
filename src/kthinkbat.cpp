@@ -102,12 +102,16 @@ KThinkBat::setPowerMeterPosition() {
 void 
 KThinkBat::about() {
 
-    KAboutData aboutData("KThinkBat", "KThinkbat", "0.1.5",
-            I18N_NOOP("A KDE panel applet to display the current laptop battery status.")
-            , KAboutData::License_GPL_V2, "(c)2005-2006, Tobias Roeser", "", "https://lepetitfou.dyndns.org/KThinkBat"
-            , "le.petit.fou@web.de" );
-    aboutData.addAuthor("Tobias Roeser", "", "le.petitfou@web.de",
-            "https://lepetitfou.dyndns.org/KThinkBat");
+    KAboutData aboutData( "KThinkBat", "KThinkbat", QString("%1").arg(VERSION),
+                          I18N_NOOP("A KDE panel applet to display the current laptop battery status."),
+                          KAboutData::License_GPL_V2, 
+                          "(c) 2005-2006, Tobias Roeser",
+                          "", 
+                          "https://lepetitfou.dyndns.org/KThinkBat",
+                          "le.petit.fou@web.de" );
+    
+    aboutData.addAuthor( "Tobias Roeser", "", "le.petitfou@web.de",
+                         "https://lepetitfou.dyndns.org/KThinkBat" );
 
     KAboutApplication about( &aboutData, this, NULL, 0 );
 //     about.setIcon( KGlobal::instance()->iconLoader()->iconPath( "kthinkbat", -KIcon::SizeLarge ) );
