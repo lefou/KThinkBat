@@ -30,6 +30,7 @@
 #include <qtextstream.h>
 #include <qregexp.h>
 #include <qtimer.h>
+#include <qpopupmenu.h>
 
 #include "kthinkbat.h"
 
@@ -46,7 +47,8 @@ KThinkBat::KThinkBat(const QString& configFile, Type type, int actions, QWidget 
 , wastePosBelow( true )
 , batInfo1( BatInfo() )
 , batInfo2( BatInfo( 2 ) )
-, neededSize( QSize( 52, 40) ) {
+, neededSize( QSize( 52, 40) )
+, powerPosID( 0 ) {
     // Get the current application configuration handle
     ksConfig = config();
 
@@ -57,6 +59,12 @@ KThinkBat::KThinkBat(const QString& configFile, Type type, int actions, QWidget 
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(timeout()));
     timer->start(intervall);
+
+    QPopupMenu* popupMenu = new QPopupMenu();
+    powerPosID = popupMenu->insertItem( tr("Power Meter below Gauge"), this, SLOT(setPowerMeterPosition()) );
+    popupMenu->setItemEnabled( powerPosID, wastePosBelow );
+
+    setCustomMenu( popupMenu );
 }
 
 
@@ -66,6 +74,13 @@ KThinkBat::~KThinkBat() {
     timer = NULL;
 }
 
+void KThinkBat::setPowerMeterPosition() {
+    if( customMenu() ) {
+        wastePosBelow = customMenu()->isItemEnabled( powerPosID );
+    }
+    // force an update, as we have a new layout
+    update();
+}
 
 void KThinkBat::about() {
     KMessageBox::information(0, i18n("A KDE panel applet to display the current laptop battery status.\n\nCopyrigth (c) 2005-2006 Tobias Roeser\nDistributed under the terms of the GNU General Public License v2"));
@@ -210,7 +225,8 @@ extern "C" {
     KPanelApplet* init( QWidget *parent, const QString& configFile) {
         KGlobal::locale()->insertCatalogue("kthinkbat");
         return new KThinkBat(configFile, KPanelApplet::Normal,
-                             KPanelApplet::About | KPanelApplet::Help | KPanelApplet::Preferences,
+//                              KPanelApplet::About | KPanelApplet::Help | KPanelApplet::Preferences,
+                             KPanelApplet::About,
                              parent, "kthinkbat");
     }
 }

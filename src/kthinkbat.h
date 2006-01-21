@@ -124,12 +124,11 @@ public:
 
 public slots:
     void timeout();
+    void setPowerMeterPosition();
 
 protected:
     void resizeEvent(QResizeEvent *);
     void paintEvent(QPaintEvent* event);
-
-
 
 private:
     KConfig *ksConfig;
@@ -154,6 +153,8 @@ private:
     QString powerUnit;
 
     QSize neededSize;
+
+    int powerPosID;
 };
 
 #endif
