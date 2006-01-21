@@ -30,7 +30,6 @@
 #include <qtextstream.h>
 #include <qregexp.h>
 #include <qtimer.h>
-#include <kpopupmenu.h>
 #include <kaboutapplication.h>
 
 #include "kthinkbat.h"
@@ -70,33 +69,31 @@ KThinkBat::KThinkBat(const QString& configFile, Type type, int actions, QWidget 
     timer->start(intervall);
 
     // Create a popup menu to show KThinkBats specific options.
-    KPopupMenu* popupMenu = new KPopupMenu();
-    assert( popupMenu );
-    popupMenu->setCheckable( true );
-    popupMenu->insertTitle( i18n("KThinkBat %1").arg(VERSION) );
-    popupMenu->insertItem( i18n("About KThinkBat"), this, SLOT(about()) );
-    powerPosID = popupMenu->insertItem( i18n("Power Meter below Gauge"), this, SLOT(setPowerMeterPosition()) );
-    popupMenu->setItemChecked( powerPosID, wastePosBelow );
+    contextMenu = new KPopupMenu();
+    assert( contextMenu );
+    contextMenu->setCheckable( true );
+    contextMenu->insertTitle( i18n("KThinkBat %1").arg(VERSION) );
+    contextMenu->insertItem( i18n("About KThinkBat"), this, SLOT(about()) );
+    powerPosID = contextMenu->insertItem( i18n("Power Meter below Gauge"), this, SLOT(setPowerMeterPosition()) );
+    contextMenu->setItemChecked( powerPosID, wastePosBelow );
 
     // KPanelApplet takes ownership of this menu, so we don't have to delete it.
-    setCustomMenu( popupMenu );
+    setCustomMenu( contextMenu );
 }
 
 KThinkBat::~KThinkBat() {
+    
     timer->stop();
-    delete timer;
-    timer = NULL;
+    delete timer; timer = NULL;
+
+    delete contextMenu; contextMenu = NULL;
 }
 
 void 
 KThinkBat::setPowerMeterPosition() {
 
-    if( customMenu() ) {
-        wastePosBelow = customMenu()->isItemChecked( powerPosID );
-    }
-
-    // FIXME remove this dialog
-    KMessageBox::information( 0, QString("SLOT setPowerMeterPosition() called. wastePosBelow = %1").arg( wastePosBelow ? "true" : "false" ) );
+    wastePosBelow = ! wastePosBelow;
+    contextMenu->setItemChecked( powerPosID, wastePosBelow );
 
     // force an update, as we have a new layout
     update();
@@ -105,7 +102,7 @@ KThinkBat::setPowerMeterPosition() {
 void 
 KThinkBat::about() {
 
-    KAboutData aboutData("KTinkBat", "KThinkbat", "0.1.5",
+    KAboutData aboutData("KThinkBat", "KThinkbat", "0.1.5",
             I18N_NOOP("A KDE panel applet to display the current laptop battery status.")
             , KAboutData::License_GPL_V2, "(c)2005-2006, Tobias Roeser", "", "https://lepetitfou.dyndns.org/KThinkBat"
             , "le.petit.fou@web.de" );

@@ -22,7 +22,7 @@
   <kdevautoproject>
     <general>
       <activetarget>src/libkthinkbat.la</activetarget>
-      <useconfiguration>default</useconfiguration>
+      <useconfiguration>debug</useconfiguration>
     </general>
     <configurations>
       <optimized>
@@ -53,14 +53,14 @@
       <abortonerror>true</abortonerror>
       <numberofjobs>1</numberofjobs>
       <dontact>false</dontact>
-      <makebin/>
+      <makebin></makebin>
       <prio>0</prio>
     </make>
     <run>
       <directoryradio>executable</directoryradio>
       <customdirectory>/</customdirectory>
-      <mainprogram/>
-      <programargs/>
+      <mainprogram></mainprogram>
+      <programargs></programargs>
       <terminal>false</terminal>
       <autocompile>true</autocompile>
       <envvars/>
@@ -150,7 +150,7 @@
     <projectdoc>
       <docsystem>Doxygen-Dokumentation</docsystem>
       <docurl>kthinkbat.tag</docurl>
-      <usermanualurl/>
+      <usermanualurl></usermanualurl>
     </projectdoc>
   </kdevdocumentation>
   <substmap>

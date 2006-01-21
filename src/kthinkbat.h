@@ -32,6 +32,7 @@
 #include <qtimer.h>
 #include <qpainter.h>
 #include <qcolor.h>
+#include <kpopupmenu.h>
 
 #include "batinfo.h"
 #include "batgauge.h"
@@ -154,6 +155,8 @@ private:
     QSize neededSize;
 
     int powerPosID;
+
+    KPopupMenu* contextMenu;
 };
 
 #endif
