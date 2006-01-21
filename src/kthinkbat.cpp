@@ -35,6 +35,13 @@
 
 #include "kthinkbat.h"
 
+extern "C" {
+    KPanelApplet* init( QWidget *parent, const QString& configFile) {
+        KGlobal::locale()->insertCatalogue("kthinkbat");
+        return new KThinkBat(configFile, KPanelApplet::Normal, 0, parent, "kthinkbat");
+//                              KPanelApplet::About | KPanelApplet::Help | KPanelApplet::Preferences,
+    }
+}
 
 KThinkBat::KThinkBat(const QString& configFile, Type type, int actions, QWidget *parent, const char *name)
 : KPanelApplet(configFile, type, actions, parent, name)
@@ -65,11 +72,11 @@ KThinkBat::KThinkBat(const QString& configFile, Type type, int actions, QWidget 
     // Create a popup menu to show KThinkBats specific options.
     KPopupMenu* popupMenu = new KPopupMenu();
     assert( popupMenu );
-    // popupMenu->setCheckable( true );
+    popupMenu->setCheckable( true );
     popupMenu->insertTitle( i18n("KThinkBat %1").arg(VERSION) );
-    popupMenu->insertItem( i18n("About %1").arg(PACKAGE), this, SLOT(about()) );
+    popupMenu->insertItem( i18n("About KThinkBat"), this, SLOT(about()) );
     powerPosID = popupMenu->insertItem( i18n("Power Meter below Gauge"), this, SLOT(setPowerMeterPosition()) );
-    popupMenu->setItemEnabled( powerPosID, wastePosBelow );
+    popupMenu->setItemChecked( powerPosID, wastePosBelow );
 
     // KPanelApplet takes ownership of this menu, so we don't have to delete it.
     setCustomMenu( popupMenu );
@@ -84,11 +91,9 @@ KThinkBat::~KThinkBat() {
 void 
 KThinkBat::setPowerMeterPosition() {
 
-//     if( customMenu() ) {
-//         wastePosBelow = customMenu()->isItemEnabled( powerPosID );
-//     }
-
-    wastePosBelow = !wastePosBelow;
+    if( customMenu() ) {
+        wastePosBelow = customMenu()->isItemChecked( powerPosID );
+    }
 
     // FIXME remove this dialog
     KMessageBox::information( 0, QString("SLOT setPowerMeterPosition() called. wastePosBelow = %1").arg( wastePosBelow ? "true" : "false" ) );
@@ -102,11 +107,12 @@ KThinkBat::about() {
 
     KAboutData aboutData("KTinkBat", "KThinkbat", "0.1.5",
             I18N_NOOP("A KDE panel applet to display the current laptop battery status.")
-            , KAboutData::License_GPL_V2, "(c)2005-2006, Tobias Roeser", "", "https://lepetitfou.dyndns.org/KThinkBat" );
+            , KAboutData::License_GPL_V2, "(c)2005-2006, Tobias Roeser", "", "https://lepetitfou.dyndns.org/KThinkBat"
+            , "le.petit.fou@web.de" );
     aboutData.addAuthor("Tobias Roeser", "", "le.petitfou@web.de",
             "https://lepetitfou.dyndns.org/KThinkBat");
 
-    KAboutApplication about( &aboutData, this );
+    KAboutApplication about( &aboutData, this, NULL, 0 );
 //     about.setIcon( KGlobal::instance()->iconLoader()->iconPath( "kthinkbat", -KIcon::SizeLarge ) );
     about.exec();
 }
@@ -252,12 +258,3 @@ KThinkBat::timeout() {
     update();
 }
 
-extern "C" {
-    KPanelApplet* init( QWidget *parent, const QString& configFile) {
-        KGlobal::locale()->insertCatalogue("kthinkbat");
-        return new KThinkBat(configFile, KPanelApplet::Normal,
-//                              KPanelApplet::About | KPanelApplet::Help | KPanelApplet::Preferences,
-                             0,
-                             parent, "kthinkbat");
-    }
-}
