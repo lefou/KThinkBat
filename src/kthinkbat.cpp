@@ -82,25 +82,23 @@ KThinkBat::~KThinkBat() {
 
 void KThinkBat::setPowerMeterPosition() {
 
-    // FIXME remove this dialog
-    KMessageBox::information( 0, "SLOT setPowerMeterPosition() called" );
-
     if( customMenu() ) {
         wastePosBelow = customMenu()->isItemEnabled( powerPosID );
     }
+
+    // FIXME remove this dialog
+    KMessageBox::information( 0, "SLOT setPowerMeterPosition() called. wastePosBelow = " + QString( wastePosBelow ? "true" : "false" ) );
+
     // force an update, as we have a new layout
     update();
 }
 
 void KThinkBat::about() {
     // KMessageBox::information(0, i18n("A KDE panel applet to display the current laptop battery status.\n\nCopyrigth (c) 2005-2006 Tobias Roeser\nDistributed under the terms of the GNU General Public License v2"));
-
-    // FIXME remove this dialog
-    KMessageBox::information( 0, "SLOT about() called" );
+    //timeout();
 
     KAboutApplication about( this );
-    about.show();
-    //timeout();
+    about.exec();
 }
 
 
