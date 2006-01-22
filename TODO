@@ -8,7 +8,6 @@ https://lepetitfou.dyndns.org/KThinkBat
 - integrate ibam battery monitoring fassility
 - need an icon
 - Config-Dialog: Color, ACPI proc path, update intervall, action on click 
-  Can anybody point me to a good tutorial for Kxconfig? 
 - show remaining time 
 - scons+bksys based build system 
 - update intervall configurable 

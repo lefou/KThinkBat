@@ -1,3 +1,6 @@
+KThinkBat 0.1.5 Beta 3:
+   * Support for KConfig XT
+
 KThinkBat 0.1.5 Beta 2:
    * better Text justification (Alignment of Values in Gauge)
    * code cleanup for querying sysfs and proc interfaces

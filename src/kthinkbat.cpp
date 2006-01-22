@@ -44,6 +44,7 @@ extern "C" {
 
 KThinkBat::KThinkBat(const QString& configFile, Type type, int actions, QWidget *parent, const char *name)
 : KPanelApplet(configFile, type, actions, parent, name)
+, config( new KThinkBatConfig( sharedConfig() ) )
 , intervall(3000)
 , borderColor("black")
 , emptyColor("grey")
@@ -58,10 +59,12 @@ KThinkBat::KThinkBat(const QString& configFile, Type type, int actions, QWidget 
 , neededSize( QSize( 52, 40) )
 , powerPosID( 0 ) {
     // Get the current application configuration handle
-    ksConfig = config();
-    assert( ksConfig );
+//     ksConfig = config();
+    assert( config );
+    config->readConfig();
 
-    wastePosBelow = ksConfig->readBoolEntry( "PowerMeterBelowGauge", wastePosBelow );
+//     wastePosBelow = ksConfig->readBoolEntry( "PowerMeterBelowGauge", wastePosBelow );
+    wastePosBelow = config->powerMeterBelowGauge();
 
     // Timer der die Aktualisierung von ACPI/SMAPI-Werten und deren Anzeige veranlasst.
     timeout();
@@ -86,8 +89,10 @@ KThinkBat::KThinkBat(const QString& configFile, Type type, int actions, QWidget 
 KThinkBat::~KThinkBat() {
 
     // Save Config values
-    ksConfig->writeEntry( "PowerMeterBelowGauge", wastePosBelow );
-    ksConfig->sync();
+//     ksConfig->writeEntry( "PowerMeterBelowGauge", wastePosBelow );
+//     ksConfig->sync();
+    config->setPowerMeterBelowGauge( wastePosBelow );
+    config->writeConfig();
 
     timer->stop();
     delete timer; timer = NULL;

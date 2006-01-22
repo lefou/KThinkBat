@@ -36,6 +36,9 @@
 
 #include "batinfo.h"
 #include "batgauge.h"
+#include "kthinkbatconfig.h"
+
+class KThinkBatConfig;
 
 /**
     @author Tobias Roeser <le.petit.fou@web.de>
@@ -131,7 +134,8 @@ protected:
     void paintEvent(QPaintEvent* event);
 
 private:
-    KConfig *ksConfig;
+//     KConfig *ksConfig;
+    KThinkBatConfig* config;
 
     /// Aktualisierungs-Interval fr die ACPI-Werte
     int intervall;
@@ -164,6 +168,7 @@ private:
     int powerPosID;
 
     KPopupMenu* contextMenu;
+
 };
 
 #endif
