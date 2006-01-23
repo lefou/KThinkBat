@@ -169,6 +169,9 @@ KThinkBat::paintEvent(QPaintEvent* event) {
     QSize wastePos;
     // Power consumption label: For correct rounding we add 500 mW (resp. 50 mA)
     QString powerLabel = ("W" == powerUnit) ? QString().number((int) (curPower + 500)/1000) + " " + powerUnit : QString().number((float) (((int) curPower + 50)/100) / 10 )  + " " + powerUnit;
+    powerLabel += batInfo1.isInstalled() ? "[1|" : "[0|";
+    powerLabel += batInfo2.isInstalled() ? "1]" : "0]";
+
     // Needed Space for Power Consumption Label
     QRect powerTextExtend = painter.boundingRect( 0, 0, 1, 1,
                                                   Qt::AlignLeft | Qt::AlignTop,
@@ -217,11 +220,13 @@ void
 KThinkBat::timeout() {
     // 1. First try TP SMAPI on BAT0
     // 2. If that fails try ACPI /proc interface for BAT0
-    bool battery1 = batInfo1.parseSysfsTP() || batInfo1.parseProcACPI();
+    bool battery1 = batInfo1.parseSysfsTP();
+    if( ! battery1 ) { battery1 = batInfo1.parseProcACPI(); }
 
     // 3. Now try BAT1, first TP SMAPI agian
     // 4. And, if that failed, try ACPi /proc interface for BAT1
-    bool battery2 = batInfo2.parseSysfsTP() || batInfo2.parseProcACPI();
+    bool battery2 = batInfo2.parseSysfsTP();
+    if( ! battery2 ) { battery2 = batInfo2.parseProcACPI(); }
 
     if( battery1 && battery2 ) {
         // we have tho batteries

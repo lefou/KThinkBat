@@ -223,7 +223,7 @@ BatInfo::parseSysfsTP() {
         file.close();
         if( ! batInstalled ) {
             resetValues();
-            return false;
+            return true;
         }
     }
     else {
