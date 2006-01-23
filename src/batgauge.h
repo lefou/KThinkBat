@@ -33,6 +33,7 @@ public:
     virtual ~BatGauge();
 
     void setPercentValue( int value );
+    void setPercentValueString( int value, QString string );
 
     void setColors( QColor fillColor, QColor dotColor );
 
@@ -43,6 +44,7 @@ private:
     QColor dotColor;
 
     int percentValue;
+    QString percentString;
 };
 
 #endif

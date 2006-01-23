@@ -264,9 +264,10 @@ KThinkBat::timeout() {
     }
 
     if( curFuell >= 0 && lastFuell > 0 ) {
-        gauge1.setPercentValue( (int) (( 100.0 / batInfo1.getLastFuell() ) * batInfo1.getCurFuell() )  );
+        gauge1.setPercentValue( (int) (( 100.0 / lastFuell ) * curFuell )  );
     } else {
-        gauge1.setPercentValue( -1 );
+//         gauge1.setPercentValue( -1 );
+        gauge1.setPercentValueString( -1, QString::number(lastFuell) + ":" + QString::number(curFuell) );
     }
 
     // force a repaint of the Applet
