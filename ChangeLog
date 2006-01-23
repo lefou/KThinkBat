@@ -1,5 +1,7 @@
 KThinkBat 0.1.5 Beta 3:
    * Support for KConfig XT
+   * BUG: fixed a realy annoying bug witch local variables, so
+     that all ACPI Fuell states where zero
 
 KThinkBat 0.1.5 Beta 2:
    * better Text justification (Alignment of Values in Gauge)

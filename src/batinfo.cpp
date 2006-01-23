@@ -64,7 +64,8 @@ BatInfo::parseProcACPI() {
     QRegExp rxCapA("^last full capacity:\\s*(\\d{1,5})\\s*mAh");
     QRegExp rxDesignCapA("^design capacity low:\\s*(\\d{1,5})\\s*mAh");
 
-    QFile file( "/proc/acpi/battery/BAT" + QString::number(batNr) + "/info" );
+    QString filename = "/proc/acpi/battery/BAT" + QString::number(batNr) + "/info";
+    QFile file( filename );
     if( ! file.exists() || ! file.open(IO_ReadOnly) ) {
         qDebug( "could not open %s", file.name().latin1() );
         resetValues();
@@ -105,7 +106,8 @@ BatInfo::parseProcACPI() {
 
     // Falls keine Angaben in mWh, dafür aber welche in mAh, 
     // dann verwenden wir A als Einheit
-    if( ! capA.isEmpty() ) {
+    if( cap.isEmpty() && ! capA.isEmpty() ) {
+//     if( ! capA.isEmpty() ) {
         cap = capA;
         designCap = designCapA;
         powerUnit = "A";
@@ -114,7 +116,8 @@ BatInfo::parseProcACPI() {
         powerUnit = "W";
     }
 
-    file.setName("/proc/acpi/battery/BAT" + QString::number( batNr ) + "/state");
+    filename = "/proc/acpi/battery/BAT" + QString::number(batNr) + "/state";
+    file.setName( filename );
     if( ! file.exists() || ! file.open(IO_ReadOnly) ) {
         qDebug("could not open %s", file.name().latin1() );
         resetValues();
@@ -143,11 +146,11 @@ BatInfo::parseProcACPI() {
     file.close();
 
     bool ok = true;
-    int curFuell = cur.toInt(&ok);
+    curFuell = cur.toInt(&ok);
     if( ! ok ) { curFuell = 0; }
 
     ok = true;
-    int lastFuell = cap.toInt(&ok);
+    lastFuell = cap.toInt(&ok);
     if( ! ok ) { lastFuell = 0; }
 
     // current cosumption
@@ -170,7 +173,8 @@ BatInfo::parseProcAcpiBatAlarm() {
     QRegExp rxWarnCap("^alarm:\\s*(\\d{1,5})\\s*m" + powerUnit + "h");
 
     // Get Alarm Fuell
-    QFile file("/proc/acpi/battery/BAT" + QString::number( batNr ) + "/alarm");
+    QString filename = "/proc/acpi/battery/BAT" + QString::number( batNr ) + "/alarm";
+    QFile file( filename );
     if( ! file.exists() || ! file.open(IO_ReadOnly) ) {
         qDebug("could not open %s", file.name().latin1() );
         criticalFuell = 0;

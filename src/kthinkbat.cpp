@@ -54,7 +54,7 @@ KThinkBat::KThinkBat(const QString& configFile, Type type, int actions, QWidget 
 , padding( QSize( 5, 2 ) )
 , timer(NULL)
 , wastePosBelow( true )
-, batInfo1( BatInfo() )
+, batInfo1( BatInfo( 1 ) )
 , batInfo2( BatInfo( 2 ) )
 , neededSize( QSize( 52, 40) )
 , powerPosID( 0 ) {
@@ -169,8 +169,8 @@ KThinkBat::paintEvent(QPaintEvent* event) {
     QSize wastePos;
     // Power consumption label: For correct rounding we add 500 mW (resp. 50 mA)
     QString powerLabel = ("W" == powerUnit) ? QString().number((int) (curPower + 500)/1000) + " " + powerUnit : QString().number((float) (((int) curPower + 50)/100) / 10 )  + " " + powerUnit;
-    powerLabel += batInfo1.isInstalled() ? "[1|" : "[0|";
-    powerLabel += batInfo2.isInstalled() ? "1]" : "0]";
+//     powerLabel += batInfo1.isInstalled() ? "[1|" : "[0|";
+//     powerLabel += batInfo2.isInstalled() ? "1]" : "0]";
 
     // Needed Space for Power Consumption Label
     QRect powerTextExtend = painter.boundingRect( 0, 0, 1, 1,
@@ -218,49 +218,37 @@ KThinkBat::paintEvent(QPaintEvent* event) {
 
 void 
 KThinkBat::timeout() {
+
+    float lastFuell = 0;
+    float curFuell = 0;
+    float critFuell = 0;
+    curPower = 0;
+    bool batOnline = true;
+
     // 1. First try TP SMAPI on BAT0
     // 2. If that fails try ACPI /proc interface for BAT0
     bool battery1 = batInfo1.parseSysfsTP();
     if( ! battery1 ) { battery1 = batInfo1.parseProcACPI(); }
+    if( battery1 ) {
+        lastFuell += batInfo1.getLastFuell();
+        curFuell += batInfo1.getCurFuell();
+        critFuell += batInfo1.getCriticalFuell();
+        batOnline = batInfo1.isOnline();
+        curPower += batInfo1.getPowerConsumption();
+        powerUnit = batInfo1.getPowerUnit();
+    }
 
     // 3. Now try BAT1, first TP SMAPI agian
     // 4. And, if that failed, try ACPi /proc interface for BAT1
     bool battery2 = batInfo2.parseSysfsTP();
     if( ! battery2 ) { battery2 = batInfo2.parseProcACPI(); }
-
-    float lastFuell = 0;
-    float curFuell = 0;
-
-    if( battery1 && battery2 ) {
-        // we have tho batteries
-        lastFuell = batInfo1.getLastFuell() + batInfo2.getLastFuell();
-        curFuell = batInfo1.getCurFuell() + batInfo2.getCurFuell();
-        gauge1.setColors( QColor( batInfo1.getCurFuell() <= ( batInfo1.getCriticalFuell() + batInfo2.getCriticalFuell() ) ? "red" : "green")
-                          , QColor( batInfo1.isOnline() ? "yellow" : "gray" ) );
-        powerUnit = batInfo1.getPowerUnit();
-        curPower = batInfo1.getPowerConsumption() + batInfo2.getPowerConsumption();
-
-    } else if( battery1 ) {
-        // we have just battery one
-//         gauge1.setPercentValue( (int) batInfo1.getChargeLevel() );
-        lastFuell = batInfo1.getLastFuell();
-        curFuell = batInfo1.getCurFuell();
-        gauge1.setColors( QColor( batInfo1.getCurFuell() <= batInfo1.getCriticalFuell() ? "red" : "green")
-                          , QColor( batInfo1.isOnline() ? "yellow" : "gray" ) );
-        powerUnit = batInfo1.getPowerUnit();
-        curPower = batInfo1.getPowerConsumption();
-    } else if( battery2 ) {
-        // we have just battery two
-//         gauge1.setPercentValue( (int) batInfo2.getChargeLevel() );
-        lastFuell = batInfo2.getLastFuell();
-        curFuell = batInfo2.getCurFuell();
-        gauge1.setColors( QColor( batInfo2.getCurFuell() <= batInfo2.getCriticalFuell() ? "red" : "green")
-                          , QColor( batInfo2.isOnline() ? "yellow" : "gray" ) );
+    if( battery2 ) {
+        lastFuell += batInfo2.getLastFuell();
+        curFuell += batInfo2.getCurFuell();
+        critFuell += batInfo2.getCriticalFuell();
+        batOnline = batOnline || batInfo2.isOnline();
+        curPower += batInfo2.getPowerConsumption();
         powerUnit = batInfo2.getPowerUnit();
-        curPower = batInfo2.getPowerConsumption();
-    } else {
-        // no battery reports good values :(
-        // maybe, we should colorize the background of the applet ?
     }
 
     if( curFuell >= 0 && lastFuell > 0 ) {
@@ -269,6 +257,8 @@ KThinkBat::timeout() {
 //         gauge1.setPercentValue( -1 );
         gauge1.setPercentValueString( -1, QString::number(lastFuell) + ":" + QString::number(curFuell) );
     }
+    gauge1.setColors( QColor( curFuell <= critFuell ? "red" : "green"),
+                      QColor( batOnline ? "yellow" : "gray" ) );
 
     // force a repaint of the Applet
     update();
