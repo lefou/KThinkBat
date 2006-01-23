@@ -228,15 +228,13 @@ KThinkBat::timeout() {
     bool battery2 = batInfo2.parseSysfsTP();
     if( ! battery2 ) { battery2 = batInfo2.parseProcACPI(); }
 
+    float lastFuell = 0;
+    float curFuell = 0;
+
     if( battery1 && battery2 ) {
         // we have tho batteries
-        float lastFuell = batInfo1.getLastFuell() + batInfo2.getLastFuell();
-        float curFuell = batInfo1.getCurFuell() + batInfo2.getCurFuell();
-        if( curFuell >= 0 && lastFuell > 0 ) {
-            gauge1.setPercentValue( (int) (( 100.0 / lastFuell ) * curFuell ) );
-        } else {
-            gauge1.setPercentValue( -1 );
-        }
+        lastFuell = batInfo1.getLastFuell() + batInfo2.getLastFuell();
+        curFuell = batInfo1.getCurFuell() + batInfo2.getCurFuell();
         gauge1.setColors( QColor( batInfo1.getCurFuell() <= ( batInfo1.getCriticalFuell() + batInfo2.getCriticalFuell() ) ? "red" : "green")
                           , QColor( batInfo1.isOnline() ? "yellow" : "gray" ) );
         powerUnit = batInfo1.getPowerUnit();
@@ -244,14 +242,14 @@ KThinkBat::timeout() {
 
     } else if( battery1 ) {
         // we have just battery one
-        gauge1.setPercentValue( (int) batInfo1.getChargeLevel() );
+//         gauge1.setPercentValue( (int) batInfo1.getChargeLevel() );
         gauge1.setColors( QColor( batInfo1.getCurFuell() <= batInfo1.getCriticalFuell() ? "red" : "green")
                           , QColor( batInfo1.isOnline() ? "yellow" : "gray" ) );
         powerUnit = batInfo1.getPowerUnit();
         curPower = batInfo1.getPowerConsumption();
     } else if( battery2 ) {
         // we have just battery two
-        gauge1.setPercentValue( (int) batInfo2.getChargeLevel() );
+//         gauge1.setPercentValue( (int) batInfo2.getChargeLevel() );
         gauge1.setColors( QColor( batInfo2.getCurFuell() <= batInfo2.getCriticalFuell() ? "red" : "green")
                           , QColor( batInfo2.isOnline() ? "yellow" : "gray" ) );
         powerUnit = batInfo2.getPowerUnit();
@@ -259,6 +257,13 @@ KThinkBat::timeout() {
     } else {
         // no battery reports good values :(
         // maybe, we should colorize the background of the applet ?
+    }
+
+    if( curFuell >= 0 && lastFuell > 0 ) {
+        gauge1.setPercentValue( (int) (( 100.0 / batInfo1.getLastFuell() ) * batInfo1.getCurFuell() )  );
+    } else {
+        KMessageBox::information( 0, "FAILED Condition: curFuell >= 0 && lastFuell > 0" );
+        gauge1.setPercentValue( -1 );
     }
 
     // force a repaint of the Applet
