@@ -254,8 +254,8 @@ KThinkBat::timeout() {
     if( curFuell >= 0 && lastFuell > 0 ) {
         gauge1.setPercentValue( (int) (( 100.0 / lastFuell ) * curFuell )  );
     } else {
-//         gauge1.setPercentValue( -1 );
-        gauge1.setPercentValueString( -1, QString::number(lastFuell) + ":" + QString::number(curFuell) );
+        gauge1.setPercentValue( -1 );
+//         gauge1.setPercentValueString( -1, QString::number(lastFuell) + ":" + QString::number(curFuell) );
     }
     gauge1.setColors( QColor( curFuell <= critFuell ? "red" : "green"),
                       QColor( batOnline ? "yellow" : "gray" ) );
