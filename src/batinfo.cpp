@@ -142,14 +142,16 @@ BatInfo::parseProcACPI() {
     }
     file.close();
 
-    bool ok;
+    bool ok = true;
     int curFuell = cur.toInt(&ok);
     if( ! ok ) { curFuell = 0; }
 
+    ok = true;
     int lastFuell = cap.toInt(&ok);
     if( ! ok ) { lastFuell = 0; }
-    
+
     // current cosumption
+    ok = true;
     curPower = mWHstring.toInt(&ok);
     if( ! ok ) { curPower = 0; }
 
@@ -221,11 +223,13 @@ BatInfo::parseSysfsTP() {
         file.close();
         if( ! batInstalled ) {
             resetValues();
-            return true;
+            return false;
         }
     }
     else {
-        batInstalled = false;
+        resetValues();
+        return false;
+//         batInstalled = false;
     }
 
     file.setName( tpPath + "last_full_capacity" );
