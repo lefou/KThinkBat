@@ -243,6 +243,8 @@ KThinkBat::timeout() {
     } else if( battery1 ) {
         // we have just battery one
 //         gauge1.setPercentValue( (int) batInfo1.getChargeLevel() );
+        lastFuell = batInfo1.getLastFuell();
+        curFuell = batInfo1.getCurFuell();
         gauge1.setColors( QColor( batInfo1.getCurFuell() <= batInfo1.getCriticalFuell() ? "red" : "green")
                           , QColor( batInfo1.isOnline() ? "yellow" : "gray" ) );
         powerUnit = batInfo1.getPowerUnit();
@@ -250,6 +252,8 @@ KThinkBat::timeout() {
     } else if( battery2 ) {
         // we have just battery two
 //         gauge1.setPercentValue( (int) batInfo2.getChargeLevel() );
+        lastFuell = batInfo2.getLastFuell();
+        curFuell = batInfo2.getCurFuell();
         gauge1.setColors( QColor( batInfo2.getCurFuell() <= batInfo2.getCriticalFuell() ? "red" : "green")
                           , QColor( batInfo2.isOnline() ? "yellow" : "gray" ) );
         powerUnit = batInfo2.getPowerUnit();
@@ -262,7 +266,6 @@ KThinkBat::timeout() {
     if( curFuell >= 0 && lastFuell > 0 ) {
         gauge1.setPercentValue( (int) (( 100.0 / batInfo1.getLastFuell() ) * batInfo1.getCurFuell() )  );
     } else {
-        KMessageBox::information( 0, "FAILED Condition: curFuell >= 0 && lastFuell > 0" );
         gauge1.setPercentValue( -1 );
     }
 
