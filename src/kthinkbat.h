@@ -143,9 +143,6 @@ private:
 //     KConfig *ksConfig;
     KThinkBatConfig* config;
 
-    /// Aktualisierungs-Interval fr die ACPI-Werte
-    int intervall;
-
     /// The Size of be battery gauge
     QSize gaugeSize;
     /// The border around the gauge

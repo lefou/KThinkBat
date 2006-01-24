@@ -45,7 +45,6 @@ extern "C" {
 KThinkBat::KThinkBat(const QString& configFile, Type type, int actions, QWidget *parent, const char *name)
 : KPanelApplet(configFile, type, actions, parent, name)
 , config( NULL )
-, intervall(3000)
 , gaugeSize( QSize( 46, 20 ) )
 , border( QSize( 3, 3 ) )
 , padding( QSize( 5, 2 ) )
@@ -66,7 +65,7 @@ KThinkBat::KThinkBat(const QString& configFile, Type type, int actions, QWidget 
     timer = new QTimer(this);
     assert( timer );
     connect(timer, SIGNAL(timeout()), this, SLOT(timeout()));
-    timer->start(intervall);
+    timer->start( config->updateIntervalMsek() );
 
     // Create a popup menu to show KThinkBats specific options.
     contextMenu = new KPopupMenu();
@@ -267,7 +266,7 @@ KThinkBat::timeout() {
     }
     gauge1.setColors( QColor( config->batBackgroundColor() ),
                       QColor( curFuel <= critFuel ? config->batCriticalColor() : config->batChargedColor() ),
-                      QColor( batOnline ? config->batCriticalColor() : config->batBackgroundColor() ) );
+                      QColor( batOnline ? config->batDotOnlineColor() : config->batBackgroundColor() ) );
 
     // force a repaint of the Applet
     update();

@@ -1,7 +1,8 @@
-KThinkBat 0.1.5 Beta 3:
+KThinkBat 0.1.5 Release Candidate 1:
    * All Colors can be configured (see kthinkbat.kcfg)
    * The Color of the Power Consuption Text can be configured through 
      the Context Menu of KThinkBat
+   * The update interval can be changed (in config file only atm)
 
 KThinkBat 0.1.5 Beta 3:
    * Support for KConfig XT
