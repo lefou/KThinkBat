@@ -20,8 +20,9 @@
 #include "batgauge.h"
 
 BatGauge::BatGauge()
-    : fillColor( QColor( "green" ) )
-    , dotColor( QColor( "gray" ) )
+    : fillColor( "green" )
+    , dotColor( "gray" )
+    , bgColor( "gray" )
     , percentValue( 0 )
     , percentString( "" )
 {
@@ -44,7 +45,8 @@ BatGauge::setPercentValueString( int value, QString string ) {
 }
 
 void
-BatGauge::setColors( QColor fillColor, QColor dotColor ) {
+BatGauge::setColors( QColor bgColor, QColor fillColor, QColor dotColor ) {
+    this->bgColor = bgColor;
     this->fillColor = fillColor;
     this->dotColor = dotColor;
 }
@@ -75,7 +77,7 @@ BatGauge::drawGauge( QPainter& painter, QSize gaugePos, QSize gaugeSize ) {
 
     //-------------------------------------------------------------------------
     // Paint Gauge
-    painter.fillRect(offset.width(), offset.height(), gaugeFill.width() + 2, gaugeFill.height(), QColor( "gray"));
+    painter.fillRect(offset.width(), offset.height(), gaugeFill.width() + 2, gaugeFill.height(), bgColor );
 
     int xFill = ( percentValue > 0 ? percentValue * gaugeFill.width() / 100 : 0);
     painter.fillRect(offset.width(), offset.height(), xFill, gaugeFill.height(), fillColor );

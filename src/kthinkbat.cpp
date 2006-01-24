@@ -44,11 +44,8 @@ extern "C" {
 
 KThinkBat::KThinkBat(const QString& configFile, Type type, int actions, QWidget *parent, const char *name)
 : KPanelApplet(configFile, type, actions, parent, name)
-, config( new KThinkBatConfig( sharedConfig() ) )
+, config( NULL )
 , intervall(3000)
-, borderColor("black")
-, emptyColor("grey")
-, chargedColor("green")
 , gaugeSize( QSize( 46, 20 ) )
 , border( QSize( 3, 3 ) )
 , padding( QSize( 5, 2 ) )
@@ -58,12 +55,10 @@ KThinkBat::KThinkBat(const QString& configFile, Type type, int actions, QWidget 
 , batInfo2( BatInfo( 2 ) )
 , neededSize( QSize( 52, 40) )
 , powerPosID( 0 ) {
-    // Get the current application configuration handle
-//     ksConfig = config();
-    assert( config );
-    config->readConfig();
 
-//     wastePosBelow = ksConfig->readBoolEntry( "PowerMeterBelowGauge", wastePosBelow );
+    config = new KThinkBatConfig( sharedConfig() );
+    assert( config );
+
     wastePosBelow = config->powerMeterBelowGauge();
 
     // Timer der die Aktualisierung von ACPI/SMAPI-Werten und deren Anzeige veranlasst.
@@ -79,7 +74,8 @@ KThinkBat::KThinkBat(const QString& configFile, Type type, int actions, QWidget 
     contextMenu->setCheckable( true );
     contextMenu->insertTitle( i18n("KThinkBat %1").arg(VERSION) );
     contextMenu->insertItem( i18n("About KThinkBat"), this, SLOT(about()) );
-    powerPosID = contextMenu->insertItem( i18n("Power Meter below Gauge"), this, SLOT(setPowerMeterPosition()) );
+    powerPosID = contextMenu->insertItem( i18n("Power Meter below Gauge"), this, SLOT(slotPowerMeterPosition()) );
+    contextMenu->insertItem( i18n("Power Meter Color..."), this, SLOT(slotPowerMeterColor()) );
     contextMenu->setItemChecked( powerPosID, wastePosBelow );
 
     // KPanelApplet takes ownership of this menu, so we don't have to delete it.
@@ -91,7 +87,6 @@ KThinkBat::~KThinkBat() {
     // Save Config values
 //     ksConfig->writeEntry( "PowerMeterBelowGauge", wastePosBelow );
 //     ksConfig->sync();
-    config->setPowerMeterBelowGauge( wastePosBelow );
     config->writeConfig();
 
     timer->stop();
@@ -101,13 +96,24 @@ KThinkBat::~KThinkBat() {
 }
 
 void 
-KThinkBat::setPowerMeterPosition() {
+KThinkBat::slotPowerMeterPosition() {
 
     wastePosBelow = ! wastePosBelow;
     contextMenu->setItemChecked( powerPosID, wastePosBelow );
+    config->setPowerMeterBelowGauge( wastePosBelow );
 
     // force an update, as we have a new layout
     update();
+}
+
+void 
+KThinkBat::slotPowerMeterColor() {
+
+    QColor myColor = config->powerMeterColor();
+    if ( KColorDialog::Accepted == KColorDialog::getColor( myColor ) ) {
+        config->setPowerMeterColor( myColor );
+        update();
+    }
 }
 
 void 
@@ -199,12 +205,16 @@ KThinkBat::paintEvent(QPaintEvent* event) {
 
     }
 
+    QPen origPen = painter.pen();
+    painter.setPen( config->powerMeterColor() );
+
     // Draw the Power Consumption at position @c wastePos.
     painter.drawText( wastePos.width(), wastePos.height(), 
                           powerTextExtend.width(), powerTextExtend.height(),
                           Qt::AlignTop | Qt::AlignLeft, 
                           powerLabel );
 
+    painter.setPen( origPen );
     //-------------------------------------------------------------------------
     painter.end();
 
@@ -219,20 +229,19 @@ KThinkBat::paintEvent(QPaintEvent* event) {
 void 
 KThinkBat::timeout() {
 
-    float lastFuell = 0;
-    float curFuell = 0;
-    float critFuell = 0;
+    float lastFuel = 0;
+    float curFuel = 0;
+    float critFuel = 0;
     curPower = 0;
     bool batOnline = true;
 
     // 1. First try TP SMAPI on BAT0
     // 2. If that fails try ACPI /proc interface for BAT0
-    bool battery1 = batInfo1.parseSysfsTP();
-    if( ! battery1 ) { battery1 = batInfo1.parseProcACPI(); }
+    bool battery1 = batInfo1.parseSysfsTP() || batInfo1.parseProcACPI();
     if( battery1 ) {
-        lastFuell += batInfo1.getLastFuell();
-        curFuell += batInfo1.getCurFuell();
-        critFuell += batInfo1.getCriticalFuell();
+        lastFuel += batInfo1.getLastFuel();
+        curFuel += batInfo1.getCurFuel();
+        critFuel += batInfo1.getCriticalFuel();
         batOnline = batInfo1.isOnline();
         curPower += batInfo1.getPowerConsumption();
         powerUnit = batInfo1.getPowerUnit();
@@ -240,25 +249,25 @@ KThinkBat::timeout() {
 
     // 3. Now try BAT1, first TP SMAPI agian
     // 4. And, if that failed, try ACPi /proc interface for BAT1
-    bool battery2 = batInfo2.parseSysfsTP();
-    if( ! battery2 ) { battery2 = batInfo2.parseProcACPI(); }
+    bool battery2 = batInfo2.parseSysfsTP() || batInfo2.parseProcACPI();
     if( battery2 ) {
-        lastFuell += batInfo2.getLastFuell();
-        curFuell += batInfo2.getCurFuell();
-        critFuell += batInfo2.getCriticalFuell();
+        lastFuel += batInfo2.getLastFuel();
+        curFuel += batInfo2.getCurFuel();
+        critFuel += batInfo2.getCriticalFuel();
         batOnline = batOnline || batInfo2.isOnline();
         curPower += batInfo2.getPowerConsumption();
         powerUnit = batInfo2.getPowerUnit();
     }
 
-    if( curFuell >= 0 && lastFuell > 0 ) {
-        gauge1.setPercentValue( (int) (( 100.0 / lastFuell ) * curFuell )  );
+    if( curFuel >= 0 && lastFuel > 0 ) {
+        gauge1.setPercentValue( (int) (( 100.0 / lastFuel ) * curFuel )  );
     } else {
         gauge1.setPercentValue( -1 );
-//         gauge1.setPercentValueString( -1, QString::number(lastFuell) + ":" + QString::number(curFuell) );
+//         gauge1.setPercentValueString( -1, QString::number(lastFuel) + ":" + QString::number(curFuel) );
     }
-    gauge1.setColors( QColor( curFuell <= critFuell ? "red" : "green"),
-                      QColor( batOnline ? "yellow" : "gray" ) );
+    gauge1.setColors( QColor( config->batBackgroundColor() ),
+                      QColor( curFuel <= critFuel ? config->batCriticalColor() : config->batChargedColor() ),
+                      QColor( batOnline ? config->batCriticalColor() : config->batBackgroundColor() ) );
 
     // force a repaint of the Applet
     update();

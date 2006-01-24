@@ -1,7 +1,12 @@
 KThinkBat 0.1.5 Beta 3:
+   * All Colors can be configured (see kthinkbat.kcfg)
+   * The Color of the Power Consuption Text can be configured through 
+     the Context Menu of KThinkBat
+
+KThinkBat 0.1.5 Beta 3:
    * Support for KConfig XT
    * fixed a realy annoying bug witch local variables, so
-     that all ACPI Fuell states where zero
+     that all ACPI Fuel states where zero
 
 KThinkBat 0.1.5 Beta 2:
    * better Text justification (Alignment of Values in Gauge)

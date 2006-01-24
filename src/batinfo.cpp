@@ -38,8 +38,8 @@ BatInfo::~BatInfo() {
 
 float
 BatInfo::getChargeLevel() {
-    if( curFuell >= 0 && lastFuell > 0 ) {
-        return ( 100.0 / lastFuell ) * curFuell;
+    if( curFuel >= 0 && lastFuel > 0 ) {
+        return ( 100.0 / lastFuel ) * curFuel;
     }
     return -1;
 }
@@ -146,12 +146,12 @@ BatInfo::parseProcACPI() {
     file.close();
 
     bool ok = true;
-    curFuell = cur.toInt(&ok);
-    if( ! ok ) { curFuell = 0; }
+    curFuel = cur.toInt(&ok);
+    if( ! ok ) { curFuel = 0; }
 
     ok = true;
-    lastFuell = cap.toInt(&ok);
-    if( ! ok ) { lastFuell = 0; }
+    lastFuel = cap.toInt(&ok);
+    if( ! ok ) { lastFuel = 0; }
 
     // current cosumption
     ok = true;
@@ -172,12 +172,12 @@ BatInfo::parseProcAcpiBatAlarm() {
     bool ok = false;
     QRegExp rxWarnCap("^alarm:\\s*(\\d{1,5})\\s*m" + powerUnit + "h");
 
-    // Get Alarm Fuell
+    // Get Alarm Fuel
     QString filename = "/proc/acpi/battery/BAT" + QString::number( batNr ) + "/alarm";
     QFile file( filename );
     if( ! file.exists() || ! file.open(IO_ReadOnly) ) {
         qDebug("could not open %s", file.name().latin1() );
-        criticalFuell = 0;
+        criticalFuel = 0;
         return false;
     }
 
@@ -186,13 +186,13 @@ BatInfo::parseProcAcpiBatAlarm() {
         QString line = stream.readLine();
         if( -1 != rxWarnCap.search( line ) ) {
             QString warnCap = rxWarnCap.cap(1);
-            criticalFuell = warnCap.toInt(&ok);
+            criticalFuel = warnCap.toInt(&ok);
         }
     }
     file.close();
 
     if( ! ok ) {
-        criticalFuell = 0;
+        criticalFuel = 0;
     }
 
     return ok;
@@ -241,12 +241,12 @@ BatInfo::parseSysfsTP() {
         stream.setDevice( &file );
         line = stream.readLine();
         if( -1 != mWh.search( line ) ) {
-            lastFuell = mWh.cap(1).toInt( &check );
+            lastFuel = mWh.cap(1).toInt( &check );
         }
         file.close();
     }
     else {
-        lastFuell = 0;
+        lastFuel = 0;
     }
 
     file.setName( tpPath + "design_capacity" );
@@ -254,12 +254,12 @@ BatInfo::parseSysfsTP() {
         stream.setDevice( &file );
         line = stream.readLine();
         if( -1 != mWh.search( line ) ) {
-            designFuell = mWh.cap(1).toInt( &check );
+            designFuel = mWh.cap(1).toInt( &check );
         }
         file.close();
     }
     else {
-        designFuell = 0;
+        designFuel = 0;
     }
     
     file.setName( tpPath + "remaining_capacity" );
@@ -267,12 +267,12 @@ BatInfo::parseSysfsTP() {
         stream.setDevice( &file );
         line = stream.readLine();
         if( -1 != mWh.search( line ) ) {
-            curFuell = mWh.cap(1).toInt( &check );
+            curFuel = mWh.cap(1).toInt( &check );
         }
         file.close();
     }
     else {
-        curFuell = -1;
+        curFuel = -1;
     }
     
     file.setName( tpPath + "power_now" );
@@ -309,7 +309,7 @@ BatInfo::parseSysfsTP() {
         acConnected = false;
     }
 
-    // critical Fuell can not be set via tp_smapi, so we try to read /proc/acpi for that
+    // critical Fuel can not be set via tp_smapi, so we try to read /proc/acpi for that
     parseProcAcpiBatAlarm();
 
     return true;
@@ -317,10 +317,10 @@ BatInfo::parseSysfsTP() {
 
 void 
 BatInfo::resetValues() {
-    lastFuell = 0;
-    designFuell = 0;
-    criticalFuell = 0;
-    curFuell = 0;
+    lastFuel = 0;
+    designFuel = 0;
+    criticalFuel = 0;
+    curFuel = 0;
     curPower = 0;
     batInstalled = false;
     powerUnit = "W";

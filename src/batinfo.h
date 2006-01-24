@@ -45,10 +45,10 @@ public:
     */
     float getChargeLevel();
 
-    float getLastFuell() { return lastFuell; }
-    float getDesignFuell() { return designFuell; }
-    float getCriticalFuell() { return criticalFuell; }
-    float getCurFuell() { return curFuell; }
+    float getLastFuel() { return lastFuel; }
+    float getDesignFuel() { return designFuel; }
+    float getCriticalFuel() { return criticalFuel; }
+    float getCurFuel() { return curFuel; }
 
     float getPowerConsumption() { return curPower; }
 
@@ -71,10 +71,10 @@ protected:
     void resetValues();
 
 private:
-    float lastFuell;
-    float designFuell;
-    float criticalFuell;
-    float curFuell;
+    float lastFuel;
+    float designFuel;
+    float criticalFuel;
+    float curFuel;
     float curPower;
 
     int batNr;

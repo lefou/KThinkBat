@@ -11,6 +11,30 @@
             <label>Display the power consumption below the battery gauge.</label> 
             <default>true</default>
         </entry> 
+        <entry name="BorderColor" type="Color"> 
+            <label>Color of the border.</label> 
+            <default>black</default>
+        </entry> 
+        <entry name="BatChargedColor" type="Color"> 
+            <label>Color of the charded part of the battery.</label> 
+            <default>green</default>
+        </entry> 
+        <entry name="BatCriticalColor" type="Color"> 
+            <label>Color of the charded part of the battery, if with critical fuel.</label> 
+            <default>red</default>
+        </entry> 
+        <entry name="BatBackgroundColor" type="Color"> 
+            <label>Color of the empty battery.</label> 
+            <default>grey</default>
+        </entry> 
+        <entry name="BatDotOnlineColor" type="Color"> 
+            <label>Color of the Battery dot if charging or online.</label> 
+            <default>yellow</default>
+        </entry> 
+        <entry name="PowerMeterColor" type="Color"> 
+            <label>Color of the power meter.</label> 
+            <default>black</default>
+        </entry> 
     </group> 
 
 </kcfg>

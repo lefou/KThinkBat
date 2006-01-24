@@ -26,14 +26,19 @@
 #include <config.h>
 #endif
 
-#include <kpanelapplet.h>
+// Qt
 #include <qstring.h>
-#include <kconfig.h>
 #include <qtimer.h>
 #include <qpainter.h>
 #include <qcolor.h>
-#include <kpopupmenu.h>
 
+// KDE
+#include <kconfig.h>
+#include <kpanelapplet.h>
+#include <kpopupmenu.h>
+#include <kcolordialog.h>
+
+// KThinkBat
 #include "batinfo.h"
 #include "batgauge.h"
 #include "kthinkbatconfig.h"
@@ -122,7 +127,8 @@ public:
 public slots:
     void timeout();
 
-    void setPowerMeterPosition();
+    void slotPowerMeterPosition();
+    void slotPowerMeterColor();
 
     /**
      * Is called when the user selects "About" from the applets RMB menu.
@@ -139,8 +145,6 @@ private:
 
     /// Aktualisierungs-Interval fr die ACPI-Werte
     int intervall;
-
-    QColor borderColor, emptyColor, chargedColor;
 
     /// The Size of be battery gauge
     QSize gaugeSize;

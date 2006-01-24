@@ -35,13 +35,14 @@ public:
     void setPercentValue( int value );
     void setPercentValueString( int value, QString string );
 
-    void setColors( QColor fillColor, QColor dotColor );
+    void setColors( QColor bgColor, QColor fillColor, QColor dotColor );
 
     void drawGauge( QPainter& painter, QSize gaugePos, QSize gaugeSize );
 
 private:
     QColor fillColor;
     QColor dotColor;
+    QColor bgColor;
 
     int percentValue;
     QString percentString;
