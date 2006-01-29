@@ -58,7 +58,7 @@ KThinkBat::KThinkBat(const QString& configFile, Type type, int actions, QWidget 
 //     config = KThinkBatConfig::self();
 //     assert( config );
 
-    neededSize = QSize( KThinkBatConfig::gaugeSize().width() + (2* KThinkBatConfig::borderSize().width()), KThinkBatConfig::gaugeSize().height() + (2* KThinkBatConfig::borderSize().width()) );
+    neededSize = QSize( KThinkBatConfig::gaugeWidth() + (2* KThinkBatConfig::borderSize().width()), KThinkBatConfig::gaugeHeight() + (2* KThinkBatConfig::borderSize().width()) );
 
     // TODO We have to rebuild the menu, if we show it, so we could better reflect any changes in Select entries 
 
@@ -67,14 +67,14 @@ KThinkBat::KThinkBat(const QString& configFile, Type type, int actions, QWidget 
     assert( contextMenu );
 //     contextMenu->setCheckable( true );
     contextMenu->insertTitle( i18n("KThinkBat %1").arg(VERSION) );
-    contextMenu->insertItem( i18n("About KThinkBat"), this, SLOT(slotAbout()) );
+    contextMenu->insertItem( i18n("About %1").arg("KThinkBat"), this, SLOT(slotAbout()) );
 
 //     powerPosID = contextMenu->insertItem( i18n("Power Meter below Gauge"), this, SLOT(slotPowerMeterPosition()) );
 //     contextMenu->setItemChecked( powerPosID, KThinkBatConfig::powerMeterBelowGauge() );
 
 //     contextMenu->insertItem( i18n("Power Meter Color..."), this, SLOT(slotPowerMeterColor()) );
 
-    contextMenu->insertItem( i18n("Preferences..."), this, SLOT(slotPreferences()) );
+    contextMenu->insertItem( i18n("Configure %1...").arg("KThinkBat"), this, SLOT(slotPreferences()) );
 
     // KPanelApplet takes ownership of this menu, so we don't have to delete it.
     setCustomMenu( contextMenu );
@@ -190,12 +190,29 @@ KThinkBat::paintEvent(QPaintEvent* event) {
     QPixmap pixmap(width(), height());
     pixmap.fill(this, 0, 0);
     QPainter painter(&pixmap);
+    // this is the needed Space
+    QSize realNeededSpace = QSize( (2 * KThinkBatConfig::borderSize().width()) + KThinkBatConfig::gaugeWidth(),
+                                   (2 * KThinkBatConfig::borderSize().height()) + KThinkBatConfig::gaugeHeight() );
 
-    gauge1.drawGauge( painter, KThinkBatConfig::borderSize(), KThinkBatConfig::gaugeSize() );
+    gauge1.drawGauge( painter, KThinkBatConfig::borderSize(), QSize( KThinkBatConfig::gaugeWidth(), KThinkBatConfig::gaugeHeight() ) );
+
+    QSize nextSouth = QSize( KThinkBatConfig::borderSize().width(), KThinkBatConfig::borderSize().height() + padding.height() + KThinkBatConfig::gaugeHeight() );
+    QSize nextEast = QSize( KThinkBatConfig::borderSize().width() + padding.width() + KThinkBatConfig::gaugeWidth(), KThinkBatConfig::borderSize().height() );
+
+
+    if( ! KThinkBatConfig::summarizeBatteries() ) {
+        if( KThinkBatConfig::powerMeterBelowGauge() ) {
+            gauge2.drawGauge( painter, nextEast, QSize( KThinkBatConfig::gaugeWidth(), KThinkBatConfig::gaugeHeight() ) );
+            realNeededSpace = QSize( realNeededSpace.width() + padding.width() + KThinkBatConfig::gaugeWidth(), realNeededSpace.height() );
+        }
+        else {
+            gauge2.drawGauge( painter, nextSouth, QSize( KThinkBatConfig::gaugeWidth(), KThinkBatConfig::gaugeHeight() ) );
+            realNeededSpace = QSize( realNeededSpace.width(), realNeededSpace.height() + padding.height()  + KThinkBatConfig::gaugeHeight() );
+        }
+    }
 
     //-------------------------------------------------------------------------
     // Position for power consumtion display
-    QSize wastePos;
     // Power consumption label: For correct rounding we add 500 mW (resp. 50 mA)
     QString powerLabel1 = ("W" == powerUnit1) ? QString().number((int) (curPower1 + 500)/1000) + " " + powerUnit1 : QString().number((float) (((int) curPower1 + 50)/100) / 10 )  + " " + powerUnit1;
 //     powerLabel += batInfo1.isInstalled() ? "[1|" : "[0|";
@@ -206,19 +223,20 @@ KThinkBat::paintEvent(QPaintEvent* event) {
                                                   Qt::AlignLeft | Qt::AlignTop,
                                                   powerLabel1 );
 
+    QSize wastePos;
     // left upper corner of power consumption label
     if( KThinkBatConfig::powerMeterBelowGauge() ) {
         // Verbrauchsanzeige unterhalb der Gauge
         //         wastePos = QSize( KThinkBatConfig::borderSize().width(), KThinkBatConfig::borderSize().height() + gaugeSize.height() + 12 );
-        wastePos = QSize( KThinkBatConfig::borderSize().width(), KThinkBatConfig::borderSize().height() + padding.height() + KThinkBatConfig::gaugeSize().height() );
-        neededSize = QSize( (2 * KThinkBatConfig::borderSize().width() ) + KThinkBatConfig::gaugeSize().width()
+        wastePos = QSize( KThinkBatConfig::borderSize().width(), KThinkBatConfig::borderSize().height() + padding.height() + KThinkBatConfig::gaugeHeight() );
+        neededSize = QSize( (2 * KThinkBatConfig::borderSize().width() ) + KThinkBatConfig::gaugeWidth()
                             , wastePos.height() + powerTextExtend.height() + KThinkBatConfig::borderSize().height() );
     } else {
         // Verbrauchsanzeige rechts von der Gauge
         //         wastePos = QSize( ( 3 * border.width() ) + gaugeSize.width(), border.height() );
-        wastePos = QSize( KThinkBatConfig::borderSize().width() + padding.width() + KThinkBatConfig::gaugeSize().width(), KThinkBatConfig::borderSize().height() + ((KThinkBatConfig::gaugeSize().height() - powerTextExtend.height()) / 2 ) );
+        wastePos = QSize( KThinkBatConfig::borderSize().width() + padding.width() + KThinkBatConfig::gaugeWidth(), KThinkBatConfig::borderSize().height() + ((KThinkBatConfig::gaugeHeight() - powerTextExtend.height()) / 2 ) );
         neededSize = QSize( wastePos.width() + powerTextExtend.width() + KThinkBatConfig::borderSize().width()
-                            , ( 2 * KThinkBatConfig::borderSize().height() ) + KThinkBatConfig::gaugeSize().height() );
+                            , ( 2 * KThinkBatConfig::borderSize().height() ) + KThinkBatConfig::gaugeHeight() );
 
 
 
