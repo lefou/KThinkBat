@@ -123,7 +123,7 @@ public slots:
 //     void slotPowerMeterColor();
     void slotPreferences();
 //     void slotTwoBatteries();
-    void slotUpdateConfigruration();
+    void slotUpdateConfiguration();
 
     /**
      * Is called when the user selects "About" from the menu.

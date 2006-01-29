@@ -57,7 +57,7 @@ BatGauge::drawGauge( QPainter& painter, QSize gaugePos, QSize gaugeSize ) {
     // Values for Gauge and Border
     QSize offset( gaugePos.width() + 1, gaugePos.height() + 1 );
     // size of the dot
-    QSize gHalfDot(4, 4);
+    QSize gHalfDot( (int) (gaugeSize.height() / 4),  (int) (gaugeSize.height() / 4) );
     // substract the frame and the dot
     QSize gaugeFill(gaugeSize.width() - gHalfDot.width() - 2, gaugeSize.height() - 2 );
 

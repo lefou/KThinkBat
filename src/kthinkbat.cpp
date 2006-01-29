@@ -131,13 +131,13 @@ KThinkBat::slotPreferences() {
  
     //User edited the configuration - update your local copies of the 
     //configuration data 
-    connect( dialog, SIGNAL(settingsChanged()), this, SLOT(updateConfiguration()) ); 
+    connect( dialog, SIGNAL(settingsChanged()), this, SLOT(slotUpdateConfiguration()) ); 
      
     dialog->show();
 }
 
 void
-KThinkBat::slotUpdateConfigruration() {
+KThinkBat::slotUpdateConfiguration() {
     timeout();
     update();
 }
@@ -213,13 +213,19 @@ KThinkBat::paintEvent(QPaintEvent* event) {
     // Position for power consumtion display
     // Power consumption label: For correct rounding we add 500 mW (resp. 50 mA)
     QString powerLabel1 = ("W" == powerUnit1) ? QString().number((int) (curPower1 + 500)/1000) + " " + powerUnit1 : QString().number((float) (((int) curPower1 + 50)/100) / 10 )  + " " + powerUnit1;
-//     powerLabel += batInfo1.isInstalled() ? "[1|" : "[0|";
-//     powerLabel += batInfo2.isInstalled() ? "1]" : "0]";
-
     // Needed Space for Power Consumption Label
-    QRect powerTextExtend = painter.boundingRect( 0, 0, 1, 1,
+    QRect powerTextExtend1 = painter.boundingRect( 0, 0, 1, 1,
                                                   Qt::AlignLeft | Qt::AlignTop,
                                                   powerLabel1 );
+
+    QString powerLabel2("");
+    QRect powerTextExtend2(0,0,0,0);
+    if( ! KThinkBatConfig::summarizeBatteries() ) {
+        powerLabel2 = ("W" == powerUnit2) ? QString().number((int) (curPower2 + 500)/1000) + " " + powerUnit2 : QString().number((float) (((int) curPower2 + 50)/100) / 10 )  + " " + powerUnit2;
+        QRect powerTextExtend2 = painter.boundingRect( 0, 0, 1, 1,
+                                                      Qt::AlignLeft | Qt::AlignTop,
+                                                      powerLabel2 );
+    }
 
     QSize wastePos;
     // left upper corner of power consumption label
@@ -228,32 +234,28 @@ KThinkBat::paintEvent(QPaintEvent* event) {
         //         wastePos = QSize( KThinkBatConfig::borderSize().width(), KThinkBatConfig::borderSize().height() + gaugeSize.height() + 12 );
         wastePos = QSize( KThinkBatConfig::borderSize().width(), KThinkBatConfig::borderSize().height() + padding.height() + KThinkBatConfig::gaugeHeight() );
         neededSize = QSize( (2 * KThinkBatConfig::borderSize().width() ) + KThinkBatConfig::gaugeWidth()
-                            , wastePos.height() + powerTextExtend.height() + KThinkBatConfig::borderSize().height() );
+                            , wastePos.height() + powerTextExtend1.height() + KThinkBatConfig::borderSize().height() );
     } else {
         // Verbrauchsanzeige rechts von der Gauge
         //         wastePos = QSize( ( 3 * border.width() ) + gaugeSize.width(), border.height() );
-        wastePos = QSize( KThinkBatConfig::borderSize().width() + padding.width() + KThinkBatConfig::gaugeWidth(), KThinkBatConfig::borderSize().height() + ((KThinkBatConfig::gaugeHeight() - powerTextExtend.height()) / 2 ) );
-        neededSize = QSize( wastePos.width() + powerTextExtend.width() + KThinkBatConfig::borderSize().width()
+        wastePos = QSize( KThinkBatConfig::borderSize().width() + padding.width() + KThinkBatConfig::gaugeWidth(), KThinkBatConfig::borderSize().height() + ((KThinkBatConfig::gaugeHeight() - powerTextExtend1.height()) / 2 ) );
+        neededSize = QSize( wastePos.width() + powerTextExtend1.width() + KThinkBatConfig::borderSize().width()
                             , ( 2 * KThinkBatConfig::borderSize().height() ) + KThinkBatConfig::gaugeHeight() );
-
-
-
-//     painter.drawText( offset.width() + ( (gaugeFill.width() - reqTextSize.width()) / 2 )
-//                     , offset.height() + ( (gaugeFill.height() - reqTextSize.height()) / 2 )
-
-
     }
 
+    // Painting the Text
     QPen origPen = painter.pen();
     painter.setPen( KThinkBatConfig::powerMeterColor() );
-
     // Draw the Power Consumption at position @c wastePos.
     painter.drawText( wastePos.width(), wastePos.height(), 
-                          powerTextExtend.width(), powerTextExtend.height(),
+                          powerTextExtend1.width(), powerTextExtend1.height(),
                           Qt::AlignTop | Qt::AlignLeft, 
                           powerLabel1 );
-
     painter.setPen( origPen );
+
+
+
+
     //-------------------------------------------------------------------------
     painter.end();
 
