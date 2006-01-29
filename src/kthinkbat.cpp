@@ -18,21 +18,26 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-
+// Qt
 #include <qlcdnumber.h>
-#include <kglobal.h>
-#include <klocale.h>
-#include <kconfig.h>
-#include <kapplication.h>
-#include <kmessagebox.h>
 #include <qpainter.h>
 #include <qfile.h>
 #include <qtextstream.h>
 #include <qregexp.h>
 #include <qtimer.h>
-#include <kaboutapplication.h>
 
+// KDE
+#include <kglobal.h>
+#include <klocale.h>
+#include <kconfig.h>
+#include <kapplication.h>
+#include <kmessagebox.h>
+#include <kaboutapplication.h>
+#include <kconfigdialog.h>
+
+// KThinkkBat
 #include "kthinkbat.h"
+#include "prefs.h"
 
 extern "C" {
     KPanelApplet* init( QWidget *parent, const QString& configFile) {
@@ -55,7 +60,8 @@ KThinkBat::KThinkBat(const QString& configFile, Type type, int actions, QWidget 
 , neededSize( QSize( 52, 40) )
 , powerPosID( 0 ) {
 
-    config = new KThinkBatConfig( sharedConfig() );
+//     config = new KThinkBatConfig( sharedConfig() );
+    config = KThinkBatConfig::self();
     assert( config );
 
     wastePosBelow = config->powerMeterBelowGauge();
@@ -76,6 +82,7 @@ KThinkBat::KThinkBat(const QString& configFile, Type type, int actions, QWidget 
     powerPosID = contextMenu->insertItem( i18n("Power Meter below Gauge"), this, SLOT(slotPowerMeterPosition()) );
     contextMenu->insertItem( i18n("Power Meter Color..."), this, SLOT(slotPowerMeterColor()) );
     contextMenu->setItemChecked( powerPosID, wastePosBelow );
+    contextMenu->insertItem( i18n("Settings..."), this, SLOT(slotConfigure()) );
 
     // KPanelApplet takes ownership of this menu, so we don't have to delete it.
     setCustomMenu( contextMenu );
@@ -113,6 +120,31 @@ KThinkBat::slotPowerMeterColor() {
         config->setPowerMeterColor( myColor );
         update();
     }
+}
+
+void
+KThinkBat::slotConfigure() {
+    //An instance of your dialog could be already created and could be cached, 
+    //in which case you want to display the cached dialog instead of creating 
+    //another one 
+    if ( KConfigDialog::showDialog( "settings" ) ) 
+            return; 
+     
+    //KConfigDialog didn't find an instance of this dialog, so lets create it : 
+    KConfigDialog* dialog = new KConfigDialog( this, "settings", 
+                                               config ); 
+    Prefs* prefs =  
+            new Prefs( 0, "KThinkBat Preferences" );
+    assert( prefs );
+ 
+    dialog->addPage( prefs, i18n("Example"), "example" ); 
+ 
+    //User edited the configuration - update your local copies of the 
+    //configuration data 
+//     connect( dialog, SIGNAL(settingsChanged()), 
+//              this, SLOT(updateConfiguration()) ); 
+     
+    dialog->show();
 }
 
 void 

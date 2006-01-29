@@ -1,3 +1,6 @@
+KThinkBat 0.1.5 Release Candidate 2:
+   * Config as a Singeleton
+
 KThinkBat 0.1.5 Release Candidate 1:
    * All Colors can be configured (see kthinkbat.kcfg)
    * The Color of the Power Consuption Text can be configured through 

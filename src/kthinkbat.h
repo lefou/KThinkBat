@@ -129,6 +129,7 @@ public slots:
 
     void slotPowerMeterPosition();
     void slotPowerMeterColor();
+    void slotConfigure();
 
     /**
      * Is called when the user selects "About" from the applets RMB menu.

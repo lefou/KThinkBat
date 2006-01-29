@@ -1,4 +1,4 @@
 File=kthinkbat.kcfg
 ClassName=KThinkBatConfig
-#Singleton=true
+Singleton=true
 Mutators=true
