@@ -115,26 +115,20 @@ public:
      * See @ref Action and @ref KPanelApplet().
      **/
     virtual void help();
-    /**
-     * Is called when the user selects "Preferences" from the applets RMB menu.
-     * Reimplement this function to launch a preferences dialog or kcontrol module.
-     *
-     * Note that this is called only when your applet supports the preferences action.
-     * See @ref Action and @ref KPanelApplet().
-     **/
-    virtual void preferences();
 
 public slots:
     void timeout();
 
-    void slotPowerMeterPosition();
-    void slotPowerMeterColor();
-    void slotConfigure();
+//     void slotPowerMeterPosition();
+//     void slotPowerMeterColor();
+    void slotPreferences();
+//     void slotTwoBatteries();
+    void slotUpdateConfigruration();
 
     /**
-     * Is called when the user selects "About" from the applets RMB menu.
+     * Is called when the user selects "About" from the menu.
      **/
-    virtual void about();
+    void slotAbout();
 
 protected:
     void resizeEvent(QResizeEvent *);
@@ -142,28 +136,24 @@ protected:
 
 private:
 //     KConfig *ksConfig;
-    KThinkBatConfig* config;
+//     KThinkBatConfig* config;
 
-    /// The Size of be battery gauge
-    QSize gaugeSize;
-    /// The border around the gauge
-    QSize border;
     /// The space between gauge and power consuption label
     QSize padding;
 
     /// The timer, that controls the update of the battery values
     QTimer* timer;
 
-    /// Anzeige des Verbrauchs unterhalb der Gauge anzeigen (oder rechts davon)
-    bool wastePosBelow;
-
     BatInfo batInfo1;
     BatInfo batInfo2;
 
     BatGauge gauge1;
+    BatGauge gauge2;
 
-    float curPower;
-    QString powerUnit;
+    float curPower1;
+    float curPower2;
+    QString powerUnit1;
+    QString powerUnit2;
 
     QSize neededSize;
 

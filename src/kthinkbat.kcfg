@@ -13,6 +13,25 @@
             <default>3000</default>
         </entry> 
 
+        <entry name="SummarizeBatteries" type="Bool">
+            <label>Display two separate batteries.</label>
+            <default>true</default>
+        </entry>
+
+        <entry name="GaugeSize" type="Size">
+            <label>Battery Gauge Size.</label>
+            <default>QSize(46,20)</default>
+        </entry>
+        <entry name="BorderSize" type="Size">
+            <label>Battery Gauge Size.</label>
+            <default>QSize(3,3)</default>
+        </entry>
+
+        <entry name="CriticalFill" type="Int">
+            <label>Critical Fill</label>
+            <default>10</default>
+        </entry>
+
         <entry name="PowerMeterBelowGauge" type="Bool"> 
             <label>Display the power consumption below the battery gauge.</label> 
             <default>true</default>

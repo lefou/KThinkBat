@@ -161,7 +161,7 @@ BatInfo::parseProcACPI() {
     // TODO better read /proc/acpi/ac_adapter/AC/state an evaluate "on-line"
     acConnected = (batState != "discharging");
 
-    parseProcAcpiBatAlarm();
+//     parseProcAcpiBatAlarm();
 
     return true;
 }
@@ -310,7 +310,7 @@ BatInfo::parseSysfsTP() {
     }
 
     // critical Fuel can not be set via tp_smapi, so we try to read /proc/acpi for that
-    parseProcAcpiBatAlarm();
+//     parseProcAcpiBatAlarm();
 
     return true;
 }
