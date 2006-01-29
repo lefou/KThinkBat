@@ -60,8 +60,6 @@ KThinkBat::KThinkBat(const QString& configFile, Type type, int actions, QWidget 
 
     neededSize = QSize( KThinkBatConfig::gaugeWidth() + (2* KThinkBatConfig::borderSize().width()), KThinkBatConfig::gaugeHeight() + (2* KThinkBatConfig::borderSize().width()) );
 
-    // TODO We have to rebuild the menu, if we show it, so we could better reflect any changes in Select entries 
-
     // Create a popup menu to show KThinkBats specific options.
     contextMenu = new KPopupMenu();
     assert( contextMenu );
@@ -283,7 +281,7 @@ KThinkBat::timeout() {
         if( ! KThinkBatConfig::summarizeBatteries() ) {
             gauge1.setPercentValue( (int) batInfo1.getChargeLevel() );
             gauge1.setColors( QColor( KThinkBatConfig::batBackgroundColor() ),
-                              QColor( batInfo1.getCurFuel() <= batInfo1.getCriticalFuel() ? KThinkBatConfig::batCriticalColor() : KThinkBatConfig::batChargedColor() ),
+                              QColor( ((int) batInfo1.getChargeLevel()) <= KThinkBatConfig::criticalFill() ? KThinkBatConfig::batCriticalColor() : KThinkBatConfig::batChargedColor() ),
                               QColor( batInfo1.isOnline() ? KThinkBatConfig::batDotOnlineColor() : KThinkBatConfig::batBackgroundColor() ) );
             curPower1 = batInfo1.getPowerConsumption();
             powerUnit1 = batInfo1.getPowerUnit();
@@ -305,7 +303,7 @@ KThinkBat::timeout() {
         if( ! KThinkBatConfig::summarizeBatteries() ) {
             gauge2.setPercentValue( (int) batInfo2.getChargeLevel() );
             gauge2.setColors( QColor( KThinkBatConfig::batBackgroundColor() ),
-                              QColor( batInfo2.getChargeLevel() <= KThinkBatConfig::criticalFill() ? KThinkBatConfig::batCriticalColor() : KThinkBatConfig::batChargedColor() ),
+                              QColor( ((int) batInfo2.getChargeLevel()) <= KThinkBatConfig::criticalFill() ? KThinkBatConfig::batCriticalColor() : KThinkBatConfig::batChargedColor() ),
                               QColor( batInfo2.isOnline() ? KThinkBatConfig::batDotOnlineColor() : KThinkBatConfig::batBackgroundColor() ) );
             curPower2 = batInfo1.getPowerConsumption();
             powerUnit2 = batInfo1.getPowerUnit();
