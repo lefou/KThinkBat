@@ -156,11 +156,11 @@ msgstr "Größe des Akku-Pols"
 #: rc.cpp:74
 #, no-c-format
 msgid "Gauge Font (Percentage Value)"
-msgstr "Schrift Akkuanzeige (Prozentangabe)"
+msgstr "Schriftart Akkuanzeige (Prozentangabe)"
 
 #. i18n: file ./prefs.ui line 477
 #: rc.cpp:77
 #, no-c-format
 msgid "Power Meter Font"
-msgstr "Schrift Verbrauchsanzeige"
+msgstr "Schriftart Verbrauchsanzeige"
 
