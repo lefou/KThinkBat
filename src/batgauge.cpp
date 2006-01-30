@@ -58,7 +58,6 @@ BatGauge::drawGauge( QPainter& painter, QSize gaugePos, QSize gaugeSize ) {
     // Values for Gauge and Border
     QSize offset( gaugePos.width() + 1, gaugePos.height() + 1 );
     // size of the dot
-//     QSize gHalfDot( (int) (gaugeSize.height() / 5),  (int) (gaugeSize.height() / 4) );
     QSize gHalfDot( KThinkBatConfig::gaugeDotWidth(), (int) ((KThinkBatConfig::gaugeDotHeight() / 2) + 0.5) );
     // substract the frame and the dot
     QSize gaugeFill(gaugeSize.width() - gHalfDot.width() - 2, gaugeSize.height() - 2 );
@@ -88,12 +87,6 @@ BatGauge::drawGauge( QPainter& painter, QSize gaugePos, QSize gaugeSize ) {
 
     // Paint Border
     painter.drawPolyline(border);
-
-    // Prozent-Anzeige
-    // OLD: painter.drawText( offset.width() + 11, offset.height() + gaugeFill.height() - 5, percentageString );
-    // void QPainter::drawText ( int x, int y, int w, int h, int flags, const QString &, int len = -1, QRect * br = 0, QTextParag ** internal = 0 )
-    // assuming, the drawn border arround the gauge is just 1 Point large
-    //  <- offset -> | <- 1pt ->  xx %  <- 1pt -> | <- offset ->
 
     // Calculate, haw much space is needed by the Text string
     QRect reqTextSize = painter.boundingRect( 1,1,1,1, Qt::AlignHCenter | Qt::AlignVCenter, percentString );

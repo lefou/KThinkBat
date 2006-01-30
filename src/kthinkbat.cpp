@@ -31,6 +31,7 @@
 #include <kmessagebox.h>
 #include <kaboutapplication.h>
 #include <kconfigdialog.h>
+#include <kiconloader.h>
 
 // KThinkkBat
 #include "kthinkbat.h"
@@ -54,27 +55,14 @@ KThinkBat::KThinkBat(const QString& configFile, Type type, int actions, QWidget 
 
     KThinkBatConfig::instance( configFile );
 
-//     config = new KThinkBatConfig( sharedConfig() );
-//     config = KThinkBatConfig::self();
-//     assert( config );
-
     neededSize = QSize( KThinkBatConfig::gaugeWidth() + (2* KThinkBatConfig::borderSize().width()), KThinkBatConfig::gaugeHeight() + (2* KThinkBatConfig::borderSize().width()) );
 
     // Create a popup menu to show KThinkBats specific options.
     contextMenu = new KPopupMenu();
     assert( contextMenu );
-//     contextMenu->setCheckable( true );
     contextMenu->insertTitle( i18n("KThinkBat %1").arg(VERSION) );
-    contextMenu->insertItem( i18n("About %1").arg("KThinkBat"), this, SLOT(slotAbout()) );
-
-//     powerPosID = contextMenu->insertItem( i18n("Power Meter below Gauge"), this, SLOT(slotPowerMeterPosition()) );
-//     contextMenu->setItemChecked( powerPosID, KThinkBatConfig::powerMeterBelowGauge() );
-
-//     contextMenu->insertItem( i18n("Power Meter Color..."), this, SLOT(slotPowerMeterColor()) );
-
-    contextMenu->insertItem( i18n("Configure %1...").arg("KThinkBat"), this, SLOT(slotPreferences()) );
-
-    // KPanelApplet takes ownership of this menu, so we don't have to delete it.
+    contextMenu->insertItem( i18n("&About %1").arg("KThinkBat"), this, SLOT(slotAbout()) );
+    contextMenu->insertItem( SmallIcon( "configure" ), i18n("&Configure %1...").arg("KThinkBat"), this, SLOT(slotPreferences()) );
     setCustomMenu( contextMenu );
 
     // Timer der die Aktualisierung von ACPI/SMAPI-Werten und deren Anzeige veranlasst.
@@ -96,38 +84,18 @@ KThinkBat::~KThinkBat() {
     delete contextMenu; contextMenu = NULL;
 }
 
-// void 
-// KThinkBat::slotPowerMeterPosition() {
-// 
-//     KThinkBatConfig::setPowerMeterBelowGauge( ! KThinkBatConfig::powerMeterBelowGauge() );
-//     contextMenu->setItemChecked( powerPosID, KThinkBatConfig::powerMeterBelowGauge() );
-// 
-//     // force an update, as we have a new layout
-//     update();
-// }
-
-// void 
-// KThinkBat::slotPowerMeterColor() {
-// 
-//     QColor myColor = KThinkBatConfig::powerMeterColor();
-//     if ( KColorDialog::Accepted == KColorDialog::getColor( myColor ) ) {
-//         KThinkBatConfig::setPowerMeterColor( myColor );
-//         update();
-//     }
-// }
-
 void
 KThinkBat::slotPreferences() {
     if ( KConfigDialog::showDialog( "KThinkBatSettings" ) ) {
         return;
     }
 
-    KConfigDialog* dialog = new KConfigDialog( this, "KThinkBatSettings", KThinkBatConfig::self() );
+    KConfigDialog* dialog = new KConfigDialog( this, "KThinkBatSettings", KThinkBatConfig::self(), KDialogBase::Plain );
 
     Prefs* prefs = new Prefs( this );
     assert( prefs );
  
-    dialog->addPage( prefs, i18n("KThinkBat Preferences"), "general" ); 
+    dialog->addPage( prefs, i18n("KThinkBat Preferences"), "configure" ); 
  
     //User edited the configuration - update your local copies of the 
     //configuration data 
@@ -183,7 +151,6 @@ KThinkBat::resizeEvent(QResizeEvent *e) {}
 
 void 
 KThinkBat::paintEvent(QPaintEvent* event) {
-    // TODO Gauge auslagern als Funktion, später als extra Control
 
     QPixmap pixmap(width(), height());
     pixmap.fill(this, 0, 0);
@@ -236,16 +203,14 @@ KThinkBat::paintEvent(QPaintEvent* event) {
         if( KThinkBatConfig::powerMeterBelowGauge() ) {
             // Verbrauchsanzeige unterhalb der Gauge
             //         wastePos = QSize( KThinkBatConfig::borderSize().width(), KThinkBatConfig::borderSize().height() + gaugeSize.height() + 12 );
-            powerPos1 = QSize( KThinkBatConfig::borderSize().width(), KThinkBatConfig::borderSize().height() + padding.height() + KThinkBatConfig::gaugeHeight() );
-//         neededSize = QSize( (2 * KThinkBatConfig::borderSize().width() ) + KThinkBatConfig::gaugeWidth()
-//                             , wastePos.height() + powerTextExtend1.height() + KThinkBatConfig::borderSize().height() );
+            powerPos1 = QSize( KThinkBatConfig::borderSize().width(), 
+                               KThinkBatConfig::borderSize().height() + padding.height() + KThinkBatConfig::gaugeHeight() );
             realNeededSpace = QSize( realNeededSpace.width(), realNeededSpace.height() + padding.height() + maxPowerExtend.height() );
         } else {
             // Verbrauchsanzeige rechts von der Gauge
             //         wastePos = QSize( ( 3 * border.width() ) + gaugeSize.width(), border.height() );
-            powerPos1 = QSize( KThinkBatConfig::borderSize().width() + padding.width() + KThinkBatConfig::gaugeWidth(), KThinkBatConfig::borderSize().height() + ((KThinkBatConfig::gaugeHeight() - powerTextExtend1.height()) / 2 ) );
-//         neededSize = QSize( wastePos.width() + powerTextExtend1.width() + KThinkBatConfig::borderSize().width()
-//                             , ( 2 * KThinkBatConfig::borderSize().height() ) + KThinkBatConfig::gaugeHeight() );
+            powerPos1 = QSize( KThinkBatConfig::borderSize().width() + padding.width() + KThinkBatConfig::gaugeWidth(),
+                                KThinkBatConfig::borderSize().height() + ((KThinkBatConfig::gaugeHeight() - powerTextExtend1.height()) / 2 ) );
             realNeededSpace = QSize( realNeededSpace.width() + padding.width() + maxPowerExtend.width(), realNeededSpace.height() );
         }
 
@@ -271,15 +236,10 @@ KThinkBat::paintEvent(QPaintEvent* event) {
 
     }
     painter.end();
-
     bitBlt(this, 0, 0, &pixmap);
 
     // new needed Size for the applet
     neededSize = realNeededSpace;
-
-    // full extend is
-    //   width: (3 x offset) + gaugeFill + gHalfDot ( + wasteSite )
-    //   height: (3 x offset) + gaugeFill ( + wasteSite )
 }
 
 
@@ -323,8 +283,8 @@ KThinkBat::timeout() {
             gauge2.setColors( QColor( KThinkBatConfig::batBackgroundColor() ),
                               QColor( ((int) batInfo2.getChargeLevel()) <= KThinkBatConfig::criticalFill() ? KThinkBatConfig::batCriticalColor() : KThinkBatConfig::batChargedColor() ),
                               QColor( batInfo2.isOnline() ? KThinkBatConfig::batDotOnlineColor() : KThinkBatConfig::batBackgroundColor() ) );
-            curPower2 = batInfo1.getPowerConsumption();
-            powerUnit2 = batInfo1.getPowerUnit();
+            curPower2 = batInfo2.getPowerConsumption();
+            powerUnit2 = batInfo2.getPowerUnit();
         }
         else {
             lastFuel += batInfo2.getLastFuel();
@@ -351,3 +311,13 @@ KThinkBat::timeout() {
     update();
 }
 
+void 
+KThinkBat::mousePressEvent(QMouseEvent* e) {
+    if ( e->button() != RightButton ) {
+        KPanelApplet::mousePressEvent( e );
+        return;
+    }
+
+    assert(contextMenu);
+    contextMenu->exec( e->globalPos() );
+}

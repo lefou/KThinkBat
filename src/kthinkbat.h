@@ -116,6 +116,7 @@ public:
      **/
     virtual void help();
 
+
 public slots:
     void timeout();
 
@@ -133,6 +134,7 @@ public slots:
 protected:
     void resizeEvent(QResizeEvent *);
     void paintEvent(QPaintEvent* event);
+    void mousePressEvent(QMouseEvent* e);
 
 private:
 //     KConfig *ksConfig;

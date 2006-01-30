@@ -1,10 +1,11 @@
 Please see at 
 https://lepetitfou.dyndns.org/KThinkBat
 
-- good error messages if getting /proc values fail
-- ASUS: calculate W from the values provided by ACPI
-- integrate ibam battery monitoring fassility
-- KThinkBat needs at least one icon
-- Config-Dialog: ACPI proc path, action on click 
+- ASUS/ACER: calculate W from the values provided by ACPI
 - show remaining time 
-- there should be a symbol such as power plug next to it when connected
+- integrate ibam battery monitoring fassility, for (better) time computation
+- KThinkBat needs at least one icon, svg prefered. Artists arround?
+- Config-Dialog: ACPI proc path, action on click 
+- there should be a symbol such as power plug next to it when connected to AC
+- make backend selectable: tp_smapi or ACPI
+- add APM option for older Laptops. Still needed?
