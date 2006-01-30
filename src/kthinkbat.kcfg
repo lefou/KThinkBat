@@ -17,6 +17,10 @@
             <label>Display two separate batteries.</label>
             <default>true</default>
         </entry>
+        <entry name="ShowPowerMeter" type="Bool">
+            <label>Display the current power consumption in W (or A).</label>
+            <default>true</default>
+        </entry>
 
         <entry name="GaugeWidth" type="Int">
             <label>Battery Gauge Width.</label>
@@ -73,6 +77,15 @@
         <entry name="PowerMeterColor" type="Color"> 
             <label>Color of the power meter.</label> 
             <default>black</default>
+        </entry> 
+
+        <entry name="GaugeFont" type="Font"> 
+            <label>The font used to display the percentage value in the battery gauge.</label> 
+            <default code="true">KGlobalSettings::generalFont()</default> 
+        </entry> 
+        <entry name="PowerMeterFont" type="Font"> 
+            <label>The font used to display the current power consumption (power meter).</label> 
+            <default code="true">KGlobalSettings::generalFont()</default> 
         </entry> 
     </group> 
 

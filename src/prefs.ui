@@ -8,8 +8,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>452</width>
-            <height>460</height>
+            <width>548</width>
+            <height>540</height>
         </rect>
     </property>
     <property name="caption">
@@ -30,18 +30,7 @@
                 <property name="name">
                     <cstring>unnamed</cstring>
                 </property>
-                <widget class="QCheckBox" row="0" column="0" rowspan="1" colspan="2">
-                    <property name="name">
-                        <cstring>kcfg_SummarizeBatteries</cstring>
-                    </property>
-                    <property name="text">
-                        <string>Summari&amp;ze all Batteries</string>
-                    </property>
-                    <property name="accel">
-                        <string>Alt+Z</string>
-                    </property>
-                </widget>
-                <widget class="QLabel" row="2" column="0">
+                <widget class="QLabel" row="3" column="0">
                     <property name="name">
                         <cstring>textLabel1</cstring>
                     </property>
@@ -49,7 +38,7 @@
                         <string>Battery Critical Fill</string>
                     </property>
                 </widget>
-                <spacer row="2" column="1" rowspan="1" colspan="2">
+                <spacer row="3" column="1" rowspan="1" colspan="2">
                     <property name="name">
                         <cstring>spacer13</cstring>
                     </property>
@@ -66,12 +55,12 @@
                         </size>
                     </property>
                 </spacer>
-                <widget class="QSpinBox" row="2" column="3" rowspan="1" colspan="2">
+                <widget class="QSpinBox" row="3" column="3">
                     <property name="name">
                         <cstring>kcfg_CriticalFill</cstring>
                     </property>
                 </widget>
-                <widget class="QLabel" row="3" column="0" rowspan="1" colspan="2">
+                <widget class="QLabel" row="4" column="0" rowspan="1" colspan="2">
                     <property name="name">
                         <cstring>textLabel2_2</cstring>
                     </property>
@@ -79,7 +68,7 @@
                         <string>Battery Update Interval (in milliseconds)</string>
                     </property>
                 </widget>
-                <spacer row="3" column="2">
+                <spacer row="4" column="2">
                     <property name="name">
                         <cstring>spacer14</cstring>
                     </property>
@@ -96,7 +85,7 @@
                         </size>
                     </property>
                 </spacer>
-                <widget class="QSpinBox" row="3" column="3" rowspan="1" colspan="2">
+                <widget class="QSpinBox" row="4" column="3">
                     <property name="name">
                         <cstring>kcfg_UpdateIntervalMsek</cstring>
                     </property>
@@ -110,7 +99,7 @@
                         <number>50</number>
                     </property>
                 </widget>
-                <widget class="QCheckBox" row="1" column="0" rowspan="1" colspan="4">
+                <widget class="QCheckBox" row="2" column="0" rowspan="1" colspan="4">
                     <property name="name">
                         <cstring>kcfg_PowerMeterBelowGauge</cstring>
                     </property>
@@ -121,6 +110,28 @@
                         <string>Alt+W</string>
                     </property>
                 </widget>
+                <widget class="QCheckBox" row="0" column="0" rowspan="1" colspan="2">
+                    <property name="name">
+                        <cstring>kcfg_SummarizeBatteries</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Summari&amp;ze all Batteries</string>
+                    </property>
+                    <property name="accel">
+                        <string>Alt+Z</string>
+                    </property>
+                </widget>
+                <widget class="QCheckBox" row="1" column="0">
+                    <property name="name">
+                        <cstring>kcfg_ShowPowerMeter</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Show Power Meter</string>
+                    </property>
+                    <property name="accel">
+                        <string></string>
+                    </property>
+                </widget>
             </grid>
         </widget>
         <widget class="QGroupBox">
@@ -128,7 +139,7 @@
                 <cstring>groupBox3</cstring>
             </property>
             <property name="title">
-                <string>Colors</string>
+                <string>Color</string>
             </property>
             <grid>
                 <property name="name">
@@ -439,6 +450,79 @@
                 </widget>
             </grid>
         </widget>
+        <widget class="QGroupBox">
+            <property name="name">
+                <cstring>groupBox4</cstring>
+            </property>
+            <property name="title">
+                <string>Font</string>
+            </property>
+            <grid>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <widget class="QLabel" row="0" column="0">
+                    <property name="name">
+                        <cstring>textLabel1_2</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Gauge Font (Percentage Value)</string>
+                    </property>
+                </widget>
+                <widget class="QLabel" row="1" column="0">
+                    <property name="name">
+                        <cstring>textLabel2_3</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Power Meter Font</string>
+                    </property>
+                </widget>
+                <widget class="KFontCombo" row="0" column="2">
+                    <property name="name">
+                        <cstring>kcfg_GaugeFont</cstring>
+                    </property>
+                </widget>
+                <spacer row="0" column="1">
+                    <property name="name">
+                        <cstring>spacer10</cstring>
+                    </property>
+                    <property name="orientation">
+                        <enum>Horizontal</enum>
+                    </property>
+                    <property name="sizeType">
+                        <enum>Expanding</enum>
+                    </property>
+                    <property name="sizeHint">
+                        <size>
+                            <width>30</width>
+                            <height>20</height>
+                        </size>
+                    </property>
+                </spacer>
+                <widget class="KFontCombo" row="1" column="2">
+                    <property name="name">
+                        <cstring>kcfg_PowerMeterFont</cstring>
+                    </property>
+                </widget>
+                <spacer row="1" column="1">
+                    <property name="name">
+                        <cstring>spacer11</cstring>
+                    </property>
+                    <property name="orientation">
+                        <enum>Horizontal</enum>
+                    </property>
+                    <property name="sizeType">
+                        <enum>Expanding</enum>
+                    </property>
+                    <property name="sizeHint">
+                        <size>
+                            <width>40</width>
+                            <height>21</height>
+                        </size>
+                    </property>
+                </spacer>
+            </grid>
+        </widget>
         <spacer>
             <property name="name">
                 <cstring>spacer6</cstring>
@@ -452,7 +536,7 @@
             <property name="sizeHint">
                 <size>
                     <width>20</width>
-                    <height>50</height>
+                    <height>20</height>
                 </size>
             </property>
         </spacer>
@@ -464,5 +548,9 @@
     <includehint>kcolorbutton.h</includehint>
     <includehint>kcolorbutton.h</includehint>
     <includehint>kcolorbutton.h</includehint>
+    <includehint>kfontcombo.h</includehint>
+    <includehint>klineedit.h</includehint>
+    <includehint>kfontcombo.h</includehint>
+    <includehint>klineedit.h</includehint>
 </includehints>
 </UI>

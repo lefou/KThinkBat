@@ -188,7 +188,9 @@ KThinkBat::paintEvent(QPaintEvent* event) {
     QPixmap pixmap(width(), height());
     pixmap.fill(this, 0, 0);
     QPainter painter(&pixmap);
-    // this is the needed Space
+    painter.setFont( KThinkBatConfig::gaugeFont() );
+
+    // this is the needed Space by the Applet
     QSize realNeededSpace = QSize( (2 * KThinkBatConfig::borderSize().width()) + KThinkBatConfig::gaugeWidth(),
                                    (2 * KThinkBatConfig::borderSize().height()) + KThinkBatConfig::gaugeHeight() );
 
@@ -196,7 +198,6 @@ KThinkBat::paintEvent(QPaintEvent* event) {
 
     QSize nextSouth = QSize( KThinkBatConfig::borderSize().width(), KThinkBatConfig::borderSize().height() + padding.height() + KThinkBatConfig::gaugeHeight() );
     QSize nextEast = QSize( KThinkBatConfig::borderSize().width() + padding.width() + KThinkBatConfig::gaugeWidth(), KThinkBatConfig::borderSize().height() );
-
 
     if( ! KThinkBatConfig::summarizeBatteries() ) {
         if( KThinkBatConfig::powerMeterBelowGauge() ) {
@@ -209,63 +210,66 @@ KThinkBat::paintEvent(QPaintEvent* event) {
         }
     }
 
-    //-------------------------------------------------------------------------
-    // Position for power consumtion display
-    // Power consumption label: For correct rounding we add 500 mW (resp. 50 mA)
-    QString powerLabel1 = ("W" == powerUnit1) ? QString().number((int) (curPower1 + 500)/1000) + " " + powerUnit1 : QString().number((float) (((int) curPower1 + 50)/100) / 10 )  + " " + powerUnit1;
-    // Needed Space for Power Consumption Label
-    QRect powerTextExtend1 = painter.boundingRect( 0, 0, 1, 1, Qt::AlignLeft | Qt::AlignTop, powerLabel1 );
+    if( KThinkBatConfig::showPowerMeter() ) {
 
-    QString powerLabel2("");
-    QRect powerTextExtend2(0,0,0,0);
-    QSize maxPowerExtend = QSize( powerTextExtend1.width(), powerTextExtend1.height() );
+        painter.setFont( KThinkBatConfig::powerMeterFont() );
+
+        // Position for power consumtion display
+        // Power consumption label: For correct rounding we add 500 mW (resp. 50 mA)
+        QString powerLabel1 = ("W" == powerUnit1) ? QString().number((int) (curPower1 + 500)/1000) + " " + powerUnit1 : QString().number((float) (((int) curPower1 + 50)/100) / 10 )  + " " + powerUnit1;
+        // Needed Space for Power Consumption Label
+        QRect powerTextExtend1 = painter.boundingRect( 0, 0, 1, 1, Qt::AlignLeft | Qt::AlignTop, powerLabel1 );
+
+        QString powerLabel2("");
+        QRect powerTextExtend2(0,0,0,0);
+        QSize maxPowerExtend = QSize( powerTextExtend1.width(), powerTextExtend1.height() );
     
-    if( ! KThinkBatConfig::summarizeBatteries() ) {
-        powerLabel2 = ("W" == powerUnit2) ? QString().number((int) (curPower2 + 500)/1000) + " " + powerUnit2 : QString().number((float) (((int) curPower2 + 50)/100) / 10 )  + " " + powerUnit2;
-        powerTextExtend2 = painter.boundingRect( 0, 0, 1, 1, Qt::AlignLeft | Qt::AlignTop, powerLabel2 );
-        maxPowerExtend = QSize( powerTextExtend1.width() > powerTextExtend2.width() ? powerTextExtend1.width() : powerTextExtend2.width(),
-                                powerTextExtend1.height() > powerTextExtend2.height() ? powerTextExtend1.height() : powerTextExtend2.height() );
-    }
+        if( ! KThinkBatConfig::summarizeBatteries() ) {
+            powerLabel2 = ("W" == powerUnit2) ? QString().number((int) (curPower2 + 500)/1000) + " " + powerUnit2 : QString().number((float) (((int) curPower2 + 50)/100) / 10 )  + " " + powerUnit2;
+            powerTextExtend2 = painter.boundingRect( 0, 0, 1, 1, Qt::AlignLeft | Qt::AlignTop, powerLabel2 );
+            maxPowerExtend = QSize( powerTextExtend1.width() > powerTextExtend2.width() ? powerTextExtend1.width() : powerTextExtend2.width(),
+                                    powerTextExtend1.height() > powerTextExtend2.height() ? powerTextExtend1.height() : powerTextExtend2.height() );
+        }
 
-    QSize powerPos1;
-    // left upper corner of power consumption label
-    if( KThinkBatConfig::powerMeterBelowGauge() ) {
-        // Verbrauchsanzeige unterhalb der Gauge
-        //         wastePos = QSize( KThinkBatConfig::borderSize().width(), KThinkBatConfig::borderSize().height() + gaugeSize.height() + 12 );
-        powerPos1 = QSize( KThinkBatConfig::borderSize().width(), KThinkBatConfig::borderSize().height() + padding.height() + KThinkBatConfig::gaugeHeight() );
+        QSize powerPos1;
+        // left upper corner of power consumption label
+        if( KThinkBatConfig::powerMeterBelowGauge() ) {
+            // Verbrauchsanzeige unterhalb der Gauge
+            //         wastePos = QSize( KThinkBatConfig::borderSize().width(), KThinkBatConfig::borderSize().height() + gaugeSize.height() + 12 );
+            powerPos1 = QSize( KThinkBatConfig::borderSize().width(), KThinkBatConfig::borderSize().height() + padding.height() + KThinkBatConfig::gaugeHeight() );
 //         neededSize = QSize( (2 * KThinkBatConfig::borderSize().width() ) + KThinkBatConfig::gaugeWidth()
 //                             , wastePos.height() + powerTextExtend1.height() + KThinkBatConfig::borderSize().height() );
-        realNeededSpace = QSize( realNeededSpace.width(), realNeededSpace.height() + padding.height() + maxPowerExtend.height() );
-    } else {
-        // Verbrauchsanzeige rechts von der Gauge
-        //         wastePos = QSize( ( 3 * border.width() ) + gaugeSize.width(), border.height() );
-        powerPos1 = QSize( KThinkBatConfig::borderSize().width() + padding.width() + KThinkBatConfig::gaugeWidth(), KThinkBatConfig::borderSize().height() + ((KThinkBatConfig::gaugeHeight() - powerTextExtend1.height()) / 2 ) );
+            realNeededSpace = QSize( realNeededSpace.width(), realNeededSpace.height() + padding.height() + maxPowerExtend.height() );
+        } else {
+            // Verbrauchsanzeige rechts von der Gauge
+            //         wastePos = QSize( ( 3 * border.width() ) + gaugeSize.width(), border.height() );
+            powerPos1 = QSize( KThinkBatConfig::borderSize().width() + padding.width() + KThinkBatConfig::gaugeWidth(), KThinkBatConfig::borderSize().height() + ((KThinkBatConfig::gaugeHeight() - powerTextExtend1.height()) / 2 ) );
 //         neededSize = QSize( wastePos.width() + powerTextExtend1.width() + KThinkBatConfig::borderSize().width()
 //                             , ( 2 * KThinkBatConfig::borderSize().height() ) + KThinkBatConfig::gaugeHeight() );
-        realNeededSpace = QSize( realNeededSpace.width() + padding.width() + maxPowerExtend.width(), realNeededSpace.height() );
+            realNeededSpace = QSize( realNeededSpace.width() + padding.width() + maxPowerExtend.width(), realNeededSpace.height() );
+        }
+
+        // Painting the Text
+        QPen origPen = painter.pen();
+        painter.setPen( KThinkBatConfig::powerMeterColor() );
+        // Draw the Power Consumption at position @c wastePos.
+        painter.drawText( powerPos1.width(), powerPos1.height(), 
+                              powerTextExtend1.width(), powerTextExtend1.height(),
+                              Qt::AlignTop | Qt::AlignLeft, 
+                              powerLabel1 );
+        if( ! KThinkBatConfig::summarizeBatteries() ) { 
+            QSize powerPos2;
+            powerPos2 = QSize( KThinkBatConfig::borderSize().width() + padding.width() + KThinkBatConfig::gaugeWidth(),
+                               KThinkBatConfig::borderSize().height() + padding.height() + KThinkBatConfig::gaugeHeight() );
+
+            painter.drawText( powerPos2.width(), powerPos2.height(), 
+                              powerTextExtend2.width(), powerTextExtend2.height(),
+                              Qt::AlignTop | Qt::AlignLeft, 
+                              powerLabel2 );
+        }
+        painter.setPen( origPen );
+
     }
-
-    // Painting the Text
-    QPen origPen = painter.pen();
-    painter.setPen( KThinkBatConfig::powerMeterColor() );
-    // Draw the Power Consumption at position @c wastePos.
-    painter.drawText( powerPos1.width(), powerPos1.height(), 
-                          powerTextExtend1.width(), powerTextExtend1.height(),
-                          Qt::AlignTop | Qt::AlignLeft, 
-                          powerLabel1 );
-    if( ! KThinkBatConfig::summarizeBatteries() ) { 
-        QSize powerPos2;
-        powerPos2 = QSize( KThinkBatConfig::borderSize().width() + padding.width() + KThinkBatConfig::gaugeWidth(),
-                           KThinkBatConfig::borderSize().height() + padding.height() + KThinkBatConfig::gaugeHeight() );
-
-        painter.drawText( powerPos2.width(), powerPos2.height(), 
-                          powerTextExtend2.width(), powerTextExtend2.height(),
-                          Qt::AlignTop | Qt::AlignLeft, 
-                          powerLabel2 );
-    }
-    painter.setPen( origPen );
-
-    //-------------------------------------------------------------------------
     painter.end();
 
     bitBlt(this, 0, 0, &pixmap);
