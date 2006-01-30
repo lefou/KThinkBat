@@ -1,1 +1,2 @@
 POFILES = AUTO
+KDE_LANG = de
