@@ -72,7 +72,7 @@ msgstr "Kritischer Akkustand"
 #: rc.cpp:12
 #, no-c-format
 msgid "Battery Update Interval (in milliseconds)"
-msgstr "Aktualisierungsintervall für Akku-Werte"
+msgstr "Aktualisierungsintervall für Akku-Werte (in Millisekunden)"
 
 #. i18n: file ./prefs.ui line 107
 #: rc.cpp:15

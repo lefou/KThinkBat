@@ -39,7 +39,6 @@
             <default>8</default>
         </entry>
 
-
         <entry name="BorderSize" type="Size">
             <label>Battery Gauge Size.</label>
             <default>QSize(3,3)</default>
