@@ -1,7 +1,10 @@
 KThinkBat 0.1.5 Release Candidate 2:
+   * With this version, The Layout of the KThinkBat Applet is now completelly configurable
    * Config as a Singeleton
    * Configuration/Settings Dialog
    * KThinkBat can now display separate battery icons for each battery
+   * The Power Meter can be disabled
+   * Selectable Fonts
 
 KThinkBat 0.1.5 Release Candidate 1:
    * All Colors can be configured (see kthinkbat.kcfg)

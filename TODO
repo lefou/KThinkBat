@@ -3,7 +3,6 @@ https://lepetitfou.dyndns.org/KThinkBat
 
 - good error messages if getting /proc values fail
 - ASUS: calculate W from the values provided by ACPI
-- use kdeutils/klaptopdaemon function eps. laptop_portable
 - integrate ibam battery monitoring fassility
 - KThinkBat needs at least one icon
 - Config-Dialog: ACPI proc path, action on click 
