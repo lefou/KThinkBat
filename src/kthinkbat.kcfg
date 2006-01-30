@@ -18,10 +18,6 @@
             <default>true</default>
         </entry>
 
-        <entry name="GaugeSize" type="Size">
-            <label>Battery Gauge Size.</label>
-            <default>QSize(46,20)</default>
-        </entry>
         <entry name="GaugeWidth" type="Int">
             <label>Battery Gauge Width.</label>
             <default>46</default>
@@ -30,6 +26,16 @@
             <label>Battery Gauge Height.</label>
             <default>20</default>
         </entry>
+        <entry name="GaugeDotWidth" type="Int">
+            <label>Battery Gauge Dot Width.</label>
+            <default>4</default>
+        </entry>
+        <entry name="GaugeDotHeight" type="Int">
+            <label>Battery Gauge Dot Height.</label>
+            <default>8</default>
+        </entry>
+
+
         <entry name="BorderSize" type="Size">
             <label>Battery Gauge Size.</label>
             <default>QSize(3,3)</default>

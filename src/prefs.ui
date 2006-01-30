@@ -314,6 +314,14 @@
                 <property name="name">
                     <cstring>unnamed</cstring>
                 </property>
+                <widget class="QLabel" row="0" column="0">
+                    <property name="name">
+                        <cstring>textLabel3_2</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Gauge Size:</string>
+                    </property>
+                </widget>
                 <widget class="QLabel" row="0" column="4">
                     <property name="name">
                         <cstring>textLabel4_2</cstring>
@@ -328,25 +336,6 @@
                     </property>
                     <property name="minValue">
                         <number>20</number>
-                    </property>
-                </widget>
-                <widget class="QSpinBox" row="0" column="5">
-                    <property name="name">
-                        <cstring>kcfg_GaugeHeight</cstring>
-                    </property>
-                    <property name="maxValue">
-                        <number>30</number>
-                    </property>
-                    <property name="minValue">
-                        <number>10</number>
-                    </property>
-                </widget>
-                <widget class="QLabel" row="0" column="0">
-                    <property name="name">
-                        <cstring>textLabel3_2</cstring>
-                    </property>
-                    <property name="text">
-                        <string>Gauge Size:</string>
                     </property>
                 </widget>
                 <widget class="QLabel" row="0" column="2">
@@ -374,6 +363,80 @@
                         </size>
                     </property>
                 </spacer>
+                <widget class="QSpinBox" row="0" column="5">
+                    <property name="name">
+                        <cstring>kcfg_GaugeHeight</cstring>
+                    </property>
+                    <property name="maxValue">
+                        <number>30</number>
+                    </property>
+                    <property name="minValue">
+                        <number>10</number>
+                    </property>
+                </widget>
+                <widget class="QSpinBox" row="1" column="3">
+                    <property name="name">
+                        <cstring>kcfg_GaugeDotWidth</cstring>
+                    </property>
+                    <property name="maxValue">
+                        <number>20</number>
+                    </property>
+                    <property name="minValue">
+                        <number>2</number>
+                    </property>
+                </widget>
+                <widget class="QLabel" row="1" column="0">
+                    <property name="name">
+                        <cstring>textLabel3_2_2</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Gauge Dot Size:</string>
+                    </property>
+                </widget>
+                <spacer row="1" column="1">
+                    <property name="name">
+                        <cstring>spacer16_2</cstring>
+                    </property>
+                    <property name="orientation">
+                        <enum>Horizontal</enum>
+                    </property>
+                    <property name="sizeType">
+                        <enum>Expanding</enum>
+                    </property>
+                    <property name="sizeHint">
+                        <size>
+                            <width>155</width>
+                            <height>21</height>
+                        </size>
+                    </property>
+                </spacer>
+                <widget class="QLabel" row="1" column="2">
+                    <property name="name">
+                        <cstring>textLabel5_2</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Width</string>
+                    </property>
+                </widget>
+                <widget class="QLabel" row="1" column="4">
+                    <property name="name">
+                        <cstring>textLabel4_2_2</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Height</string>
+                    </property>
+                </widget>
+                <widget class="QSpinBox" row="1" column="5">
+                    <property name="name">
+                        <cstring>kcfg_GaugeDotHeight</cstring>
+                    </property>
+                    <property name="maxValue">
+                        <number>20</number>
+                    </property>
+                    <property name="minValue">
+                        <number>2</number>
+                    </property>
+                </widget>
             </grid>
         </widget>
         <spacer>
@@ -389,7 +452,7 @@
             <property name="sizeHint">
                 <size>
                     <width>20</width>
-                    <height>16</height>
+                    <height>50</height>
                 </size>
             </property>
         </spacer>

@@ -1,7 +1,7 @@
 KThinkBat 0.1.5 Release Candidate 2:
    * Config as a Singeleton
    * Configuration/Settings Dialog
-   * Rudimentary Support for separate dual view batteries
+   * KThinkBat can now display separate battery icons for each battery
 
 KThinkBat 0.1.5 Release Candidate 1:
    * All Colors can be configured (see kthinkbat.kcfg)
