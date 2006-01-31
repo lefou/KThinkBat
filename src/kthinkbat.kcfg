@@ -15,10 +15,12 @@
 
         <entry name="SummarizeBatteries" type="Bool">
             <label>Display two separate batteries.</label>
+            <whatsthis>If selected and there are more than one battery installed, als battery values will be summarized and shown as "one" battery.</whatsthis>
             <default>true</default>
         </entry>
         <entry name="ShowPowerMeter" type="Bool">
-            <label>Display the current power consumption in W (or A).</label>
+            <label>Display the current power consumption.</label>
+            <whatsthis>If selected, the current power consumption (if discarging) and the loading power (while charging) is shown in the "Power Meter".</whatsthis>
             <default>true</default>
         </entry>
 

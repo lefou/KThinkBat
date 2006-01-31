@@ -1,6 +1,7 @@
 KThinkBat 0.1.5:
    * A right click gives now a Context Menu
    * minor code cleanup
+   * added German translation
 
 KThinkBat 0.1.5 Release Candidate 2:
    * With this version, The Layout of the KThinkBat Applet is now completelly configurable
