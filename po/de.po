@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-30 17:15+0100\n"
+"POT-Creation-Date: 2006-02-03 15:47+0100\n"
 "PO-Revision-Date: 2006-01-30 17:57+0100\n"
 "Last-Translator: Tobias Roeser <le.petit.fou@web.de>\n"
 "Language-Team: Deutsch <de@li.org>\n"
@@ -163,4 +163,3 @@ msgstr "Schriftart Akkuanzeige (Prozentangabe)"
 #, no-c-format
 msgid "Power Meter Font"
 msgstr "Schriftart Verbrauchsanzeige"
-
