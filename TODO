@@ -9,3 +9,4 @@ https://lepetitfou.dyndns.org/KThinkBat
 - there should be a symbol such as power plug next to it when connected to AC
 - make backend selectable: tp_smapi or ACPI
 - add APM option for older Laptops. Still needed?
+- Option to enable/disapble: ACPI/TP_SMAPI/APM

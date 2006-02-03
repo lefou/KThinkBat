@@ -7,12 +7,12 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-02-03 15:47+0100\n"
+"POT-Creation-Date: 2006-02-03 16:29+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: _translatorinfo.cpp:1
@@ -49,7 +49,15 @@ msgstr ""
 msgid "A KDE panel applet to display the current laptop battery status."
 msgstr ""
 
-#: kthinkbat.cpp:134
+#: kthinkbat.cpp:124
+msgid "_: NAME OF TRANSLATORS\\nYour names"
+msgstr ""
+
+#: kthinkbat.cpp:124
+msgid "_: EMAIL OF TRANSLATORS\\nYour emails"
+msgstr ""
+
+#: kthinkbat.cpp:136
 msgid ""
 "A KDE panel applet to display the current laptop battery status.\n"
 "\n"

@@ -120,7 +120,9 @@ KThinkBat::slotAbout() {
                           "", 
                           "https://lepetitfou.dyndns.org/KThinkBat",
                           "le.petit.fou@web.de" );
-    
+
+    aboutData.setTranslator( I18N_NOOP("_: NAME OF TRANSLATORS\\nYour names"), I18N_NOOP("_: EMAIL OF TRANSLATORS\\nYour emails") );
+
     aboutData.addAuthor( "Tobias Roeser", "", "le.petitfou@web.de",
                          "https://lepetitfou.dyndns.org/KThinkBat" );
 
