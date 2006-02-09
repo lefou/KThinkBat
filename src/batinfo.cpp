@@ -28,8 +28,8 @@
 #include "batinfo.h"
 
 BatInfo::BatInfo( int number ) 
-    : batNr( number - 1 )
-{
+: batNr( number - 1 ) {
+
     resetValues();
 }
 
@@ -159,7 +159,11 @@ BatInfo::parseProcACPI() {
     if( ! ok ) { curPower = 0; }
 
     // TODO better read /proc/acpi/ac_adapter/AC/state an evaluate "on-line"
+    bool oldAcCon = isOnline();
     acConnected = (batState != "discharging");
+    if( oldAcCon != acConnected ) {
+        emit onlineModeChanged( acConnected );
+    }
 
 //     parseProcAcpiBatAlarm();
 
@@ -299,6 +303,7 @@ BatInfo::parseSysfsTP() {
         batState = "";
     }
 
+    bool oldAcCon = isOnline();
     file.setName( "/sys/devices/platform/smapi/ac_connected" );
     if( file.exists() && file.open(IO_ReadOnly) ) {
         stream.setDevice( &file );
@@ -307,6 +312,9 @@ BatInfo::parseSysfsTP() {
     }
     else {
         acConnected = false;
+    }
+    if( oldAcCon != acConnected ) {
+       emit onlineModeChanged( acConnected );
     }
 
     // critical Fuel can not be set via tp_smapi, so we try to read /proc/acpi for that

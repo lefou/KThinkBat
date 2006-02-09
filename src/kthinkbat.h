@@ -116,7 +116,6 @@ public:
      **/
     virtual void help();
 
-
 public slots:
     void timeout();
 

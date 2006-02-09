@@ -19,19 +19,21 @@
  ***************************************************************************/
 
 #ifndef KTHINKBAT_BATINFO_H
-#define LTHINKBAT_BATINFO_H
+#define KTHINKBAT_BATINFO_H
 
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
 
+#include <qobject.h>
 #include <qstring.h>
 
 /**
     @author Tobias Roeser <le.petit.fou@web.de>
 */
-class BatInfo {
-    
+class BatInfo : public QObject {
+    Q_OBJECT
+
 public:
     /** Constructor.
 
@@ -66,6 +68,9 @@ public:
 
     /// Get battery info form tp_smapi sysfs interface.
     bool parseSysfsTP();
+
+signals:
+    void onlineModeChanged( bool batOnline );
 
 protected:
     void resetValues();

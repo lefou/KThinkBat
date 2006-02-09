@@ -10,3 +10,9 @@ https://lepetitfou.dyndns.org/KThinkBat
 - make backend selectable: tp_smapi or ACPI
 - add APM option for older Laptops. Still needed?
 - Option to enable/disapble: ACPI/TP_SMAPI/APM
+- rework drawing alg for gauge dot
+- Support for display setting (brightness, power off)
+- dcop interface for settings
+- support for hibernate/suspend, laptop-mode, laptop-mode-daemon
+- support hdaps harddrive status/settings
+- ToolTop with remaining time etc.

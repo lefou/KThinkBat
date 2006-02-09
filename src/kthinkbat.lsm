@@ -1,6 +1,6 @@
 Begin3
 Title:          KThinkBat -- Some description
-Version:        0.1.3
+Version:        0.1.5
 Entered-date:   
 Description:    
 Keywords:       KDE Qt
@@ -8,9 +8,9 @@ Author:         Tobias Roeser <le.petit.fou@web.de>
 Maintained-by:  Tobias Roeser <le.petit.fou@web.de>
 Home-page:      
 Alternate-site: 
-Primary-site:   ftp://ftp.kde.org/pub/kde/unstable/apps/utils
-                xxxxxx  kthinkbat-0.1.tar.gz
-                xxx     kthinkbat-0.1.lsm
+Primary-site:   https://lepetifou.dyndns.org/kthinkabt
+                xxxxxx  kthinkbat-0.1.5.tar.bz2
+                xxx     kthinkbat-0.1.5.lsm
 Platform:       Linux. Needs KDE
 Copying-policy: GPL
 End

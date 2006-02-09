@@ -33,6 +33,9 @@
 #include <kconfigdialog.h>
 #include <kiconloader.h>
 
+// other libs 
+#include <assert.h>
+
 // KThinkkBat
 #include "kthinkbat.h"
 #include "prefs.h"
@@ -49,8 +52,8 @@ KThinkBat::KThinkBat(const QString& configFile, Type type, int actions, QWidget 
 // , config( NULL )
 , padding( QSize( 5, 2 ) )
 , timer(NULL)
-, batInfo1( BatInfo( 1 ) )
-, batInfo2( BatInfo( 2 ) )
+, batInfo1( 1 )
+, batInfo2( 2 )
 , powerPosID( 0 ) {
 
     KThinkBatConfig::instance( configFile );
@@ -120,8 +123,6 @@ KThinkBat::slotAbout() {
                           "", 
                           "https://lepetitfou.dyndns.org/KThinkBat",
                           "le.petit.fou@web.de" );
-
-    aboutData.setTranslator( I18N_NOOP("_: NAME OF TRANSLATORS\\nYour names"), I18N_NOOP("_: EMAIL OF TRANSLATORS\\nYour emails") );
 
     aboutData.addAuthor( "Tobias Roeser", "", "le.petitfou@web.de",
                          "https://lepetitfou.dyndns.org/KThinkBat" );
