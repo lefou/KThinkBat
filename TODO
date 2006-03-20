@@ -1,15 +1,20 @@
-   * ASUS/ACER: calculate W from the values provided by ACPI
-   * show remaining time 
-   * integrate ibam battery monitoring fassility, for (better) time computation
+User Interface / Usability:
    * KThinkBat needs at least one icon, svg prefered. Artists arround?
-   * Config-Dialog: ACPI proc path, action on click 
-   * there should be a symbol such as power plug next to it when connected to AC
+   * ToolTip with remaining time and detailed battery info
+
+Changes, Cleanups, Bugfixes:
    * make backend selectable: tp_smapi or ACPI
-   * add APM option for older Laptops. Still needed?
    * Option to enable/disapble: ACPI/TP_SMAPI/APM
    * rework drawing alg for gauge dot
-   * Support for display setting (brightness, power off)
+
+Features Enhancements:
+   * show remaining time 
+   * calculate Watt values from the Ampere based values provieded by ACER/ASUS-ACPI
+   * integrate ibam battery monitoring fassility, for (better) time computation and a nice graph
+   * Config-Dialog: ACPI proc path, action on click 
+   * there should be a symbol such as power plug next to it when connected to AC
+   * add APM option for older Laptops. Still needed?
    * dcop interface for settings
+   * Support for display setting at least on ThinkPads (brightness, power off)
    * support for hibernate/suspend, laptop-mode, laptop-mode-daemon
-   * support hdaps harddrive status/settings
-   * ToolTop with remaining time etc.
+   * support hdaps harddrive status/settings (for ThinkPads/PowerBooks)
