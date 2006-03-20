@@ -1,18 +1,15 @@
-Please see at 
-https://lepetitfou.dyndns.org/KThinkBat
-
-- ASUS/ACER: calculate W from the values provided by ACPI
-- show remaining time 
-- integrate ibam battery monitoring fassility, for (better) time computation
-- KThinkBat needs at least one icon, svg prefered. Artists arround?
-- Config-Dialog: ACPI proc path, action on click 
-- there should be a symbol such as power plug next to it when connected to AC
-- make backend selectable: tp_smapi or ACPI
-- add APM option for older Laptops. Still needed?
-- Option to enable/disapble: ACPI/TP_SMAPI/APM
-- rework drawing alg for gauge dot
-- Support for display setting (brightness, power off)
-- dcop interface for settings
-- support for hibernate/suspend, laptop-mode, laptop-mode-daemon
-- support hdaps harddrive status/settings
-- ToolTop with remaining time etc.
+   * ASUS/ACER: calculate W from the values provided by ACPI
+   * show remaining time 
+   * integrate ibam battery monitoring fassility, for (better) time computation
+   * KThinkBat needs at least one icon, svg prefered. Artists arround?
+   * Config-Dialog: ACPI proc path, action on click 
+   * there should be a symbol such as power plug next to it when connected to AC
+   * make backend selectable: tp_smapi or ACPI
+   * add APM option for older Laptops. Still needed?
+   * Option to enable/disapble: ACPI/TP_SMAPI/APM
+   * rework drawing alg for gauge dot
+   * Support for display setting (brightness, power off)
+   * dcop interface for settings
+   * support for hibernate/suspend, laptop-mode, laptop-mode-daemon
+   * support hdaps harddrive status/settings
+   * ToolTop with remaining time etc.
