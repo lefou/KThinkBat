@@ -43,5 +43,5 @@ KThinkBat 0.1.4 - 20 Nov 2005:
    * Support for ASUS Laptops wich report values in mAh instead of 
      mWh in /proc/acpi/battery/BAT0 which fixes Bug #KTB001
 
-KThinkBat 0.1.3:
+KThinkBat 0.1.3 - 09 Nov 2005:
    * Inital release after 3 month of personal using
