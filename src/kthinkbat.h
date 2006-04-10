@@ -17,10 +17,8 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
-
-
-#ifndef KTHINKBAT_H
-#define KTHINKBAT_H
+#ifndef KTHINKBAT_KTHINKBAT_H
+#define KTHINKBAT_KTHINKBAT_H
 
 #ifdef HAVE_CONFIG_H
 #include <config.h>
@@ -42,8 +40,10 @@
 #include "batinfo.h"
 #include "batgauge.h"
 #include "kthinkbatconfig.h"
+#include "battooltip.h"
 
 class KThinkBatConfig;
+class BatToolTip;
 
 /**
     @author Tobias Roeser <le.petit.fou@web.de>
@@ -119,11 +119,12 @@ public:
 public slots:
     void timeout();
 
-//     void slotPowerMeterPosition();
-//     void slotPowerMeterColor();
     void slotPreferences();
-//     void slotTwoBatteries();
+
     void slotUpdateConfiguration();
+
+    /// Popup a pasive Message about the current batteries
+    void slotToolTip();
 
     /**
      * Is called when the user selects "About" from the menu.
@@ -134,6 +135,8 @@ protected:
     void resizeEvent(QResizeEvent *);
     void paintEvent(QPaintEvent* event);
     void mousePressEvent(QMouseEvent* e);
+    void enterEvent(QEvent* e);
+    void leaveEvent(QEvent* e);
 
 private:
 //     KConfig *ksConfig;
@@ -161,6 +164,9 @@ private:
     int powerPosID;
 
     KPopupMenu* contextMenu;
+    QTimer* toolTipTimer;
+    BatToolTip* toolTip;
+    QString toolTipText;
 
 };
 

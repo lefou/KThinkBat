@@ -17,35 +17,38 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
-#ifndef KTHINKBAT_BATGAUGE_H
-#define KTHINKBAT_BATGAUGE_H
+#include "battooltip.h"
 
-#include <qpainter.h>
+#include <qvbox.h>
 
-/**
-	@author Tobias Roeser <le.petit.fou@web.de>
-*/
-class BatGauge {
 
-public:
-    BatGauge();
+BatToolTip::BatToolTip( QWidget* parent, const char* name )
+: KPassivePopup( parent, name )
+, text( NULL )
+{
+    setTimeout( 15 * 1000 );
 
-    virtual ~BatGauge();
+    QHBox* hbox = new QHBox( this );
+    hbox->setSpacing( 10 );
 
-    void setPercentValue( int value );
-    void setPercentValueString( int value, QString string );
+    QVBox* vbox = new QVBox( hbox );
+    vbox->setSpacing( 5 );
+    (void) new QLabel( "<qt><strong>KThinkBat</strong></qt>", vbox );
+    text = new QLabel( vbox );
 
-    void setColors( QColor bgColor, QColor fillColor, QColor dotColor );
+    setView( hbox );
+}
 
-    void drawGauge( QPainter& painter, QSize gaugePos, QSize gaugeSize );
 
-private:
-    QColor fillColor;
-    QColor dotColor;
-    QColor bgColor;
+BatToolTip::~BatToolTip()
+{
+    delete text; text = NULL;
+}
 
-    int percentValue;
-    QString percentString;
-};
-
-#endif
+void
+BatToolTip::setText( const QString& text ) {
+    if( this->text ) {
+        this->text->setText( text );
+        layout();
+    }
+}

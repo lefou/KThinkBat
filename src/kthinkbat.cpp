@@ -22,6 +22,8 @@
 #include <qpainter.h>
 #include <qfile.h>
 #include <qtimer.h>
+#include <qvbox.h>
+#include <qlabel.h>
 
 // KDE
 #include <kglobal.h>
@@ -51,10 +53,14 @@ KThinkBat::KThinkBat(const QString& configFile, Type type, int actions, QWidget 
 : KPanelApplet(configFile, type, actions, parent, name)
 // , config( NULL )
 , padding( QSize( 5, 2 ) )
-, timer(NULL)
+, timer( NULL )
 , batInfo1( 1 )
 , batInfo2( 2 )
-, powerPosID( 0 ) {
+, powerPosID( 0 )
+, contextMenu( NULL )
+, toolTipTimer( NULL )
+, toolTip( NULL ) 
+, toolTipText("") {
 
     KThinkBatConfig::instance( configFile );
 
@@ -74,17 +80,29 @@ KThinkBat::KThinkBat(const QString& configFile, Type type, int actions, QWidget 
     assert( timer );
     connect(timer, SIGNAL(timeout()), this, SLOT(timeout()));
     timer->start( KThinkBatConfig::updateIntervalMsek() );
+
+    toolTipTimer = new QTimer(this);
+    assert( toolTipTimer );
+    connect( toolTipTimer, SIGNAL(timeout()), this, SLOT(slotToolTip()));
+
+    toolTip = new BatToolTip( this );
+    assert( toolTip );
 }
 
 KThinkBat::~KThinkBat() {
 
-    timer->stop();
-    delete timer; timer = NULL;
+    if( timer ) {
+        timer->stop();
+        delete timer; 
+    }
+    timer = NULL;
 
     // Save Config values
     KThinkBatConfig::writeConfig();
 
-    delete contextMenu; contextMenu = NULL;
+    if( contextMenu ) delete contextMenu; contextMenu = NULL;
+    if( toolTipTimer ) delete toolTipTimer; toolTipTimer = NULL;
+    if( toolTip ) delete toolTip; toolTip = NULL;
 }
 
 void
@@ -248,6 +266,7 @@ KThinkBat::paintEvent(QPaintEvent* event) {
 
 void 
 KThinkBat::timeout() {
+    toolTipText = "";
 
     float lastFuel = 0;
     float curFuel = 0;
@@ -276,6 +295,12 @@ KThinkBat::timeout() {
             powerUnit1 = batInfo1.getPowerUnit();
         }
     }
+    if( battery1 && batInfo1.isInstalled() ) {
+        toolTipText += i18n("Battery %1: ").arg(1) + QString().number((int) batInfo1.getChargeLevel()) + "%\n";
+    }
+    else {
+        toolTipText += i18n("Battery %1: not installed").arg(1) + "\n";
+    }
 
     // 3. Now try BAT1, first TP SMAPI agian
     // 4. And, if that failed, try ACPi /proc interface for BAT1
@@ -298,6 +323,12 @@ KThinkBat::timeout() {
             powerUnit1 = batInfo2.getPowerUnit();
         }
     }
+    if( battery2 && batInfo2.isInstalled() ) {
+        toolTipText += i18n("Battery %1: ").arg(2) + QString().number((int) batInfo2.getChargeLevel()) + "%\n";
+    }
+    else {
+        toolTipText += i18n("Battery %1: not installed").arg(2) + "\n";
+    }
 
     if( KThinkBatConfig::summarizeBatteries() ) {
 
@@ -309,6 +340,7 @@ KThinkBat::timeout() {
         gauge1.setColors( QColor( KThinkBatConfig::batBackgroundColor() ),
                           QColor( percent <= KThinkBatConfig::criticalFill() ? KThinkBatConfig::batCriticalColor() : KThinkBatConfig::batChargedColor() ),
                           QColor( batOnline ? KThinkBatConfig::batDotOnlineColor() : KThinkBatConfig::batBackgroundColor() ) );
+
     }
     // force a repaint of the Applet
     update();
@@ -323,4 +355,31 @@ KThinkBat::mousePressEvent(QMouseEvent* e) {
 
     assert(contextMenu);
     contextMenu->exec( e->globalPos() );
+}
+
+void
+KThinkBat::enterEvent( QEvent* e) {
+    if( toolTipTimer && toolTip && ! toolTip->isShown() ) {
+        // FIXME read the system time preferences for ToolTip times
+        // in msek
+        toolTipTimer->start( 500 );
+    }
+}
+
+void
+KThinkBat::leaveEvent( QEvent* e) {
+    if( toolTipTimer ) {
+        toolTipTimer->stop();
+    }
+    if( toolTip ) {
+        toolTip->hide();
+    }
+}
+
+void
+KThinkBat::slotToolTip() {
+    if( toolTip ) {
+        toolTip->setText( toolTipText );
+        toolTip->show();
+    }
 }

@@ -17,35 +17,29 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
-#ifndef KTHINKBAT_BATGAUGE_H
-#define KTHINKBAT_BATGAUGE_H
+#ifndef KTHINKBAT_BATTOOLTIP_H
+#define KTHINKBAT_BATTOOLTIP_H
 
-#include <qpainter.h>
+#include <kpassivepopup.h>
+#include <qlabel.h>
 
 /**
 	@author Tobias Roeser <le.petit.fou@web.de>
 */
-class BatGauge {
+class BatToolTip : public KPassivePopup {
+  Q_OBJECT
 
 public:
-    BatGauge();
+    BatToolTip( QWidget* parent = 0, const char* name = 0 );
+    ~BatToolTip();
 
-    virtual ~BatGauge();
-
-    void setPercentValue( int value );
-    void setPercentValueString( int value, QString string );
-
-    void setColors( QColor bgColor, QColor fillColor, QColor dotColor );
-
-    void drawGauge( QPainter& painter, QSize gaugePos, QSize gaugeSize );
+public slots:
+    /** Sets the tooltip to @param text */
+    void setText( const QString &text);
 
 private:
-    QColor fillColor;
-    QColor dotColor;
-    QColor bgColor;
+    QLabel* text;
 
-    int percentValue;
-    QString percentString;
 };
 
 #endif

@@ -47,7 +47,7 @@ msgstr "KThinkBat Einstellungen"
 
 #: kthinkbat.cpp:117
 msgid "A KDE panel applet to display the current laptop battery status."
-msgstr ""
+msgstr "Ein KDE Panel Applet zur Anzeige des aktuellen Akku-Zusandes eines Laptops."
 
 #: kthinkbat.cpp:134
 msgid ""
