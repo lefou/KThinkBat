@@ -14,3 +14,4 @@
    * Support for display setting at least on ThinkPads (brightness, power off)
    * support for hibernate/suspend, laptop-mode, laptop-mode-daemon
    * support hdaps harddrive status/settings (for ThinkPads/PowerBooks)
+   * remove more redundant code
