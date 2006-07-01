@@ -296,7 +296,8 @@ KThinkBat::timeout() {
         }
     }
     if( battery1 && batInfo1.isInstalled() ) {
-        toolTipText += i18n("Battery %1: ").arg(1) + QString().number((int) batInfo1.getChargeLevel()) + "%\n";
+        toolTipText += "<b>" + i18n("Battery %1: ").arg(1) + "</b>" + QString().number((int) batInfo1.getChargeLevel()) + "%\n";
+        
     }
     else {
         toolTipText += i18n("Battery %1: not installed").arg(1) + "\n";
@@ -344,6 +345,9 @@ KThinkBat::timeout() {
     }
     // force a repaint of the Applet
     update();
+    if( toolTip && toolTip->isShown() ) {
+        toolTip->setText( toolTipText );
+    }
 }
 
 void 

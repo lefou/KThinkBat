@@ -46,9 +46,13 @@ public:
     */
     float getChargeLevel();
 
+    /** Get the last fuel state of the battery. */
     float getLastFuel() { return lastFuel; }
+    /** Get the max. design capacity of the battery. */
     float getDesignFuel() { return designFuel; }
+    /** Get the critcal fuel of the battery. */
     float getCriticalFuel() { return criticalFuel; }
+    /** Get the current capacity of the battery. */
     float getCurFuel() { return curFuel; }
 
     float getPowerConsumption() { return curPower; }
@@ -57,8 +61,11 @@ public:
 
     void invalidateAll();
 
+    /** Returns @true if the battery is installed. */
     bool isInstalled() { return batInstalled; }
+    /** Returns @true if the Laptop is online, means AC connected. */
     bool isOnline() { return acConnected; }
+    /** Get the current battery state. */
     QString getState() { return batState; }
 
     /// Get battery info from /proc/acpi interface.
