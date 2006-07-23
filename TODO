@@ -1,6 +1,5 @@
-   * KThinkBat needs at least one icon, svg prefered. Artists arround?
    * ToolTip with remaining time and detailed battery info
-   * Option to draw the battery symbol upright
+   * Option to draw the battery symbol upright (this needs some refactoring to make the Gauge a real control)
    * make backend selectable: tp_smapi or ACPI
    * Option to enable/disapble: ACPI/TP_SMAPI/APM
    * rework drawing alg for gauge dot
@@ -15,3 +14,4 @@
    * support for hibernate/suspend, laptop-mode, laptop-mode-daemon
    * support hdaps harddrive status/settings (for ThinkPads/PowerBooks)
    * remove more redundant code
+   * display cup speed

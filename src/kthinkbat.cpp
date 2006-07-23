@@ -295,12 +295,12 @@ KThinkBat::timeout() {
             powerUnit1 = batInfo1.getPowerUnit();
         }
     }
+    toolTipText += "<b>" + i18n("Battery %1: ").arg(1) + "</b>";
     if( battery1 && batInfo1.isInstalled() ) {
-        toolTipText += "<b>" + i18n("Battery %1: ").arg(1) + "</b>" + QString().number((int) batInfo1.getChargeLevel()) + "%\n";
-        
+        toolTipText += QString().number((int) batInfo1.getChargeLevel()) + "%\n";
     }
     else {
-        toolTipText += i18n("Battery %1: not installed").arg(1) + "\n";
+        toolTipText += i18n("not installed") + "\n";
     }
 
     // 3. Now try BAT1, first TP SMAPI agian
@@ -324,11 +324,12 @@ KThinkBat::timeout() {
             powerUnit1 = batInfo2.getPowerUnit();
         }
     }
+    toolTipText += "<b>" + i18n("Battery %1: ").arg(2) + "</b>";
     if( battery2 && batInfo2.isInstalled() ) {
-        toolTipText += i18n("Battery %1: ").arg(2) + QString().number((int) batInfo2.getChargeLevel()) + "%\n";
+        toolTipText += QString().number((int) batInfo2.getChargeLevel()) + "%\n";
     }
     else {
-        toolTipText += i18n("Battery %1: not installed").arg(2) + "\n";
+        toolTipText += i18n("not installed") + "\n";
     }
 
     if( KThinkBatConfig::summarizeBatteries() ) {

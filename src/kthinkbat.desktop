@@ -3,5 +3,6 @@ Encoding=UTF-8
 Comment=Display the current laptop battery status
 Comment[de]=Zeigt den aktuellen Battery-Satus des Laptops an
 Name=KThinkBat
+Icon=kthinkbat
 X-KDE-Library=kthinkbat_panelapplet
 X-KDE-UniqueApplet = true

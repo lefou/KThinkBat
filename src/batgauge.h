@@ -32,9 +32,17 @@ public:
 
     virtual ~BatGauge();
 
+    /** Set the percentage value (between 0 and 100) to be shown. To display the value together with an unit use setPercentageValueString(). */
     void setPercentValue( int value );
+
+    /** Sets the percentage value (between 0 and 100) and the string to be shown into the gauge. This way, you can override the value or can display string completely different than the value. If you just want set and display the value, you can use the setPercentageValue(). */
     void setPercentValueString( int value, QString string );
 
+    /** Sets the color of the battery gauge.
+    @param bgColor Background color
+    @param fillColor Color used for the filled area (area depends on the percentageValue)
+    @param dotColor Color of the Dot (battery pin)
+    */
     void setColors( QColor bgColor, QColor fillColor, QColor dotColor );
 
     void drawGauge( QPainter& painter, QSize gaugePos, QSize gaugeSize );
@@ -44,7 +52,12 @@ private:
     QColor dotColor;
     QColor bgColor;
 
+    /** gauge will be rotated @c rotator degre couterclockwise. */
+    double rotator;
+
+    /** the percent value, used to determine the filled area of the battery gauge. */
     int percentValue;
+    /** the string displayed inside the battery gauge (default to the percentage value itself). */
     QString percentString;
 };
 

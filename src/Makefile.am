@@ -1,3 +1,4 @@
+SUBDIRS = icons
 INCLUDES= $(all_includes)
 METASOURCES = AUTO
 

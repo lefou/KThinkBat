@@ -21,25 +21,22 @@
 #include "kthinkbatconfig.h"
 
 BatGauge::BatGauge()
-    : fillColor( "green" )
-    , dotColor( "gray" )
-    , bgColor( "gray" )
-    , percentValue( 0 )
-    , percentString( "" )
-{
-}
+: fillColor( "green" )
+, dotColor( "gray" )
+, bgColor( "gray" )
+, rotator( 0 )
+, percentValue( 0 )
+, percentString( "" ) {}
 
-BatGauge::~BatGauge()
-{
-}
+BatGauge::~BatGauge() {}
 
-void 
+void
 BatGauge::setPercentValue( int value ) {
     percentValue = value;
     percentString = ( value >= 0) ? QString().number( value ) : "?" ;
 }
 
-void 
+void
 BatGauge::setPercentValueString( int value, QString string ) {
     percentValue = value;
     percentString = string;
@@ -55,6 +52,9 @@ BatGauge::setColors( QColor bgColor, QColor fillColor, QColor dotColor ) {
 void
 BatGauge::drawGauge( QPainter& painter, QSize gaugePos, QSize gaugeSize ) {
 
+    painter.save();
+    painter.rotate( rotator );
+
     // Values for Gauge and Border
     QSize offset( gaugePos.width() + 1, gaugePos.height() + 1 );
     // size of the dot
@@ -63,22 +63,22 @@ BatGauge::drawGauge( QPainter& painter, QSize gaugePos, QSize gaugeSize ) {
     QSize gaugeFill(gaugeSize.width() - gHalfDot.width() - 2, gaugeSize.height() - 2 );
 
     // Rahmen
-    QPointArray border(9);
+    QPointArray border( 9 );
     border.putPoints( 0, 9
-        , 0, 0
-        , gaugeFill.width() + 2, 0
-        , gaugeFill.width() + 2, (gaugeFill.height() / 2) - gHalfDot.height()
-        , gaugeFill.width() + 2 + gHalfDot.width(), (gaugeFill.height() / 2) - gHalfDot.height()
-        , gaugeFill.width() + 2 + gHalfDot.width(), (gaugeFill.height() / 2) + gHalfDot.height()
-        , gaugeFill.width() + 2, (gaugeFill.height() / 2) + gHalfDot.height()
-        , gaugeFill.width() + 2, gaugeFill.height()
-        , 0 , gaugeFill.height()
-        , 0 , 0);
-    border.translate(offset.width() - 1, offset.height() - 1);
+                      , 0, 0
+                      , gaugeFill.width() + 2, 0
+                      , gaugeFill.width() + 2, (gaugeFill.height() / 2) - gHalfDot.height()
+                      , gaugeFill.width() + 2 + gHalfDot.width(), (gaugeFill.height() / 2) - gHalfDot.height()
+                      , gaugeFill.width() + 2 + gHalfDot.width(), (gaugeFill.height() / 2) + gHalfDot.height()
+                      , gaugeFill.width() + 2, (gaugeFill.height() / 2) + gHalfDot.height()
+                      , gaugeFill.width() + 2, gaugeFill.height()
+                      , 0 , gaugeFill.height()
+                      , 0 , 0);
+    border.translate( offset.width() - 1, offset.height() - 1 );
 
     //-------------------------------------------------------------------------
     // Paint Gauge
-    painter.fillRect(offset.width(), offset.height(), gaugeFill.width() + 2, gaugeFill.height(), bgColor );
+    painter.fillRect( offset.width(), offset.height(), gaugeFill.width() + 2, gaugeFill.height(), bgColor );
 
     int xFill = ( percentValue > 0 ? percentValue * gaugeFill.width() / 100 : 0);
     painter.fillRect(offset.width(), offset.height(), xFill, gaugeFill.height(), fillColor );
@@ -86,15 +86,17 @@ BatGauge::drawGauge( QPainter& painter, QSize gaugePos, QSize gaugeSize ) {
     painter.fillRect( offset.width() + gaugeFill.width() + 2, offset.height() + (gaugeFill.height() / 2) - gHalfDot.height(), gHalfDot.width(), gHalfDot.height() * 2, dotColor );
 
     // Paint Border
-    painter.drawPolyline(border);
+    painter.drawPolyline( border );
 
     // Calculate, haw much space is needed by the Text string
     QRect reqTextSize = painter.boundingRect( 1,1,1,1, Qt::AlignHCenter | Qt::AlignVCenter, percentString );
 
     // Draw text
     painter.drawText( offset.width() + ( (gaugeFill.width() - reqTextSize.width()) / 2 )
-                    , offset.height() + ( (gaugeFill.height() - reqTextSize.height()) / 2 )
-                    , reqTextSize.width(), reqTextSize.height()
-                    , Qt::AlignTop | Qt::AlignLeft
-                    , percentString );
+                      , offset.height() + ( (gaugeFill.height() - reqTextSize.height()) / 2 )
+                      , reqTextSize.width(), reqTextSize.height()
+                      , Qt::AlignTop | Qt::AlignLeft
+                      , percentString );
+
+    painter.restore();
 }

@@ -1,6 +1,7 @@
-KThinkBat HEAD:
-   * ToolTip with detailed battery information
+KThinkBat 0.16 - 23 Jul 2006:
+   * ToolTip with (later more detailed) battery information
    * more code documentation
+   * added icons provided by Luis Guillermo Sobalvarro <lgsobalvarro@e-genieria.com>, many thanks
 
 KThinkBat 0.1.5 - 03 Feb 2006:
    * A right click gives now a Context Menu
