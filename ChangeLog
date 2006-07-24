@@ -1,9 +1,9 @@
-KThinkBat HEAD:
+KThinkBat 0.1.7 - 24 Jul 2006:
    * typo in About box
    * added spanish traslation provided by Luis Guillermo Soblavarro
    * added some more info to the ToolTip
 
-KThinkBat 0.16 - 23 Jul 2006:
+KThinkBat 0.1.6 - 23 Jul 2006:
    * ToolTip with (later more detailed) battery information
    * more code documentation
    * added icons provided by Luis Guillermo Sobalvarro <lgsobalvarro@e-genieria.com>, many thanks
