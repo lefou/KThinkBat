@@ -1,5 +1,12 @@
-rm -r make-release
+#!/bin/bash
+
+if [ -d make-release ] ; then
+	echo "make-release directory already exists, aborting..."
+	exit 1
+fi
+
 svn export . make-release
+rm make-release/make-release.sh
 make -f Makefile.cvs -C make-release
 ( cd make-release && ./configure )
 make -C make-release dist-bzip2
