@@ -142,7 +142,7 @@ KThinkBat::slotAbout() {
                           "https://lepetitfou.dyndns.org/KThinkBat",
                           "le.petit.fou@web.de" );
 
-    aboutData.addAuthor( "Tobias Roeser", "", "le.petitfou@web.de",
+    aboutData.addAuthor( "Tobias Roeser", "", "le.petit.fou@web.de",
                          "https://lepetitfou.dyndns.org/KThinkBat" );
 
     KAboutApplication about( &aboutData, this, NULL, 0 );
@@ -295,13 +295,22 @@ KThinkBat::timeout() {
             powerUnit1 = batInfo1.getPowerUnit();
         }
     }
-    toolTipText += "<b>" + i18n("Battery %1: ").arg(1) + "</b>";
-    if( battery1 && batInfo1.isInstalled() ) {
-        toolTipText += QString().number((int) batInfo1.getChargeLevel()) + "%\n";
-    }
-    else {
-        toolTipText += i18n("not installed") + "\n";
-    }
+
+#define TOOL_TIP_BATTERY( bat ) \
+    toolTipText += "<b>" + i18n("Battery %1: ").arg( bat ) + "</b>"; \
+    if( battery##bat && batInfo##bat.isInstalled() ) { \
+        toolTipText += QString().number((int) batInfo##bat.getChargeLevel()) + "%<br>"; \
+        toolTipText += i18n("Current Fuel: ") + QString().number((float) batInfo##bat.getCurFuel()) + " m" + batInfo##bat.getPowerUnit() + "h" + "<br>"; \
+        toolTipText += i18n("Crit Fuel: ") + QString().number((float) batInfo##bat.getCriticalFuel()) + " m" + batInfo##bat.getPowerUnit() + "h" + "<br>"; \
+        toolTipText += i18n("Last Fuel: ") + QString().number((float) batInfo##bat.getLastFuel()) + " m" + batInfo##bat.getPowerUnit() + "h" + "<br>"; \
+        toolTipText += i18n("Design Fuel: ") + QString().number((float) batInfo##bat.getDesignFuel()) + " m" + batInfo##bat.getPowerUnit() + "h" + "<br>"; \
+    } \
+    else { \
+        toolTipText += i18n("not installed") + "\n"; \
+    } 
+
+    // Fill the ToolTip for the first battery
+    TOOL_TIP_BATTERY( 1 );
 
     // 3. Now try BAT1, first TP SMAPI agian
     // 4. And, if that failed, try ACPi /proc interface for BAT1
@@ -324,13 +333,10 @@ KThinkBat::timeout() {
             powerUnit1 = batInfo2.getPowerUnit();
         }
     }
-    toolTipText += "<b>" + i18n("Battery %1: ").arg(2) + "</b>";
-    if( battery2 && batInfo2.isInstalled() ) {
-        toolTipText += QString().number((int) batInfo2.getChargeLevel()) + "%\n";
-    }
-    else {
-        toolTipText += i18n("not installed") + "\n";
-    }
+
+    // Fill the ToolTip for the second battery
+    TOOL_TIP_BATTERY( 2 );
+#undef TOOL_TIP_BATTERY
 
     if( KThinkBatConfig::summarizeBatteries() ) {
 
