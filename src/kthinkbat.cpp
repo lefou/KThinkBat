@@ -56,6 +56,7 @@ KThinkBat::KThinkBat(const QString& configFile, Type type, int actions, QWidget 
 , timer( NULL )
 , batInfo1( 1 )
 , batInfo2( 2 )
+// , batInfo( 2 )
 , powerPosID( 0 )
 , contextMenu( NULL )
 , toolTipTimer( NULL )
@@ -146,7 +147,7 @@ KThinkBat::slotAbout() {
                          "https://lepetitfou.dyndns.org/KThinkBat" );
 
     KAboutApplication about( &aboutData, this, NULL, 0 );
-//     about.setIcon( KGlobal::instance()->iconLoader()->iconPath( "kthinkbat", -KIcon::SizeLarge ) );
+    about.setIcon( KGlobal::instance()->iconLoader()->iconPath( "kthinkbat", -KIcon::SizeLarge ) );
     about.exec();
 }
 
@@ -263,11 +264,8 @@ KThinkBat::paintEvent(QPaintEvent* event) {
     neededSize = realNeededSpace;
 }
 
-
 void 
 KThinkBat::timeout() {
-    toolTipText = "";
-
     float lastFuel = 0;
     float curFuel = 0;
 //     float critFuel = 0;
@@ -296,22 +294,6 @@ KThinkBat::timeout() {
         }
     }
 
-#define TOOL_TIP_BATTERY( bat ) \
-    toolTipText += "<b>" + i18n("Battery %1: ").arg( bat ) + "</b>"; \
-    if( battery##bat && batInfo##bat.isInstalled() ) { \
-        toolTipText += QString().number((int) batInfo##bat.getChargeLevel()) + "%<br>"; \
-        toolTipText += i18n("Current Fuel: ") + QString().number((float) batInfo##bat.getCurFuel()) + " m" + batInfo##bat.getPowerUnit() + "h" + "<br>"; \
-        toolTipText += i18n("Crit Fuel: ") + QString().number((float) batInfo##bat.getCriticalFuel()) + " m" + batInfo##bat.getPowerUnit() + "h" + "<br>"; \
-        toolTipText += i18n("Last Fuel: ") + QString().number((float) batInfo##bat.getLastFuel()) + " m" + batInfo##bat.getPowerUnit() + "h" + "<br>"; \
-        toolTipText += i18n("Design Fuel: ") + QString().number((float) batInfo##bat.getDesignFuel()) + " m" + batInfo##bat.getPowerUnit() + "h" + "<br>"; \
-    } \
-    else { \
-        toolTipText += i18n("not installed") + "\n"; \
-    } 
-
-    // Fill the ToolTip for the first battery
-    TOOL_TIP_BATTERY( 1 );
-
     // 3. Now try BAT1, first TP SMAPI agian
     // 4. And, if that failed, try ACPi /proc interface for BAT1
     bool battery2 = batInfo2.parseSysfsTP() || batInfo2.parseProcACPI();
@@ -334,10 +316,6 @@ KThinkBat::timeout() {
         }
     }
 
-    // Fill the ToolTip for the second battery
-    TOOL_TIP_BATTERY( 2 );
-#undef TOOL_TIP_BATTERY
-
     if( KThinkBatConfig::summarizeBatteries() ) {
 
         int percent = -1;
@@ -350,11 +328,43 @@ KThinkBat::timeout() {
                           QColor( batOnline ? KThinkBatConfig::batDotOnlineColor() : KThinkBatConfig::batBackgroundColor() ) );
 
     }
+
     // force a repaint of the Applet
     update();
     if( toolTip && toolTip->isShown() ) {
-        toolTip->setText( toolTipText );
+        toolTip->setText( createToolTipText( battery1, battery2 ) );
     }
+}
+
+QString
+KThinkBat::createToolTipText( bool battery1, bool battery2 ) {
+    toolTipText = "";
+    BatInfo* batInfo;
+    bool battery;
+
+    for( int bat = 1; bat <= 2; ++bat ) {
+
+        if( bat == 1 ) { batInfo = &batInfo1; battery = battery1; }
+        else if( bat == 2 ) { batInfo = &batInfo2; battery = battery2; }
+        else { break; }
+        assert( batInfo );
+
+        toolTipText += "<table cellspacing=\"0\" cellpadding=\"0\">";
+        toolTipText += "<tr><td><b>" + i18n("Battery %1: ").arg( bat ) + "</b></td>";
+
+        if( batInfo && battery && batInfo->isInstalled() ) {
+            toolTipText += "<td>" + QString().number((int) batInfo->getChargeLevel()) + "%</td></tr>";
+            toolTipText += "<tr><td>" + i18n("Current Fuel: ") + "</td><td>" + QString().number((float) batInfo->getCurFuel()) + " m" + batInfo->getPowerUnit() + "h</td></tr>";
+            toolTipText += "<tr><td>" + i18n("Crit Fuel: ") + "</td><td>" + QString().number((float) batInfo->getCriticalFuel()) + " m" + batInfo->getPowerUnit() + "h</td></tr>";
+            toolTipText += "<tr><td>" + i18n("Last Fuel: ") + "</td><td>" + QString().number((float) batInfo->getLastFuel()) + " m" + batInfo->getPowerUnit() + "h</td></tr>";
+            toolTipText += "<tr><td>" + i18n("Design Fuel: ") + "</td><td>" + QString().number((float) batInfo->getDesignFuel()) + " m" + batInfo->getPowerUnit() + "h</td></tr>";
+        }
+        else {
+            toolTipText += "<td>" + i18n("not installed") + "</td></tr>";
+        } 
+        toolTipText += "</table>";
+    }
+    return toolTipText;
 }
 
 void 
@@ -373,6 +383,7 @@ KThinkBat::enterEvent( QEvent* e) {
     if( toolTipTimer && toolTip && ! toolTip->isShown() ) {
         // FIXME read the system time preferences for ToolTip times
         // in msek
+        toolTip->setText( createToolTipText() );
         toolTipTimer->start( 500 );
     }
 }

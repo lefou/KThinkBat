@@ -1,3 +1,8 @@
+KThinkBat 0.1.8 - 28 Jul 2006:
+   * nicer layout in the ToolTip (using HTML)
+   * get rid of a Preprocessor Makro
+   * added Polish translation from Adam Golebiowski <adamg@pld-linux.org>
+
 KThinkBat 0.1.7 - 24 Jul 2006:
    * typo in About box
    * added spanish traslation provided by Luis Guillermo Soblavarro

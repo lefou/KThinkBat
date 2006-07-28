@@ -29,6 +29,7 @@
 #include <qtimer.h>
 #include <qpainter.h>
 #include <qcolor.h>
+#include <qvaluevector.h>
 
 // KDE
 #include <kconfig.h>
@@ -137,6 +138,7 @@ protected:
     void mousePressEvent(QMouseEvent* e);
     void enterEvent(QEvent* e);
     void leaveEvent(QEvent* e);
+    QString createToolTipText( bool battery1 = true, bool battery2 = true );
 
 private:
 //     KConfig *ksConfig;
@@ -148,6 +150,7 @@ private:
     /// The timer, that controls the update of the battery values
     QTimer* timer;
 
+//     BatInfo batInfo[2];
     BatInfo batInfo1;
     BatInfo batInfo2;
 

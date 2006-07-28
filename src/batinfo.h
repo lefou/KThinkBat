@@ -75,6 +75,8 @@ public:
     /// Get battery info form tp_smapi sysfs interface.
     bool parseSysfsTP();
 
+    void setBatNr( int number ) { batNr = number; }
+
 signals:
     void onlineModeChanged( bool batOnline );
 
