@@ -150,7 +150,6 @@ private:
     /// The timer, that controls the update of the battery values
     QTimer* timer;
 
-//     BatInfo batInfo[2];
     BatInfo batInfo1;
     BatInfo batInfo2;
 

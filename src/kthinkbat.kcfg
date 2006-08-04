@@ -23,6 +23,11 @@
             <whatsthis>If selected, the current power consumption (if discarging) and the loading power (while charging) is shown in the "Power Meter".</whatsthis>
             <default>true</default>
         </entry>
+        <entry name="ShowToolTip" type="Bool">
+            <label>Show ToolTip.</label>
+            <whatsthis>If selected, shows a ToolTip after holding the mouse cursor over the Applet.</whatsthis>
+            <default>true</default>
+        </entry>
 
         <entry name="GaugeWidth" type="Int">
             <label>Battery Gauge Width.</label>

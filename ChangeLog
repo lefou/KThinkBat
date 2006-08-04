@@ -1,3 +1,6 @@
+KThinkBat 0.1.9 - 04 Aug 2006:
+   * ToolTip can be disabled in the Preferences Dialog
+
 KThinkBat 0.1.8 - 28 Jul 2006:
    * nicer layout in the ToolTip (using HTML)
    * get rid of a Preprocessor Makro

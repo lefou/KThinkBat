@@ -56,7 +56,6 @@ KThinkBat::KThinkBat(const QString& configFile, Type type, int actions, QWidget 
 , timer( NULL )
 , batInfo1( 1 )
 , batInfo2( 2 )
-// , batInfo( 2 )
 , powerPosID( 0 )
 , contextMenu( NULL )
 , toolTipTimer( NULL )
@@ -85,7 +84,6 @@ KThinkBat::KThinkBat(const QString& configFile, Type type, int actions, QWidget 
     toolTipTimer = new QTimer(this);
     assert( toolTipTimer );
     connect( toolTipTimer, SIGNAL(timeout()), this, SLOT(slotToolTip()));
-
     toolTip = new BatToolTip( this );
     assert( toolTip );
 }
@@ -128,6 +126,7 @@ KThinkBat::slotPreferences() {
 
 void
 KThinkBat::slotUpdateConfiguration() {
+
     timeout();
     update();
 }
@@ -380,7 +379,7 @@ KThinkBat::mousePressEvent(QMouseEvent* e) {
 
 void
 KThinkBat::enterEvent( QEvent* e) {
-    if( toolTipTimer && toolTip && ! toolTip->isShown() ) {
+    if( KThinkBatConfig::showToolTip() && toolTipTimer && toolTip && ! toolTip->isShown() ) {
         // FIXME read the system time preferences for ToolTip times
         // in msek
         toolTip->setText( createToolTipText() );
@@ -400,7 +399,7 @@ KThinkBat::leaveEvent( QEvent* e) {
 
 void
 KThinkBat::slotToolTip() {
-    if( toolTip ) {
+    if( KThinkBatConfig::showToolTip() && toolTip ) {
         toolTip->setText( toolTipText );
         toolTip->show();
     }

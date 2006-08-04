@@ -9,132 +9,17 @@
             <x>0</x>
             <y>0</y>
             <width>412</width>
-            <height>494</height>
+            <height>524</height>
         </rect>
     </property>
     <property name="caption">
         <string>KThinkBat Preferences</string>
     </property>
-    <vbox>
+    <grid>
         <property name="name">
             <cstring>unnamed</cstring>
         </property>
-        <widget class="QGroupBox">
-            <property name="name">
-                <cstring>groupBox3_2</cstring>
-            </property>
-            <property name="title">
-                <string>Battery Settings</string>
-            </property>
-            <grid>
-                <property name="name">
-                    <cstring>unnamed</cstring>
-                </property>
-                <widget class="QLabel" row="3" column="0">
-                    <property name="name">
-                        <cstring>textLabel1</cstring>
-                    </property>
-                    <property name="text">
-                        <string>Battery Critical Fill</string>
-                    </property>
-                </widget>
-                <spacer row="3" column="1" rowspan="1" colspan="2">
-                    <property name="name">
-                        <cstring>spacer13</cstring>
-                    </property>
-                    <property name="orientation">
-                        <enum>Horizontal</enum>
-                    </property>
-                    <property name="sizeType">
-                        <enum>Expanding</enum>
-                    </property>
-                    <property name="sizeHint">
-                        <size>
-                            <width>220</width>
-                            <height>16</height>
-                        </size>
-                    </property>
-                </spacer>
-                <widget class="QSpinBox" row="3" column="3">
-                    <property name="name">
-                        <cstring>kcfg_CriticalFill</cstring>
-                    </property>
-                </widget>
-                <widget class="QLabel" row="4" column="0" rowspan="1" colspan="2">
-                    <property name="name">
-                        <cstring>textLabel2_2</cstring>
-                    </property>
-                    <property name="text">
-                        <string>Battery Update Interval (in milliseconds)</string>
-                    </property>
-                </widget>
-                <spacer row="4" column="2">
-                    <property name="name">
-                        <cstring>spacer14</cstring>
-                    </property>
-                    <property name="orientation">
-                        <enum>Horizontal</enum>
-                    </property>
-                    <property name="sizeType">
-                        <enum>Expanding</enum>
-                    </property>
-                    <property name="sizeHint">
-                        <size>
-                            <width>124</width>
-                            <height>16</height>
-                        </size>
-                    </property>
-                </spacer>
-                <widget class="QSpinBox" row="4" column="3">
-                    <property name="name">
-                        <cstring>kcfg_UpdateIntervalMsek</cstring>
-                    </property>
-                    <property name="maxValue">
-                        <number>100000</number>
-                    </property>
-                    <property name="minValue">
-                        <number>0</number>
-                    </property>
-                    <property name="lineStep">
-                        <number>50</number>
-                    </property>
-                </widget>
-                <widget class="QCheckBox" row="2" column="0" rowspan="1" colspan="4">
-                    <property name="name">
-                        <cstring>kcfg_PowerMeterBelowGauge</cstring>
-                    </property>
-                    <property name="text">
-                        <string>Po&amp;wer Meter Position below of Battery Gauge</string>
-                    </property>
-                    <property name="accel">
-                        <string>Alt+W</string>
-                    </property>
-                </widget>
-                <widget class="QCheckBox" row="0" column="0" rowspan="1" colspan="2">
-                    <property name="name">
-                        <cstring>kcfg_SummarizeBatteries</cstring>
-                    </property>
-                    <property name="text">
-                        <string>Summari&amp;ze all Batteries</string>
-                    </property>
-                    <property name="accel">
-                        <string>Alt+Z</string>
-                    </property>
-                </widget>
-                <widget class="QCheckBox" row="1" column="0">
-                    <property name="name">
-                        <cstring>kcfg_ShowPowerMeter</cstring>
-                    </property>
-                    <property name="text">
-                        <string>Show Power Meter</string>
-                    </property>
-                    <property name="accel">
-                        <string></string>
-                    </property>
-                </widget>
-            </grid>
-        </widget>
-        <widget class="QGroupBox">
+        <widget class="QGroupBox" row="1" column="0">
             <property name="name">
                 <cstring>groupBox3</cstring>
             </property>
@@ -314,7 +199,7 @@
                 </widget>
             </grid>
         </widget>
-        <widget class="QGroupBox">
+        <widget class="QGroupBox" row="2" column="0">
             <property name="name">
                 <cstring>groupBox2</cstring>
             </property>
@@ -450,7 +335,7 @@
                 </widget>
             </grid>
         </widget>
-        <widget class="QGroupBox">
+        <widget class="QGroupBox" row="3" column="0">
             <property name="name">
                 <cstring>groupBox4</cstring>
             </property>
@@ -523,7 +408,7 @@
                 </spacer>
             </grid>
         </widget>
-        <spacer>
+        <spacer row="4" column="0">
             <property name="name">
                 <cstring>spacer6</cstring>
             </property>
@@ -536,11 +421,145 @@
             <property name="sizeHint">
                 <size>
                     <width>20</width>
-                    <height>20</height>
+                    <height>16</height>
                 </size>
             </property>
         </spacer>
-    </vbox>
+        <widget class="QLabel" row="0" column="0">
+            <property name="name">
+                <cstring>textLabel5_3</cstring>
+            </property>
+            <property name="text">
+                <string>textLabel5</string>
+            </property>
+        </widget>
+        <widget class="QGroupBox" row="0" column="0">
+            <property name="name">
+                <cstring>groupBox3_2</cstring>
+            </property>
+            <property name="title">
+                <string>Battery Settings</string>
+            </property>
+            <grid>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <widget class="QCheckBox" row="0" column="0" rowspan="1" colspan="2">
+                    <property name="name">
+                        <cstring>kcfg_SummarizeBatteries</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Summari&amp;ze all Batteries</string>
+                    </property>
+                    <property name="accel">
+                        <string>Alt+Z</string>
+                    </property>
+                </widget>
+                <widget class="QCheckBox" row="1" column="0">
+                    <property name="name">
+                        <cstring>kcfg_ShowPowerMeter</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Show Power Meter</string>
+                    </property>
+                    <property name="accel">
+                        <string></string>
+                    </property>
+                </widget>
+                <widget class="QCheckBox" row="2" column="0" rowspan="1" colspan="4">
+                    <property name="name">
+                        <cstring>kcfg_PowerMeterBelowGauge</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Po&amp;wer Meter Position below of Battery Gauge</string>
+                    </property>
+                    <property name="accel">
+                        <string>Alt+W</string>
+                    </property>
+                </widget>
+                <widget class="QLabel" row="3" column="0">
+                    <property name="name">
+                        <cstring>textLabel1</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Battery Critical Fill</string>
+                    </property>
+                </widget>
+                <widget class="QSpinBox" row="3" column="3">
+                    <property name="name">
+                        <cstring>kcfg_CriticalFill</cstring>
+                    </property>
+                </widget>
+                <spacer row="3" column="1" rowspan="1" colspan="2">
+                    <property name="name">
+                        <cstring>spacer13</cstring>
+                    </property>
+                    <property name="orientation">
+                        <enum>Horizontal</enum>
+                    </property>
+                    <property name="sizeType">
+                        <enum>Expanding</enum>
+                    </property>
+                    <property name="sizeHint">
+                        <size>
+                            <width>220</width>
+                            <height>16</height>
+                        </size>
+                    </property>
+                </spacer>
+                <widget class="QSpinBox" row="4" column="3">
+                    <property name="name">
+                        <cstring>kcfg_UpdateIntervalMsek</cstring>
+                    </property>
+                    <property name="maxValue">
+                        <number>100000</number>
+                    </property>
+                    <property name="minValue">
+                        <number>0</number>
+                    </property>
+                    <property name="lineStep">
+                        <number>50</number>
+                    </property>
+                </widget>
+                <widget class="QCheckBox" row="5" column="0">
+                    <property name="name">
+                        <cstring>kcfg_ShowToolTip</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Show &amp;ToolTip</string>
+                    </property>
+                    <property name="accel">
+                        <string>Alt+T</string>
+                    </property>
+                </widget>
+                <spacer row="4" column="2">
+                    <property name="name">
+                        <cstring>spacer14</cstring>
+                    </property>
+                    <property name="orientation">
+                        <enum>Horizontal</enum>
+                    </property>
+                    <property name="sizeType">
+                        <enum>Expanding</enum>
+                    </property>
+                    <property name="sizeHint">
+                        <size>
+                            <width>124</width>
+                            <height>16</height>
+                        </size>
+                    </property>
+                </spacer>
+                <widget class="QLabel" row="4" column="0" rowspan="1" colspan="2">
+                    <property name="name">
+                        <cstring>textLabel2_2</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Battery Update Interval (in milliseconds)</string>
+                    </property>
+                </widget>
+            </grid>
+        </widget>
+    </grid>
 </widget>
 <layoutdefaults spacing="6" margin="11"/>
 <includehints>
