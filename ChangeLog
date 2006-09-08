@@ -1,3 +1,7 @@
+KThinkBar 0.2.0 - HEAD:
+   * Support new tp_smapi versions (greater than 0.26) which ommit the 
+     'mWh' part of the power values to stay sysfs compliant
+
 KThinkBat 0.1.9 - 04 Aug 2006:
    * ToolTip can be disabled in the Preferences Dialog
 

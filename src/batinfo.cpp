@@ -211,8 +211,8 @@ BatInfo::parseSysfsTP() {
     QFile file;
     QTextStream stream;
     QString line;
-    QRegExp mWh( "^([-]?\\d{1,6})\\s*mWh\\s*$" );
-    QRegExp mW( "^([-]?\\d{1,6})\\s*mW\\s*$" );
+    QRegExp mWh( "^([-]?\\d{1,6})(\\s*mWh)?\\s*$" );
+    QRegExp mW( "^([-]?\\d{1,6})(\\s*mW)?\\s*$" );
     bool check;
     
     if( ! QDir().exists( "/sys/devices/platform/smapi" ) ) {
