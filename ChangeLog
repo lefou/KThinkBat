@@ -1,4 +1,4 @@
-KThinkBar 0.2.0 - HEAD:
+KThinkBar 0.2.0 - 08 Sep 2006:
    * Support new tp_smapi versions (greater than 0.26) which ommit the 
      'mWh' part of the power values to stay sysfs compliant
 
