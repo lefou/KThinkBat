@@ -214,7 +214,7 @@ BatInfo::parseSysfsTP() {
     QRegExp mWh( "^([-]?\\d{1,6})(\\s*mWh)?\\s*$" );
     QRegExp mW( "^([-]?\\d{1,6})(\\s*mW)?\\s*$" );
     bool check;
-    
+
     if( ! QDir().exists( "/sys/devices/platform/smapi" ) ) {
         static bool sayTheProblem = true;
         if( sayTheProblem ) {
@@ -303,6 +303,8 @@ BatInfo::parseSysfsTP() {
         batState = "";
     }
 
+    batCharging = ( batState == "charging" );
+
     bool oldAcCon = isOnline();
     file.setName( "/sys/devices/platform/smapi/ac_connected" );
     if( file.exists() && file.open(IO_ReadOnly) ) {
@@ -315,6 +317,26 @@ BatInfo::parseSysfsTP() {
     }
     if( oldAcCon != acConnected ) {
        emit onlineModeChanged( acConnected );
+    }
+
+    if( isCharging() ) {
+        file.setName( tpPath + "remaining_charging_time" );
+        if( file.exists() && file.open(IO_ReadOnly) ) {
+            stream.setDevice( &file );
+            remainingTime = stream.readLine().toInt( &check );
+            file.close();
+        }
+    }
+    else if( isInstalled() && ! isOnline() ) {
+        file.setName( tpPath + "remaining_running_time" );
+        if( file.exists() && file.open(IO_ReadOnly) ) {
+            stream.setDevice( &file );
+            remainingTime = stream.readLine().toInt( &check );
+            file.close();
+        }
+    }
+    else {
+        remainingTime = 0;
     }
 
     // critical Fuel can not be set via tp_smapi, so we try to read /proc/acpi for that
@@ -330,7 +352,9 @@ BatInfo::resetValues() {
     criticalFuel = 0;
     curFuel = 0;
     curPower = 0;
+    remainingTime = 0;
     batInstalled = false;
+    batCharging = false;
     powerUnit = "W";
     batState = "not installed";
 }

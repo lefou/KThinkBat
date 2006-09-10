@@ -1,4 +1,10 @@
-KThinkBar 0.2.0 - 08 Sep 2006:
+KThinkBat SVN HEAD - 10 Sep 2006:
+   * parse the remaining time if using tp_smapi >= 0.29
+   * display the remaining time in the tooltip
+   * prepared config dialog for remaining time and rearranged the color choosers 
+   * added "is charging" parsing if using tp_smapi
+
+KThinkBat 0.2.0 - 08 Sep 2006:
    * Support new tp_smapi versions (greater than 0.26) which ommit the 
      'mWh' part of the power values to stay sysfs compliant
 

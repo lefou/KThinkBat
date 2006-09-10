@@ -46,25 +46,34 @@ public:
     */
     float getChargeLevel();
 
-    /** Get the last fuel state of the battery. */
-    float getLastFuel() { return lastFuel; }
-    /** Get the max. design capacity of the battery. */
-    float getDesignFuel() { return designFuel; }
     /** Get the critcal fuel of the battery. */
     float getCriticalFuel() { return criticalFuel; }
+
     /** Get the current capacity of the battery. */
     float getCurFuel() { return curFuel; }
+
+    /** Get the max. design capacity of the battery. */
+    float getDesignFuel() { return designFuel; }
+
+    /** Get the last fuel state of the battery. */
+    float getLastFuel() { return lastFuel; }
 
     float getPowerConsumption() { return curPower; }
 
     QString getPowerUnit() { return powerUnit; }
 
+    int getRemainingTimeInMin() { return remainingTime; }
+
     void invalidateAll();
 
     /** Returns @true if the battery is installed. */
     bool isInstalled() { return batInstalled; }
+
     /** Returns @true if the Laptop is online, means AC connected. */
-    bool isOnline() { return acConnected; }
+    bool isOnline() { return isInstalled() && acConnected; }
+
+    bool isCharging() { return isInstalled() && isOnline() && batCharging; }
+
     /** Get the current battery state. */
     QString getState() { return batState; }
 
@@ -89,9 +98,11 @@ private:
     float criticalFuel;
     float curFuel;
     float curPower;
+    int remainingTime;
 
     int batNr;
     bool batInstalled;
+    bool batCharging;
 
     /** Note: On Acer and Asus Laptops we have mA(h) instead of mW(h), 
         so @c powerUnit is "W" or "A", depending on the battery and 

@@ -327,7 +327,6 @@ KThinkBat::timeout() {
                           QColor( batOnline ? KThinkBatConfig::batDotOnlineColor() : KThinkBatConfig::batBackgroundColor() ) );
 
     }
-
     // force a repaint of the Applet
     update();
     if( toolTip && toolTip->isShown() ) {
@@ -357,6 +356,8 @@ KThinkBat::createToolTipText( bool battery1, bool battery2 ) {
             toolTipText += "<tr><td>" + i18n("Crit Fuel: ") + "</td><td>" + QString().number((float) batInfo->getCriticalFuel()) + " m" + batInfo->getPowerUnit() + "h</td></tr>";
             toolTipText += "<tr><td>" + i18n("Last Fuel: ") + "</td><td>" + QString().number((float) batInfo->getLastFuel()) + " m" + batInfo->getPowerUnit() + "h</td></tr>";
             toolTipText += "<tr><td>" + i18n("Design Fuel: ") + "</td><td>" + QString().number((float) batInfo->getDesignFuel()) + " m" + batInfo->getPowerUnit() + "h</td></tr>";
+            toolTipText += "<tr><td>" + i18n("State: ") + "</td><td>" + i18n(batInfo->getState()) + "</td></tr>";
+            toolTipText += "<tr><td>" + i18n("Remaining Time: ") + "</td><td>" + QString().number((int) batInfo->getRemainingTimeInMin()) + " min</td></tr>";
         }
         else {
             toolTipText += "<td>" + i18n("not installed") + "</td></tr>";
