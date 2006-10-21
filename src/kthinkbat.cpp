@@ -167,8 +167,8 @@ KThinkBat::heightForWidth(int width) const {
     return neededSize.height();
 }
 
-void 
-KThinkBat::resizeEvent(QResizeEvent *e) {}
+// void 
+// KThinkBat::resizeEvent(QResizeEvent *e) {}
 
 void 
 KThinkBat::paintEvent(QPaintEvent* event) {
@@ -178,7 +178,7 @@ KThinkBat::paintEvent(QPaintEvent* event) {
     QPainter painter(&pixmap);
     painter.setFont( KThinkBatConfig::gaugeFont() );
 
-    // this is the needed Space by the Applet
+    // this is the (minimal) needed Space by the Applet
     QSize realNeededSpace = QSize( (2 * KThinkBatConfig::borderSize().width()) + KThinkBatConfig::gaugeWidth(),
                                    (2 * KThinkBatConfig::borderSize().height()) + KThinkBatConfig::gaugeHeight() );
 
@@ -188,6 +188,7 @@ KThinkBat::paintEvent(QPaintEvent* event) {
     QSize nextEast = QSize( KThinkBatConfig::borderSize().width() + padding.width() + KThinkBatConfig::gaugeWidth(), KThinkBatConfig::borderSize().height() );
 
     if( ! KThinkBatConfig::summarizeBatteries() ) {
+        // If we have to draw two batteries
         if( KThinkBatConfig::powerMeterBelowGauge() ) {
             gauge2.drawGauge( painter, nextEast, QSize( KThinkBatConfig::gaugeWidth(), KThinkBatConfig::gaugeHeight() ) );
             realNeededSpace = QSize( realNeededSpace.width() + padding.width() + KThinkBatConfig::gaugeWidth(), realNeededSpace.height() );
@@ -199,6 +200,7 @@ KThinkBat::paintEvent(QPaintEvent* event) {
     }
 
     if( KThinkBatConfig::showPowerMeter() ) {
+        // We have to draw some text below or beside the Gauge Symbol
 
         painter.setFont( KThinkBatConfig::powerMeterFont() );
 
@@ -219,6 +221,10 @@ KThinkBat::paintEvent(QPaintEvent* event) {
                                     powerTextExtend1.height() > powerTextExtend2.height() ? powerTextExtend1.height() : powerTextExtend2.height() );
         }
 
+        // Painting the Text
+        QPen origPen = painter.pen();
+        painter.setPen( KThinkBatConfig::powerMeterColor() );
+
         QSize powerPos1;
         // left upper corner of power consumption label
         if( KThinkBatConfig::powerMeterBelowGauge() ) {
@@ -235,9 +241,6 @@ KThinkBat::paintEvent(QPaintEvent* event) {
             realNeededSpace = QSize( realNeededSpace.width() + padding.width() + maxPowerExtend.width(), realNeededSpace.height() );
         }
 
-        // Painting the Text
-        QPen origPen = painter.pen();
-        painter.setPen( KThinkBatConfig::powerMeterColor() );
         // Draw the Power Consumption at position @c wastePos.
         painter.drawText( powerPos1.width(), powerPos1.height(), 
                               powerTextExtend1.width(), powerTextExtend1.height(),
@@ -245,8 +248,16 @@ KThinkBat::paintEvent(QPaintEvent* event) {
                               powerLabel1 );
         if( ! KThinkBatConfig::summarizeBatteries() ) { 
             QSize powerPos2;
-            powerPos2 = QSize( KThinkBatConfig::borderSize().width() + padding.width() + KThinkBatConfig::gaugeWidth(),
-                               KThinkBatConfig::borderSize().height() + padding.height() + KThinkBatConfig::gaugeHeight() );
+
+            if( KThinkBatConfig::powerMeterBelowGauge() ) {
+                // Verbrauchsanzeige unterhalb der Gauge
+                powerPos2 = QSize( KThinkBatConfig::borderSize().width() + padding.width() + KThinkBatConfig::gaugeWidth(),
+                                   KThinkBatConfig::borderSize().height() + padding.height() + KThinkBatConfig::gaugeHeight() );
+            } else {
+                // Verbrauchsanzeige rechts von der Gauge
+                powerPos2 = QSize( KThinkBatConfig::borderSize().width() + padding.width() + KThinkBatConfig::gaugeWidth(),
+                                   KThinkBatConfig::borderSize().height() + padding.height() + KThinkBatConfig::gaugeHeight() + ((KThinkBatConfig::gaugeHeight() - powerTextExtend2.height()) / 2 ) );
+            }
 
             painter.drawText( powerPos2.width(), powerPos2.height(), 
                               powerTextExtend2.width(), powerTextExtend2.height(),
@@ -259,8 +270,16 @@ KThinkBat::paintEvent(QPaintEvent* event) {
     painter.end();
     bitBlt(this, 0, 0, &pixmap);
 
-    // new needed Size for the applet
-    neededSize = realNeededSpace;
+//      if( neededSize != realNeededSpace ) {
+//         // new needed Size for the applet
+//         neededSize = realNeededSpace;
+//         resize( realNeededSpace );
+//         repaint();
+//     }
+//     else {
+        // new needed Size for the applet
+        neededSize = realNeededSpace;
+//     }
 }
 
 void 
@@ -327,8 +346,18 @@ KThinkBat::timeout() {
                           QColor( batOnline ? KThinkBatConfig::batDotOnlineColor() : KThinkBatConfig::batBackgroundColor() ) );
 
     }
+
+//     QSize oldSize = neededSize;
+
     // force a repaint of the Applet
     update();
+
+    // This is some kind of hack to force a resize
+//     if( oldSize != neededSize ) {
+//         resize( neededSize );
+//         update();
+//     }
+
     if( toolTip && toolTip->isShown() ) {
         toolTip->setText( createToolTipText( battery1, battery2 ) );
     }

@@ -133,7 +133,7 @@ public slots:
     void slotAbout();
 
 protected:
-    void resizeEvent(QResizeEvent *);
+//     void resizeEvent(QResizeEvent *);
     void paintEvent(QPaintEvent* event);
     void mousePressEvent(QMouseEvent* e);
     void enterEvent(QEvent* e);
