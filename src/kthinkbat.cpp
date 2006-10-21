@@ -270,16 +270,15 @@ KThinkBat::paintEvent(QPaintEvent* event) {
     painter.end();
     bitBlt(this, 0, 0, &pixmap);
 
-//      if( neededSize != realNeededSpace ) {
-//         // new needed Size for the applet
-//         neededSize = realNeededSpace;
-//         resize( realNeededSpace );
-//         repaint();
-//     }
-//     else {
+     if( neededSize != realNeededSpace ) {
         // new needed Size for the applet
         neededSize = realNeededSpace;
-//     }
+        emit updateLayout();
+    }
+    else {
+        // new needed Size for the applet
+        neededSize = realNeededSpace;
+    }
 }
 
 void 
@@ -347,16 +346,8 @@ KThinkBat::timeout() {
 
     }
 
-//     QSize oldSize = neededSize;
-
     // force a repaint of the Applet
     update();
-
-    // This is some kind of hack to force a resize
-//     if( oldSize != neededSize ) {
-//         resize( neededSize );
-//         update();
-//     }
 
     if( toolTip && toolTip->isShown() ) {
         toolTip->setText( createToolTipText( battery1, battery2 ) );

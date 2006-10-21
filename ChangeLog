@@ -4,6 +4,7 @@ KThinkBat SVN HEAD - 10 Sep 2006:
    * prepared config dialog for remaining time and rearranged the color choosers 
    * added "is charging" parsing if using tp_smapi
    * FIX: Ticket #4: misaligned text
+   * FIX: Ticket #1: Fix font size (re-)calculation problem
 
 KThinkBat 0.2.0 - 08 Sep 2006:
    * Support new tp_smapi versions (greater than 0.26) which ommit the 
