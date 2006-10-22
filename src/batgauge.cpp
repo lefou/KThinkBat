@@ -24,11 +24,14 @@ BatGauge::BatGauge()
 : fillColor( "green" )
 , dotColor( "gray" )
 , bgColor( "gray" )
-, rotator( 0 )
 , percentValue( 0 )
-, percentString( "" ) {}
+, percentString( "" ) 
+, gaugeSize( 20, 10 ) 
+, orientation( Qt::Horizontal ) {
+}
 
-BatGauge::~BatGauge() {}
+BatGauge::~BatGauge() {
+}
 
 void
 BatGauge::setPercentValue( int value ) {
@@ -51,16 +54,33 @@ BatGauge::setColors( QColor bgColor, QColor fillColor, QColor dotColor ) {
 
 void
 BatGauge::drawGauge( QPainter& painter, QSize gaugePos, QSize gaugeSize ) {
+    setSize( gaugeSize );
+    drawGauge( painter, gaugePos );
+}
 
-    painter.save();
-    painter.rotate( rotator );
+void
+BatGauge::drawGauge( QPainter& painter, QSize gaugePos ) {
+
+    QSize gaugeSize = getSize();
 
     // Values for Gauge and Border
     QSize offset( gaugePos.width() + 1, gaugePos.height() + 1 );
     // size of the dot
     QSize gHalfDot( KThinkBatConfig::gaugeDotWidth(), (int) ((KThinkBatConfig::gaugeDotHeight() / 2) + 0.5) );
+
+    painter.save();
+
+    if( Qt::Vertical == getOrientation() ) {
+        // rotate the painter 90 degree counterclockwise
+        painter.rotate( -90 );
+        gaugeSize.transpose();
+        gHalfDot.transpose();
+        offset = QSize( gaugePos.width() - 3 - gaugeSize.width(), gaugePos.height() + 1 );
+    }
+
     // substract the frame and the dot
     QSize gaugeFill(gaugeSize.width() - gHalfDot.width() - 2, gaugeSize.height() - 2 );
+
 
     // Rahmen
     QPointArray border( 9 );
@@ -99,4 +119,14 @@ BatGauge::drawGauge( QPainter& painter, QSize gaugePos, QSize gaugeSize ) {
                       , percentString );
 
     painter.restore();
+}
+
+void
+BatGauge::setSize( QSize gaugeSize ) {
+    this->gaugeSize = gaugeSize;
+}
+
+void
+BatGauge::setOrientation( Qt::Orientation orientation ) {
+    this->orientation = orientation;
 }
