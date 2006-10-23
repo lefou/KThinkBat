@@ -1,4 +1,6 @@
 KThinkBat SVN HEAD:
+   * removed faulty text label from config dialog (Ticket #6)
+   * added option to draw the battery gauge upright (Ticket #3)
 
 KThinkBat 0.2.1 - 22 Okt 2006:
    * parse the remaining time if using tp_smapi >= 0.29

@@ -119,8 +119,8 @@ KThinkBat::slotPreferences() {
  
     //User edited the configuration - update your local copies of the 
     //configuration data 
-    connect( dialog, SIGNAL(settingsChanged()), this, SLOT(slotUpdateConfiguration()) ); 
-     
+    connect( dialog, SIGNAL(settingsChanged()), this, SLOT(slotUpdateConfiguration()) );
+
     dialog->show();
 }
 
@@ -173,6 +173,11 @@ KThinkBat::heightForWidth(int width) const {
 void 
 KThinkBat::paintEvent(QPaintEvent* event) {
 
+    gauge1.setOrientation( KThinkBatConfig::drawBatteryUpright() ? Qt::Vertical : Qt::Horizontal );
+    gauge1.setSize( KThinkBatConfig::gaugeWidth(), KThinkBatConfig::gaugeHeight() );
+    gauge2.setOrientation( KThinkBatConfig::drawBatteryUpright() ? Qt::Vertical : Qt::Horizontal );
+    gauge2.setSize( KThinkBatConfig::gaugeWidth(), KThinkBatConfig::gaugeHeight() );
+
     QPixmap pixmap(width(), height());
     pixmap.fill(this, 0, 0);
     QPainter painter(&pixmap);
@@ -182,7 +187,7 @@ KThinkBat::paintEvent(QPaintEvent* event) {
     QSize realNeededSpace = QSize( (2 * KThinkBatConfig::borderSize().width()) + KThinkBatConfig::gaugeWidth(),
                                    (2 * KThinkBatConfig::borderSize().height()) + KThinkBatConfig::gaugeHeight() );
 
-    gauge1.drawGauge( painter, KThinkBatConfig::borderSize(), QSize( KThinkBatConfig::gaugeWidth(), KThinkBatConfig::gaugeHeight() ) );
+    gauge1.drawGauge( painter, KThinkBatConfig::borderSize() );
 
     QSize nextSouth = QSize( KThinkBatConfig::borderSize().width(), KThinkBatConfig::borderSize().height() + padding.height() + KThinkBatConfig::gaugeHeight() );
     QSize nextEast = QSize( KThinkBatConfig::borderSize().width() + padding.width() + KThinkBatConfig::gaugeWidth(), KThinkBatConfig::borderSize().height() );
@@ -190,11 +195,11 @@ KThinkBat::paintEvent(QPaintEvent* event) {
     if( ! KThinkBatConfig::summarizeBatteries() ) {
         // If we have to draw two batteries
         if( KThinkBatConfig::powerMeterBelowGauge() ) {
-            gauge2.drawGauge( painter, nextEast, QSize( KThinkBatConfig::gaugeWidth(), KThinkBatConfig::gaugeHeight() ) );
+            gauge2.drawGauge( painter, nextEast );
             realNeededSpace = QSize( realNeededSpace.width() + padding.width() + KThinkBatConfig::gaugeWidth(), realNeededSpace.height() );
         }
         else {
-            gauge2.drawGauge( painter, nextSouth, QSize( KThinkBatConfig::gaugeWidth(), KThinkBatConfig::gaugeHeight() ) );
+            gauge2.drawGauge( painter, nextSouth );
             realNeededSpace = QSize( realNeededSpace.width(), realNeededSpace.height() + padding.height()  + KThinkBatConfig::gaugeHeight() );
         }
     }

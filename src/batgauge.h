@@ -46,10 +46,13 @@ public:
     void setColors( QColor bgColor, QColor fillColor, QColor dotColor );
 
     void drawGauge( QPainter& painter, QSize gaugePos );
+
+    /** @deprecated Please use drawGauge() in combination with setSize(). */
     void drawGauge( QPainter& painter, QSize gaugePos, QSize gaugeSize );
 
     QSize getSize() { return gaugeSize; }
     void setSize( QSize gaugeSize );
+    void setSize( int gaugeWidth, int gaugeHeight ) { setSize( QSize( gaugeWidth, gaugeHeight) ); }
 
     Qt::Orientation getOrientation() { return orientation; }
     void setOrientation( Qt::Orientation orientation );
@@ -59,14 +62,14 @@ private:
     QColor dotColor;
     QColor bgColor;
 
-    Qt::Orientation orientation;
-
     /** the percent value, used to determine the filled area of the battery gauge. */
     int percentValue;
     /** the string displayed inside the battery gauge (default to the percentage value itself). */
     QString percentString;
 
     QSize gaugeSize;
+    Qt::Orientation orientation;
+
 };
 
 #endif

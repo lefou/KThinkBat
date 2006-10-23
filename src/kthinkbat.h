@@ -64,7 +64,8 @@ public:
      **/
     KThinkBat(const QString& configFile, Type t = Normal, int actions = 0,
               QWidget *parent = 0, const char *name = 0);
-    /** destructor */
+
+    /** Destructor of the panel applet. */
     virtual ~KThinkBat();
 
     /**
@@ -118,10 +119,12 @@ public:
     virtual void help();
 
 public slots:
+    /** Called by the update timer to reread the laptop battery information. */
     void timeout();
 
     void slotPreferences();
 
+    /** Called, when Configuration is changed. Forces an update of the widget to reflect changes. */
     void slotUpdateConfiguration();
 
     /// Popup a pasive Message about the current batteries
@@ -133,11 +136,19 @@ public slots:
     void slotAbout();
 
 protected:
-//     void resizeEvent(QResizeEvent *);
+    /** (Re-)Paint the Applet Content. */
     void paintEvent(QPaintEvent* event);
+
+    /** Handle mouse clicks. */
     void mousePressEvent(QMouseEvent* e);
+
+    /** Handle the mouse enter event. Needed to start a timer and popup a custom tooltip after timeout. */
     void enterEvent(QEvent* e);
+
+    /** Handle the mouse leave event. Needed to let disappear the tooltip. */
     void leaveEvent(QEvent* e);
+
+    /** Construct the (HTML) tooltip text. */
     QString createToolTipText( bool battery1 = true, bool battery2 = true );
 
 private:
@@ -161,12 +172,14 @@ private:
     QString powerUnit1;
     QString powerUnit2;
 
+    /** The (maximal) needed size of the panel applet. */
     QSize neededSize;
 
     int powerPosID;
 
     KPopupMenu* contextMenu;
     QTimer* toolTipTimer;
+
     BatToolTip* toolTip;
     QString toolTipText;
 
