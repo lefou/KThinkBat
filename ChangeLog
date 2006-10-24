@@ -3,6 +3,7 @@ KThinkBat SVN HEAD:
    * added option to draw the battery gauge upright (Ticket #3)
    * better ACPI support (design capacity, design critical capacity)
    * calculate remaining (discharging) time from capacity values, if the better embedded controler values ar not available
+   * changed min-max range for gauge size values to reflect upright gauge option
 
 KThinkBat 0.2.1 - 22 Okt 2006:
    * parse the remaining time if using tp_smapi >= 0.29

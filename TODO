@@ -1,17 +1,13 @@
-   * ToolTip with remaining time and detailed battery info
    * Option to draw the battery symbol upright (this needs some refactoring to make the Gauge a real control)
    * make backend selectable: tp_smapi or ACPI
    * Option to enable/disapble: ACPI/TP_SMAPI/APM
    * rework drawing alg for gauge dot
-   * show remaining time 
    * calculate Watt values from the Ampere based values provieded by ACER/ASUS-ACPI
    * integrate ibam battery monitoring fassility, for (better) time computation and a nice graph
    * Config-Dialog: ACPI proc path, action on click 
    * there should be a symbol such as power plug next to it when connected to AC
-   * add APM option for older Laptops. Still needed?
    * dcop interface for settings
    * Support for display setting at least on ThinkPads (brightness, power off)
    * support for hibernate/suspend, laptop-mode, laptop-mode-daemon
-   * support hdaps harddrive status/settings (for ThinkPads/PowerBooks)
-   * remove more redundant code
-   * display cup speed
+
+(Feel free to open a ticket for these issues - if not already there - to show, that you want these features.)
