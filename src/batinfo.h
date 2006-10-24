@@ -74,6 +74,8 @@ public:
 
     bool isCharging() { return isInstalled() && isOnline() && batCharging; }
 
+    bool isDischarging() { return isInstalled() && ! isOnline() && ! batCharging; }
+
     /** Get the current battery state. */
     QString getState() { return batState; }
 
@@ -91,6 +93,8 @@ signals:
 
 protected:
     void resetValues();
+
+    void calculateRemainingTime();
 
 private:
     float lastFuel;

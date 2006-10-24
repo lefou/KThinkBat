@@ -51,18 +51,20 @@ BatInfo::parseProcACPI() {
     QString line = "";
     QString mWHstring = "";
     // normale Angaben: Kapzität, Max Kap., aktuelle Kap.
-    QString cap = "", designCap = "", cur = "";
+    QString cap = "", designCap = "", cur = "", criticalCap = "";
     // dieselben Angaben, aber in mAh statt in mWh
-    QString capA = "", designCapA = "";
+    QString capA = "", designCapA = "", criticalCapA = "";
 
     // Pattern für /proc/acpi/battery/BATx/info
     // ThinkPad (mWh)
     QRegExp rxInstalled( "^present:\\s*(yes)" );
     QRegExp rxCap("^last full capacity:\\s*(\\d{1,5})\\s*mWh");
-    QRegExp rxDesignCap("^design capacity low:\\s*(\\d{1,5})\\s*mWh");
+    QRegExp rxDesignCap("^design capacity:\\s*(\\d{1,5})\\s*mWh");
+    QRegExp rxDesignCapLow("^design capacity warning:\\s*(\\d{1,5})\\s*mWh");
     // Asus/Acer (mAh)
     QRegExp rxCapA("^last full capacity:\\s*(\\d{1,5})\\s*mAh");
     QRegExp rxDesignCapA("^design capacity low:\\s*(\\d{1,5})\\s*mAh");
+    QRegExp rxDesignCapLowA("^design capacity warning:\\s*(\\d{1,5})\\s*mAh");
 
     QString filename = "/proc/acpi/battery/BAT" + QString::number(batNr) + "/info";
     QFile file( filename );
@@ -78,7 +80,7 @@ BatInfo::parseProcACPI() {
     while( ! stream.atEnd() ) {
         line = stream.readLine();
         if( -1 != rxInstalled.search( line ) ) {
-            batInstalled = rxInstalled.cap(1) == "yes";
+            batInstalled = ( rxInstalled.cap(1) == "yes" );
             //KMessageBox::information(0, "fount cap: "+cap);
         }
         if( -1 != rxCap.search( line ) ) {
@@ -88,12 +90,18 @@ BatInfo::parseProcACPI() {
         if( -1 != rxDesignCap.search( line ) ) {
             designCap = rxDesignCap.cap(1);
         }
+        if( -1 != rxDesignCapLow.search( line ) ) {
+            criticalCap = rxDesignCapLow.cap(1);
+        }
         if( -1 != rxCapA.search( line ) ) {
             capA = rxCapA.cap(1);
             //KMessageBox::information(0, "fount cap: "+cap);
         }
         if( -1 != rxDesignCapA.search( line ) ) {
             designCapA = rxDesignCapA.cap(1);
+        }
+        if( -1 != rxDesignCapLowA.search( line ) ) {
+            criticalCapA = rxDesignCapLowA.cap(1);
         }
     }
     file.close();
@@ -110,6 +118,7 @@ BatInfo::parseProcACPI() {
 //     if( ! capA.isEmpty() ) {
         cap = capA;
         designCap = designCapA;
+        criticalCap = criticalCapA;
         powerUnit = "A";
     }
     else {
@@ -153,12 +162,20 @@ BatInfo::parseProcACPI() {
     lastFuel = cap.toInt(&ok);
     if( ! ok ) { lastFuel = 0; }
 
+    ok = true;
+    designFuel = designCap.toInt(&ok);
+    if( ! ok ) { designFuel = 0; }
+
+    ok = true;
+    criticalFuel = criticalCap.toInt(&ok);
+    if( ! ok ) { criticalFuel = 0; }
+
     // current cosumption
     ok = true;
     curPower = mWHstring.toInt(&ok);
     if( ! ok ) { curPower = 0; }
 
-    // TODO better read /proc/acpi/ac_adapter/AC/state an evaluate "on-line"
+    // TODO better read /proc/acpi/ac_adapter/AC/state and evaluate "on-line"
     bool oldAcCon = isOnline();
     acConnected = (batState != "discharging");
     if( oldAcCon != acConnected ) {
@@ -167,7 +184,36 @@ BatInfo::parseProcACPI() {
 
 //     parseProcAcpiBatAlarm();
 
+    calculateRemainingTime();
+
     return true;
+}
+
+void
+BatInfo::calculateRemainingTime() {
+
+    // Calculate remaining time
+    if( isDischarging() ) {
+        if( getCurFuel() > 0 && getPowerConsumption() > 0 && getPowerUnit() == "W" ) {
+            double remain = getCurFuel() / getPowerConsumption();
+            remainingTime = (int) (remain * 60.0);
+        }
+        else {
+            remainingTime = 0;
+        }
+    }
+    else if( isCharging() ) {
+        if( getPowerConsumption() > 0 && (getLastFuel() - getCurFuel()) > 0 && getPowerUnit() == "W" ) {
+            double remain = (getLastFuel() - getCurFuel()) / getPowerConsumption();
+            remainingTime = (int) (remain * 60.0);
+        }
+        else {
+            remainingTime = 0;
+        }
+    }
+    else {
+        remainingTime = 0;
+    }
 }
 
 bool 
@@ -326,13 +372,19 @@ BatInfo::parseSysfsTP() {
             remainingTime = stream.readLine().toInt( &check );
             file.close();
         }
+        else {
+            calculateRemainingTime();
+        }
     }
-    else if( isInstalled() && ! isOnline() ) {
+    else if( isDischarging() ) {
         file.setName( tpPath + "remaining_running_time" );
         if( file.exists() && file.open(IO_ReadOnly) ) {
             stream.setDevice( &file );
             remainingTime = stream.readLine().toInt( &check );
             file.close();
+        }
+        else {
+            calculateRemainingTime();
         }
     }
     else {
