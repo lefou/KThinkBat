@@ -88,6 +88,8 @@ public:
 
     void setBatNr( int number ) { batNr = number; }
 
+    QString getLastSuccessfulReadMethod() { return lastSuccessfulReadMethod; }
+
 signals:
     void onlineModeChanged( bool batOnline );
 
@@ -114,6 +116,8 @@ private:
     QString powerUnit;
     QString batState;
     bool acConnected;
+
+    QString lastSuccessfulReadMethod;
 };
 
 #endif // KTHINKBAT_BATINFO_H

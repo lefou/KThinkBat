@@ -31,7 +31,7 @@ class BatToolTip : public KPassivePopup {
 
 public:
     BatToolTip( QWidget* parent = 0, const char* name = 0 );
-    ~BatToolTip();
+    virtual ~BatToolTip();
 
 public slots:
     /** Sets the tooltip to @param text */

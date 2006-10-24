@@ -186,6 +186,7 @@ BatInfo::parseProcACPI() {
 
     calculateRemainingTime();
 
+    lastSuccessfulReadMethod = "ACPI";
     return true;
 }
 
@@ -394,6 +395,7 @@ BatInfo::parseSysfsTP() {
     // critical Fuel can not be set via tp_smapi, so we try to read /proc/acpi for that
 //     parseProcAcpiBatAlarm();
 
+    lastSuccessfulReadMethod = "SMAPI";
     return true;
 }
 
@@ -409,4 +411,5 @@ BatInfo::resetValues() {
     batCharging = false;
     powerUnit = "W";
     batState = "not installed";
+    lastSuccessfulReadMethod = "";
 }

@@ -605,7 +605,7 @@
                         <cstring>kcfg_ShowRemainingTime</cstring>
                     </property>
                     <property name="enabled">
-                        <bool>false</bool>
+                        <bool>true</bool>
                     </property>
                     <property name="text">
                         <string>Show &amp;Remaining Time</string>

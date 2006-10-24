@@ -114,9 +114,9 @@ KThinkBat::slotPreferences() {
 
     Prefs* prefs = new Prefs( this );
     assert( prefs );
- 
+
     dialog->addPage( prefs, i18n("KThinkBat Preferences"), "configure" ); 
- 
+
     //User edited the configuration - update your local copies of the 
     //configuration data 
     connect( dialog, SIGNAL(settingsChanged()), this, SLOT(slotUpdateConfiguration()) );
@@ -167,8 +167,52 @@ KThinkBat::heightForWidth(int width) const {
     return neededSize.height();
 }
 
-// void 
-// KThinkBat::resizeEvent(QResizeEvent *e) {}
+QString
+KThinkBat::createPowerTimeLabel( int batteryNr ) {
+
+    if( batteryNr < 1 || batteryNr > 2 ) {  return ""; }
+
+    QString label = "";
+
+    if( KThinkBatConfig::showPowerMeter() ) {
+        QString powerUnit;
+        float curPower;
+
+        if( 1 == batteryNr ) { 
+            powerUnit = powerUnit1;
+            curPower = curPower1;
+        }
+        else if( 2 == batteryNr ) { 
+            powerUnit = powerUnit2;
+            curPower = curPower2;
+        }
+
+        if( "W" == powerUnit ) {
+            label = QString().number((int) (curPower + 500)/1000) + " " + powerUnit;
+        }
+        else {
+            label = QString().number((float) (((int) curPower + 50)/100) / 10 )  + " " + powerUnit;
+        }
+    }
+
+    if( KThinkBatConfig::showRemainingTime() ) {
+        int mins;
+        if( KThinkBatConfig::summarizeBatteries() ) {
+            mins = batInfo1.getRemainingTimeInMin() + batInfo2.getRemainingTimeInMin();
+        }
+        else if( 1 == batteryNr ) {
+            mins = batInfo1.getRemainingTimeInMin();
+        }
+        else {
+            mins = batInfo2.getRemainingTimeInMin();
+        }
+        if( KThinkBatConfig::showPowerMeter() ) {
+            label += " / ";
+        }
+        label += QString().number(mins) + " min";
+    }
+    return label;
+}
 
 void 
 KThinkBat::paintEvent(QPaintEvent* event) {
@@ -204,14 +248,14 @@ KThinkBat::paintEvent(QPaintEvent* event) {
         }
     }
 
-    if( KThinkBatConfig::showPowerMeter() ) {
+    if( KThinkBatConfig::showPowerMeter() || KThinkBatConfig::showRemainingTime() ) {
         // We have to draw some text below or beside the Gauge Symbol
 
         painter.setFont( KThinkBatConfig::powerMeterFont() );
 
         // Position for power consumtion display
         // Power consumption label: For correct rounding we add 500 mW (resp. 50 mA)
-        QString powerLabel1 = ("W" == powerUnit1) ? QString().number((int) (curPower1 + 500)/1000) + " " + powerUnit1 : QString().number((float) (((int) curPower1 + 50)/100) / 10 )  + " " + powerUnit1;
+        QString powerLabel1 = createPowerTimeLabel( 1 );
         // Needed Space for Power Consumption Label
         QRect powerTextExtend1 = painter.boundingRect( 0, 0, 1, 1, Qt::AlignLeft | Qt::AlignTop, powerLabel1 );
 
@@ -220,7 +264,7 @@ KThinkBat::paintEvent(QPaintEvent* event) {
         QSize maxPowerExtend = QSize( powerTextExtend1.width(), powerTextExtend1.height() );
     
         if( ! KThinkBatConfig::summarizeBatteries() ) {
-            powerLabel2 = ("W" == powerUnit2) ? QString().number((int) (curPower2 + 500)/1000) + " " + powerUnit2 : QString().number((float) (((int) curPower2 + 50)/100) / 10 )  + " " + powerUnit2;
+            powerLabel2 = createPowerTimeLabel( 2 );
             powerTextExtend2 = painter.boundingRect( 0, 0, 1, 1, Qt::AlignLeft | Qt::AlignTop, powerLabel2 );
             maxPowerExtend = QSize( powerTextExtend1.width() > powerTextExtend2.width() ? powerTextExtend1.width() : powerTextExtend2.width(),
                                     powerTextExtend1.height() > powerTextExtend2.height() ? powerTextExtend1.height() : powerTextExtend2.height() );
@@ -237,7 +281,8 @@ KThinkBat::paintEvent(QPaintEvent* event) {
             //         wastePos = QSize( KThinkBatConfig::borderSize().width(), KThinkBatConfig::borderSize().height() + gaugeSize.height() + 12 );
             powerPos1 = QSize( KThinkBatConfig::borderSize().width(), 
                                KThinkBatConfig::borderSize().height() + padding.height() + KThinkBatConfig::gaugeHeight() );
-            realNeededSpace = QSize( realNeededSpace.width(), realNeededSpace.height() + padding.height() + maxPowerExtend.height() );
+            realNeededSpace = QSize( realNeededSpace.width() > maxPowerExtend.width() ? realNeededSpace.width() : ((2 * KThinkBatConfig::borderSize().width()) + maxPowerExtend.width())
+                                    , realNeededSpace.height() + padding.height() + maxPowerExtend.height() );
         } else {
             // Verbrauchsanzeige rechts von der Gauge
             //         wastePos = QSize( ( 3 * border.width() ) + gaugeSize.width(), border.height() );
@@ -256,6 +301,7 @@ KThinkBat::paintEvent(QPaintEvent* event) {
 
             if( KThinkBatConfig::powerMeterBelowGauge() ) {
                 // Verbrauchsanzeige unterhalb der Gauge
+//                 powerPos2 = QSize( KThinkBatConfig::borderSize().width() + padding.width() + KThinkBatConfig::gaugeWidth() > powerTextExtend1.width() ? KThinkBatConfig::gaugeWidth() : powerTextExtend1.width(),
                 powerPos2 = QSize( KThinkBatConfig::borderSize().width() + padding.width() + KThinkBatConfig::gaugeWidth(),
                                    KThinkBatConfig::borderSize().height() + padding.height() + KThinkBatConfig::gaugeHeight() );
             } else {
@@ -373,7 +419,11 @@ KThinkBat::createToolTipText( bool battery1, bool battery2 ) {
         assert( batInfo );
 
         toolTipText += "<table cellspacing=\"0\" cellpadding=\"0\">";
-        toolTipText += "<tr><td><b>" + i18n("Battery %1: ").arg( bat ) + "</b></td>";
+        toolTipText += "<tr><td><b>" + i18n("Battery %1").arg( bat );
+        if( batInfo->getLastSuccessfulReadMethod() != "" ) {
+            toolTipText += " (" + batInfo->getLastSuccessfulReadMethod() + ")";
+        }
+        toolTipText += ":</b></td>";
 
         if( batInfo && battery && batInfo->isInstalled() ) {
             toolTipText += "<td>" + QString().number((int) batInfo->getChargeLevel()) + "%</td></tr>";

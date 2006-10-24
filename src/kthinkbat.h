@@ -47,8 +47,10 @@ class KThinkBatConfig;
 class BatToolTip;
 
 /**
-    @author Tobias Roeser <le.petit.fou@web.de>
-*/
+ * A KDE panel applet to visually display the laptop battery state.
+ *
+ * @author Tobias Roeser <le.petit.fou@web.de>
+ */
 class KThinkBat : public KPanelApplet {
     Q_OBJECT
 
@@ -150,6 +152,8 @@ protected:
 
     /** Construct the (HTML) tooltip text. */
     QString createToolTipText( bool battery1 = true, bool battery2 = true );
+
+    QString createPowerTimeLabel( int batteryNr );
 
 private:
 //     KConfig *ksConfig;
