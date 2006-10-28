@@ -1,4 +1,4 @@
-KThinkBat 0.2.2 - 24.10.2006:
+KThinkBat 0.2.2 - 28.10.2006:
    * removed faulty text label from config dialog (Ticket #6)
    * added option to draw the battery gauge upright (Ticket #3)
    * better ACPI support (design capacity, design critical capacity)
@@ -6,6 +6,7 @@ KThinkBat 0.2.2 - 24.10.2006:
      if the better embedded controler values ar not available
    * changed min-max range for gauge size values to reflect upright gauge option
    * show also the remaining time in the applet
+   * fixed some bugs, reported by Jan Ciger
 
 KThinkBat 0.2.1 - 22 Okt 2006:
    * parse the remaining time if using tp_smapi >= 0.29
