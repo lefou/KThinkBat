@@ -69,7 +69,12 @@ BatInfo::parseProcACPI() {
     QString filename = "/proc/acpi/battery/BAT" + QString::number(batNr) + "/info";
     QFile file( filename );
     if( ! file.exists() || ! file.open(IO_ReadOnly) ) {
-        qDebug( "could not open %s", file.name().latin1() );
+        // this is nothing unexpected, so say it only once
+        static bool sayTheProblem = true;
+        if( sayTheProblem ) {
+            qDebug( "KThinkBat: could not open %s", file.name().latin1() );
+            sayTheProblem = false;
+        }
         resetValues();
         return false;
     }
@@ -128,7 +133,11 @@ BatInfo::parseProcACPI() {
     filename = "/proc/acpi/battery/BAT" + QString::number(batNr) + "/state";
     file.setName( filename );
     if( ! file.exists() || ! file.open(IO_ReadOnly) ) {
-        qDebug("could not open %s", file.name().latin1() );
+        static bool sayTheProblem2 = true;
+        if( sayTheProblem2 ) {
+            qDebug( "KThinkBat: could not open %s", file.name().latin1() );
+            sayTheProblem2 = false;
+        }
         resetValues();
         return false;
     }
@@ -227,7 +236,6 @@ BatInfo::parseProcAcpiBatAlarm() {
     QString filename = "/proc/acpi/battery/BAT" + QString::number( batNr ) + "/alarm";
     QFile file( filename );
     if( ! file.exists() || ! file.open(IO_ReadOnly) ) {
-        qDebug("could not open %s", file.name().latin1() );
         criticalFuel = 0;
         return false;
     }
@@ -265,7 +273,7 @@ BatInfo::parseSysfsTP() {
     if( ! QDir().exists( "/sys/devices/platform/smapi" ) ) {
         static bool sayTheProblem = true;
         if( sayTheProblem ) {
-            qDebug( "There is no directory /sys/devices/platform/smapi. Do you have tp_smapi loaded?" );
+            qDebug( "KThinkBat: There is no directory /sys/devices/platform/smapi. Do you have tp_smapi loaded?" );
             sayTheProblem = false;
         }
         return false;
