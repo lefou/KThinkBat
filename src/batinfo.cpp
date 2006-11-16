@@ -204,7 +204,7 @@ BatInfo::calculateRemainingTime() {
 
     // Calculate remaining time
     if( isDischarging() ) {
-        if( getCurFuel() > 0 && getPowerConsumption() > 0 && getPowerUnit() == "W" ) {
+        if( getCurFuel() > 0 && getPowerConsumption() > 0 ) {
             double remain = getCurFuel() / getPowerConsumption();
             remainingTime = (int) (remain * 60.0);
         }
@@ -213,7 +213,7 @@ BatInfo::calculateRemainingTime() {
         }
     }
     else if( isCharging() ) {
-        if( getPowerConsumption() > 0 && (getLastFuel() - getCurFuel()) > 0 && getPowerUnit() == "W" ) {
+        if( getPowerConsumption() > 0 && (getLastFuel() - getCurFuel()) > 0 ) {
             double remain = (getLastFuel() - getCurFuel()) / getPowerConsumption();
             remainingTime = (int) (remain * 60.0);
         }

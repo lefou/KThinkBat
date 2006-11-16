@@ -1,3 +1,7 @@
+KThinkBat 0.2.3:
+   * #10: Adapt remaining time calculation to apere base battery information
+     on Asus and Acer laptops
+
 KThinkBat 0.2.2 - 28.10.2006:
    * removed faulty text label from config dialog (Ticket #6)
    * added option to draw the battery gauge upright (Ticket #3)
