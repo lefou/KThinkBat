@@ -60,6 +60,10 @@ public:
 
     float getPowerConsumption() { return curPower; }
 
+    QString getPowerConsumptionFormated();
+
+    /** Get the power unit this battery uses. 
+     */
     QString getPowerUnit() { return powerUnit; }
 
     int getRemainingTimeInMin() { return remainingTime; }

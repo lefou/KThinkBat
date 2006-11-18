@@ -339,6 +339,7 @@ KThinkBat::timeout() {
 //     float critFuel = 0;
     curPower1 = 0;
     bool batOnline = true;
+    powerUnit1 = "";
 
     // 1. First try TP SMAPI on BAT0
     // 2. If that fails try ACPI /proc interface for BAT0
@@ -380,7 +381,7 @@ KThinkBat::timeout() {
 //             critFuel += batInfo2.getCriticalFuel();
             batOnline = batOnline || batInfo2.isOnline();
             curPower1 += batInfo2.getPowerConsumption();
-            powerUnit1 = batInfo2.getPowerUnit();
+            powerUnit1 = powerUnit1.isEmpty() ? batInfo2.getPowerUnit() : powerUnit1;
         }
     }
 

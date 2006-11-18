@@ -1,10 +1,13 @@
-KThinkBat 0.2.3:
-   * #10: Adapt remaining time calculation to apere base battery information
+KThinkBat 0.2.3 - 18.11.2006:
+   * #10: Adapt remaining time calculation to ampere based battery information
      on Asus and Acer laptops
+   * #10: optimized ACPI parsing and ampere/volt detection
+   * #10, #8: made ACPI and SMAPI path configurable via config file (this makes
+     testing with foreign battery information easier)
 
 KThinkBat 0.2.2 - 28.10.2006:
-   * removed faulty text label from config dialog (Ticket #6)
-   * added option to draw the battery gauge upright (Ticket #3)
+   * #6: removed faulty text label from config dialog
+   * #3: added option to draw the battery gauge upright
    * better ACPI support (design capacity, design critical capacity)
    * calculate remaining (discharging) time from capacity values, 
      if the better embedded controler values ar not available

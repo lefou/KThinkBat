@@ -1,19 +1,25 @@
 ## generate API documentation with doxygen
 apidox-am-yes:
-	@if test \! -f "$(top_srcdir)/doc/common/" && test -z "$$ADMIN" ; then \
+	@if test \! -d "$(top_srcdir)/doc/common/" && test -z "$$DOXDATA" ; then \
 		export DOXDATA=$(kde_libs_htmldir)/en/common ; \
 	fi ; \
-	cd $(top_builddir) && sh $(top_srcdir)/admin/doxygen.sh \
+	abs_top_srcdir=`cd $(top_srcdir) && pwd` ;\
+	test -d $(top_builddir)/apidocs || \
+		( cd $(top_builddir) && sh $$abs_top_srcdir/admin/doxygen.sh \
+		--no-modulename --installdir=$(kde_libs_htmldir)/en \
+		--no-recurse $(abs_top_srcdir) . ) ; \
+	cd $(top_builddir) && sh $$abs_top_srcdir/admin/doxygen.sh \
 		--recurse --no-modulename --installdir=$(kde_libs_htmldir)/en \
-		$(top_srcdir) $(subdir)
+		$$abs_top_srcdir $(subdir)
 
 apidox-am-toplevel-yes:
-	@if test \! -f "$(top_srcdir)/doc/common/" && test -z "$$ADMIN" ; then \
+	@if test \! -d "$(top_srcdir)/doc/common/" && test -z "$$ADMIN" ; then \
 		export DOXDATA=$(kde_libs_htmldir)/en/common ; \
 	fi ; \
-	cd $(top_builddir) && sh $(top_srcdir)/admin/doxygen.sh \
+	abs_top_srcdir=`cd $(top_srcdir) && pwd` ;\
+	cd $(top_builddir) && sh $$abs_top_srcdir/admin/doxygen.sh \
 		--no-modulename --installdir=$(kde_libs_htmldir)/en \
-		$(top_srcdir)
+		$$abs_top_srcdir
 
 ## Don't generate API documentation without doxygen
 apidox-am-no:

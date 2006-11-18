@@ -6,12 +6,26 @@
 
     <kcfgfile arg="true"/>
     
-    <group name="General"> 
+    <group name="ACPI">
+        <entry name="AcpiBatteryPath" type="String"> 
+            <label>The path where ACPI information for batteries can be found. Default is /proc/acpi/battery.</label>
+            <default>/proc/acpi/battery</default>
+        </entry>
+    </group>
 
-        <entry name="UpdateIntervalMsek" type="Int"> 
-            <label>Update Interval between new information will be retrieved from the battery.</label> 
+    <group name="SMAPI">
+        <entry name="SmapiPath" type="String"> 
+            <label>The path where SMAPI information for batteries can be found. Default is /sys/devices/platform/smapi.</label>
+            <default>/sys/devices/platform/smapi</default>
+        </entry>
+    </group>
+
+    <group name="General">
+
+        <entry name="UpdateIntervalMsek" type="Int">
+            <label>Update Interval between new information will be retrieved from the battery.</label>
             <default>3000</default>
-        </entry> 
+        </entry>
 
         <entry name="SummarizeBatteries" type="Bool">
             <label>Display two separate batteries.</label>
@@ -65,44 +79,44 @@
             <default>10</default>
         </entry>
 
-        <entry name="PowerMeterBelowGauge" type="Bool"> 
-            <label>Display the power consumption below the battery gauge.</label> 
+        <entry name="PowerMeterBelowGauge" type="Bool">
+            <label>Display the power consumption below the battery gauge.</label>
             <default>true</default>
-        </entry> 
-        <entry name="BorderColor" type="Color"> 
-            <label>Color of the border.</label> 
+        </entry>
+        <entry name="BorderColor" type="Color">
+            <label>Color of the border.</label>
             <default>black</default>
         </entry> 
-        <entry name="BatChargedColor" type="Color"> 
-            <label>Color of the charded part of the battery.</label> 
+        <entry name="BatChargedColor" type="Color">
+            <label>Color of the charded part of the battery.</label>
             <default>green</default>
         </entry> 
-        <entry name="BatCriticalColor" type="Color"> 
-            <label>Color of the charded part of the battery, if with critical fuel.</label> 
+        <entry name="BatCriticalColor" type="Color">
+            <label>Color of the charded part of the battery, if with critical fuel.</label>
             <default>red</default>
-        </entry> 
-        <entry name="BatBackgroundColor" type="Color"> 
-            <label>Color of the empty battery.</label> 
+        </entry>
+        <entry name="BatBackgroundColor" type="Color">
+            <label>Color of the empty battery.</label>
             <default>grey</default>
-        </entry> 
-        <entry name="BatDotOnlineColor" type="Color"> 
-            <label>Color of the Battery dot if charging or online.</label> 
+        </entry>
+        <entry name="BatDotOnlineColor" type="Color">
+            <label>Color of the Battery dot if charging or online.</label>
             <default>yellow</default>
-        </entry> 
-        <entry name="PowerMeterColor" type="Color"> 
-            <label>Color of the power meter.</label> 
+        </entry>
+        <entry name="PowerMeterColor" type="Color">
+            <label>Color of the power meter.</label>
             <default>black</default>
-        </entry> 
+        </entry>
 
-        <entry name="GaugeFont" type="Font"> 
-            <label>The font used to display the percentage value in the battery gauge.</label> 
-            <default code="true">KGlobalSettings::generalFont()</default> 
-        </entry> 
-        <entry name="PowerMeterFont" type="Font"> 
-            <label>The font used to display the current power consumption (power meter).</label> 
-            <default code="true">KGlobalSettings::generalFont()</default> 
-        </entry> 
-    </group> 
+        <entry name="GaugeFont" type="Font">
+            <label>The font used to display the percentage value in the battery gauge.</label>
+            <default code="true">KGlobalSettings::generalFont()</default>
+        </entry>
+        <entry name="PowerMeterFont" type="Font">
+            <label>The font used to display the current power consumption (power meter).</label>
+            <default code="true">KGlobalSettings::generalFont()</default>
+        </entry>
+    </group>
 
 </kcfg>
 

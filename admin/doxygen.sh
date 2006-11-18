@@ -13,9 +13,13 @@ echo "*** doxygen.sh"
 recurse=1
 recurse_given=NO
 use_modulename=1
+cleanup=YES
 
 while test -n "$1" ; do
 case "x$1" in
+"x--no-cleanup" )
+	cleanup=NO
+	;;
 "x--no-recurse" )
 	recurse=0
 	recurse_given=YES
@@ -134,15 +138,27 @@ if test -z "$DOXDATA" || test ! -d "$DOXDATA" ; then
 fi
 
 if ! test -d "$DOXDATA" ; then
-	echo "\$DOXDATA does not name a directory ( or is unset ), tried \"$DOXDATA\""
+	echo "* \$DOXDATA does not name a directory ( or is unset ), tried \"$DOXDATA\""
 	exit 1
 fi
 
 if test -n "$PREFIX" && test ! -d "$PREFIX" ; then
-	echo "\$PREFIX does not name a directory, tried \"$PREFIX\""
-	exit 1
+	echo "* \$PREFIX does not name a directory, tried \"$PREFIX\""
+	echo "* \$PREFIX is disabled."
+	PREFIX=""
 fi
 
+### We need some values from top-level files, which
+### are not preserved between invocations of this
+### script, so factor it out for easy use.
+create_doxyfile_in() 
+{
+	eval `grep 'VERSION="' "$top_srcdir/admin/cvs.sh"`
+	echo "PROJECT_NUMBER = $VERSION" > Doxyfile.in
+	grep ^KDE_INIT_DOXYGEN "$top_srcdir/configure.in.in" | \
+		sed -e 's+[^[]*\[\([^]]*\)+PROJECT_NAME = "\1"+' \
+			-e 's+].*++' >> Doxyfile.in
+}
 
 apidoxdir="$module_name"-apidocs
 test "x$use_modulename" = "x0" && apidoxdir="apidocs"
@@ -151,7 +167,7 @@ test "x$use_modulename" = "x0" && apidoxdir="apidocs"
 ### for the apidox and initialize it. Otherwise, just use the
 ### structure assumed to be there.
 if test -z "$subdir" ; then
-	if test "x$recurse" = "x1" ; then
+	if ! test -d "$apidoxdir" ; then
 		mkdir "$apidoxdir" > /dev/null 2>&1
 	fi
 	if ! cd "$apidoxdir" > /dev/null 2>&1 ; then
@@ -159,13 +175,7 @@ if test -z "$subdir" ; then
 		exit 1
 	fi
 
-	# Extract some constants from the top-level files and
-	# store them in Makefile.in for later reference.
-	eval `grep 'VERSION="' "$top_srcdir/admin/cvs.sh"`
-	echo "PROJECT_NUMBER = $VERSION" > Doxyfile.in
-	grep ^KDE_INIT_DOXYGEN "$top_srcdir/configure.in.in" | \
-		sed -e 's+[^[]*\[\([^]]*\)+PROJECT_NAME = "\1"+' \
-			-e 's+].*++' >> Doxyfile.in
+	test -f "Doxyfile.in" || create_doxyfile_in
 
 	# Copy in logos and the like
 	for i in "favicon.ico" "kde_gear_64.png"
@@ -321,6 +331,10 @@ doxyndex()
 		htmltop="$top_builddir.." # top_builddir ends with /
 		echo "* Post-processing files in $htmldir"
 
+		# Build a little PHP file that maps class names to file
+		# names, for the quick-class-picker functionality.
+		# (The quick-class-picker is disabled due to styling
+		# problems in IE & FF).
 		(
 		echo "<?php \$map = array(";  \
 		for htmlfile in `find $htmldir/ -type f -name "class[A-Z]*.html" | grep -v "\-members.html$"`; do
@@ -360,15 +374,25 @@ doxyndex()
 
 	PMENU=`grep '<!-- pmenu' "$htmldir/index.html" | sed -e 's+.*pmenu *++' -e 's+ *-->++' | awk '{ c=split($0,a,"/"); for (j=1; j<=c; j++) { printf " / <a href=\""; if (j==c) { printf("."); } for (k=j; k<c; k++) { printf "../"; } if (j<c) { printf("../html/index.html"); } printf "\">%s</a>\n" , a[j]; } }' | tr -d '\n'`
 
+	# Map the PHP file into HTML options so that
+	# it can be substituted in for the quick-class-picker.
 	CMENU=""
-	test -f "$subdir/classmap.inc" && \
-	CMENU=`grep '=>' "$subdir/classmap.inc" | sed -e 's+"\([^"]*\)" => "'"$subdir/html/"'\([^"]*\)"+<option value="\2">\1<\/option>+' | tr -d '\n'`
-
+	# For now, leave the CMENU disabled
 	CMENUBEGIN="<!--"
 	CMENUEND="-->"
-	if ! test -f "$subdir/classmap.inc" || ! grep "=>" "$subdir/classmap.inc" > /dev/null 2>&1 ; then
+
+	if test "x$subdir" = "x." ; then
+		# Disable CMENU on toplevel anyway
 		CMENUBEGIN="<!--"
 		CMENUEND="-->"
+	else
+		test -f "$subdir/classmap.inc" && \
+		CMENU=`grep '=>' "$subdir/classmap.inc" | sed -e 's+"\([^"]*\)" => "'"$subdir/html/"'\([^"]*\)"+<option value="\2">\1<\/option>+' | tr -d '\n'`
+
+		if ! test -f "$subdir/classmap.inc" || ! grep "=>" "$subdir/classmap.inc" > /dev/null 2>&1 ; then
+			CMENUBEGIN="<!--"
+			CMENUEND="-->"
+		fi
 	fi
 
 	# Now substitute in the MENU in every file. This depends
@@ -380,10 +404,11 @@ doxyndex()
 			sed -e "s+<!-- menu -->+$MENU+" \
 				-e "s+<!-- gmenu -->+$GMENU+" \
 				-e "s+<!-- pmenu.*-->+$PMENU+" \
-				-e "s+<!-- cmenu -->+$CMENU+" \
 				-e "s+<!-- cmenu.begin -->+$CMENUBEGIN+" \
 				-e "s+<!-- cmenu.end -->+$CMENUEND+" \
 				< "$i"  | sed -e "s+@topdir@+$htmltop+g" > "$i.new" && mv "$i.new" "$i"
+			sed -e "s+<!-- cmenu -->+$CMENU+" < "$i" > "$i.new"
+			test -s "$i.new" && mv "$i.new" "$i"
 		fi
 	done
 }
@@ -455,10 +480,13 @@ apidox_toplevel()
 			dir="$dir/"
 		fi
 		indent=`echo "$dir" | sed -e 's+[^/]*/+\&nbsp;\&nbsp;+g' | sed -e 's+&+\\\&+g'`
+		entryname=`extract_line DOXYGEN_SET_PROJECT_NAME "$top_srcdir/$dir/$file/Makefile.am"`
+		test -z "$entryname" && entryname="$file"
+
 		if grep DOXYGEN_EMPTY "$top_srcdir/$dir/$file/Makefile.am" > /dev/null 2>&1 ; then
 			echo "<li>$indent$file</li>"
 		else
-			echo "<li>$indent<a href=\"@topdir@/$dir$file/html/index.html\">$file</a></li>"
+			echo "<li>$indent<a href=\"@topdir@/$dir$file/html/index.html\">$entryname</a></li>"
 		fi
 	done > subdirs
 
@@ -487,6 +515,7 @@ apidox_subdir()
 	done
 
 
+	test -f "Doxyfile.in" || create_doxyfile_in
 	cat "Doxyfile.in" >> "$subdir/Doxyfile"
 
 	echo "PROJECT_NAME           = \"$subdir\"" >> "$subdir/Doxyfile"
@@ -830,6 +859,13 @@ else
 fi
 
 
+# At the end of a run, clean up stuff.
+if test "YES" = "$cleanup" ; then
+	rm -f subdirs.in  subdirs.later subdirs.sort subdirs.top Doxyfile.in
+	rm -f `find . -name Doxyfile`
+	rm -f qt/qt.tag
+	rmdir qt > /dev/null 2>&1
+fi
 
 
 exit 0

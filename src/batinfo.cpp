@@ -26,6 +26,7 @@
 #include <qtextstream.h>
 
 #include "batinfo.h"
+#include "kthinkbatconfig.h"
 
 BatInfo::BatInfo( int number ) 
 : batNr( number - 1 ) {
@@ -47,26 +48,21 @@ BatInfo::getChargeLevel() {
 bool
 BatInfo::parseProcACPI() {
 
-    // die aktuelle Zeile beim parsen des proc-fs
+    // the current line while parsing the proc-fs
     QString line = "";
     QString mWHstring = "";
-    // normale Angaben: Kapzität, Max Kap., aktuelle Kap.
-    QString cap = "", designCap = "", cur = "", criticalCap = "";
-    // dieselben Angaben, aber in mAh statt in mWh
-    QString capA = "", designCapA = "", criticalCapA = "";
+    QString cur = "";
+    QString cap = "";
+    QString designCap = "";
+    QString criticalCap = "";
 
     // Pattern für /proc/acpi/battery/BATx/info
-    // ThinkPad (mWh)
     QRegExp rxInstalled( "^present:\\s*(yes)" );
-    QRegExp rxCap("^last full capacity:\\s*(\\d{1,5})\\s*mWh");
-    QRegExp rxDesignCap("^design capacity:\\s*(\\d{1,5})\\s*mWh");
-    QRegExp rxDesignCapLow("^design capacity warning:\\s*(\\d{1,5})\\s*mWh");
-    // Asus/Acer (mAh)
-    QRegExp rxCapA("^last full capacity:\\s*(\\d{1,5})\\s*mAh");
-    QRegExp rxDesignCapA("^design capacity low:\\s*(\\d{1,5})\\s*mAh");
-    QRegExp rxDesignCapLowA("^design capacity warning:\\s*(\\d{1,5})\\s*mAh");
+    QRegExp rxCap("^last full capacity:\\s*(\\d{1,5})\\s*m(A|W)h");
+    QRegExp rxDesignCap("^design capacity:\\s*(\\d{1,5})\\s*m(A|W)h");
+    QRegExp rxDesignCapLow("^design capacity warning:\\s*(\\d{1,5})\\s*m(A|W)h");
 
-    QString filename = "/proc/acpi/battery/BAT" + QString::number(batNr) + "/info";
+    QString filename = KThinkBatConfig::acpiBatteryPath() + "/BAT" + QString::number(batNr) + "/info";
     QFile file( filename );
     if( ! file.exists() || ! file.open(IO_ReadOnly) ) {
         // this is nothing unexpected, so say it only once
@@ -83,14 +79,16 @@ BatInfo::parseProcACPI() {
 
     QTextStream stream( (QIODevice*) &file );
     while( ! stream.atEnd() ) {
+        // parse output line-wise
         line = stream.readLine();
-        if( -1 != rxInstalled.search( line ) ) {
-            batInstalled = ( rxInstalled.cap(1) == "yes" );
-            //KMessageBox::information(0, "fount cap: "+cap);
+        if( -1 != rxInstalled.search( line ) && "yes" != rxInstalled.cap(1) ) {
+            resetValues();
+            batInstalled = false;
+            return false;
         }
         if( -1 != rxCap.search( line ) ) {
             cap = rxCap.cap(1);
-            //KMessageBox::information(0, "fount cap: "+cap);
+            powerUnit = rxCap.cap(2);
         }
         if( -1 != rxDesignCap.search( line ) ) {
             designCap = rxDesignCap.cap(1);
@@ -98,39 +96,10 @@ BatInfo::parseProcACPI() {
         if( -1 != rxDesignCapLow.search( line ) ) {
             criticalCap = rxDesignCapLow.cap(1);
         }
-        if( -1 != rxCapA.search( line ) ) {
-            capA = rxCapA.cap(1);
-            //KMessageBox::information(0, "fount cap: "+cap);
-        }
-        if( -1 != rxDesignCapA.search( line ) ) {
-            designCapA = rxDesignCapA.cap(1);
-        }
-        if( -1 != rxDesignCapLowA.search( line ) ) {
-            criticalCapA = rxDesignCapLowA.cap(1);
-        }
     }
     file.close();
 
-    if( ! batInstalled ) {
-        resetValues();
-        batInstalled = false;
-        return false;
-    }   
-
-    // Falls keine Angaben in mWh, dafür aber welche in mAh, 
-    // dann verwenden wir A als Einheit
-    if( cap.isEmpty() && ! capA.isEmpty() ) {
-//     if( ! capA.isEmpty() ) {
-        cap = capA;
-        designCap = designCapA;
-        criticalCap = criticalCapA;
-        powerUnit = "A";
-    }
-    else {
-        powerUnit = "W";
-    }
-
-    filename = "/proc/acpi/battery/BAT" + QString::number(batNr) + "/state";
+    filename = KThinkBatConfig::acpiBatteryPath() + "/BAT" + QString::number(batNr) + "/state";
     file.setName( filename );
     if( ! file.exists() || ! file.open(IO_ReadOnly) ) {
         static bool sayTheProblem2 = true;
@@ -233,7 +202,7 @@ BatInfo::parseProcAcpiBatAlarm() {
     QRegExp rxWarnCap("^alarm:\\s*(\\d{1,5})\\s*m" + powerUnit + "h");
 
     // Get Alarm Fuel
-    QString filename = "/proc/acpi/battery/BAT" + QString::number( batNr ) + "/alarm";
+    QString filename = KThinkBatConfig::acpiBatteryPath() + "/BAT" + QString::number( batNr ) + "/alarm";
     QFile file( filename );
     if( ! file.exists() || ! file.open(IO_ReadOnly) ) {
         criticalFuel = 0;
@@ -262,7 +231,7 @@ BatInfo::parseSysfsTP() {
 
     powerUnit = "W";
 
-    QString tpPath = "/sys/devices/platform/smapi/BAT" + QString::number(batNr) + "/";
+    QString tpPath = KThinkBatConfig::smapiPath() + "/BAT" + QString::number(batNr) + "/";
     QFile file;
     QTextStream stream;
     QString line;
@@ -270,10 +239,10 @@ BatInfo::parseSysfsTP() {
     QRegExp mW( "^([-]?\\d{1,6})(\\s*mW)?\\s*$" );
     bool check;
 
-    if( ! QDir().exists( "/sys/devices/platform/smapi" ) ) {
+    if( ! QDir().exists( KThinkBatConfig::smapiPath() ) ) {
         static bool sayTheProblem = true;
         if( sayTheProblem ) {
-            qDebug( "KThinkBat: There is no directory /sys/devices/platform/smapi. Do you have tp_smapi loaded?" );
+            qDebug( "KThinkBat: There is no directory %s. Do you have tp_smapi loaded?", QString(KThinkBatConfig::smapiPath()).latin1() );
             sayTheProblem = false;
         }
         return false;
@@ -361,7 +330,7 @@ BatInfo::parseSysfsTP() {
     batCharging = ( batState == "charging" );
 
     bool oldAcCon = isOnline();
-    file.setName( "/sys/devices/platform/smapi/ac_connected" );
+    file.setName( KThinkBatConfig::smapiPath() + "/ac_connected" );
     if( file.exists() && file.open(IO_ReadOnly) ) {
         stream.setDevice( &file );
         acConnected = stream.readLine().toInt( &check );
@@ -420,4 +389,19 @@ BatInfo::resetValues() {
     powerUnit = "W";
     batState = "not installed";
     lastSuccessfulReadMethod = "";
+}
+
+QString
+BatInfo::getPowerConsumptionFormated() {
+
+    QString formatString = "";
+
+    if( "W" == getPowerUnit() ) {
+            formatString = QString().number((int) (curPower + 500)/1000);
+        }
+        else {
+            formatString = QString().number((float) (((int) curPower + 50)/100) / 10 );
+        }
+
+    return (formatString + " " + getPowerUnit());
 }

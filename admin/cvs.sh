@@ -32,7 +32,7 @@ check_autotool_versions()
 required_autoconf_version="2.53 or newer"
 AUTOCONF_VERSION=`$AUTOCONF --version | head -n 1`
 case $AUTOCONF_VERSION in
-  Autoconf*2.5* | autoconf*2.5* ) : ;;
+  Autoconf*2.[56]* | autoconf*2.[56]* ) : ;;
   "" )
     echo "*** AUTOCONF NOT FOUND!."
     echo "*** KDE requires autoconf $required_autoconf_version"
@@ -47,7 +47,7 @@ esac
 
 AUTOHEADER_VERSION=`$AUTOHEADER --version | head -n 1`
 case $AUTOHEADER_VERSION in
-  Autoconf*2.5* | autoheader*2.5* ) : ;;
+  Autoconf*2.[56]* | autoheader*2.[56]* ) : ;;
   "" )
     echo "*** AUTOHEADER NOT FOUND!."
     echo "*** KDE requires autoheader $required_autoconf_version"
@@ -131,6 +131,7 @@ call_and_fix_autoconf
 if egrep "^AM_CONFIG_HEADER" configure.in >/dev/null 2>&1; then
   echo "*** Creating config.h template"
   $AUTOHEADER || exit 1
+  touch config.h.in
 fi
 
 echo "*** Creating Makefile templates"
@@ -186,6 +187,7 @@ $ACLOCAL $ACLOCALFLAGS
 if egrep "^AM_CONFIG_HEADER" configure.in >/dev/null 2>&1; then
   echo "*** Creating config.h template"
   $AUTOHEADER || exit 1
+  touch config.h.in
 fi
 $AUTOMAKE --foreign || exit 1
 if test "$UNSERMAKE" = no; then
@@ -219,6 +221,7 @@ subdir_dist()
 {
 $ACLOCAL $ACLOCALFLAGS
 $AUTOHEADER
+touch config.h.in
 $AUTOMAKE
 AUTOMAKE_STRING=`$AUTOMAKE --version | head -n 1`
 case $AUTOMAKE_STRING in
@@ -313,7 +316,7 @@ if test -f configure.in.in; then
    fi
 fi
 if test -z "$VERSION" || test "$VERSION" = "@VERSION@"; then
-     VERSION="\"3.4.90\""
+     VERSION="\"3.5.0\""
 fi
 if test -z "$modulename" || test "$modulename" = "@MODULENAME@"; then
    modulename=`pwd`; 

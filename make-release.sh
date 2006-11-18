@@ -12,3 +12,5 @@ make -f Makefile.cvs -C make-release
 make -C make-release dist-bzip2
 mv -v make-release/*.tar.bz2 .
 rm -r make-release
+
+for file in $(ls -1 *.tar.bz2); do md5sum $file > $file.md5; done

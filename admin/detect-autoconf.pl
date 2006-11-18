@@ -28,6 +28,10 @@ sub findBest
     my ($program, @paths) = @_;
     my $best_version_found = '0'; # Deliberately a string.
     my %versions;
+    my %minimumVersions = (
+ 	'autoconf' => '2.5',
+	'automake' => '1.6',
+    );
 
     # Allow user to use environment variable to override search.
     return $ENV{uc $program} if $ENV{uc $program};
@@ -40,8 +44,28 @@ sub findBest
 	    # Don't check non-executable scripts.
 	    next unless -x $file;
 
-	    ($version) = $file =~ /$program-?(.*)$/;
+	    ($version) = $file =~ /$prefix\/$program-?(.*)$/;
 	    $version =~ s/-|\.//g;
+
+	    # Special case some programs to make sure it has a minimum version.
+	    if (not $version and exists $minimumVersions{$program})
+	    {
+		my $min_version = $minimumVersions{$program};
+		my $versionOutput = `$program --version 2>/dev/null | head -n 1`;
+
+		# If we can't run the script to get the version it likely won't work later.
+		next unless $versionOutput; 
+
+		# Use number.number for version (we don't need the excess in general).
+		($versionOutput) = ($versionOutput =~ /(\d\.\d)/);
+
+		# Use lt to do lexicographical comparison of strings (which should be
+		# equivalent and doesn't involve issues with floating point conversions).
+		if (not $versionOutput or $versionOutput lt $min_version)
+		{
+		    next;
+		}
+	    }
 
 	    # If no version suffix then use it in favor of a versioned autotool
 	    # since the ever-popular WANT_AUTOFOO should then work (in theory).
@@ -106,7 +130,11 @@ $autom4te = findProgram('autom4te', $autoconf_suffix);
 
 # Get best automake, and look for unsermake to possibly override it.
 $automake = findBest('automake', @paths);
-$unsermake = ($ENV{'UNSERMAKE'} ne 'no') ? findProgram('unsermake') : "";
+$unsermake = "";
+# backward compatible: if $UNSERMAKE points to a path, use it
+$unsermake = findProgram('unsermake') if (defined($ENV{'UNSERMAKE'}) and $ENV{'UNSERMAKE'} =~ /\//);
+# new compatible: if it says 'yes', use the one from path
+$unsermake = which('unsermake') if ($ENV{'UNSERMAKE'} ne 'no');
 
 ($automake_suffix) = $automake =~ /.*automake(.*)$/;
 
