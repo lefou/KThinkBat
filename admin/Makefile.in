@@ -20,7 +20,7 @@ VPATH = @srcdir@
 pkgdatadir = $(datadir)/@PACKAGE@
 pkglibdir = $(libdir)/@PACKAGE@
 pkgincludedir = $(includedir)/@PACKAGE@
-top_builddir = ../..
+top_builddir = ..
 am__cd = CDPATH="$${ZSH_VERSION+.}$(PATH_SEPARATOR)" && cd
 INSTALL = @INSTALL@
 install_sh_DATA = $(install_sh) -c -m 644
@@ -37,7 +37,7 @@ POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
 target_triplet = @target@
-subdir = kapptemplate/admin
+subdir = admin
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in compile \
 	config.guess config.sub depcomp install-sh ltmain.sh missing \
 	mkinstalldirs ylwrap
@@ -231,8 +231,6 @@ build_os = @build_os@
 build_vendor = @build_vendor@
 datadir = @datadir@
 datarootdir = @datarootdir@
-doc_SUBDIR_included_FALSE = @doc_SUBDIR_included_FALSE@
-doc_SUBDIR_included_TRUE = @doc_SUBDIR_included_TRUE@
 docdir = @docdir@
 dvidir = @dvidir@
 exec_prefix = @exec_prefix@
@@ -249,8 +247,6 @@ include_x11_TRUE = @include_x11_TRUE@
 includedir = @includedir@
 infodir = @infodir@
 install_sh = @install_sh@
-kapptemplate_SUBDIR_included_FALSE = @kapptemplate_SUBDIR_included_FALSE@
-kapptemplate_SUBDIR_included_TRUE = @kapptemplate_SUBDIR_included_TRUE@
 kde_appsdir = @kde_appsdir@
 kde_bindir = @kde_bindir@
 kde_confdir = @kde_confdir@
@@ -316,9 +312,9 @@ $(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
 #>- 	      exit 1;; \
 #>- 	  esac; \
 #>- 	done; \
-#>- 	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu  kapptemplate/admin/Makefile'; \
+#>- 	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu  admin/Makefile'; \
 #>- 	cd $(top_srcdir) && \
-#>- 	  $(AUTOMAKE) --gnu  kapptemplate/admin/Makefile
+#>- 	  $(AUTOMAKE) --gnu  admin/Makefile
 #>+ 12
 	@for dep in $?; do \
 	  case '$(am__configure_deps)' in \
@@ -328,10 +324,10 @@ $(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu  kapptemplate/admin/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu  admin/Makefile'; \
 	cd $(top_srcdir) && \
-	  $(AUTOMAKE) --gnu  kapptemplate/admin/Makefile
-	cd $(top_srcdir) && perl admin/am_edit kapptemplate/admin/Makefile.in
+	  $(AUTOMAKE) --gnu  admin/Makefile
+	cd $(top_srcdir) && perl admin/am_edit admin/Makefile.in
 .PRECIOUS: Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
@@ -513,10 +509,10 @@ force-reedit:
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu  kapptemplate/admin/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu  admin/Makefile'; \
 	cd $(top_srcdir) && \
-	  $(AUTOMAKE) --gnu  kapptemplate/admin/Makefile
-	cd $(top_srcdir) && perl admin/am_edit kapptemplate/admin/Makefile.in
+	  $(AUTOMAKE) --gnu  admin/Makefile
+	cd $(top_srcdir) && perl admin/am_edit admin/Makefile.in
 
 
 #>+ 21

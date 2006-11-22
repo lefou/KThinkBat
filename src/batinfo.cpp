@@ -75,16 +75,15 @@ BatInfo::parseProcACPI() {
         return false;
     }
 
-    batInstalled = true;
+    // we assume, that no battery is installed rather than beeing optimistic, see Ticket #11
+    batInstalled = false;
 
     QTextStream stream( (QIODevice*) &file );
     while( ! stream.atEnd() ) {
         // parse output line-wise
         line = stream.readLine();
-        if( -1 != rxInstalled.search( line ) && "yes" != rxInstalled.cap(1) ) {
-            resetValues();
-            batInstalled = false;
-            return false;
+        if( -1 != rxInstalled.search( line ) && "yes" == rxInstalled.cap(1) ) {
+            batInstalled = true;
         }
         if( -1 != rxCap.search( line ) ) {
             cap = rxCap.cap(1);
@@ -98,6 +97,13 @@ BatInfo::parseProcACPI() {
         }
     }
     file.close();
+
+    if( ! batInstalled ) {
+        resetValues();
+        batInstalled = false;
+        // we return true, as no other backend should detect the fact, that there is no battery again.
+        return true;
+    }
 
     filename = KThinkBatConfig::acpiBatteryPath() + "/BAT" + QString::number(batNr) + "/state";
     file.setName( filename );
@@ -114,7 +120,7 @@ BatInfo::parseProcACPI() {
 
     // Pattern for /proc/acpi/battery/BATx/state
     QRegExp rxCur("^remaining capacity:\\s*(\\d{1,5})\\s*m" + powerUnit + "h");
-    QRegExp rxOffline("^charging state:\\s*(discharging|charging|charged)");
+    QRegExp rxOffline("^charging state:\\s*(discharging|charging|charged|not installed)");
     QRegExp rxMWH("^present rate:\\s*(\\d{1,5})\\s*m" + powerUnit );
 
     while( ! stream.atEnd() ) {
@@ -125,6 +131,13 @@ BatInfo::parseProcACPI() {
         }
         if( -1 != rxOffline.search( line ) ) {
             batState = rxOffline.cap(1);
+            // we check again for a not installed battery, see Ticket #11
+            if( "not installed" == batState ) {
+                resetValues();
+                batInstalled = false;
+                // we return true, as no other backend should detect the fact, that there is no battery again.
+                return true;
+            }
         }
         if( -1 != rxMWH.search( line ) ) {
             mWHstring = rxMWH.cap(1);

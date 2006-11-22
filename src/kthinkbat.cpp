@@ -344,7 +344,7 @@ KThinkBat::timeout() {
     // 1. First try TP SMAPI on BAT0
     // 2. If that fails try ACPI /proc interface for BAT0
     bool battery1 = batInfo1.parseSysfsTP() || batInfo1.parseProcACPI();
-    if( battery1 ) {
+    if( battery1 && batInfo1.isInstalled() ) {
         if( ! KThinkBatConfig::summarizeBatteries() ) {
             gauge1.setPercentValue( (int) batInfo1.getChargeLevel() );
             gauge1.setColors( QColor( KThinkBatConfig::batBackgroundColor() ),
@@ -366,7 +366,7 @@ KThinkBat::timeout() {
     // 3. Now try BAT1, first TP SMAPI agian
     // 4. And, if that failed, try ACPi /proc interface for BAT1
     bool battery2 = batInfo2.parseSysfsTP() || batInfo2.parseProcACPI();
-    if( battery2 ) {
+    if( battery2 && batInfo2.isInstalled() ) {
         if( ! KThinkBatConfig::summarizeBatteries() ) {
             gauge2.setPercentValue( (int) batInfo2.getChargeLevel() );
             gauge2.setColors( QColor( KThinkBatConfig::batBackgroundColor() ),

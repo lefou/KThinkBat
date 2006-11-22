@@ -1,3 +1,6 @@
+KThinkBat 0.2.4:
+   * #11: better detection, if battery is installed or not
+
 KThinkBat 0.2.3 - 18.11.2006:
    * #10: Adapt remaining time calculation to ampere based battery information
      on Asus and Acer laptops
