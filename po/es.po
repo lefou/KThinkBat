@@ -79,8 +79,7 @@ msgstr "Propiedades de la batería"
 
 #. i18n: file ./prefs.ui line 38
 #: rc.cpp:9
-#, no-c-format
-#, fuzzy
+#, fuzzy, no-c-format
 msgid "Battery Critical Fill"
 msgstr "Campo de ña batería crítica"
 
@@ -164,8 +163,7 @@ msgstr "Tamaño de la batería"
 
 #. i18n: file ./prefs.ui line 404
 #: rc.cpp:62
-#, no-c-format
-#, fuzzy
+#, fuzzy, no-c-format
 msgid "Gauge Dot Size:"
 msgstr "Tamaño del punto de la batería"
 
@@ -180,4 +178,3 @@ msgstr "Fuente del medidor (Valor del porcentaje)"
 #, no-c-format
 msgid "Power Meter Font"
 msgstr "Fuente del medidor de batería"
-

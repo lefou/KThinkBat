@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-02-03 15:47+0100\n"
+"POT-Creation-Date: 2006-04-10 11:59+0200\n"
 "PO-Revision-Date: 2006-01-30 17:57+0100\n"
 "Last-Translator: Adam Golebiowski <adamg@pld-linux.org>\n"
 "Language-Team: Polish <pl@li.org>\n"
@@ -27,29 +27,29 @@ msgid ""
 "Your emails"
 msgstr "adamg@pld-linux.org"
 
-#: kthinkbat.cpp:63
+#: kthinkbat.cpp:72
 msgid "KThinkBat %1"
 msgstr "KThinkBat %1"
 
-#: kthinkbat.cpp:64
+#: kthinkbat.cpp:73
 msgid "&About %1"
 msgstr "O &programie %1"
 
-#: kthinkbat.cpp:65
+#: kthinkbat.cpp:74
 msgid "&Configure %1..."
 msgstr "&Konfiguruj %1"
 
 #. i18n: file ./prefs.ui line 16
-#: kthinkbat.cpp:98 rc.cpp:3
+#: kthinkbat.cpp:119 rc.cpp:3
 #, no-c-format
 msgid "KThinkBat Preferences"
 msgstr "Opcje KThinkBat"
 
-#: kthinkbat.cpp:117
+#: kthinkbat.cpp:138
 msgid "A KDE panel applet to display the current laptop battery status."
 msgstr "Aplet panelu KDE wyświetlający status baterii w laptopie."
 
-#: kthinkbat.cpp:134
+#: kthinkbat.cpp:155
 msgid ""
 "A KDE panel applet to display the current laptop battery status.\n"
 "\n"
@@ -58,6 +58,14 @@ msgstr ""
 "Aplet panelu KDE wyświetlający status baterii w laptopie.\n"
 "\n"
 "Jak na razie aplet ten nie posiada pomocy"
+
+#: kthinkbat.cpp:299 kthinkbat.cpp:327
+msgid "Battery %1: "
+msgstr ""
+
+#: kthinkbat.cpp:302 kthinkbat.cpp:330
+msgid "Battery %1: not installed"
+msgstr ""
 
 #. i18n: file ./prefs.ui line 27
 #: rc.cpp:6
@@ -166,4 +174,3 @@ msgstr "Wielkość czcionki wykresu (procentowo):"
 #, no-c-format
 msgid "Power Meter Font"
 msgstr "Czcionka miernika mocy"
-# vim: set encoding=utf-8 termencoding=iso-8859-2:
