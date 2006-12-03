@@ -48,6 +48,22 @@
             <default>true</default>
         </entry>
 
+        <entry name="GaugeContentPercent" type="Bool">
+            <label>Show Fuel in Percent.</label>
+            <whatsthis>If selected, shows the current battery fuel in percent in the battery gauge.</whatsthis>
+            <default>true</default>
+        </entry>
+        <entry name="GaugeContentTime" type="Bool">
+            <label>Show Remaining Time.</label>
+            <whatsthis>If selected, shows the remaining time left in the battery gauge.</whatsthis>
+            <default>false</default>
+        </entry>
+        <entry name="GaugeContentNone" type="Bool">
+            <label>Enpyty Gauge.</label>
+            <whatsthis>If selected, show no value in the battery gauge.</whatsthis>
+            <default>false</default>
+        </entry>
+
         <entry name="DrawBatteryUpright" type="Bool">
             <label>Draw the battery gauge upright.</label>
             <default>false</default>

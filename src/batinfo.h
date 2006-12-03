@@ -67,6 +67,7 @@ public:
     QString getPowerUnit() { return powerUnit; }
 
     int getRemainingTimeInMin() { return remainingTime; }
+    QString getRemainingTimeInHours();
 
     void invalidateAll();
 

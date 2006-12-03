@@ -1,5 +1,8 @@
 KThinkBat 0.2.4:
    * #11: better detection, if battery is installed or not
+   * #12: more control over the text labels, the bettery gauge content can now 
+     be empty, remaining time or remaining power
+   * more German translations
 
 KThinkBat 0.2.3 - 18.11.2006:
    * #10: Adapt remaining time calculation to ampere based battery information

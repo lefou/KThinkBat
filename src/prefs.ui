@@ -8,8 +8,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>500</width>
-            <height>534</height>
+            <width>572</width>
+            <height>565</height>
         </rect>
     </property>
     <property name="maximumSize">
@@ -25,294 +25,7 @@
         <property name="name">
             <cstring>unnamed</cstring>
         </property>
-        <widget class="QGroupBox" row="3" column="0">
-            <property name="name">
-                <cstring>groupBox4</cstring>
-            </property>
-            <property name="title">
-                <string>Font</string>
-            </property>
-            <grid>
-                <property name="name">
-                    <cstring>unnamed</cstring>
-                </property>
-                <widget class="QLabel" row="0" column="0">
-                    <property name="name">
-                        <cstring>textLabel1_2</cstring>
-                    </property>
-                    <property name="text">
-                        <string>Gauge Font (Percentage Value)</string>
-                    </property>
-                </widget>
-                <widget class="QLabel" row="1" column="0">
-                    <property name="name">
-                        <cstring>textLabel2_3</cstring>
-                    </property>
-                    <property name="text">
-                        <string>Power Meter Font</string>
-                    </property>
-                </widget>
-                <widget class="KFontCombo" row="0" column="2">
-                    <property name="name">
-                        <cstring>kcfg_GaugeFont</cstring>
-                    </property>
-                </widget>
-                <spacer row="0" column="1">
-                    <property name="name">
-                        <cstring>spacer10</cstring>
-                    </property>
-                    <property name="orientation">
-                        <enum>Horizontal</enum>
-                    </property>
-                    <property name="sizeType">
-                        <enum>Expanding</enum>
-                    </property>
-                    <property name="sizeHint">
-                        <size>
-                            <width>30</width>
-                            <height>20</height>
-                        </size>
-                    </property>
-                </spacer>
-                <widget class="KFontCombo" row="1" column="2">
-                    <property name="name">
-                        <cstring>kcfg_PowerMeterFont</cstring>
-                    </property>
-                </widget>
-                <spacer row="1" column="1">
-                    <property name="name">
-                        <cstring>spacer11</cstring>
-                    </property>
-                    <property name="orientation">
-                        <enum>Horizontal</enum>
-                    </property>
-                    <property name="sizeType">
-                        <enum>Expanding</enum>
-                    </property>
-                    <property name="sizeHint">
-                        <size>
-                            <width>40</width>
-                            <height>21</height>
-                        </size>
-                    </property>
-                </spacer>
-            </grid>
-        </widget>
-        <widget class="QGroupBox" row="1" column="0">
-            <property name="name">
-                <cstring>groupBox3</cstring>
-            </property>
-            <property name="title">
-                <string>Color</string>
-            </property>
-            <grid>
-                <property name="name">
-                    <cstring>unnamed</cstring>
-                </property>
-                <widget class="QLabel" row="0" column="0">
-                    <property name="name">
-                        <cstring>textLabel3</cstring>
-                    </property>
-                    <property name="text">
-                        <string>Gauge Background Color</string>
-                    </property>
-                </widget>
-                <widget class="KColorButton" row="1" column="6">
-                    <property name="name">
-                        <cstring>kcfg_BatCriticalColor</cstring>
-                    </property>
-                    <property name="sizePolicy">
-                        <sizepolicy>
-                            <hsizetype>0</hsizetype>
-                            <vsizetype>0</vsizetype>
-                            <horstretch>0</horstretch>
-                            <verstretch>0</verstretch>
-                        </sizepolicy>
-                    </property>
-                    <property name="text">
-                        <string></string>
-                    </property>
-                </widget>
-                <widget class="QLabel" row="1" column="4">
-                    <property name="name">
-                        <cstring>textLabel6</cstring>
-                    </property>
-                    <property name="text">
-                        <string>Gauge Critical Fuell Color</string>
-                    </property>
-                </widget>
-                <widget class="KColorButton" row="0" column="2">
-                    <property name="name">
-                        <cstring>kcfg_BatBackgroundColor</cstring>
-                    </property>
-                    <property name="sizePolicy">
-                        <sizepolicy>
-                            <hsizetype>0</hsizetype>
-                            <vsizetype>0</vsizetype>
-                            <horstretch>0</horstretch>
-                            <verstretch>0</verstretch>
-                        </sizepolicy>
-                    </property>
-                    <property name="text">
-                        <string></string>
-                    </property>
-                </widget>
-                <spacer row="0" column="5">
-                    <property name="name">
-                        <cstring>spacer3</cstring>
-                    </property>
-                    <property name="orientation">
-                        <enum>Horizontal</enum>
-                    </property>
-                    <property name="sizeType">
-                        <enum>Expanding</enum>
-                    </property>
-                    <property name="sizeHint">
-                        <size>
-                            <width>20</width>
-                            <height>20</height>
-                        </size>
-                    </property>
-                </spacer>
-                <spacer row="1" column="5">
-                    <property name="name">
-                        <cstring>spacer6_2</cstring>
-                    </property>
-                    <property name="orientation">
-                        <enum>Horizontal</enum>
-                    </property>
-                    <property name="sizeType">
-                        <enum>Expanding</enum>
-                    </property>
-                    <property name="sizeHint">
-                        <size>
-                            <width>20</width>
-                            <height>20</height>
-                        </size>
-                    </property>
-                </spacer>
-                <spacer row="0" column="1">
-                    <property name="name">
-                        <cstring>spacer1</cstring>
-                    </property>
-                    <property name="orientation">
-                        <enum>Horizontal</enum>
-                    </property>
-                    <property name="sizeType">
-                        <enum>Expanding</enum>
-                    </property>
-                    <property name="sizeHint">
-                        <size>
-                            <width>20</width>
-                            <height>20</height>
-                        </size>
-                    </property>
-                </spacer>
-                <spacer row="1" column="1">
-                    <property name="name">
-                        <cstring>spacer7</cstring>
-                    </property>
-                    <property name="orientation">
-                        <enum>Horizontal</enum>
-                    </property>
-                    <property name="sizeType">
-                        <enum>Expanding</enum>
-                    </property>
-                    <property name="sizeHint">
-                        <size>
-                            <width>20</width>
-                            <height>20</height>
-                        </size>
-                    </property>
-                </spacer>
-                <spacer row="1" column="3">
-                    <property name="name">
-                        <cstring>spacer15</cstring>
-                    </property>
-                    <property name="orientation">
-                        <enum>Horizontal</enum>
-                    </property>
-                    <property name="sizeType">
-                        <enum>Expanding</enum>
-                    </property>
-                    <property name="sizeHint">
-                        <size>
-                            <width>20</width>
-                            <height>20</height>
-                        </size>
-                    </property>
-                </spacer>
-                <spacer row="0" column="3">
-                    <property name="name">
-                        <cstring>spacer14_2</cstring>
-                    </property>
-                    <property name="orientation">
-                        <enum>Horizontal</enum>
-                    </property>
-                    <property name="sizeType">
-                        <enum>Expanding</enum>
-                    </property>
-                    <property name="sizeHint">
-                        <size>
-                            <width>20</width>
-                            <height>20</height>
-                        </size>
-                    </property>
-                </spacer>
-                <widget class="QLabel" row="1" column="0">
-                    <property name="name">
-                        <cstring>textLabel4</cstring>
-                    </property>
-                    <property name="text">
-                        <string>Power Meter Text Color</string>
-                    </property>
-                </widget>
-                <widget class="QLabel" row="0" column="4">
-                    <property name="name">
-                        <cstring>textLabel2</cstring>
-                    </property>
-                    <property name="text">
-                        <string>Gauge Fuel Color</string>
-                    </property>
-                </widget>
-                <widget class="KColorButton" row="0" column="6">
-                    <property name="name">
-                        <cstring>kcfg_BatChargedColor</cstring>
-                    </property>
-                    <property name="sizePolicy">
-                        <sizepolicy>
-                            <hsizetype>0</hsizetype>
-                            <vsizetype>0</vsizetype>
-                            <horstretch>0</horstretch>
-                            <verstretch>0</verstretch>
-                        </sizepolicy>
-                    </property>
-                    <property name="text">
-                        <string></string>
-                    </property>
-                </widget>
-                <widget class="KColorButton" row="1" column="2">
-                    <property name="name">
-                        <cstring>kcfg_PowerMeterColor</cstring>
-                    </property>
-                    <property name="sizePolicy">
-                        <sizepolicy>
-                            <hsizetype>0</hsizetype>
-                            <vsizetype>0</vsizetype>
-                            <horstretch>0</horstretch>
-                            <verstretch>0</verstretch>
-                        </sizepolicy>
-                    </property>
-                    <property name="text">
-                        <string></string>
-                    </property>
-                    <property name="flat">
-                        <bool>false</bool>
-                    </property>
-                </widget>
-            </grid>
-        </widget>
-        <spacer row="4" column="0">
+        <spacer row="3" column="0">
             <property name="name">
                 <cstring>spacer6</cstring>
             </property>
@@ -329,187 +42,18 @@
                 </size>
             </property>
         </spacer>
-        <widget class="QGroupBox" row="2" column="0">
-            <property name="name">
-                <cstring>groupBox2</cstring>
-            </property>
-            <property name="title">
-                <string>Size</string>
-            </property>
-            <grid>
-                <property name="name">
-                    <cstring>unnamed</cstring>
-                </property>
-                <widget class="QSpinBox" row="2" column="5">
-                    <property name="name">
-                        <cstring>kcfg_GaugeDotHeight</cstring>
-                    </property>
-                    <property name="maxValue">
-                        <number>20</number>
-                    </property>
-                    <property name="minValue">
-                        <number>2</number>
-                    </property>
-                </widget>
-                <widget class="QLabel" row="2" column="4">
-                    <property name="name">
-                        <cstring>textLabel4_2_2</cstring>
-                    </property>
-                    <property name="text">
-                        <string>Height</string>
-                    </property>
-                </widget>
-                <widget class="QSpinBox" row="1" column="3">
-                    <property name="name">
-                        <cstring>kcfg_GaugeWidth</cstring>
-                    </property>
-                    <property name="minValue">
-                        <number>10</number>
-                    </property>
-                </widget>
-                <widget class="QLabel" row="1" column="4">
-                    <property name="name">
-                        <cstring>textLabel4_2</cstring>
-                    </property>
-                    <property name="text">
-                        <string>Height</string>
-                    </property>
-                </widget>
-                <spacer row="2" column="1">
-                    <property name="name">
-                        <cstring>spacer16_2</cstring>
-                    </property>
-                    <property name="orientation">
-                        <enum>Horizontal</enum>
-                    </property>
-                    <property name="sizeType">
-                        <enum>Expanding</enum>
-                    </property>
-                    <property name="sizeHint">
-                        <size>
-                            <width>155</width>
-                            <height>21</height>
-                        </size>
-                    </property>
-                </spacer>
-                <widget class="QLabel" row="2" column="2">
-                    <property name="name">
-                        <cstring>textLabel5_2</cstring>
-                    </property>
-                    <property name="text">
-                        <string>Width</string>
-                    </property>
-                </widget>
-                <widget class="QSpinBox" row="2" column="3">
-                    <property name="name">
-                        <cstring>kcfg_GaugeDotWidth</cstring>
-                    </property>
-                    <property name="maxValue">
-                        <number>20</number>
-                    </property>
-                    <property name="minValue">
-                        <number>2</number>
-                    </property>
-                </widget>
-                <widget class="QLabel" row="1" column="2">
-                    <property name="name">
-                        <cstring>textLabel5</cstring>
-                    </property>
-                    <property name="text">
-                        <string>Width</string>
-                    </property>
-                </widget>
-                <widget class="QSpinBox" row="1" column="5">
-                    <property name="name">
-                        <cstring>kcfg_GaugeHeight</cstring>
-                    </property>
-                    <property name="maxValue">
-                        <number>99</number>
-                    </property>
-                    <property name="minValue">
-                        <number>10</number>
-                    </property>
-                </widget>
-                <spacer row="1" column="1">
-                    <property name="name">
-                        <cstring>spacer16</cstring>
-                    </property>
-                    <property name="orientation">
-                        <enum>Horizontal</enum>
-                    </property>
-                    <property name="sizeType">
-                        <enum>Expanding</enum>
-                    </property>
-                    <property name="sizeHint">
-                        <size>
-                            <width>72</width>
-                            <height>21</height>
-                        </size>
-                    </property>
-                </spacer>
-                <widget class="QCheckBox" row="0" column="0" rowspan="1" colspan="4">
-                    <property name="name">
-                        <cstring>kcfg_DrawBatteryUpright</cstring>
-                    </property>
-                    <property name="text">
-                        <string>Draw Batter&amp;y upright</string>
-                    </property>
-                    <property name="accel">
-                        <string>Alt+Y</string>
-                    </property>
-                </widget>
-                <widget class="QLabel" row="2" column="0">
-                    <property name="name">
-                        <cstring>textLabel3_2_2</cstring>
-                    </property>
-                    <property name="text">
-                        <string>Gauge Dot Size:</string>
-                    </property>
-                </widget>
-                <widget class="QLabel" row="1" column="0">
-                    <property name="name">
-                        <cstring>textLabel3_2</cstring>
-                    </property>
-                    <property name="text">
-                        <string>Gauge Size:</string>
-                    </property>
-                </widget>
-            </grid>
-        </widget>
         <widget class="QGroupBox" row="0" column="0">
             <property name="name">
-                <cstring>groupBox3_2</cstring>
+                <cstring>groupBox6</cstring>
             </property>
             <property name="title">
-                <string>Battery Settings</string>
+                <string>General</string>
             </property>
             <grid>
                 <property name="name">
                     <cstring>unnamed</cstring>
                 </property>
-                <widget class="QCheckBox" row="0" column="0" rowspan="1" colspan="3">
-                    <property name="name">
-                        <cstring>kcfg_SummarizeBatteries</cstring>
-                    </property>
-                    <property name="text">
-                        <string>Summari&amp;ze all Batteries</string>
-                    </property>
-                    <property name="accel">
-                        <string>Alt+Z</string>
-                    </property>
-                </widget>
-                <widget class="QCheckBox" row="6" column="0" rowspan="1" colspan="2">
-                    <property name="name">
-                        <cstring>kcfg_ShowToolTip</cstring>
-                    </property>
-                    <property name="text">
-                        <string>Show &amp;ToolTip</string>
-                    </property>
-                    <property name="accel">
-                        <string>Alt+T</string>
-                    </property>
-                </widget>
-                <widget class="QLabel" row="4" column="0">
+                <widget class="QLabel" row="2" column="0">
                     <property name="name">
                         <cstring>textLabel1</cstring>
                     </property>
@@ -517,7 +61,7 @@
                         <string>Battery Critical Fill</string>
                     </property>
                 </widget>
-                <widget class="QLabel" row="5" column="0" rowspan="1" colspan="2">
+                <widget class="QLabel" row="3" column="0" rowspan="1" colspan="2">
                     <property name="name">
                         <cstring>textLabel2_2</cstring>
                     </property>
@@ -525,7 +69,7 @@
                         <string>Battery Update Interval (in milliseconds)</string>
                     </property>
                 </widget>
-                <spacer row="5" column="2">
+                <spacer row="3" column="2">
                     <property name="name">
                         <cstring>spacer14</cstring>
                     </property>
@@ -537,29 +81,12 @@
                     </property>
                     <property name="sizeHint">
                         <size>
-                            <width>124</width>
+                            <width>208</width>
                             <height>16</height>
                         </size>
                     </property>
                 </spacer>
-                <spacer row="4" column="1" rowspan="1" colspan="2">
-                    <property name="name">
-                        <cstring>spacer13</cstring>
-                    </property>
-                    <property name="orientation">
-                        <enum>Horizontal</enum>
-                    </property>
-                    <property name="sizeType">
-                        <enum>Expanding</enum>
-                    </property>
-                    <property name="sizeHint">
-                        <size>
-                            <width>220</width>
-                            <height>16</height>
-                        </size>
-                    </property>
-                </spacer>
-                <widget class="QSpinBox" row="5" column="3">
+                <widget class="QSpinBox" row="3" column="3">
                     <property name="name">
                         <cstring>kcfg_UpdateIntervalMsek</cstring>
                     </property>
@@ -573,46 +100,595 @@
                         <number>50</number>
                     </property>
                 </widget>
-                <widget class="QSpinBox" row="4" column="3">
+                <widget class="QCheckBox" row="1" column="0">
+                    <property name="name">
+                        <cstring>kcfg_ShowToolTip</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Show &amp;ToolTip</string>
+                    </property>
+                    <property name="accel">
+                        <string>Alt+T</string>
+                    </property>
+                </widget>
+                <spacer row="2" column="1" rowspan="1" colspan="2">
+                    <property name="name">
+                        <cstring>spacer13</cstring>
+                    </property>
+                    <property name="orientation">
+                        <enum>Horizontal</enum>
+                    </property>
+                    <property name="sizeType">
+                        <enum>Expanding</enum>
+                    </property>
+                    <property name="sizeHint">
+                        <size>
+                            <width>346</width>
+                            <height>16</height>
+                        </size>
+                    </property>
+                </spacer>
+                <widget class="QSpinBox" row="2" column="3">
                     <property name="name">
                         <cstring>kcfg_CriticalFill</cstring>
                     </property>
                 </widget>
-                <widget class="QCheckBox" row="3" column="0" rowspan="1" colspan="4">
+                <widget class="QCheckBox" row="0" column="0" rowspan="1" colspan="4">
+                    <property name="name">
+                        <cstring>kcfg_SummarizeBatteries</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Summari&amp;ze all Batteries</string>
+                    </property>
+                    <property name="accel">
+                        <string>Alt+Z</string>
+                    </property>
+                </widget>
+            </grid>
+        </widget>
+        <widget class="QGroupBox" row="1" column="0">
+            <property name="name">
+                <cstring>groupBox3_2</cstring>
+            </property>
+            <property name="title">
+                <string>Battery Settings</string>
+            </property>
+            <grid>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <widget class="QSpinBox" row="4" column="6">
+                    <property name="name">
+                        <cstring>kcfg_GaugeDotHeight</cstring>
+                    </property>
+                    <property name="maxValue">
+                        <number>20</number>
+                    </property>
+                    <property name="minValue">
+                        <number>2</number>
+                    </property>
+                </widget>
+                <widget class="QSpinBox" row="3" column="3">
+                    <property name="name">
+                        <cstring>kcfg_GaugeWidth</cstring>
+                    </property>
+                    <property name="minValue">
+                        <number>10</number>
+                    </property>
+                </widget>
+                <widget class="QLabel" row="3" column="4" rowspan="1" colspan="2">
+                    <property name="name">
+                        <cstring>textLabel4_2</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Height</string>
+                    </property>
+                </widget>
+                <widget class="QLabel" row="3" column="2">
+                    <property name="name">
+                        <cstring>textLabel5</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Width</string>
+                    </property>
+                </widget>
+                <widget class="QSpinBox" row="3" column="6">
+                    <property name="name">
+                        <cstring>kcfg_GaugeHeight</cstring>
+                    </property>
+                    <property name="maxValue">
+                        <number>99</number>
+                    </property>
+                    <property name="minValue">
+                        <number>10</number>
+                    </property>
+                </widget>
+                <widget class="QLabel" row="4" column="0">
+                    <property name="name">
+                        <cstring>textLabel3_2_2</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Gauge Dot Size:</string>
+                    </property>
+                </widget>
+                <widget class="QLabel" row="3" column="0">
+                    <property name="name">
+                        <cstring>textLabel3_2</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Gauge Size:</string>
+                    </property>
+                </widget>
+                <spacer row="4" column="1">
+                    <property name="name">
+                        <cstring>spacer16_2</cstring>
+                    </property>
+                    <property name="orientation">
+                        <enum>Horizontal</enum>
+                    </property>
+                    <property name="sizeType">
+                        <enum>Expanding</enum>
+                    </property>
+                    <property name="sizeHint">
+                        <size>
+                            <width>170</width>
+                            <height>21</height>
+                        </size>
+                    </property>
+                </spacer>
+                <spacer row="3" column="1">
+                    <property name="name">
+                        <cstring>spacer16</cstring>
+                    </property>
+                    <property name="orientation">
+                        <enum>Horizontal</enum>
+                    </property>
+                    <property name="sizeType">
+                        <enum>Expanding</enum>
+                    </property>
+                    <property name="sizeHint">
+                        <size>
+                            <width>180</width>
+                            <height>21</height>
+                        </size>
+                    </property>
+                </spacer>
+                <widget class="QLabel" row="4" column="2">
+                    <property name="name">
+                        <cstring>textLabel5_2</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Width</string>
+                    </property>
+                </widget>
+                <widget class="QSpinBox" row="4" column="3">
+                    <property name="name">
+                        <cstring>kcfg_GaugeDotWidth</cstring>
+                    </property>
+                    <property name="maxValue">
+                        <number>20</number>
+                    </property>
+                    <property name="minValue">
+                        <number>2</number>
+                    </property>
+                </widget>
+                <widget class="QLabel" row="4" column="5">
+                    <property name="name">
+                        <cstring>textLabel4_2_2</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Height</string>
+                    </property>
+                </widget>
+                <widget class="QCheckBox" row="1" column="0" rowspan="1" colspan="7">
                     <property name="name">
                         <cstring>kcfg_PowerMeterBelowGauge</cstring>
                     </property>
                     <property name="text">
-                        <string>Po&amp;wer Meter Position below of Battery Gauge</string>
-                    </property>
-                    <property name="accel">
-                        <string>Alt+W</string>
-                    </property>
-                </widget>
-                <widget class="QCheckBox" row="2" column="0" rowspan="1" colspan="2">
-                    <property name="name">
-                        <cstring>kcfg_ShowPowerMeter</cstring>
-                    </property>
-                    <property name="text">
-                        <string>Show Power Meter</string>
+                        <string>Info Field below of Battery Gauge</string>
                     </property>
                     <property name="accel">
                         <string></string>
                     </property>
                 </widget>
-                <widget class="QCheckBox" row="1" column="0" rowspan="1" colspan="3">
+                <widget class="QCheckBox" row="2" column="0" rowspan="1" colspan="5">
                     <property name="name">
-                        <cstring>kcfg_ShowRemainingTime</cstring>
-                    </property>
-                    <property name="enabled">
-                        <bool>true</bool>
+                        <cstring>kcfg_DrawBatteryUpright</cstring>
                     </property>
                     <property name="text">
-                        <string>Show &amp;Remaining Time</string>
+                        <string>Draw Batter&amp;y upright</string>
                     </property>
                     <property name="accel">
-                        <string>Alt+R</string>
+                        <string>Alt+Y</string>
                     </property>
+                </widget>
+                <widget class="QLayoutWidget" row="0" column="0" rowspan="1" colspan="7">
+                    <property name="name">
+                        <cstring>layout6</cstring>
+                    </property>
+                    <grid>
+                        <property name="name">
+                            <cstring>unnamed</cstring>
+                        </property>
+                        <widget class="QButtonGroup" row="0" column="1">
+                            <property name="name">
+                                <cstring>buttonGroup2</cstring>
+                            </property>
+                            <property name="title">
+                                <string>Content of Info Field</string>
+                            </property>
+                            <grid>
+                                <property name="name">
+                                    <cstring>unnamed</cstring>
+                                </property>
+                                <widget class="QCheckBox" row="0" column="0">
+                                    <property name="name">
+                                        <cstring>kcfg_ShowRemainingTime</cstring>
+                                    </property>
+                                    <property name="enabled">
+                                        <bool>true</bool>
+                                    </property>
+                                    <property name="text">
+                                        <string>&amp;Remaining Time</string>
+                                    </property>
+                                    <property name="accel">
+                                        <string>Alt+R</string>
+                                    </property>
+                                </widget>
+                                <widget class="QCheckBox" row="1" column="0">
+                                    <property name="name">
+                                        <cstring>kcfg_ShowPowerMeter</cstring>
+                                    </property>
+                                    <property name="text">
+                                        <string>Current Po&amp;wer Consumption</string>
+                                    </property>
+                                    <property name="accel">
+                                        <string>Alt+W</string>
+                                    </property>
+                                </widget>
+                            </grid>
+                        </widget>
+                        <widget class="QButtonGroup" row="0" column="0">
+                            <property name="name">
+                                <cstring>buttonGroup1</cstring>
+                            </property>
+                            <property name="title">
+                                <string>Content of Battery Gauge</string>
+                            </property>
+                            <grid>
+                                <property name="name">
+                                    <cstring>unnamed</cstring>
+                                </property>
+                                <widget class="QRadioButton" row="1" column="0">
+                                    <property name="name">
+                                        <cstring>kcfg_GaugeContentTime</cstring>
+                                    </property>
+                                    <property name="text">
+                                        <string>Remaining Time</string>
+                                    </property>
+                                    <property name="accel">
+                                        <string></string>
+                                    </property>
+                                </widget>
+                                <widget class="QRadioButton" row="0" column="0">
+                                    <property name="name">
+                                        <cstring>kcfg_GaugeContentPercent</cstring>
+                                    </property>
+                                    <property name="text">
+                                        <string>Remaining Power in Percent</string>
+                                    </property>
+                                    <property name="accel">
+                                        <string></string>
+                                    </property>
+                                </widget>
+                                <widget class="QRadioButton" row="2" column="0">
+                                    <property name="name">
+                                        <cstring>kcfg_GaugeContentNone</cstring>
+                                    </property>
+                                    <property name="text">
+                                        <string>&amp;None</string>
+                                    </property>
+                                    <property name="accel">
+                                        <string>Alt+N</string>
+                                    </property>
+                                </widget>
+                            </grid>
+                        </widget>
+                    </grid>
+                </widget>
+            </grid>
+        </widget>
+        <widget class="QGroupBox" row="2" column="0">
+            <property name="name">
+                <cstring>groupBox3</cstring>
+            </property>
+            <property name="title">
+                <string>Color and Font</string>
+            </property>
+            <grid>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <widget class="QLayoutWidget" row="1" column="0">
+                    <property name="name">
+                        <cstring>layout8</cstring>
+                    </property>
+                    <grid>
+                        <property name="name">
+                            <cstring>unnamed</cstring>
+                        </property>
+                        <widget class="KFontCombo" row="1" column="2">
+                            <property name="name">
+                                <cstring>kcfg_PowerMeterFont</cstring>
+                            </property>
+                        </widget>
+                        <widget class="QLabel" row="1" column="0">
+                            <property name="name">
+                                <cstring>textLabel2_3</cstring>
+                            </property>
+                            <property name="text">
+                                <string>Power Meter Font</string>
+                            </property>
+                        </widget>
+                        <widget class="KFontCombo" row="0" column="2">
+                            <property name="name">
+                                <cstring>kcfg_GaugeFont</cstring>
+                            </property>
+                        </widget>
+                        <spacer row="0" column="1">
+                            <property name="name">
+                                <cstring>spacer10</cstring>
+                            </property>
+                            <property name="orientation">
+                                <enum>Horizontal</enum>
+                            </property>
+                            <property name="sizeType">
+                                <enum>Expanding</enum>
+                            </property>
+                            <property name="sizeHint">
+                                <size>
+                                    <width>16</width>
+                                    <height>20</height>
+                                </size>
+                            </property>
+                        </spacer>
+                        <spacer row="1" column="1">
+                            <property name="name">
+                                <cstring>spacer11</cstring>
+                            </property>
+                            <property name="orientation">
+                                <enum>Horizontal</enum>
+                            </property>
+                            <property name="sizeType">
+                                <enum>Expanding</enum>
+                            </property>
+                            <property name="sizeHint">
+                                <size>
+                                    <width>20</width>
+                                    <height>21</height>
+                                </size>
+                            </property>
+                        </spacer>
+                        <widget class="QLabel" row="0" column="0">
+                            <property name="name">
+                                <cstring>textLabel1_2</cstring>
+                            </property>
+                            <property name="text">
+                                <string>Gauge Font (Percentage Value)</string>
+                            </property>
+                        </widget>
+                    </grid>
+                </widget>
+                <widget class="QLayoutWidget" row="0" column="0">
+                    <property name="name">
+                        <cstring>layout10</cstring>
+                    </property>
+                    <grid>
+                        <property name="name">
+                            <cstring>unnamed</cstring>
+                        </property>
+                        <widget class="QLabel" row="1" column="0" rowspan="2" colspan="1">
+                            <property name="name">
+                                <cstring>textLabel4</cstring>
+                            </property>
+                            <property name="text">
+                                <string>Power Meter Text Color</string>
+                            </property>
+                        </widget>
+                        <spacer row="0" column="3">
+                            <property name="name">
+                                <cstring>spacer14_2</cstring>
+                            </property>
+                            <property name="orientation">
+                                <enum>Horizontal</enum>
+                            </property>
+                            <property name="sizeType">
+                                <enum>Expanding</enum>
+                            </property>
+                            <property name="sizeHint">
+                                <size>
+                                    <width>26</width>
+                                    <height>20</height>
+                                </size>
+                            </property>
+                        </spacer>
+                        <widget class="QLabel" row="1" column="4" rowspan="2" colspan="2">
+                            <property name="name">
+                                <cstring>textLabel6</cstring>
+                            </property>
+                            <property name="text">
+                                <string>Gauge Critical Fuell Color</string>
+                            </property>
+                        </widget>
+                        <spacer row="1" column="1" rowspan="2" colspan="1">
+                            <property name="name">
+                                <cstring>spacer7</cstring>
+                            </property>
+                            <property name="orientation">
+                                <enum>Horizontal</enum>
+                            </property>
+                            <property name="sizeType">
+                                <enum>Expanding</enum>
+                            </property>
+                            <property name="sizeHint">
+                                <size>
+                                    <width>26</width>
+                                    <height>20</height>
+                                </size>
+                            </property>
+                        </spacer>
+                        <widget class="KColorButton" row="0" column="6">
+                            <property name="name">
+                                <cstring>kcfg_BatChargedColor</cstring>
+                            </property>
+                            <property name="sizePolicy">
+                                <sizepolicy>
+                                    <hsizetype>0</hsizetype>
+                                    <vsizetype>0</vsizetype>
+                                    <horstretch>0</horstretch>
+                                    <verstretch>0</verstretch>
+                                </sizepolicy>
+                            </property>
+                            <property name="text">
+                                <string></string>
+                            </property>
+                        </widget>
+                        <widget class="QLabel" row="0" column="0">
+                            <property name="name">
+                                <cstring>textLabel3</cstring>
+                            </property>
+                            <property name="text">
+                                <string>Gauge Background Color</string>
+                            </property>
+                        </widget>
+                        <spacer row="0" column="1">
+                            <property name="name">
+                                <cstring>spacer1</cstring>
+                            </property>
+                            <property name="orientation">
+                                <enum>Horizontal</enum>
+                            </property>
+                            <property name="sizeType">
+                                <enum>Expanding</enum>
+                            </property>
+                            <property name="sizeHint">
+                                <size>
+                                    <width>26</width>
+                                    <height>20</height>
+                                </size>
+                            </property>
+                        </spacer>
+                        <widget class="KColorButton" row="1" column="2" rowspan="2" colspan="1">
+                            <property name="name">
+                                <cstring>kcfg_PowerMeterColor</cstring>
+                            </property>
+                            <property name="sizePolicy">
+                                <sizepolicy>
+                                    <hsizetype>0</hsizetype>
+                                    <vsizetype>0</vsizetype>
+                                    <horstretch>0</horstretch>
+                                    <verstretch>0</verstretch>
+                                </sizepolicy>
+                            </property>
+                            <property name="text">
+                                <string></string>
+                            </property>
+                            <property name="flat">
+                                <bool>false</bool>
+                            </property>
+                        </widget>
+                        <widget class="QLabel" row="0" column="4">
+                            <property name="name">
+                                <cstring>textLabel2</cstring>
+                            </property>
+                            <property name="text">
+                                <string>Gauge Fuel Color</string>
+                            </property>
+                        </widget>
+                        <spacer row="2" column="3">
+                            <property name="name">
+                                <cstring>spacer15</cstring>
+                            </property>
+                            <property name="orientation">
+                                <enum>Horizontal</enum>
+                            </property>
+                            <property name="sizeType">
+                                <enum>Expanding</enum>
+                            </property>
+                            <property name="sizeHint">
+                                <size>
+                                    <width>26</width>
+                                    <height>20</height>
+                                </size>
+                            </property>
+                        </spacer>
+                        <spacer row="0" column="5">
+                            <property name="name">
+                                <cstring>spacer3</cstring>
+                            </property>
+                            <property name="orientation">
+                                <enum>Horizontal</enum>
+                            </property>
+                            <property name="sizeType">
+                                <enum>Expanding</enum>
+                            </property>
+                            <property name="sizeHint">
+                                <size>
+                                    <width>25</width>
+                                    <height>20</height>
+                                </size>
+                            </property>
+                        </spacer>
+                        <widget class="KColorButton" row="1" column="6" rowspan="2" colspan="1">
+                            <property name="name">
+                                <cstring>kcfg_BatCriticalColor</cstring>
+                            </property>
+                            <property name="sizePolicy">
+                                <sizepolicy>
+                                    <hsizetype>0</hsizetype>
+                                    <vsizetype>0</vsizetype>
+                                    <horstretch>0</horstretch>
+                                    <verstretch>0</verstretch>
+                                </sizepolicy>
+                            </property>
+                            <property name="text">
+                                <string></string>
+                            </property>
+                        </widget>
+                        <widget class="KColorButton" row="0" column="2">
+                            <property name="name">
+                                <cstring>kcfg_BatBackgroundColor</cstring>
+                            </property>
+                            <property name="sizePolicy">
+                                <sizepolicy>
+                                    <hsizetype>0</hsizetype>
+                                    <vsizetype>0</vsizetype>
+                                    <horstretch>0</horstretch>
+                                    <verstretch>0</verstretch>
+                                </sizepolicy>
+                            </property>
+                            <property name="text">
+                                <string></string>
+                            </property>
+                        </widget>
+                        <spacer row="2" column="5">
+                            <property name="name">
+                                <cstring>spacer6_2</cstring>
+                            </property>
+                            <property name="orientation">
+                                <enum>Horizontal</enum>
+                            </property>
+                            <property name="sizeType">
+                                <enum>Expanding</enum>
+                            </property>
+                            <property name="sizeHint">
+                                <size>
+                                    <width>26</width>
+                                    <height>20</height>
+                                </size>
+                            </property>
+                        </spacer>
+                    </grid>
                 </widget>
             </grid>
         </widget>
@@ -620,24 +696,30 @@
 </widget>
 <tabstops>
     <tabstop>kcfg_SummarizeBatteries</tabstop>
+    <tabstop>kcfg_ShowToolTip</tabstop>
+    <tabstop>kcfg_CriticalFill</tabstop>
+    <tabstop>kcfg_UpdateIntervalMsek</tabstop>
+    <tabstop>kcfg_GaugeContentPercent</tabstop>
+    <tabstop>kcfg_GaugeContentTime</tabstop>
+    <tabstop>kcfg_GaugeContentNone</tabstop>
     <tabstop>kcfg_ShowRemainingTime</tabstop>
     <tabstop>kcfg_ShowPowerMeter</tabstop>
     <tabstop>kcfg_PowerMeterBelowGauge</tabstop>
     <tabstop>kcfg_DrawBatteryUpright</tabstop>
+    <tabstop>kcfg_GaugeWidth</tabstop>
+    <tabstop>kcfg_GaugeHeight</tabstop>
+    <tabstop>kcfg_GaugeDotWidth</tabstop>
+    <tabstop>kcfg_GaugeDotHeight</tabstop>
+    <tabstop>kcfg_BatBackgroundColor</tabstop>
+    <tabstop>kcfg_PowerMeterColor</tabstop>
+    <tabstop>kcfg_BatChargedColor</tabstop>
+    <tabstop>kcfg_BatCriticalColor</tabstop>
     <tabstop>kcfg_GaugeFont</tabstop>
     <tabstop>kcfg_PowerMeterFont</tabstop>
-    <tabstop>kcfg_BatCriticalColor</tabstop>
-    <tabstop>kcfg_BatBackgroundColor</tabstop>
-    <tabstop>kcfg_BatChargedColor</tabstop>
-    <tabstop>kcfg_PowerMeterColor</tabstop>
-    <tabstop>kcfg_GaugeDotHeight</tabstop>
-    <tabstop>kcfg_GaugeWidth</tabstop>
-    <tabstop>kcfg_GaugeDotWidth</tabstop>
-    <tabstop>kcfg_GaugeHeight</tabstop>
-    <tabstop>kcfg_ShowToolTip</tabstop>
-    <tabstop>kcfg_UpdateIntervalMsek</tabstop>
-    <tabstop>kcfg_CriticalFill</tabstop>
 </tabstops>
+<slots>
+    <slot>kcfg_GaugeContentPercent_toggled(bool)</slot>
+</slots>
 <layoutdefaults spacing="6" margin="11"/>
 <includehints>
     <includehint>kfontcombo.h</includehint>

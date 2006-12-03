@@ -418,3 +418,13 @@ BatInfo::getPowerConsumptionFormated() {
 
     return (formatString + " " + getPowerUnit());
 }
+
+QString 
+BatInfo::getRemainingTimeInHours() {
+    int hours = getRemainingTimeInMin() / 60;
+    QString mins = QString().number(getRemainingTimeInMin() - (hours * 60));
+    if( mins.length() == 1 ) {
+        mins = "0" + mins;
+    }
+    return QString().number(hours) + ":" + mins;
+}
