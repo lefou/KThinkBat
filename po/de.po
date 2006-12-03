@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-10 11:59+0200\n"
-"PO-Revision-Date: 2006-12-03 13:40+0100\n"
+"POT-Creation-Date: 2006-12-03 14:25+0100\n"
+"PO-Revision-Date: 2006-12-03 15:02+0100\n"
 "Last-Translator: Tobias Roeser <le.petit.fou@web.de>\n"
 "Language-Team: Deutsch <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11\n"
+"X-Generator: KBabel 1.11.4\n"
 
 #: _translatorinfo.cpp:1
 msgid ""
@@ -37,10 +37,10 @@ msgstr "Ü&ber %1"
 
 #: kthinkbat.cpp:74
 msgid "&Configure %1..."
-msgstr "Ein..."
+msgstr "%1 ein&richten..."
 
-#. i18n: file ./prefs.ui line 16
-#: kthinkbat.cpp:119 rc.cpp:3
+#. i18n: file ./prefs.ui line 22
+#: kthinkbat.cpp:118 rc.cpp:3
 #, no-c-format
 msgid "KThinkBat Preferences"
 msgstr "KThinkBat Einstellungen"
@@ -56,122 +56,181 @@ msgid ""
 "\n"
 "There is no real help box at the moment"
 msgstr ""
-"Ein KDE Panel Applet zur Anzeige des aktuellen Akku-Zusandes eines Laptops."
-"\n"
+"Ein KDE Panel Applet zur Anzeige des aktuellen Akku-Zusandes eines Laptops.\n"
 "Es gibt zur Zeit noch keine Hilfe-Box."
 
-#: kthinkbat.cpp:299 kthinkbat.cpp:327
-msgid "Battery %1: "
-msgstr "Akku %1:"
+#: kthinkbat.cpp:423
+msgid "Battery %1"
+msgstr "Akku %1"
 
-#: kthinkbat.cpp:302 kthinkbat.cpp:330
-msgid "Battery %1: not installed"
-msgstr "Akku %1: nicht installiert"
+#: kthinkbat.cpp:431
+msgid "Current Fuel: "
+msgstr "Aktuelle Kapazität: "
 
-#. i18n: file ./prefs.ui line 27
-#: rc.cpp:6
-#, no-c-format
-msgid "Battery Settings"
-msgstr "Akku Einstellungen"
+#: kthinkbat.cpp:432
+msgid "Crit Fuel: "
+msgstr "Kritische Kapazität: "
 
-#. i18n: file ./prefs.ui line 38
+#: kthinkbat.cpp:433
+msgid "Last Fuel: "
+msgstr "Letze erreichte Kapazität: "
+
+#: kthinkbat.cpp:434
+msgid "Design Fuel: "
+msgstr "Design-kapazität"
+
+#: kthinkbat.cpp:435
+msgid "State: "
+msgstr "Status"
+
+#: kthinkbat.cpp:436
+msgid "Remaining Time: "
+msgstr "Verbleibende Zeit"
+
+#: kthinkbat.cpp:439
+msgid "not installed"
+msgstr "nicht installiert"
+
+#. i18n: file ./prefs.ui line 44
 #: rc.cpp:9
-#, no-c-format
-msgid "Battery Critical Fill"
-msgstr "Kritischer Akkustand"
-
-#. i18n: file ./prefs.ui line 68
-#: rc.cpp:12
-#, no-c-format
-msgid "Battery Update Interval (in milliseconds)"
-msgstr "Aktualisierungsintervall für Akku-Werte (in Millisekunden)"
-
-#. i18n: file ./prefs.ui line 107
-#: rc.cpp:15
-#, no-c-format
-msgid "Po&wer Meter Position below of Battery Gauge"
-msgstr "Verbrauchsanzeige unterhalb der Akkuanzeige"
-
-#. i18n: file ./prefs.ui line 110
-#: rc.cpp:18
-#, no-c-format
-msgid "Alt+W"
-msgstr ""
-
-#. i18n: file ./prefs.ui line 118
-#: rc.cpp:21
-#, no-c-format
-msgid "Summari&ze all Batteries"
-msgstr "Werter aller Akkus zusammenfassen"
-
-#. i18n: file ./prefs.ui line 121
-#: rc.cpp:24
-#, no-c-format
-msgid "Alt+Z"
-msgstr ""
-
-#. i18n: file ./prefs.ui line 129
-#: rc.cpp:27
-#, no-c-format
-msgid "Show Power Meter"
-msgstr "Verbrauchsanzeige anzeigen"
-
-#. i18n: file ./prefs.ui line 142
-#: rc.cpp:31
-#, no-c-format
-msgid "Color"
-msgstr "Farbe"
-
-#. i18n: file ./prefs.ui line 187
-#: rc.cpp:34
-#, no-c-format
-msgid "Gauge Fuel Color"
-msgstr "Farbe für normalen Akkustand"
-
-#. i18n: file ./prefs.ui line 195
-#: rc.cpp:37
-#, no-c-format
-msgid "Gauge Critical Fuell Color"
-msgstr "Farbe für kritischen Akkustand"
-
-#. i18n: file ./prefs.ui line 203
-#: rc.cpp:40
-#, no-c-format
-msgid "Gauge Background Color"
-msgstr "Akkuanzeige Hintergrundfarbe"
-
-#. i18n: file ./prefs.ui line 228
-#: rc.cpp:43
-#, no-c-format
-msgid "Power Meter Text Color"
-msgstr "Verbrauchsanzeige Textfarbe"
-
-#. i18n: file ./prefs.ui line 322
-#: rc.cpp:50
-#, no-c-format
-msgid "Size"
-msgstr "Größe"
-
-#. i18n: file ./prefs.ui line 333
-#: rc.cpp:53
-#, no-c-format
-msgid "Gauge Size:"
-msgstr "Größe der Akkuanzeige:"
-
-#. i18n: file ./prefs.ui line 404
-#: rc.cpp:62
-#, no-c-format
-msgid "Gauge Dot Size:"
-msgstr "Größe des Akku-Pols"
-
-#. i18n: file ./prefs.ui line 469
-#: rc.cpp:74
 #, no-c-format
 msgid "Gauge Font (Percentage Value)"
 msgstr "Schriftart Akkuanzeige (Prozentangabe)"
 
-#. i18n: file ./prefs.ui line 477
-#: rc.cpp:77
+#. i18n: file ./prefs.ui line 52
+#: rc.cpp:12
 #, no-c-format
 msgid "Power Meter Font"
 msgstr "Schriftart Verbrauchsanzeige"
+
+#. i18n: file ./prefs.ui line 106
+#: rc.cpp:15
+#, no-c-format
+msgid "Color"
+msgstr "Farbe"
+
+#. i18n: file ./prefs.ui line 117
+#: rc.cpp:18
+#, no-c-format
+msgid "Gauge Background Color"
+msgstr "Akkuanzeige Hintergrundfarbe"
+
+#. i18n: file ./prefs.ui line 141
+#: rc.cpp:22
+#, no-c-format
+msgid "Gauge Critical Fuell Color"
+msgstr "Farbe für kritischen Akkustand"
+
+#. i18n: file ./prefs.ui line 267
+#: rc.cpp:26
+#, no-c-format
+msgid "Power Meter Text Color"
+msgstr "Verbrauchsanzeige Textfarbe"
+
+#. i18n: file ./prefs.ui line 275
+#: rc.cpp:29
+#, no-c-format
+msgid "Gauge Fuel Color"
+msgstr "Farbe für normalen Akkustand"
+
+#. i18n: file ./prefs.ui line 337
+#: rc.cpp:34
+#, no-c-format
+msgid "Size"
+msgstr "Größe"
+
+#. i18n: file ./prefs.ui line 455
+#: rc.cpp:49
+#, no-c-format
+msgid "Draw Batter&y upright"
+msgstr "Zeichne Akku aufrecht"
+
+#. i18n: file ./prefs.ui line 458
+#: rc.cpp:52
+#, no-c-format
+msgid "Alt+Y"
+msgstr ""
+
+#. i18n: file ./prefs.ui line 466
+#: rc.cpp:55
+#, no-c-format
+msgid "Gauge Dot Size:"
+msgstr "Größe des Akku-Pols"
+
+#. i18n: file ./prefs.ui line 474
+#: rc.cpp:58
+#, no-c-format
+msgid "Gauge Size:"
+msgstr "Größe der Akkuanzeige:"
+
+#. i18n: file ./prefs.ui line 484
+#: rc.cpp:61
+#, no-c-format
+msgid "Battery Settings"
+msgstr "Akku Einstellungen"
+
+#. i18n: file ./prefs.ui line 495
+#: rc.cpp:64
+#, no-c-format
+msgid "Summari&ze all Batteries"
+msgstr "Werter aller Akkus zusammenfassen"
+
+#. i18n: file ./prefs.ui line 498
+#: rc.cpp:67
+#, no-c-format
+msgid "Alt+Z"
+msgstr ""
+
+#. i18n: file ./prefs.ui line 506
+#: rc.cpp:70
+#, no-c-format
+msgid "Show &ToolTip"
+msgstr "Zeige ToolTip"
+
+#. i18n: file ./prefs.ui line 509
+#: rc.cpp:73
+#, no-c-format
+msgid "Alt+T"
+msgstr ""
+
+#. i18n: file ./prefs.ui line 517
+#: rc.cpp:76
+#, no-c-format
+msgid "Battery Critical Fill"
+msgstr "Kritischer Akkustand"
+
+#. i18n: file ./prefs.ui line 525
+#: rc.cpp:79
+#, no-c-format
+msgid "Battery Update Interval (in milliseconds)"
+msgstr "Aktualisierungsintervall für Akku-Werte (in Millisekunden)"
+
+#. i18n: file ./prefs.ui line 586
+#: rc.cpp:82
+#, no-c-format
+msgid "Po&wer Meter Position below of Battery Gauge"
+msgstr "Zeige Verbrauchsanzeige unterhalb der Akkuanzeige"
+
+#. i18n: file ./prefs.ui line 589
+#: rc.cpp:85
+#, no-c-format
+msgid "Alt+W"
+msgstr ""
+
+#. i18n: file ./prefs.ui line 597
+#: rc.cpp:88
+#, no-c-format
+msgid "Show Power Meter"
+msgstr "Verbrauchsanzeige anzeigen"
+
+#. i18n: file ./prefs.ui line 611
+#: rc.cpp:92
+#, no-c-format
+msgid "Show &Remaining Time"
+msgstr "Verbleibende Zeit anzeigen"
+
+#. i18n: file ./prefs.ui line 614
+#: rc.cpp:95
+#, no-c-format
+msgid "Alt+R"
+msgstr ""

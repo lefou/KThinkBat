@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-10 11:59+0200\n"
+"POT-Creation-Date: 2006-12-03 14:25+0100\n"
 "PO-Revision-Date: 2006-07-23 16:10-0500\n"
 "Last-Translator: Luis Guillermo Sobalvarro <webmaster@kdelatino.com>\n"
 "Language-Team: Spanish <en@li.org>\n"
@@ -43,8 +43,8 @@ msgstr "&Acerca %1"
 msgid "&Configure %1..."
 msgstr "&Configurar %1..."
 
-#. i18n: file ./prefs.ui line 16
-#: kthinkbat.cpp:119 rc.cpp:3
+#. i18n: file ./prefs.ui line 22
+#: kthinkbat.cpp:118 rc.cpp:3
 #, no-c-format
 msgid "KThinkBat Preferences"
 msgstr "Preferencias de KThinkBat"
@@ -63,118 +63,180 @@ msgstr ""
 "\n"
 "No hay un verdadero diálogo de ayuda por el momento"
 
-#: kthinkbat.cpp:299 kthinkbat.cpp:327
-msgid "Battery %1: "
+#: kthinkbat.cpp:423
+#, fuzzy
+msgid "Battery %1"
 msgstr "Batería %1: "
 
-#: kthinkbat.cpp:302 kthinkbat.cpp:330
-msgid "Battery %1: not installed"
+#: kthinkbat.cpp:431
+msgid "Current Fuel: "
+msgstr ""
+
+#: kthinkbat.cpp:432
+msgid "Crit Fuel: "
+msgstr ""
+
+#: kthinkbat.cpp:433
+msgid "Last Fuel: "
+msgstr ""
+
+#: kthinkbat.cpp:434
+msgid "Design Fuel: "
+msgstr ""
+
+#: kthinkbat.cpp:435
+msgid "State: "
+msgstr ""
+
+#: kthinkbat.cpp:436
+msgid "Remaining Time: "
+msgstr ""
+
+#: kthinkbat.cpp:439
+#, fuzzy
+msgid "not installed"
 msgstr "Batería %1: no instalada"
 
-#. i18n: file ./prefs.ui line 27
-#: rc.cpp:6
-#, no-c-format
-msgid "Battery Settings"
-msgstr "Propiedades de la batería"
-
-#. i18n: file ./prefs.ui line 38
+#. i18n: file ./prefs.ui line 44
 #: rc.cpp:9
-#, fuzzy, no-c-format
-msgid "Battery Critical Fill"
-msgstr "Campo de ña batería crítica"
-
-#. i18n: file ./prefs.ui line 68
-#: rc.cpp:12
-#, no-c-format
-msgid "Battery Update Interval (in milliseconds)"
-msgstr "Intervalo de actualización de la batería (en milisegundos)"
-
-#. i18n: file ./prefs.ui line 107
-#: rc.cpp:15
-#, no-c-format
-msgid "Po&wer Meter Position below of Battery Gauge"
-msgstr "Posición del medidor de energía debajo de la batería"
-
-#. i18n: file ./prefs.ui line 110
-#: rc.cpp:18
-#, no-c-format
-msgid "Alt+W"
-msgstr "Alt+W"
-
-#. i18n: file ./prefs.ui line 118
-#: rc.cpp:21
-#, no-c-format
-msgid "Summari&ze all Batteries"
-msgstr "Mostrar resumen de todas las baterías"
-
-#. i18n: file ./prefs.ui line 121
-#: rc.cpp:24
-#, no-c-format
-msgid "Alt+Z"
-msgstr "Alt+Z"
-
-#. i18n: file ./prefs.ui line 129
-#: rc.cpp:27
-#, no-c-format
-msgid "Show Power Meter"
-msgstr "Mostrar medidor de energía"
-
-#. i18n: file ./prefs.ui line 142
-#: rc.cpp:31
-#, no-c-format
-msgid "Color"
-msgstr "Color"
-
-#. i18n: file ./prefs.ui line 187
-#: rc.cpp:34
-#, no-c-format
-msgid "Gauge Fuel Color"
-msgstr "Color de la batería"
-
-#. i18n: file ./prefs.ui line 195
-#: rc.cpp:37
-#, no-c-format
-msgid "Gauge Critical Fuell Color"
-msgstr "Color de la batería cuando esta a nivel crítico"
-
-#. i18n: file ./prefs.ui line 203
-#: rc.cpp:40
-#, no-c-format
-msgid "Gauge Background Color"
-msgstr "Color de fondo de la batería."
-
-#. i18n: file ./prefs.ui line 228
-#: rc.cpp:43
-#, no-c-format
-msgid "Power Meter Text Color"
-msgstr "Color del texto del medidor de batería"
-
-#. i18n: file ./prefs.ui line 322
-#: rc.cpp:50
-#, no-c-format
-msgid "Size"
-msgstr "Tamaño"
-
-#. i18n: file ./prefs.ui line 333
-#: rc.cpp:53
-#, no-c-format
-msgid "Gauge Size:"
-msgstr "Tamaño de la batería"
-
-#. i18n: file ./prefs.ui line 404
-#: rc.cpp:62
-#, fuzzy, no-c-format
-msgid "Gauge Dot Size:"
-msgstr "Tamaño del punto de la batería"
-
-#. i18n: file ./prefs.ui line 469
-#: rc.cpp:74
 #, no-c-format
 msgid "Gauge Font (Percentage Value)"
 msgstr "Fuente del medidor (Valor del porcentaje)"
 
-#. i18n: file ./prefs.ui line 477
-#: rc.cpp:77
+#. i18n: file ./prefs.ui line 52
+#: rc.cpp:12
 #, no-c-format
 msgid "Power Meter Font"
 msgstr "Fuente del medidor de batería"
+
+#. i18n: file ./prefs.ui line 106
+#: rc.cpp:15
+#, no-c-format
+msgid "Color"
+msgstr "Color"
+
+#. i18n: file ./prefs.ui line 117
+#: rc.cpp:18
+#, no-c-format
+msgid "Gauge Background Color"
+msgstr "Color de fondo de la batería."
+
+#. i18n: file ./prefs.ui line 141
+#: rc.cpp:22
+#, no-c-format
+msgid "Gauge Critical Fuell Color"
+msgstr "Color de la batería cuando esta a nivel crítico"
+
+#. i18n: file ./prefs.ui line 267
+#: rc.cpp:26
+#, no-c-format
+msgid "Power Meter Text Color"
+msgstr "Color del texto del medidor de batería"
+
+#. i18n: file ./prefs.ui line 275
+#: rc.cpp:29
+#, no-c-format
+msgid "Gauge Fuel Color"
+msgstr "Color de la batería"
+
+#. i18n: file ./prefs.ui line 337
+#: rc.cpp:34
+#, no-c-format
+msgid "Size"
+msgstr "Tamaño"
+
+#. i18n: file ./prefs.ui line 455
+#: rc.cpp:49
+#, no-c-format
+msgid "Draw Batter&y upright"
+msgstr ""
+
+#. i18n: file ./prefs.ui line 458
+#: rc.cpp:52
+#, fuzzy, no-c-format
+msgid "Alt+Y"
+msgstr "Alt+W"
+
+#. i18n: file ./prefs.ui line 466
+#: rc.cpp:55
+#, fuzzy, no-c-format
+msgid "Gauge Dot Size:"
+msgstr "Tamaño del punto de la batería"
+
+#. i18n: file ./prefs.ui line 474
+#: rc.cpp:58
+#, no-c-format
+msgid "Gauge Size:"
+msgstr "Tamaño de la batería"
+
+#. i18n: file ./prefs.ui line 484
+#: rc.cpp:61
+#, no-c-format
+msgid "Battery Settings"
+msgstr "Propiedades de la batería"
+
+#. i18n: file ./prefs.ui line 495
+#: rc.cpp:64
+#, no-c-format
+msgid "Summari&ze all Batteries"
+msgstr "Mostrar resumen de todas las baterías"
+
+#. i18n: file ./prefs.ui line 498
+#: rc.cpp:67
+#, no-c-format
+msgid "Alt+Z"
+msgstr "Alt+Z"
+
+#. i18n: file ./prefs.ui line 506
+#: rc.cpp:70
+#, no-c-format
+msgid "Show &ToolTip"
+msgstr ""
+
+#. i18n: file ./prefs.ui line 509
+#: rc.cpp:73
+#, fuzzy, no-c-format
+msgid "Alt+T"
+msgstr "Alt+W"
+
+#. i18n: file ./prefs.ui line 517
+#: rc.cpp:76
+#, fuzzy, no-c-format
+msgid "Battery Critical Fill"
+msgstr "Campo de ña batería crítica"
+
+#. i18n: file ./prefs.ui line 525
+#: rc.cpp:79
+#, no-c-format
+msgid "Battery Update Interval (in milliseconds)"
+msgstr "Intervalo de actualización de la batería (en milisegundos)"
+
+#. i18n: file ./prefs.ui line 586
+#: rc.cpp:82
+#, no-c-format
+msgid "Po&wer Meter Position below of Battery Gauge"
+msgstr "Posición del medidor de energía debajo de la batería"
+
+#. i18n: file ./prefs.ui line 589
+#: rc.cpp:85
+#, no-c-format
+msgid "Alt+W"
+msgstr "Alt+W"
+
+#. i18n: file ./prefs.ui line 597
+#: rc.cpp:88
+#, no-c-format
+msgid "Show Power Meter"
+msgstr "Mostrar medidor de energía"
+
+#. i18n: file ./prefs.ui line 611
+#: rc.cpp:92
+#, no-c-format
+msgid "Show &Remaining Time"
+msgstr ""
+
+#. i18n: file ./prefs.ui line 614
+#: rc.cpp:95
+#, fuzzy, no-c-format
+msgid "Alt+R"
+msgstr "Alt+W"
