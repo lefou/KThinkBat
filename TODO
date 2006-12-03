@@ -1,9 +1,11 @@
-   * make backend selectable: tp_smapi or ACPI
-   * Option to enable/disapble: ACPI/TP_SMAPI/APM
-   * rework drawing alg for gauge dot
-   * calculate Watt values from the Ampere based values provieded by ACER/ASUS-ACPI
-   * Config-Dialog: ACPI proc path, action on click 
-   * there should be a symbol such as power plug next to it when connected to AC
-   * dcop interface for settings
+= TODOs for KThinkBat =
+
+ - make backend selectable: tp_smapi or ACPI
+ - Option to enable/disapble: ACPI/TP_SMAPI/APM
+ - rework drawing alg for gauge dot
+ - calculate Watt values from the Ampere based values provieded by ACER/ASUS-ACPI
+ - Config-Dialog: ACPI proc path, action on click 
+ - there should be a symbol such as power plug next to it when connected to AC
+ - dcop interface for settings
 
 (Feel free to open a ticket for these issues - if not already there - to show, that you want these features.)
