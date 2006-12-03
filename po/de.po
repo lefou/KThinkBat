@@ -77,15 +77,15 @@ msgstr "Letze erreichte Kapazität: "
 
 #: kthinkbat.cpp:434
 msgid "Design Fuel: "
-msgstr "Design-kapazität"
+msgstr "Design-Kapazität: "
 
 #: kthinkbat.cpp:435
 msgid "State: "
-msgstr "Status"
+msgstr "Status: "
 
 #: kthinkbat.cpp:436
 msgid "Remaining Time: "
-msgstr "Verbleibende Zeit"
+msgstr "Verbleibende Zeit: "
 
 #: kthinkbat.cpp:439
 msgid "not installed"
