@@ -197,19 +197,23 @@ KThinkBat::createPowerTimeLabel( int batteryNr ) {
 
     if( KThinkBatConfig::showRemainingTime() ) {
         int mins;
+        bool full;
         if( KThinkBatConfig::summarizeBatteries() ) {
+            full = (!batInfo1.isInstalled() || batInfo1.isFull()) && (!batInfo2.isInstalled() || batInfo2.isFull());
             mins = batInfo1.getRemainingTimeInMin() + batInfo2.getRemainingTimeInMin();
         }
         else if( 1 == batteryNr ) {
+            full = batInfo1.isFull();
             mins = batInfo1.getRemainingTimeInMin();
         }
         else {
+            full = batInfo2.isFull();
             mins = batInfo2.getRemainingTimeInMin();
         }
         if( KThinkBatConfig::showPowerMeter() ) {
             label += " / ";
         }
-        label += QString().number(mins) + " min";
+        label += (full) ? "full" : QString().number(mins) + " min";
     }
     return label;
 }
@@ -355,7 +359,7 @@ KThinkBat::timeout() {
                 gauge1.setPercentValue( (int) batInfo1.getChargeLevel() );
             }
             else if( KThinkBatConfig::gaugeContentTime() ) {
-                gauge1.setPercentValueString( (int) batInfo1.getChargeLevel(), batInfo1.getRemainingTimeInHours() );
+                gauge1.setPercentValueString( (int) batInfo1.getChargeLevel(), batInfo1.isFull() ? "full" : batInfo1.getRemainingTimeInHours() );
             }
             else {
                 gauge1.setPercentValueString( (int) batInfo1.getChargeLevel(), "" );
@@ -385,7 +389,7 @@ KThinkBat::timeout() {
                 gauge2.setPercentValue( (int) batInfo2.getChargeLevel() );
             }
             else if( KThinkBatConfig::gaugeContentTime() ) {
-                gauge2.setPercentValueString( (int) batInfo2.getChargeLevel(), batInfo2.getRemainingTimeInHours() );
+                gauge2.setPercentValueString( (int) batInfo2.getChargeLevel(), batInfo2.isFull() ? "full" : batInfo2.getRemainingTimeInHours() );
             }
             else {
                 gauge2.setPercentValueString( (int) batInfo2.getChargeLevel(), "" );
@@ -414,17 +418,26 @@ KThinkBat::timeout() {
             gauge1.setPercentValue( percent );
         }
         else if( KThinkBatConfig::gaugeContentTime() ) {
-            int mins = batInfo1.getRemainingTimeInMin() + batInfo2.getRemainingTimeInMin();
-            int hours = mins / 60;
-            QString minString = QString().number(mins - (hours * 60));
-            if( minString.length() == 1 ) {
-                minString = "0" + mins;
+            if( ( !batInfo1.isInstalled() || batInfo1.isFull()) && (!batInfo2.isInstalled() || batInfo2.isFull()) ) { 
+                gauge1.setPercentValueString( (int) batInfo1.getChargeLevel(), "full" );
             }
-            minString.insert( 0, QString().number(hours).append(":") );
-            gauge1.setPercentValueString( (int) batInfo1.getChargeLevel(), minString );
+            else {
+
+                int min = batInfo1.getRemainingTimeInMin() + batInfo2.getRemainingTimeInMin();
+                int hours = min / 60;
+                QString out = QString().number(hours) + ":";
+                min = min - (hours * 60);
+                if( min > 9 ) {
+                    out += QString().number(min);
+                }
+                else {
+                    out += "0" + QString().number(min);
+                }
+                gauge1.setPercentValueString( (int) percent, out );
+            }
         }
         else {
-            gauge1.setPercentValueString( (int) batInfo1.getChargeLevel(), "" );
+            gauge1.setPercentValueString( (int) percent, "" );
         }
     }
 
@@ -463,7 +476,7 @@ KThinkBat::createToolTipText( bool battery1, bool battery2 ) {
             toolTipText += "<tr><td>" + i18n("Last Fuel: ") + "</td><td>" + QString().number((float) batInfo->getLastFuel()) + " m" + batInfo->getPowerUnit() + "h</td></tr>";
             toolTipText += "<tr><td>" + i18n("Design Fuel: ") + "</td><td>" + QString().number((float) batInfo->getDesignFuel()) + " m" + batInfo->getPowerUnit() + "h</td></tr>";
             toolTipText += "<tr><td>" + i18n("State: ") + "</td><td>" + i18n(batInfo->getState()) + "</td></tr>";
-            toolTipText += "<tr><td>" + i18n("Remaining Time: ") + "</td><td>" + QString().number((int) batInfo->getRemainingTimeInMin()) + " min</td></tr>";
+            toolTipText += "<tr><td>" + i18n("Remaining Time: ") + "</td><td>" + ( batInfo->isFull() ? i18n("full charged") : (QString().number((int) batInfo->getRemainingTimeInMin()) + "min") ) + "</td></tr>";
         }
         else {
             toolTipText += "<td>" + i18n("not installed") + "</td></tr>";

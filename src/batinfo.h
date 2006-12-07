@@ -81,6 +81,8 @@ public:
 
     bool isDischarging() { return isInstalled() && ! isOnline() && ! batCharging; }
 
+    bool isFull() { return  isInstalled() && 100.0 == getChargeLevel() && !isCharging() && !isDischarging(); }
+
     /** Get the current battery state. */
     QString getState() { return batState; }
 

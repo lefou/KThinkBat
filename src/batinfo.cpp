@@ -283,6 +283,7 @@ BatInfo::parseSysfsTP() {
         line = stream.readLine();
         if( -1 != mWh.search( line ) ) {
             lastFuel = mWh.cap(1).toInt( &check );
+            if( !check ) { lastFuel = 0; }
         }
         file.close();
     }
@@ -296,6 +297,7 @@ BatInfo::parseSysfsTP() {
         line = stream.readLine();
         if( -1 != mWh.search( line ) ) {
             designFuel = mWh.cap(1).toInt( &check );
+            if( !check ) { designFuel = 0; }
         }
         file.close();
     }
@@ -309,6 +311,7 @@ BatInfo::parseSysfsTP() {
         line = stream.readLine();
         if( -1 != mWh.search( line ) ) {
             curFuel = mWh.cap(1).toInt( &check );
+            if( !check ) { curFuel = 0; }
         }
         file.close();
     }
@@ -322,7 +325,8 @@ BatInfo::parseSysfsTP() {
         line = stream.readLine();
         if( -1 != mW.search( line ) ) {
             curPower = mW.cap(1).toInt( &check );
-            if( curPower < 0 ) { curPower = (0 - curPower); }
+            if( !check ) { curPower = 0; }
+            else if( curPower < 0 ) { curPower = (0 - curPower); }
         }
         file.close();
     }
@@ -361,6 +365,7 @@ BatInfo::parseSysfsTP() {
         if( file.exists() && file.open(IO_ReadOnly) ) {
             stream.setDevice( &file );
             remainingTime = stream.readLine().toInt( &check );
+            if( !check ) { remainingTime = 0; }
             file.close();
         }
         else {
@@ -372,6 +377,7 @@ BatInfo::parseSysfsTP() {
         if( file.exists() && file.open(IO_ReadOnly) ) {
             stream.setDevice( &file );
             remainingTime = stream.readLine().toInt( &check );
+            if( !check ) { remainingTime = 0; }
             file.close();
         }
         else {
@@ -421,10 +427,15 @@ BatInfo::getPowerConsumptionFormated() {
 
 QString 
 BatInfo::getRemainingTimeInHours() {
-    int hours = getRemainingTimeInMin() / 60;
-    QString mins = QString().number(getRemainingTimeInMin() - (hours * 60));
-    if( mins.length() == 1 ) {
-        mins = "0" + mins;
+    int min = getRemainingTimeInMin();
+    int hours = min / 60;
+    QString out = QString().number(hours) + ":";
+    min = min - (hours * 60);
+    if( min > 9 ) {
+        out += QString().number(min);
     }
-    return QString().number(hours) + ":" + mins;
+    else {
+        out += "0" + QString().number(min);
+    }
+    return out;
 }

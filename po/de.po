@@ -47,7 +47,8 @@ msgstr "KThinkBat Einstellungen"
 
 #: kthinkbat.cpp:138
 msgid "A KDE panel applet to display the current laptop battery status."
-msgstr "Ein KDE Panel Applet zur Anzeige des aktuellen Akku-Zusandes eines Laptops."
+msgstr ""
+"Ein KDE Panel Applet zur Anzeige des aktuellen Akku-Zusandes eines Laptops."
 
 #: kthinkbat.cpp:155
 msgid ""
@@ -269,4 +270,3 @@ msgstr "Akkuanzeige Hintergrundfarbe"
 #, no-c-format
 msgid "Gauge Fuel Color"
 msgstr "Farbe für normalen Akkustand"
-
