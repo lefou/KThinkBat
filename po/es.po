@@ -2,18 +2,19 @@
 # This file is put in the public domain.
 #
 # Luis Guillermo Sobalvarro <webmaster@kdelatino.com>, 2006.
+# Luis Guillermo Sobalvarro <lgsobalvarro@e-genieria.com>, 2006.
 msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-12-03 20:09+0100\n"
-"PO-Revision-Date: 2006-07-23 16:10-0500\n"
-"Last-Translator: Luis Guillermo Sobalvarro <webmaster@kdelatino.com>\n"
-"Language-Team: Spanish <en@li.org>\n"
+"PO-Revision-Date: 2006-12-08 21:22+0500\n"
+"Last-Translator: Luis Guillermo Sobalvarro <lgsobalvarro@e-genieria.com>\n"
+"Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.2\n"
+"X-Generator: KBabel 1.11.4\n"
 
 #: _translatorinfo.cpp:1
 msgid ""
@@ -29,7 +30,7 @@ msgid ""
 "Your emails"
 msgstr ""
 "_: EMAIL OF TRANSLATORS\n"
-"webmaster@kdelatino.org"
+"lgsobalvarro@e-genieria.com"
 
 #: kthinkbat.cpp:72
 msgid "KThinkBat %1"
@@ -51,7 +52,7 @@ msgstr "Preferencias de KThinkBat"
 
 #: kthinkbat.cpp:138
 msgid "A KDE panel applet to display the current laptop battery status."
-msgstr "Un applet para el panel de KDE que muestra el estado de la batería."
+msgstr "Applet para el panel de KDE que muestra el estado de la batería."
 
 #: kthinkbat.cpp:155
 msgid ""
@@ -61,53 +62,51 @@ msgid ""
 msgstr ""
 "Un applet para el panel de KDE que muestra el estado de la batería. \n"
 "\n"
-"No hay un verdadero diálogo de ayuda por el momento"
+"No hay un diálogo de ayuda por el momento"
 
 #: kthinkbat.cpp:453
-#, fuzzy
 msgid "Battery %1"
-msgstr "Batería %1: "
+msgstr "Batería %1"
 
 #: kthinkbat.cpp:461
 msgid "Current Fuel: "
-msgstr ""
+msgstr "Capacidad actual: "
 
 #: kthinkbat.cpp:462
 msgid "Crit Fuel: "
-msgstr ""
+msgstr "Capacidad crítica: "
 
 #: kthinkbat.cpp:463
 msgid "Last Fuel: "
-msgstr ""
+msgstr "Última capacidad: "
 
 #: kthinkbat.cpp:464
 msgid "Design Fuel: "
-msgstr ""
+msgstr "Capacidad original: "
 
 #: kthinkbat.cpp:465
 msgid "State: "
-msgstr ""
+msgstr "Estado: "
 
 #: kthinkbat.cpp:466
 msgid "Remaining Time: "
-msgstr ""
+msgstr "Tiempo restante: "
 
 #: kthinkbat.cpp:469
-#, fuzzy
 msgid "not installed"
-msgstr "Batería %1: no instalada"
+msgstr "no instalada"
 
 #. i18n: file ./prefs.ui line 50
 #: rc.cpp:6
 #, no-c-format
 msgid "General"
-msgstr ""
+msgstr "General"
 
 #. i18n: file ./prefs.ui line 61
 #: rc.cpp:9
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Battery Critical Fill"
-msgstr "Campo de ña batería crítica"
+msgstr "Campo de la batería crítica"
 
 #. i18n: file ./prefs.ui line 69
 #: rc.cpp:12
@@ -119,13 +118,13 @@ msgstr "Intervalo de actualización de la batería (en milisegundos)"
 #: rc.cpp:15
 #, no-c-format
 msgid "Show &ToolTip"
-msgstr ""
+msgstr "Mostrar sugerencias de uso"
 
 #. i18n: file ./prefs.ui line 111
 #: rc.cpp:18
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Alt+T"
-msgstr "Alt+W"
+msgstr "Alt+T"
 
 #. i18n: file ./prefs.ui line 141
 #: rc.cpp:21
@@ -147,19 +146,19 @@ msgstr "Propiedades de la batería"
 
 #. i18n: file ./prefs.ui line 211
 #: rc.cpp:36
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Gauge Dot Size:"
-msgstr "Tamaño del punto de la batería"
+msgstr "Tamaño del punto de la batería:"
 
 #. i18n: file ./prefs.ui line 219
 #: rc.cpp:39
 #, no-c-format
 msgid "Gauge Size:"
-msgstr "Tamaño de la batería"
+msgstr "Tamaño de la batería:"
 
 #. i18n: file ./prefs.ui line 288
 #: rc.cpp:48
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Info Field below of Battery Gauge"
 msgstr "Posición del medidor de energía debajo de la batería"
 
@@ -167,37 +166,37 @@ msgstr "Posición del medidor de energía debajo de la batería"
 #: rc.cpp:52
 #, no-c-format
 msgid "Draw Batter&y upright"
-msgstr ""
+msgstr "Dibujado horizontal de la información de la batería"
 
 #. i18n: file ./prefs.ui line 302
 #: rc.cpp:55
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Alt+Y"
-msgstr "Alt+W"
+msgstr "Alt+Y"
 
 #. i18n: file ./prefs.ui line 318
 #: rc.cpp:58
 #, no-c-format
 msgid "Content of Info Field"
-msgstr ""
+msgstr "Contenido del campo de información"
 
 #. i18n: file ./prefs.ui line 332
 #: rc.cpp:61
 #, no-c-format
 msgid "&Remaining Time"
-msgstr ""
+msgstr "Tiempo &restante"
 
 #. i18n: file ./prefs.ui line 335
 #: rc.cpp:64
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Alt+R"
-msgstr "Alt+W"
+msgstr "Alt+R"
 
 #. i18n: file ./prefs.ui line 343
 #: rc.cpp:67
 #, no-c-format
 msgid "Current Po&wer Consumption"
-msgstr ""
+msgstr "Consumo actual de batería"
 
 #. i18n: file ./prefs.ui line 346
 #: rc.cpp:70
@@ -207,39 +206,39 @@ msgstr "Alt+W"
 
 #. i18n: file ./prefs.ui line 356
 #: rc.cpp:73
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Content of Battery Gauge"
-msgstr "Posición del medidor de energía debajo de la batería"
+msgstr "Contenido del medidor de batería"
 
 #. i18n: file ./prefs.ui line 367
 #: rc.cpp:76
 #, no-c-format
 msgid "Remaining Time"
-msgstr ""
+msgstr "Tiempo restante"
 
 #. i18n: file ./prefs.ui line 378
 #: rc.cpp:80
 #, no-c-format
 msgid "Remaining Power in Percent"
-msgstr ""
+msgstr "Batería restante en porcentaje"
 
 #. i18n: file ./prefs.ui line 389
 #: rc.cpp:84
 #, no-c-format
 msgid "&None"
-msgstr ""
+msgstr "&Nada"
 
 #. i18n: file ./prefs.ui line 392
 #: rc.cpp:87
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Alt+N"
-msgstr "Alt+W"
+msgstr "Alt+N"
 
 #. i18n: file ./prefs.ui line 406
 #: rc.cpp:90
 #, no-c-format
 msgid "Color and Font"
-msgstr ""
+msgstr "Color y fuente"
 
 #. i18n: file ./prefs.ui line 430
 #: rc.cpp:93
@@ -277,11 +276,3 @@ msgstr "Color de fondo de la batería."
 msgid "Gauge Fuel Color"
 msgstr "Color de la batería"
 
-#~ msgid "Color"
-#~ msgstr "Color"
-
-#~ msgid "Size"
-#~ msgstr "Tamaño"
-
-#~ msgid "Show Power Meter"
-#~ msgstr "Mostrar medidor de energía"
