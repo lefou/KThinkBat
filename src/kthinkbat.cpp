@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2005-2006 by Tobias Roeser   *
+ *   Copyright (C) 2005-2007 by Tobias Roeser   *
  *   le.petit.fou@web.de   *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -137,7 +137,7 @@ KThinkBat::slotAbout() {
     KAboutData aboutData( "KThinkBat", "KThinkBat", VERSION,
                           I18N_NOOP("A KDE panel applet to display the current laptop battery status."),
                           KAboutData::License_GPL_V2, 
-                          "(c) 2005-2006, Tobias Roeser",
+                          "(c) 2005-2007, Tobias Roeser",
                           "", 
                           "https://lepetitfou.dyndns.org/KThinkBat",
                           "le.petit.fou@web.de" );
