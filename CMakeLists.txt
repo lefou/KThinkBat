@@ -1,13 +1,20 @@
 project(kthinkbat_panelapplet)
 cmake_minimum_required(VERSION 2.4.2)
 
+#SET(CMAKE_VERBOSE_MAKEFILE ON)
+
 find_package(Qt3 REQUIRED)
 find_package(KDE3 REQUIRED)
 
-add_definitions(${QT_DEFINITIONS} ${KDE3_DEFINITIONS})
+add_definitions(${QT_DEFINITIONS}
+    ${KDE3_DEFINITIONS} 
+    -DVERSION=\\"0.2.4-svn\\"
+    )
 
 link_directories(${KDE3_LIB_DIR})
 
-include_directories(${KDE3_INCLUDE_DIR} ${QT_INCLUDE_DIR})
+include_directories(. ${KDE3_INCLUDE_DIR} ${QT_INCLUDE_DIR})
+
+#configure_file (config.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config.h )
 
 add_subdirectory(src)
