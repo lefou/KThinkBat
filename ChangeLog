@@ -2,6 +2,7 @@ KThinkBat 0.2.5
    * #20: New translation for Bulgarian from Aleksandar Tsankov
    * Reworked icon set which is now more oxygen-like and with a shadow, send by
      Luis Guillermo Sobalvarro
+   * #21: Added one translated message to Italian translation
 
 KThinkBat 0.2.4 - 06.01.2007:
    * #11: better detection, if battery is installed or not
