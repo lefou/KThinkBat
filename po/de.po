@@ -270,3 +270,8 @@ msgstr "Akkuanzeige Hintergrundfarbe"
 #, no-c-format
 msgid "Gauge Fuel Color"
 msgstr "Farbe für normalen Akkustand"
+
+#: kthinkbat.cpp:465
+msgid "Current Consumption: "
+msgstr "Aktueller Verbrauch: "
+

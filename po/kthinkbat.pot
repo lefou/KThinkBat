@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-01-03 21:59+0100\n"
+"POT-Creation-Date: 2007-04-02 19:54+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -40,7 +40,7 @@ msgid "&Configure %1..."
 msgstr ""
 
 #. i18n: file ./prefs.ui line 22
-#: kthinkbat.cpp:118 prefs.cpp:322 rc.cpp:3
+#: kthinkbat.cpp:118 rc.cpp:3
 #, no-c-format
 msgid "KThinkBat Preferences"
 msgstr ""
@@ -56,218 +56,222 @@ msgid ""
 "There is no real help box at the moment"
 msgstr ""
 
-#: kthinkbat.cpp:466
+#: kthinkbat.cpp:457
 msgid "Battery %1"
 msgstr ""
 
-#: kthinkbat.cpp:474
+#: kthinkbat.cpp:465
+msgid "Current Consumption: "
+msgstr ""
+
+#: kthinkbat.cpp:466
 msgid "Current Fuel: "
 msgstr ""
 
-#: kthinkbat.cpp:475
+#: kthinkbat.cpp:467
 msgid "Crit Fuel: "
 msgstr ""
 
-#: kthinkbat.cpp:476
+#: kthinkbat.cpp:468
 msgid "Last Fuel: "
 msgstr ""
 
-#: kthinkbat.cpp:477
+#: kthinkbat.cpp:469
 msgid "Design Fuel: "
 msgstr ""
 
-#: kthinkbat.cpp:478
+#: kthinkbat.cpp:470
 msgid "State: "
 msgstr ""
 
-#: kthinkbat.cpp:479
+#: kthinkbat.cpp:471
 msgid "Remaining Time: "
 msgstr ""
 
-#: kthinkbat.cpp:479
+#: kthinkbat.cpp:471
 msgid "full charged"
 msgstr ""
 
-#: kthinkbat.cpp:482
+#: kthinkbat.cpp:474
 msgid "not installed"
 msgstr ""
 
 #. i18n: file ./prefs.ui line 50
-#: prefs.cpp:323 rc.cpp:6
+#: rc.cpp:6
 #, no-c-format
 msgid "General"
 msgstr ""
 
 #. i18n: file ./prefs.ui line 61
-#: prefs.cpp:324 rc.cpp:9
+#: rc.cpp:9
 #, no-c-format
 msgid "Battery Critical Fill"
 msgstr ""
 
 #. i18n: file ./prefs.ui line 69
-#: prefs.cpp:325 rc.cpp:12
+#: rc.cpp:12
 #, no-c-format
 msgid "Battery Update Interval (in milliseconds)"
 msgstr ""
 
 #. i18n: file ./prefs.ui line 108
-#: prefs.cpp:326 rc.cpp:15
+#: rc.cpp:15
 #, no-c-format
 msgid "Show &ToolTip"
 msgstr ""
 
 #. i18n: file ./prefs.ui line 111
-#: prefs.cpp:327 rc.cpp:18
+#: rc.cpp:18
 #, no-c-format
 msgid "Alt+T"
 msgstr ""
 
 #. i18n: file ./prefs.ui line 141
-#: prefs.cpp:328 rc.cpp:21
+#: rc.cpp:21
 #, no-c-format
 msgid "Summari&ze all Batteries"
 msgstr ""
 
 #. i18n: file ./prefs.ui line 144
-#: prefs.cpp:329 rc.cpp:24
+#: rc.cpp:24
 #, no-c-format
 msgid "Alt+Z"
 msgstr ""
 
 #. i18n: file ./prefs.ui line 154
-#: prefs.cpp:330 rc.cpp:27
+#: rc.cpp:27
 #, no-c-format
 msgid "Battery Settings"
 msgstr ""
 
 #. i18n: file ./prefs.ui line 211
-#: prefs.cpp:333 rc.cpp:36
+#: rc.cpp:36
 #, no-c-format
 msgid "Gauge Dot Size:"
 msgstr ""
 
 #. i18n: file ./prefs.ui line 219
-#: prefs.cpp:334 rc.cpp:39
+#: rc.cpp:39
 #, no-c-format
 msgid "Gauge Size:"
 msgstr ""
 
 #. i18n: file ./prefs.ui line 288
-#: prefs.cpp:337 rc.cpp:48
+#: rc.cpp:48
 #, no-c-format
 msgid "Info Field below of Battery Gauge"
 msgstr ""
 
 #. i18n: file ./prefs.ui line 299
-#: prefs.cpp:339 rc.cpp:52
+#: rc.cpp:52
 #, no-c-format
 msgid "Draw Batter&y upright"
 msgstr ""
 
 #. i18n: file ./prefs.ui line 302
-#: prefs.cpp:340 rc.cpp:55
+#: rc.cpp:55
 #, no-c-format
 msgid "Alt+Y"
 msgstr ""
 
 #. i18n: file ./prefs.ui line 318
-#: prefs.cpp:341 rc.cpp:58
+#: rc.cpp:58
 #, no-c-format
 msgid "Content of Info Field"
 msgstr ""
 
 #. i18n: file ./prefs.ui line 332
-#: prefs.cpp:342 rc.cpp:61
+#: rc.cpp:61
 #, no-c-format
 msgid "&Remaining Time"
 msgstr ""
 
 #. i18n: file ./prefs.ui line 335
-#: prefs.cpp:343 rc.cpp:64
+#: rc.cpp:64
 #, no-c-format
 msgid "Alt+R"
 msgstr ""
 
 #. i18n: file ./prefs.ui line 343
-#: prefs.cpp:344 rc.cpp:67
+#: rc.cpp:67
 #, no-c-format
 msgid "Current Po&wer Consumption"
 msgstr ""
 
 #. i18n: file ./prefs.ui line 346
-#: prefs.cpp:345 rc.cpp:70
+#: rc.cpp:70
 #, no-c-format
 msgid "Alt+W"
 msgstr ""
 
 #. i18n: file ./prefs.ui line 356
-#: prefs.cpp:346 rc.cpp:73
+#: rc.cpp:73
 #, no-c-format
 msgid "Content of Battery Gauge"
 msgstr ""
 
 #. i18n: file ./prefs.ui line 367
-#: prefs.cpp:347 rc.cpp:76
+#: rc.cpp:76
 #, no-c-format
 msgid "Remaining Time"
 msgstr ""
 
 #. i18n: file ./prefs.ui line 378
-#: prefs.cpp:349 rc.cpp:80
+#: rc.cpp:80
 #, no-c-format
 msgid "Remaining Power in Percent"
 msgstr ""
 
 #. i18n: file ./prefs.ui line 389
-#: prefs.cpp:351 rc.cpp:84
+#: rc.cpp:84
 #, no-c-format
 msgid "&None"
 msgstr ""
 
 #. i18n: file ./prefs.ui line 392
-#: prefs.cpp:352 rc.cpp:87
+#: rc.cpp:87
 #, no-c-format
 msgid "Alt+N"
 msgstr ""
 
 #. i18n: file ./prefs.ui line 406
-#: prefs.cpp:353 rc.cpp:90
+#: rc.cpp:90
 #, no-c-format
 msgid "Color and Font"
 msgstr ""
 
 #. i18n: file ./prefs.ui line 430
-#: prefs.cpp:354 rc.cpp:93
+#: rc.cpp:93
 #, no-c-format
 msgid "Power Meter Font"
 msgstr ""
 
 #. i18n: file ./prefs.ui line 477
-#: prefs.cpp:355 rc.cpp:96
+#: rc.cpp:96
 #, no-c-format
 msgid "Gauge Font (Percentage Value)"
 msgstr ""
 
 #. i18n: file ./prefs.ui line 495
-#: prefs.cpp:356 rc.cpp:99
+#: rc.cpp:99
 #, no-c-format
 msgid "Power Meter Text Color"
 msgstr ""
 
 #. i18n: file ./prefs.ui line 520
-#: prefs.cpp:357 rc.cpp:102
+#: rc.cpp:102
 #, no-c-format
 msgid "Gauge Critical Fuell Color"
 msgstr ""
 
 #. i18n: file ./prefs.ui line 561
-#: prefs.cpp:359 rc.cpp:106
+#: rc.cpp:106
 #, no-c-format
 msgid "Gauge Background Color"
 msgstr ""
 
 #. i18n: file ./prefs.ui line 605
-#: prefs.cpp:361 rc.cpp:110
+#: rc.cpp:110
 #, no-c-format
 msgid "Gauge Fuel Color"
 msgstr ""
