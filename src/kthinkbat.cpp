@@ -86,6 +86,11 @@ KThinkBat::KThinkBat(const QString& configFile, Type type, int actions, QWidget 
     connect( toolTipTimer, SIGNAL(timeout()), this, SLOT(slotToolTip()));
     toolTip = new BatToolTip( this );
     assert( toolTip );
+
+    // Trigger some translations
+    i18n("charging");
+    i18n("discharging");
+    i18n("idle");
 }
 
 KThinkBat::~KThinkBat() {

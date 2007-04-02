@@ -6,6 +6,7 @@ KThinkBat 0.2.5
    * Update to the Spanish translation to be easier understandable, thanks to 
      Luis Guillermo Sobalvarro (again)
    * Remaining time can be shown in hours format (h:mm) or in minutes (m min)
+   * More German translations
 
 KThinkBat 0.2.4 - 06.01.2007:
    * #11: better detection, if battery is installed or not

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: it\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-12-03 20:09+0100\n"
+"POT-Creation-Date: 2007-04-02 20:17+0200\n"
 "PO-Revision-Date: 2007-03-13 17:10+0100\n"
 "Last-Translator: Anselmo Luginbühl <omlesna@gmail.com>\n"
 "Language-Team:  <it@li.org>\n"
@@ -45,52 +45,77 @@ msgstr "A &proposito %1"
 msgid "&Configure %1..."
 msgstr "&Configura %1..."
 
+#: kthinkbat.cpp:91
+msgid "charging"
+msgstr ""
+
+#: kthinkbat.cpp:92
+msgid "discharging"
+msgstr ""
+
+#: kthinkbat.cpp:93
+msgid "idle"
+msgstr ""
+
 #. i18n: file ./prefs.ui line 22
-#: kthinkbat.cpp:118 rc.cpp:3
+#: kthinkbat.cpp:123 rc.cpp:3
 #, no-c-format
 msgid "KThinkBat Preferences"
 msgstr "Preferenze di KThinkBat"
 
-#: kthinkbat.cpp:138
+#: kthinkbat.cpp:143
 msgid "A KDE panel applet to display the current laptop battery status."
 msgstr "Un indicatore dello stato attuale delle batterie del portatile."
 
-#: kthinkbat.cpp:155
+#: kthinkbat.cpp:160
 msgid ""
 "A KDE panel applet to display the current laptop battery status.\n"
 "\n"
 "There is no real help box at the moment"
-msgstr "Un'applet per il pannello di KDE che mostra lo stato delle batterie del portatile.\n\nAl momento non esiste un riquadro di aiuto"
+msgstr ""
+"Un'applet per il pannello di KDE che mostra lo stato delle batterie del "
+"portatile.\n"
+"\n"
+"Al momento non esiste un riquadro di aiuto"
 
-#: kthinkbat.cpp:453
+#: kthinkbat.cpp:462
 msgid "Battery %1"
 msgstr "Batteria %1"
 
-#: kthinkbat.cpp:461
+#: kthinkbat.cpp:470
+#, fuzzy
+msgid "Current Consumption: "
+msgstr "Poten&za Istantanea"
+
+#: kthinkbat.cpp:471
 msgid "Current Fuel: "
 msgstr "Carica attuale:"
 
-#: kthinkbat.cpp:462
+#: kthinkbat.cpp:472
 msgid "Crit Fuel: "
 msgstr "Carica critica:"
 
-#: kthinkbat.cpp:463
+#: kthinkbat.cpp:473
 msgid "Last Fuel: "
 msgstr "Ultima carica:"
 
-#: kthinkbat.cpp:464
+#: kthinkbat.cpp:474
 msgid "Design Fuel: "
 msgstr "Carica di targa:"
 
-#: kthinkbat.cpp:465
+#: kthinkbat.cpp:475
 msgid "State: "
 msgstr "Stato:"
 
-#: kthinkbat.cpp:466
+#: kthinkbat.cpp:476
 msgid "Remaining Time: "
 msgstr "Tempo rimanente:"
 
-#: kthinkbat.cpp:469
+#: kthinkbat.cpp:476
+msgid "full charged"
+msgstr ""
+
+#: kthinkbat.cpp:479
 msgid "not installed"
 msgstr "non installato"
 
@@ -273,4 +298,3 @@ msgstr "Sfondo"
 #, no-c-format
 msgid "Gauge Fuel Color"
 msgstr "Livello"
-

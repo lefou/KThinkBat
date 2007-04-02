@@ -22,7 +22,7 @@ pkglibdir = $(libdir)/kthinkbat
 pkgincludedir = $(includedir)/kthinkbat
 top_builddir = ..
 am__cd = CDPATH="$${ZSH_VERSION+.}$(PATH_SEPARATOR)" && cd
-INSTALL = /bin/install -c -p
+INSTALL = /usr/bin/install -c -p
 install_sh_DATA = $(install_sh) -c -m 644
 install_sh_PROGRAM = $(install_sh) -c
 install_sh_SCRIPT = $(install_sh) -c
@@ -59,7 +59,7 @@ AMDEP_FALSE = #
 AMDEP_TRUE = 
 AMTAR = ${SHELL} /home/lefou/dev/kthinkbat/admin/missing --run tar
 AR = ar
-ARTSCCONFIG = /usr/kde/3.5/bin/artsc-config
+ARTSCCONFIG = 
 AUTOCONF = $(SHELL) $(top_srcdir)/admin/cvs.sh configure || touch configure
 AUTODIRS = 
 AUTOHEADER = ${SHELL} /home/lefou/dev/kthinkbat/admin/missing --run autoheader
@@ -89,8 +89,8 @@ ECHO_T =
 EGREP = /bin/grep -E
 ENABLE_PERMISSIVE_FLAG = -fpermissive
 EXEEXT = 
-F77 = 
-FFLAGS = 
+F77 = gfortran
+FFLAGS = -g -O2
 FRAMEWORK_COREAUDIO = 
 GMSGFMT = /usr/bin/gmsgfmt
 GREP = /bin/grep
@@ -169,7 +169,7 @@ LN_S = ln -s
 LTLIBOBJS = 
 MAKEINFO = ${SHELL} /home/lefou/dev/kthinkbat/admin/missing --run makeinfo
 MAKEKDEWIDGETS = 
-MCOPIDL = /usr/kde/3.5/bin/mcopidl
+MCOPIDL = 
 MEINPROC = /usr/kde/3.5/bin/meinproc
 MOC = /usr/qt/3/bin/moc
 MSGFMT = /usr/bin/gmsgfmt
@@ -199,7 +199,7 @@ USER_LDFLAGS =
 USE_EXCEPTIONS = -fexceptions
 USE_RTTI = 
 USE_THREADS = 
-VERSION = 0.2.4_rc1
+VERSION = 0.2.4
 WOVERLOADED_VIRTUAL = 
 XGETTEXT = /usr/bin/xgettext
 XMKMF = 
@@ -211,7 +211,7 @@ X_PRE_LIBS =
 X_RPATH = -R $(x_libraries)
 ac_ct_CC = gcc
 ac_ct_CXX = g++
-ac_ct_F77 = 
+ac_ct_F77 = gfortran
 all_includes = -I/usr/kde/3.5/include -I/usr/qt/3/include -I. 
 all_libraries = -L/usr/kde/3.5/lib -L/usr/qt/3/lib -L/usr/lib   
 am__fastdepCC_FALSE = #
@@ -240,8 +240,8 @@ host_cpu = i686
 host_os = linux-gnu
 host_vendor = pc
 htmldir = ${docdir}
-include_ARTS_FALSE = #
-include_ARTS_TRUE = 
+include_ARTS_FALSE = 
+include_ARTS_TRUE = #
 include_x11_FALSE = #
 include_x11_TRUE = 
 includedir = ${prefix}/include
@@ -494,7 +494,7 @@ uninstall-local:
 .NOEXPORT:
 
 #>+ 2
-KDE_DIST=configure.in.bot.end bcheck.pl Makefile.in Doxyfile.global deps.am detect-autoconf.pl pkg.m4.in configure.in.min acinclude.m4.in doxygen.sh debianrules libtool.m4.in nmcheck cvs.sh config.pl Doxyfile.am oldinclude.m4.in Makefile.am am_edit conf.change.pl Makefile.common 
+KDE_DIST=configure.in.bot.end bcheck.pl Makefile.in Doxyfile.global deps.am pkg.m4.in detect-autoconf.pl configure.in.min acinclude.m4.in doxygen.sh nmcheck libtool.m4.in debianrules cvs.sh config.pl Doxyfile.am oldinclude.m4.in Makefile.am conf.change.pl am_edit Makefile.common 
 
 #>+ 2
 docs-am:

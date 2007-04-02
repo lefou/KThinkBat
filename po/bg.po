@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bg\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-01-03 21:59+0100\n"
+"POT-Creation-Date: 2007-04-02 20:17+0200\n"
 "PO-Revision-Date: 2007-01-26 15:28+0200\n"
 "Last-Translator: Aleksandar Tsankov <al.tsankov@gmail.com>\n"
 "Language-Team: Bulgarian <en@li.org>\n"
@@ -39,17 +39,29 @@ msgstr "&Относно %1"
 msgid "&Configure %1..."
 msgstr "&Конфигуриране на %1"
 
+#: kthinkbat.cpp:91
+msgid "charging"
+msgstr ""
+
+#: kthinkbat.cpp:92
+msgid "discharging"
+msgstr ""
+
+#: kthinkbat.cpp:93
+msgid "idle"
+msgstr ""
+
 #. i18n: file ./prefs.ui line 22
-#: kthinkbat.cpp:118 prefs.cpp:322 rc.cpp:3
+#: kthinkbat.cpp:123 rc.cpp:3
 #, no-c-format
 msgid "KThinkBat Preferences"
 msgstr "Настройки на KThinkBat"
 
-#: kthinkbat.cpp:138
+#: kthinkbat.cpp:143
 msgid "A KDE panel applet to display the current laptop battery status."
 msgstr "KDE аплет за изобразяване на текущия статус на батерията на лаптопа"
 
-#: kthinkbat.cpp:155
+#: kthinkbat.cpp:160
 msgid ""
 "A KDE panel applet to display the current laptop battery status.\n"
 "\n"
@@ -59,219 +71,223 @@ msgstr ""
 "\n"
 "За момента все още няма истински помощен прозорец"
 
-#: kthinkbat.cpp:466
+#: kthinkbat.cpp:462
 msgid "Battery %1"
 msgstr "Батерия %1"
 
-#: kthinkbat.cpp:474
+#: kthinkbat.cpp:470
+#, fuzzy
+msgid "Current Consumption: "
+msgstr "&Текуща консумация"
+
+#: kthinkbat.cpp:471
 msgid "Current Fuel: "
 msgstr "Текущ заряд:"
 
-#: kthinkbat.cpp:475
+#: kthinkbat.cpp:472
 msgid "Crit Fuel: "
 msgstr "Критичен заряд:"
 
-#: kthinkbat.cpp:476
+#: kthinkbat.cpp:473
 msgid "Last Fuel: "
 msgstr "Максимален заряд:"
 
-#: kthinkbat.cpp:477
+#: kthinkbat.cpp:474
 msgid "Design Fuel: "
 msgstr "Фабричен заряд:"
 
-#: kthinkbat.cpp:478
+#: kthinkbat.cpp:475
 msgid "State: "
 msgstr "Състояние:"
 
-#: kthinkbat.cpp:479
+#: kthinkbat.cpp:476
 msgid "Remaining Time: "
 msgstr "Оставащо време:"
 
-#: kthinkbat.cpp:479
+#: kthinkbat.cpp:476
 msgid "full charged"
 msgstr "напълно заредена"
 
-#: kthinkbat.cpp:482
+#: kthinkbat.cpp:479
 msgid "not installed"
 msgstr "не е инсталирана"
 
 #. i18n: file ./prefs.ui line 50
-#: prefs.cpp:323 rc.cpp:6
+#: rc.cpp:6
 #, no-c-format
 msgid "General"
 msgstr "Общо"
 
 #. i18n: file ./prefs.ui line 61
-#: prefs.cpp:324 rc.cpp:9
+#: rc.cpp:9
 #, no-c-format
 msgid "Battery Critical Fill"
 msgstr "Критичен заряд на батерията"
 
 #. i18n: file ./prefs.ui line 69
-#: prefs.cpp:325 rc.cpp:12
+#: rc.cpp:12
 #, no-c-format
 msgid "Battery Update Interval (in milliseconds)"
 msgstr "Интервал за обновяване (в милисекунди)"
 
 #. i18n: file ./prefs.ui line 108
-#: prefs.cpp:326 rc.cpp:15
+#: rc.cpp:15
 #, no-c-format
 msgid "Show &ToolTip"
 msgstr "Показване на &подсещаща информация"
 
 #. i18n: file ./prefs.ui line 111
-#: prefs.cpp:327 rc.cpp:18
+#: rc.cpp:18
 #, no-c-format
 msgid "Alt+T"
 msgstr ""
 
 #. i18n: file ./prefs.ui line 141
-#: prefs.cpp:328 rc.cpp:21
+#: rc.cpp:21
 #, no-c-format
 msgid "Summari&ze all Batteries"
 msgstr "Обобщаване на &всички батерии"
 
 #. i18n: file ./prefs.ui line 144
-#: prefs.cpp:329 rc.cpp:24
+#: rc.cpp:24
 #, no-c-format
 msgid "Alt+Z"
 msgstr ""
 
 #. i18n: file ./prefs.ui line 154
-#: prefs.cpp:330 rc.cpp:27
+#: rc.cpp:27
 #, no-c-format
 msgid "Battery Settings"
 msgstr "Настройки на батерията"
 
 #. i18n: file ./prefs.ui line 211
-#: prefs.cpp:333 rc.cpp:36
+#: rc.cpp:36
 #, no-c-format
 msgid "Gauge Dot Size:"
 msgstr "Размер на точката"
 
 #. i18n: file ./prefs.ui line 219
-#: prefs.cpp:334 rc.cpp:39
+#: rc.cpp:39
 #, no-c-format
 msgid "Gauge Size:"
 msgstr "Размер на индикатора"
 
 #. i18n: file ./prefs.ui line 288
-#: prefs.cpp:337 rc.cpp:48
+#: rc.cpp:48
 #, no-c-format
 msgid "Info Field below of Battery Gauge"
 msgstr "Информационно поле под индикатора"
 
 #. i18n: file ./prefs.ui line 299
-#: prefs.cpp:339 rc.cpp:52
+#: rc.cpp:52
 #, no-c-format
 msgid "Draw Batter&y upright"
 msgstr "В&ертикално изчертаване"
 
 #. i18n: file ./prefs.ui line 302
-#: prefs.cpp:340 rc.cpp:55
+#: rc.cpp:55
 #, no-c-format
 msgid "Alt+Y"
 msgstr ""
 
 #. i18n: file ./prefs.ui line 318
-#: prefs.cpp:341 rc.cpp:58
+#: rc.cpp:58
 #, no-c-format
 msgid "Content of Info Field"
 msgstr "Съдържание на инфо полето"
 
 #. i18n: file ./prefs.ui line 332
-#: prefs.cpp:342 rc.cpp:61
+#: rc.cpp:61
 #, no-c-format
 msgid "&Remaining Time"
 msgstr "О&ставащо време"
 
 #. i18n: file ./prefs.ui line 335
-#: prefs.cpp:343 rc.cpp:64
+#: rc.cpp:64
 #, no-c-format
 msgid "Alt+R"
 msgstr ""
 
 #. i18n: file ./prefs.ui line 343
-#: prefs.cpp:344 rc.cpp:67
+#: rc.cpp:67
 #, no-c-format
 msgid "Current Po&wer Consumption"
 msgstr "&Текуща консумация"
 
 #. i18n: file ./prefs.ui line 346
-#: prefs.cpp:345 rc.cpp:70
+#: rc.cpp:70
 #, no-c-format
 msgid "Alt+W"
 msgstr ""
 
 #. i18n: file ./prefs.ui line 356
-#: prefs.cpp:346 rc.cpp:73
+#: rc.cpp:73
 #, no-c-format
 msgid "Content of Battery Gauge"
 msgstr "Съдържание на индикатора"
 
 #. i18n: file ./prefs.ui line 367
-#: prefs.cpp:347 rc.cpp:76
+#: rc.cpp:76
 #, no-c-format
 msgid "Remaining Time"
 msgstr "Оставащо време"
 
 #. i18n: file ./prefs.ui line 378
-#: prefs.cpp:349 rc.cpp:80
+#: rc.cpp:80
 #, no-c-format
 msgid "Remaining Power in Percent"
 msgstr "Оставаща мощност в проценти"
 
 #. i18n: file ./prefs.ui line 389
-#: prefs.cpp:351 rc.cpp:84
+#: rc.cpp:84
 #, no-c-format
 msgid "&None"
 msgstr "&Нищо"
 
 #. i18n: file ./prefs.ui line 392
-#: prefs.cpp:352 rc.cpp:87
+#: rc.cpp:87
 #, no-c-format
 msgid "Alt+N"
 msgstr ""
 
 #. i18n: file ./prefs.ui line 406
-#: prefs.cpp:353 rc.cpp:90
+#: rc.cpp:90
 #, no-c-format
 msgid "Color and Font"
 msgstr "Цвят и шрифт"
 
 #. i18n: file ./prefs.ui line 430
-#: prefs.cpp:354 rc.cpp:93
+#: rc.cpp:93
 #, no-c-format
 msgid "Power Meter Font"
 msgstr "Шрифт на индикатора за мощност"
 
 #. i18n: file ./prefs.ui line 477
-#: prefs.cpp:355 rc.cpp:96
+#: rc.cpp:96
 #, no-c-format
 msgid "Gauge Font (Percentage Value)"
 msgstr "Шрифт на индикатора (в проценти)"
 
 #. i18n: file ./prefs.ui line 495
-#: prefs.cpp:356 rc.cpp:99
+#: rc.cpp:99
 #, no-c-format
 msgid "Power Meter Text Color"
 msgstr "Цвят на текста на <br>индикатора на мощност"
 
 #. i18n: file ./prefs.ui line 520
-#: prefs.cpp:357 rc.cpp:102
+#: rc.cpp:102
 #, no-c-format
 msgid "Gauge Critical Fuell Color"
 msgstr "Цвят на индикатора за <br>критичен заряд"
 
 #. i18n: file ./prefs.ui line 561
-#: prefs.cpp:359 rc.cpp:106
+#: rc.cpp:106
 #, no-c-format
 msgid "Gauge Background Color"
 msgstr "Цвят на фона на индикатора"
 
 #. i18n: file ./prefs.ui line 605
-#: prefs.cpp:361 rc.cpp:110
+#: rc.cpp:110
 #, no-c-format
 msgid "Gauge Fuel Color"
 msgstr "Цвят на индикатора за заряд"
-
