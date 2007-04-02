@@ -42,6 +42,11 @@
             <whatsthis>If selected, the remaining time is shown in the extended text part.</whatsthis>
             <default>true</default>
         </entry>
+        <entry name="RemainingTimeInHours" type="Bool">
+            <label>Display the remaining time in hours.</label>
+            <whatsthis>If selected, the remaining time is shown in hours (h:mm), else in minures (m min).</whatsthis>
+            <default>true</default>
+        </entry>
         <entry name="ShowToolTip" type="Bool">
             <label>Show ToolTip.</label>
             <whatsthis>If selected, shows a ToolTip after holding the mouse cursor over the Applet.</whatsthis>

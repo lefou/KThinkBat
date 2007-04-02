@@ -425,12 +425,24 @@ BatInfo::getPowerConsumptionFormated() {
     return (formatString + " " + getPowerUnit());
 }
 
-QString 
-BatInfo::getRemainingTimeInHours() {
-    int min = getRemainingTimeInMin();
-    int hours = min / 60;
+int 
+BatInfo::getRemainingTimeInMin() {
+    return remainingTime;
+}
+
+QString
+BatInfo::getRemainingTimeFormated() {
+    return formatRemainingTime(getRemainingTimeInMin());
+}
+
+QString
+BatInfo::formatRemainingTime(int timeInMin) {
+    if(!KThinkBatConfig::remainingTimeInHours()) {
+        return QString().number((int) timeInMin) + " min";
+    }
+    int hours = timeInMin / 60;
     QString out = QString().number(hours) + ":";
-    min = min - (hours * 60);
+    int min = timeInMin - (hours * 60);
     if( min > 9 ) {
         out += QString().number(min);
     }

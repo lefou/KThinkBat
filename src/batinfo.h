@@ -66,8 +66,11 @@ public:
      */
     QString getPowerUnit() { return powerUnit; }
 
-    int getRemainingTimeInMin() { return remainingTime; }
+    int getRemainingTimeInMin();
+
     QString getRemainingTimeInHours();
+
+    QString getRemainingTimeFormated();
 
     void invalidateAll();
 
@@ -96,6 +99,8 @@ public:
     void setBatNr( int number ) { batNr = number; }
 
     QString getLastSuccessfulReadMethod() { return lastSuccessfulReadMethod; }
+
+    static QString formatRemainingTime(int timInMin);
 
 signals:
     void onlineModeChanged( bool batOnline );
