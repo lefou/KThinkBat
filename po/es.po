@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-04-02 20:17+0200\n"
-"PO-Revision-Date: 2007-02-24 14:07-0500\n"
+"PO-Revision-Date: 2007-04-03 11:29-0500\n"
 "Last-Translator: Luis Guillermo Sobalvarro <lgsobalvarro@e-genieria.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -46,15 +46,16 @@ msgstr "&Configurar %1..."
 
 #: kthinkbat.cpp:91
 msgid "charging"
-msgstr ""
+msgstr "cargando"
 
 #: kthinkbat.cpp:92
 msgid "discharging"
-msgstr ""
+msgstr "descargando"
 
 #: kthinkbat.cpp:93
+#, fuzzy
 msgid "idle"
-msgstr ""
+msgstr "idle"
 
 #. i18n: file ./prefs.ui line 22
 #: kthinkbat.cpp:123 rc.cpp:3
@@ -64,7 +65,7 @@ msgstr "Preferencias de KThinkBat"
 
 #: kthinkbat.cpp:143
 msgid "A KDE panel applet to display the current laptop battery status."
-msgstr "Applet para el panel de KDE que muestra el estado de la batería."
+msgstr "Un applet para el panel de KDE que muestra el estado de la batería."
 
 #: kthinkbat.cpp:160
 msgid ""
@@ -81,9 +82,8 @@ msgid "Battery %1"
 msgstr "Batería %1"
 
 #: kthinkbat.cpp:470
-#, fuzzy
 msgid "Current Consumption: "
-msgstr "Consumo actual de batería"
+msgstr "Consumo actual:"
 
 #: kthinkbat.cpp:471
 msgid "Current Fuel: "
@@ -111,7 +111,7 @@ msgstr "Tiempo restante: "
 
 #: kthinkbat.cpp:476
 msgid "full charged"
-msgstr ""
+msgstr "Carga completa"
 
 #: kthinkbat.cpp:479
 msgid "not installed"
@@ -247,7 +247,7 @@ msgstr "Batería restante en porcentaje"
 #: rc.cpp:84
 #, no-c-format
 msgid "&None"
-msgstr "&Nada"
+msgstr "&Ninguno"
 
 #. i18n: file ./prefs.ui line 392
 #: rc.cpp:87
@@ -296,3 +296,4 @@ msgstr "Fondo del medidor"
 #, no-c-format
 msgid "Gauge Fuel Color"
 msgstr "Color de la batería"
+
