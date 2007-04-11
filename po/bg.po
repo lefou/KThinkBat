@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bg\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-04-02 20:17+0200\n"
+"POT-Creation-Date: 2007-04-11 22:31+0200\n"
 "PO-Revision-Date: 2007-01-26 15:28+0200\n"
 "Last-Translator: Aleksandar Tsankov <al.tsankov@gmail.com>\n"
 "Language-Team: Bulgarian <en@li.org>\n"
@@ -40,28 +40,37 @@ msgid "&Configure %1..."
 msgstr "&Конфигуриране на %1"
 
 #: kthinkbat.cpp:91
+#, fuzzy
+msgid "charged"
+msgstr "напълно заредена"
+
+#: kthinkbat.cpp:92
 msgid "charging"
 msgstr ""
 
-#: kthinkbat.cpp:92
+#: kthinkbat.cpp:93
 msgid "discharging"
 msgstr ""
 
-#: kthinkbat.cpp:93
+#: kthinkbat.cpp:94
 msgid "idle"
 msgstr ""
 
+#: kthinkbat.cpp:95 kthinkbat.cpp:481
+msgid "not installed"
+msgstr "не е инсталирана"
+
 #. i18n: file ./prefs.ui line 22
-#: kthinkbat.cpp:123 rc.cpp:3
+#: kthinkbat.cpp:125 rc.cpp:3
 #, no-c-format
 msgid "KThinkBat Preferences"
 msgstr "Настройки на KThinkBat"
 
-#: kthinkbat.cpp:143
+#: kthinkbat.cpp:145
 msgid "A KDE panel applet to display the current laptop battery status."
 msgstr "KDE аплет за изобразяване на текущия статус на батерията на лаптопа"
 
-#: kthinkbat.cpp:160
+#: kthinkbat.cpp:162
 msgid ""
 "A KDE panel applet to display the current laptop battery status.\n"
 "\n"
@@ -71,46 +80,42 @@ msgstr ""
 "\n"
 "За момента все още няма истински помощен прозорец"
 
-#: kthinkbat.cpp:462
+#: kthinkbat.cpp:464
 msgid "Battery %1"
 msgstr "Батерия %1"
 
-#: kthinkbat.cpp:470
+#: kthinkbat.cpp:472
 #, fuzzy
 msgid "Current Consumption: "
 msgstr "&Текуща консумация"
 
-#: kthinkbat.cpp:471
+#: kthinkbat.cpp:473
 msgid "Current Fuel: "
 msgstr "Текущ заряд:"
 
-#: kthinkbat.cpp:472
+#: kthinkbat.cpp:474
 msgid "Crit Fuel: "
 msgstr "Критичен заряд:"
 
-#: kthinkbat.cpp:473
+#: kthinkbat.cpp:475
 msgid "Last Fuel: "
 msgstr "Максимален заряд:"
 
-#: kthinkbat.cpp:474
+#: kthinkbat.cpp:476
 msgid "Design Fuel: "
 msgstr "Фабричен заряд:"
 
-#: kthinkbat.cpp:475
+#: kthinkbat.cpp:477
 msgid "State: "
 msgstr "Състояние:"
 
-#: kthinkbat.cpp:476
+#: kthinkbat.cpp:478
 msgid "Remaining Time: "
 msgstr "Оставащо време:"
 
-#: kthinkbat.cpp:476
+#: kthinkbat.cpp:478
 msgid "full charged"
 msgstr "напълно заредена"
-
-#: kthinkbat.cpp:479
-msgid "not installed"
-msgstr "не е инсталирана"
 
 #. i18n: file ./prefs.ui line 50
 #: rc.cpp:6

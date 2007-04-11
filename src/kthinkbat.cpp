@@ -88,9 +88,11 @@ KThinkBat::KThinkBat(const QString& configFile, Type type, int actions, QWidget 
     assert( toolTip );
 
     // Trigger some translations
+    i18n("charged");
     i18n("charging");
     i18n("discharging");
     i18n("idle");
+    i18n("not installed");
 }
 
 KThinkBat::~KThinkBat() {

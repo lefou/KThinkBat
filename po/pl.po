@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-04-02 20:17+0200\n"
+"POT-Creation-Date: 2007-04-11 22:31+0200\n"
 "PO-Revision-Date: 2006-01-30 17:57+0100\n"
 "Last-Translator: Adam Golebiowski <adamg@pld-linux.org>\n"
 "Language-Team: Polish <pl@li.org>\n"
@@ -40,28 +40,36 @@ msgid "&Configure %1..."
 msgstr "&Konfiguruj %1"
 
 #: kthinkbat.cpp:91
-msgid "charging"
+msgid "charged"
 msgstr ""
 
 #: kthinkbat.cpp:92
-msgid "discharging"
+msgid "charging"
 msgstr ""
 
 #: kthinkbat.cpp:93
+msgid "discharging"
+msgstr ""
+
+#: kthinkbat.cpp:94
 msgid "idle"
 msgstr ""
 
+#: kthinkbat.cpp:95 kthinkbat.cpp:481
+msgid "not installed"
+msgstr ""
+
 #. i18n: file ./prefs.ui line 22
-#: kthinkbat.cpp:123 rc.cpp:3
+#: kthinkbat.cpp:125 rc.cpp:3
 #, no-c-format
 msgid "KThinkBat Preferences"
 msgstr "Opcje KThinkBat"
 
-#: kthinkbat.cpp:143
+#: kthinkbat.cpp:145
 msgid "A KDE panel applet to display the current laptop battery status."
 msgstr "Aplet panelu KDE wyświetlający status baterii w laptopie."
 
-#: kthinkbat.cpp:160
+#: kthinkbat.cpp:162
 msgid ""
 "A KDE panel applet to display the current laptop battery status.\n"
 "\n"
@@ -71,45 +79,41 @@ msgstr ""
 "\n"
 "Jak na razie aplet ten nie posiada pomocy"
 
-#: kthinkbat.cpp:462
+#: kthinkbat.cpp:464
 #, fuzzy
 msgid "Battery %1"
 msgstr "Ustawienia baterii"
 
-#: kthinkbat.cpp:470
+#: kthinkbat.cpp:472
 msgid "Current Consumption: "
 msgstr ""
 
-#: kthinkbat.cpp:471
+#: kthinkbat.cpp:473
 msgid "Current Fuel: "
 msgstr ""
 
-#: kthinkbat.cpp:472
+#: kthinkbat.cpp:474
 msgid "Crit Fuel: "
 msgstr ""
 
-#: kthinkbat.cpp:473
+#: kthinkbat.cpp:475
 msgid "Last Fuel: "
 msgstr ""
 
-#: kthinkbat.cpp:474
+#: kthinkbat.cpp:476
 msgid "Design Fuel: "
 msgstr ""
 
-#: kthinkbat.cpp:475
+#: kthinkbat.cpp:477
 msgid "State: "
 msgstr ""
 
-#: kthinkbat.cpp:476
+#: kthinkbat.cpp:478
 msgid "Remaining Time: "
 msgstr ""
 
-#: kthinkbat.cpp:476
+#: kthinkbat.cpp:478
 msgid "full charged"
-msgstr ""
-
-#: kthinkbat.cpp:479
-msgid "not installed"
 msgstr ""
 
 #. i18n: file ./prefs.ui line 50

@@ -26,6 +26,7 @@
 
 #include <qobject.h>
 #include <qstring.h>
+#include <qdatetime.h>
 
 /**
     @author Tobias Roeser <le.petit.fou@web.de>
@@ -58,6 +59,9 @@ public:
     /** Get the last fuel state of the battery. */
     float getLastFuel() { return lastFuel; }
 
+    /** Get the current power consumptions. The unit of this value can be retrieved 
+     *  with getPowerUnit().
+     */
     float getPowerConsumption() { return curPower; }
 
     QString getPowerConsumptionFormated();
@@ -74,17 +78,23 @@ public:
 
     void invalidateAll();
 
-    /** Returns @true if the battery is installed. */
+    /** Returns true if the battery is installed. */
     bool isInstalled() { return batInstalled; }
 
-    /** Returns @true if the Laptop is online, means AC connected. */
+    /** Returns true if the battery is online, means AC connected. */
     bool isOnline() { return isInstalled() && acConnected; }
 
+    /** Returns true if the battery is charging. */
     bool isCharging() { return isInstalled() && isOnline() && batCharging; }
 
+    /** Returns true if the battery is discarging. */
     bool isDischarging() { return isInstalled() && ! isOnline() && ! batCharging; }
 
-    bool isFull() { return  isInstalled() && 100.0 == getChargeLevel() && !isCharging() && !isDischarging(); }
+    /** Return true if the battery is full. */
+    bool isFull() { return  isIdle() && 100.0 == getChargeLevel(); }
+
+    /** Return true if the battery is idle, thus neighter charging nor discharging. */
+    bool isIdle() { return isInstalled() && !isCharging() && !isDischarging(); }
 
     /** Get the current battery state. */
     QString getState() { return batState; }
@@ -116,7 +126,11 @@ private:
     float criticalFuel;
     float curFuel;
     float curPower;
+    /** Remaining time in minutes. */
     int remainingTime;
+
+    QTime remTimeForecastTimestamp;
+    float remTimeForecastCap;
 
     int batNr;
     bool batInstalled;

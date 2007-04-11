@@ -48,7 +48,7 @@ BatInfo::getChargeLevel() {
 bool
 BatInfo::parseProcACPI() {
 
-    // the current line while parsing the proc-fs
+    // the currently read line
     QString line = "";
     QString mWHstring = "";
     QString cur = "";
@@ -127,7 +127,7 @@ BatInfo::parseProcACPI() {
         line = stream.readLine();
         if( -1 != rxCur.search( line ) ) {
             cur = rxCur.cap(1);
-            //KMessageBox::information(0, "fount cur: "+cur);
+            //KMessageBox::information(0, "found cur: "+cur);
         }
         if( -1 != rxOffline.search( line ) ) {
             batState = rxOffline.cap(1);
@@ -135,7 +135,8 @@ BatInfo::parseProcACPI() {
             if( "not installed" == batState ) {
                 resetValues();
                 batInstalled = false;
-                // we return true, as no other backend should detect the fact, that there is no battery again.
+                // we return true, as we know that no battery is installed and
+                // no other backend should detect the fact again.
                 return true;
             }
         }
@@ -145,18 +146,22 @@ BatInfo::parseProcACPI() {
     }
     file.close();
 
+    // Read current capacity
     bool ok = true;
     curFuel = cur.toInt(&ok);
     if( ! ok ) { curFuel = 0; }
 
+    // Read last full capacity
     ok = true;
     lastFuel = cap.toInt(&ok);
     if( ! ok ) { lastFuel = 0; }
 
+    // Read battery design capacity
     ok = true;
     designFuel = designCap.toInt(&ok);
     if( ! ok ) { designFuel = 0; }
 
+    // Read battery disign critical capacity
     ok = true;
     criticalFuel = criticalCap.toInt(&ok);
     if( ! ok ) { criticalFuel = 0; }
@@ -173,7 +178,8 @@ BatInfo::parseProcACPI() {
         emit onlineModeChanged( acConnected );
     }
 
-//     parseProcAcpiBatAlarm();
+    // no need to read these values as we dont use them currently
+    // parseProcAcpiBatAlarm();
 
     calculateRemainingTime();
 
@@ -184,6 +190,8 @@ BatInfo::parseProcACPI() {
 void
 BatInfo::calculateRemainingTime() {
 
+    remainingTime = 0;
+
     // Calculate remaining time
     if( isDischarging() ) {
         if( getCurFuel() > 0 && getPowerConsumption() > 0 ) {
@@ -191,20 +199,45 @@ BatInfo::calculateRemainingTime() {
             remainingTime = (int) (remain * 60.0);
         }
         else {
-            remainingTime = 0;
-        }
-    }
-    else if( isCharging() ) {
-        if( getPowerConsumption() > 0 && (getLastFuel() - getCurFuel()) > 0 ) {
-            double remain = (getLastFuel() - getCurFuel()) / getPowerConsumption();
-            remainingTime = (int) (remain * 60.0);
-        }
-        else {
-            remainingTime = 0;
+            // the laptop provides no (usable) current power
+            // consumption values, which means we can not easily calculate the remaining
+            // time. See Ticket #13
+
+            // Calculate remaining time the hard way without using the current power 
+            // consumption which means we have to log the short history of this battery and 
+            // make a forecast.
+            // TODO find good shapshots for reliable forcasts.
+
+            // 1. make a new pair (timestamp, capacity)
+            // 2. if an older pair is knows calculate the delta (time gone, capacity gone) and make a forcast based on last delta
+            // 3. repeat with 1.
+
+            // Idea: remember more than one pair to straigten out consumption pitches
+
+            // FIXME prove of concept code
+            if(remTimeForecastCap <= 0 ) {
+                // Take a new shapshot
+                remTimeForecastTimestamp = QTime::currentTime();
+                remTimeForecastCap = getCurFuel();
+            }
+            else {
+                int secsGone = remTimeForecastTimestamp.secsTo(QTime::currentTime());
+                float capGone = remTimeForecastCap - getCurFuel();
+                if( secsGone > 1 && capGone > 0 ) {
+                    float secsPerCap = ((float) secsGone) / capGone;
+                    remainingTime = (getCurFuel() * secsPerCap) / 60;
+                }
+            }
         }
     }
     else {
-        remainingTime = 0;
+        remTimeForecastCap = 0;
+        if( isCharging() ) {
+            if( getPowerConsumption() > 0 && (getLastFuel() - getCurFuel()) > 0 ) {
+                double remain = (getLastFuel() - getCurFuel()) / getPowerConsumption();
+                remainingTime = (int) (remain * 60.0);
+            }
+        }
     }
 }
 
@@ -408,6 +441,7 @@ BatInfo::resetValues() {
     powerUnit = "W";
     batState = "not installed";
     lastSuccessfulReadMethod = "";
+    remTimeForecastCap = 0;
 }
 
 QString
