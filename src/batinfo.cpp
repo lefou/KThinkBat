@@ -25,6 +25,8 @@
 #include <qdir.h>
 #include <qtextstream.h>
 
+#include <klocale.h>
+
 #include "batinfo.h"
 #include "kthinkbatconfig.h"
 
@@ -37,9 +39,25 @@ BatInfo::BatInfo( int number )
 BatInfo::~BatInfo() {
 }
 
+void 
+BatInfo::resetValues() {
+    lastFuel = 0;
+    designFuel = 0;
+    criticalFuel = 0;
+    curFuel = 0;
+    curPower = 0;
+    remainingTime = 0;
+    batInstalled = false;
+    batCharging = false;
+    powerUnit = "W";
+    batState = "not installed";
+    lastSuccessfulReadMethod = "";
+    remTimeForecastCap = 0;
+}
+
 float
 BatInfo::getChargeLevel() {
-    if( curFuel >= 0 && lastFuel > 0 ) {
+    if (curFuel >= 0 && lastFuel > 0) {
         return ( 100.0 / lastFuel ) * curFuel;
     }
     return -1;
@@ -64,10 +82,10 @@ BatInfo::parseProcACPI() {
 
     QString filename = KThinkBatConfig::acpiBatteryPath() + "/BAT" + QString::number(batNr) + "/info";
     QFile file( filename );
-    if( ! file.exists() || ! file.open(IO_ReadOnly) ) {
+    if (!file.exists() || !file.open(IO_ReadOnly)) {
         // this is nothing unexpected, so say it only once
         static bool sayTheProblem = true;
-        if( sayTheProblem ) {
+        if (sayTheProblem) {
             qDebug( "KThinkBat: could not open %s", file.name().latin1() );
             sayTheProblem = false;
         }
@@ -79,26 +97,26 @@ BatInfo::parseProcACPI() {
     batInstalled = false;
 
     QTextStream stream( (QIODevice*) &file );
-    while( ! stream.atEnd() ) {
+    while (!stream.atEnd()) {
         // parse output line-wise
         line = stream.readLine();
-        if( -1 != rxInstalled.search( line ) && "yes" == rxInstalled.cap(1) ) {
+        if (-1 != rxInstalled.search( line ) && "yes" == rxInstalled.cap(1)) {
             batInstalled = true;
         }
-        if( -1 != rxCap.search( line ) ) {
+        if (-1 != rxCap.search(line)) {
             cap = rxCap.cap(1);
             powerUnit = rxCap.cap(2);
         }
-        if( -1 != rxDesignCap.search( line ) ) {
+        if (-1 != rxDesignCap.search(line)) {
             designCap = rxDesignCap.cap(1);
         }
-        if( -1 != rxDesignCapLow.search( line ) ) {
+        if (-1 != rxDesignCapLow.search(line)) {
             criticalCap = rxDesignCapLow.cap(1);
         }
     }
     file.close();
 
-    if( ! batInstalled ) {
+    if (!batInstalled) {
         resetValues();
         batInstalled = false;
         // we return true, as no other backend should detect the fact, that there is no battery again.
@@ -106,8 +124,8 @@ BatInfo::parseProcACPI() {
     }
 
     filename = KThinkBatConfig::acpiBatteryPath() + "/BAT" + QString::number(batNr) + "/state";
-    file.setName( filename );
-    if( ! file.exists() || ! file.open(IO_ReadOnly) ) {
+    file.setName(filename);
+    if (!file.exists() || !file.open(IO_ReadOnly)) {
         static bool sayTheProblem2 = true;
         if( sayTheProblem2 ) {
             qDebug( "KThinkBat: could not open %s", file.name().latin1() );
@@ -190,7 +208,7 @@ BatInfo::parseProcACPI() {
 void
 BatInfo::calculateRemainingTime() {
 
-    remainingTime = 0;
+    int remainingTime = 0;
 
     // Calculate remaining time
     if( isDischarging() ) {
@@ -225,7 +243,7 @@ BatInfo::calculateRemainingTime() {
                 float capGone = remTimeForecastCap - getCurFuel();
                 if( secsGone > 1 && capGone > 0 ) {
                     float secsPerCap = ((float) secsGone) / capGone;
-                    remainingTime = (getCurFuel() * secsPerCap) / 60;
+                    remainingTime = (int) ((getCurFuel() * secsPerCap) / 60);
                 }
             }
         }
@@ -239,6 +257,8 @@ BatInfo::calculateRemainingTime() {
             }
         }
     }
+
+    this->remainingTime = remainingTime;
 }
 
 bool 
@@ -276,7 +296,6 @@ bool
 BatInfo::parseSysfsTP() {
 
     powerUnit = "W";
-
     QString tpPath = KThinkBatConfig::smapiPath() + "/BAT" + QString::number(batNr) + "/";
     QFile file;
     QTextStream stream;
@@ -285,9 +304,9 @@ BatInfo::parseSysfsTP() {
     QRegExp mW( "^([-]?\\d{1,6})(\\s*mW)?\\s*$" );
     bool check;
 
-    if( ! QDir().exists( KThinkBatConfig::smapiPath() ) ) {
+    if (!QDir().exists(KThinkBatConfig::smapiPath())) {
         static bool sayTheProblem = true;
-        if( sayTheProblem ) {
+        if (sayTheProblem) {
             qDebug( "KThinkBat: There is no directory %s. Do you have tp_smapi loaded?", QString(KThinkBatConfig::smapiPath()).latin1() );
             sayTheProblem = false;
         }
@@ -295,11 +314,11 @@ BatInfo::parseSysfsTP() {
     }
 
     file.setName( tpPath + "installed" );
-    if( file.exists() && file.open(IO_ReadOnly) ) {
+    if (file.exists() && file.open(IO_ReadOnly)) {
         stream.setDevice( &file );
         batInstalled = ( 1 == stream.readLine().toInt( &check ) ? true : false );
         file.close();
-        if( ! batInstalled ) {
+        if(!batInstalled) {
             resetValues();
             return true;
         }
@@ -311,12 +330,12 @@ BatInfo::parseSysfsTP() {
     }
 
     file.setName( tpPath + "last_full_capacity" );
-    if( file.exists() && file.open(IO_ReadOnly) ) {
+    if (file.exists() && file.open(IO_ReadOnly)) {
         stream.setDevice( &file );
         line = stream.readLine();
-        if( -1 != mWh.search( line ) ) {
+        if (-1 != mWh.search(line)) {
             lastFuel = mWh.cap(1).toInt( &check );
-            if( !check ) { lastFuel = 0; }
+            if (!check) { lastFuel = 0; }
         }
         file.close();
     }
@@ -325,12 +344,12 @@ BatInfo::parseSysfsTP() {
     }
 
     file.setName( tpPath + "design_capacity" );
-    if( file.exists() && file.open(IO_ReadOnly) ) {
+    if (file.exists() && file.open(IO_ReadOnly)) {
         stream.setDevice( &file );
         line = stream.readLine();
-        if( -1 != mWh.search( line ) ) {
+        if (-1 != mWh.search(line)) {
             designFuel = mWh.cap(1).toInt( &check );
-            if( !check ) { designFuel = 0; }
+            if (!check) { designFuel = 0; }
         }
         file.close();
     }
@@ -339,12 +358,12 @@ BatInfo::parseSysfsTP() {
     }
     
     file.setName( tpPath + "remaining_capacity" );
-    if( file.exists() && file.open(IO_ReadOnly) ) {
+    if (file.exists() && file.open(IO_ReadOnly)) {
         stream.setDevice( &file );
         line = stream.readLine();
-        if( -1 != mWh.search( line ) ) {
+        if (-1 != mWh.search(line)) {
             curFuel = mWh.cap(1).toInt( &check );
-            if( !check ) { curFuel = 0; }
+            if (!check) { curFuel = 0; }
         }
         file.close();
     }
@@ -353,13 +372,13 @@ BatInfo::parseSysfsTP() {
     }
     
     file.setName( tpPath + "power_now" );
-    if( file.exists() && file.open(IO_ReadOnly) ) {
+    if (file.exists() && file.open(IO_ReadOnly)) {
         stream.setDevice( &file );
         line = stream.readLine();
-        if( -1 != mW.search( line ) ) {
+        if (-1 != mW.search( line )) {
             curPower = mW.cap(1).toInt( &check );
-            if( !check ) { curPower = 0; }
-            else if( curPower < 0 ) { curPower = (0 - curPower); }
+            if (!check) { curPower = 0; }
+            else if (curPower < 0) { curPower = (0 - curPower); }
         }
         file.close();
     }
@@ -368,7 +387,7 @@ BatInfo::parseSysfsTP() {
     }
 
     file.setName( tpPath + "state" );
-    if( file.exists() && file.open(IO_ReadOnly) ) {
+    if (file.exists() && file.open(IO_ReadOnly)) {
         stream.setDevice( &file );
         batState = stream.readLine();
         file.close();
@@ -381,7 +400,7 @@ BatInfo::parseSysfsTP() {
 
     bool oldAcCon = isOnline();
     file.setName( KThinkBatConfig::smapiPath() + "/ac_connected" );
-    if( file.exists() && file.open(IO_ReadOnly) ) {
+    if (file.exists() && file.open(IO_ReadOnly)) {
         stream.setDevice( &file );
         acConnected = stream.readLine().toInt( &check );
         file.close();
@@ -389,28 +408,28 @@ BatInfo::parseSysfsTP() {
     else {
         acConnected = false;
     }
-    if( oldAcCon != acConnected ) {
+    if (oldAcCon != acConnected) {
        emit onlineModeChanged( acConnected );
     }
 
-    if( isCharging() ) {
+    if (isCharging()) {
         file.setName( tpPath + "remaining_charging_time" );
-        if( file.exists() && file.open(IO_ReadOnly) ) {
+        if (file.exists() && file.open(IO_ReadOnly)) {
             stream.setDevice( &file );
             remainingTime = stream.readLine().toInt( &check );
-            if( !check ) { remainingTime = 0; }
+            if (!check) { remainingTime = 0; }
             file.close();
         }
         else {
             calculateRemainingTime();
         }
     }
-    else if( isDischarging() ) {
+    else if (isDischarging()) {
         file.setName( tpPath + "remaining_running_time" );
-        if( file.exists() && file.open(IO_ReadOnly) ) {
+        if (file.exists() && file.open(IO_ReadOnly)) {
             stream.setDevice( &file );
             remainingTime = stream.readLine().toInt( &check );
-            if( !check ) { remainingTime = 0; }
+            if (!check) { remainingTime = 0; }
             file.close();
         }
         else {
@@ -428,35 +447,9 @@ BatInfo::parseSysfsTP() {
     return true;
 }
 
-void 
-BatInfo::resetValues() {
-    lastFuel = 0;
-    designFuel = 0;
-    criticalFuel = 0;
-    curFuel = 0;
-    curPower = 0;
-    remainingTime = 0;
-    batInstalled = false;
-    batCharging = false;
-    powerUnit = "W";
-    batState = "not installed";
-    lastSuccessfulReadMethod = "";
-    remTimeForecastCap = 0;
-}
-
 QString
 BatInfo::getPowerConsumptionFormated() {
-
-    QString formatString = "";
-
-    if( "W" == getPowerUnit() ) {
-            formatString = QString().number((int) (curPower + 500)/1000);
-        }
-        else {
-            formatString = QString().number((float) (((int) curPower + 50)/100) / 10 );
-        }
-
-    return (formatString + " " + getPowerUnit());
+    return BatInfo::formatPowerUnit( getPowerConsumption(), getPowerUnit() );
 }
 
 int 
@@ -471,17 +464,62 @@ BatInfo::getRemainingTimeFormated() {
 
 QString
 BatInfo::formatRemainingTime(int timeInMin) {
-    if(!KThinkBatConfig::remainingTimeInHours()) {
+    if (!KThinkBatConfig::remainingTimeInHours()) {
         return QString().number((int) timeInMin) + " min";
     }
     int hours = timeInMin / 60;
     QString out = QString().number(hours) + ":";
     int min = timeInMin - (hours * 60);
-    if( min > 9 ) {
+    if (min > 9) {
         out += QString().number(min);
     }
     else {
         out += "0" + QString().number(min);
     }
     return out;
+}
+
+QString
+BatInfo::formatPowerUnit(float power, const QString& powerUnit) {
+
+    if (power < 0 || powerUnit.isEmpty()) {
+        return i18n("nA");
+    }
+
+    QString formatString = "0";
+    int precision = ("W" == powerUnit) ? KThinkBatConfig::precisionPowerUnitW() : KThinkBatConfig::precisionPowerUnitA();
+
+    if (power > 0) {
+        switch (precision) {
+        case 0:
+            formatString = QString().number((int)(power + 500)/1000);
+            break;
+        case 1:
+            formatString = QString().number((float) (((int)power + 50)/100) / 10 );
+            break;
+        case 2:
+            formatString = QString().number((float) (((int)power + 5)/10) / 100 );
+            break;
+        case 3:
+            formatString = QString().number((float) ((int)(power + 0.5)) / 1000 );
+            break;
+        }
+    }
+
+    // Append zeros and point if neccessary
+    if (precision >= 1 && precision <= 3) {
+        int pos = formatString.find('.');
+        if (pos == -1) {
+            formatString += ".";
+            pos = 0;
+        }
+        else {
+            pos = formatString.length() - pos - 1;
+        }
+        for ( ; pos < precision; ++pos) {
+            formatString += "0";
+        }
+    }
+
+    return (formatString + " " + powerUnit);
 }

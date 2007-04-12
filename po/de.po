@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-04-11 22:31+0200\n"
+"POT-Creation-Date: 2007-04-12 21:51+0200\n"
 "PO-Revision-Date: 2007-04-11 22:35+0200\n"
 "Last-Translator: Tobias Roeser <le.petit.fou@web.de>\n"
 "Language-Team: Deutsch\n"
@@ -26,6 +26,10 @@ msgid ""
 "_: EMAIL OF TRANSLATORS\n"
 "Your emails"
 msgstr "le.petit.fou@web.de"
+
+#: batinfo.cpp:484
+msgid "nA"
+msgstr "kA"
 
 #: kthinkbat.cpp:72
 msgid "KThinkBat %1"
@@ -55,7 +59,7 @@ msgstr "entladen"
 msgid "idle"
 msgstr "inaktiv"
 
-#: kthinkbat.cpp:95 kthinkbat.cpp:481
+#: kthinkbat.cpp:95 kthinkbat.cpp:476
 msgid "not installed"
 msgstr "nicht installiert"
 
@@ -67,7 +71,8 @@ msgstr "KThinkBat Einstellungen"
 
 #: kthinkbat.cpp:145
 msgid "A KDE panel applet to display the current laptop battery status."
-msgstr "Ein KDE Panel Applet zur Anzeige des aktuellen Akku-Zusandes eines Laptops."
+msgstr ""
+"Ein KDE Panel Applet zur Anzeige des aktuellen Akku-Zusandes eines Laptops."
 
 #: kthinkbat.cpp:162
 msgid ""
@@ -78,39 +83,39 @@ msgstr ""
 "Ein KDE Panel Applet zur Anzeige des aktuellen Akku-Zusandes eines Laptops.\n"
 "Es gibt zur Zeit noch keine Hilfe-Box."
 
-#: kthinkbat.cpp:464
+#: kthinkbat.cpp:459
 msgid "Battery %1"
 msgstr "Akku %1"
 
-#: kthinkbat.cpp:472
+#: kthinkbat.cpp:467
 msgid "Current Consumption: "
 msgstr "Aktueller Verbrauch: "
 
-#: kthinkbat.cpp:473
+#: kthinkbat.cpp:468
 msgid "Current Fuel: "
 msgstr "Aktuelle Kapazität: "
 
-#: kthinkbat.cpp:474
+#: kthinkbat.cpp:469
 msgid "Crit Fuel: "
 msgstr "Kritische Kapazität: "
 
-#: kthinkbat.cpp:475
+#: kthinkbat.cpp:470
 msgid "Last Fuel: "
 msgstr "Letze erreichte Kapazität: "
 
-#: kthinkbat.cpp:476
+#: kthinkbat.cpp:471
 msgid "Design Fuel: "
 msgstr "Design-Kapazität: "
 
-#: kthinkbat.cpp:477
+#: kthinkbat.cpp:472
 msgid "State: "
 msgstr "Status: "
 
-#: kthinkbat.cpp:478
+#: kthinkbat.cpp:473
 msgid "Remaining Time: "
 msgstr "Verbleibende Zeit: "
 
-#: kthinkbat.cpp:478
+#: kthinkbat.cpp:473
 msgid "full charged"
 msgstr "voll geladen"
 
@@ -293,4 +298,3 @@ msgstr "Akkuanzeige Hintergrundfarbe"
 #, no-c-format
 msgid "Gauge Fuel Color"
 msgstr "Farbe für normalen Akkustand"
-

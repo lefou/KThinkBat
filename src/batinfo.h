@@ -99,18 +99,25 @@ public:
     /** Get the current battery state. */
     QString getState() { return batState; }
 
-    /// Get battery info from /proc/acpi interface.
+    /** Get battery info from /proc/acpi interface. */
     bool parseProcACPI();
     bool parseProcAcpiBatAlarm();
 
-    /// Get battery info form tp_smapi sysfs interface.
+    /** Get battery info form tp_smapi sysfs interface. */
     bool parseSysfsTP();
 
     void setBatNr( int number ) { batNr = number; }
 
     QString getLastSuccessfulReadMethod() { return lastSuccessfulReadMethod; }
 
+    /** Format the given time into a representable string according to configuration. */
     static QString formatRemainingTime(int timInMin);
+
+    /**
+     * Format the given power and unit into a representable string 
+     * with the right pricision according on configruation.
+     */
+    static QString formatPowerUnit(float power, const QString& powerUnit);
 
 signals:
     void onlineModeChanged( bool batOnline );
@@ -136,7 +143,7 @@ private:
     bool batInstalled;
     bool batCharging;
 
-    /** Note: On Acer and Asus Laptops we have mA(h) instead of mW(h), 
+    /** Note: On Acer and Asus Laptops we have mA(h) instead of mW(h),
         so @c powerUnit is "W" or "A", depending on the battery and 
         laptop type. */
     QString powerUnit;

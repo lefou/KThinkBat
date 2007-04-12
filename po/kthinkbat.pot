@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-04-11 22:31+0200\n"
+"POT-Creation-Date: 2007-04-12 21:51+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,6 +25,10 @@ msgstr ""
 msgid ""
 "_: EMAIL OF TRANSLATORS\n"
 "Your emails"
+msgstr ""
+
+#: batinfo.cpp:484
+msgid "nA"
 msgstr ""
 
 #: kthinkbat.cpp:72
@@ -55,7 +59,7 @@ msgstr ""
 msgid "idle"
 msgstr ""
 
-#: kthinkbat.cpp:95 kthinkbat.cpp:481
+#: kthinkbat.cpp:95 kthinkbat.cpp:476
 msgid "not installed"
 msgstr ""
 
@@ -76,39 +80,39 @@ msgid ""
 "There is no real help box at the moment"
 msgstr ""
 
-#: kthinkbat.cpp:464
+#: kthinkbat.cpp:459
 msgid "Battery %1"
 msgstr ""
 
-#: kthinkbat.cpp:472
+#: kthinkbat.cpp:467
 msgid "Current Consumption: "
 msgstr ""
 
-#: kthinkbat.cpp:473
+#: kthinkbat.cpp:468
 msgid "Current Fuel: "
 msgstr ""
 
-#: kthinkbat.cpp:474
+#: kthinkbat.cpp:469
 msgid "Crit Fuel: "
 msgstr ""
 
-#: kthinkbat.cpp:475
+#: kthinkbat.cpp:470
 msgid "Last Fuel: "
 msgstr ""
 
-#: kthinkbat.cpp:476
+#: kthinkbat.cpp:471
 msgid "Design Fuel: "
 msgstr ""
 
-#: kthinkbat.cpp:477
+#: kthinkbat.cpp:472
 msgid "State: "
 msgstr ""
 
-#: kthinkbat.cpp:478
+#: kthinkbat.cpp:473
 msgid "Remaining Time: "
 msgstr ""
 
-#: kthinkbat.cpp:478
+#: kthinkbat.cpp:473
 msgid "full charged"
 msgstr ""
 

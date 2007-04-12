@@ -194,12 +194,7 @@ KThinkBat::createPowerTimeLabel( int batteryNr ) {
             curPower = curPower2;
         }
 
-        if( "W" == powerUnit ) {
-            label = QString().number((int) (curPower + 500)/1000) + " " + powerUnit;
-        }
-        else {
-            label = QString().number((float) (((int) curPower + 50)/100) / 10 )  + " " + powerUnit;
-        }
+        label = BatInfo::formatPowerUnit( curPower, powerUnit );
     }
 
     if( KThinkBatConfig::showRemainingTime() ) {
