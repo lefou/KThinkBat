@@ -122,7 +122,7 @@ public:
 
 public slots:
     /** Called by the update timer to reread the laptop battery information. */
-    void timeout();
+    void readBatteryInfoTimeout();
 
     void slotPreferences();
 

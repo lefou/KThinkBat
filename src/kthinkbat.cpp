@@ -75,7 +75,7 @@ KThinkBat::KThinkBat(const QString& configFile, Type type, int actions, QWidget 
     setCustomMenu( contextMenu );
 
     // Timer der die Aktualisierung von ACPI/SMAPI-Werten und deren Anzeige veranlasst.
-    timeout();
+    readBatteryInfoTimeout();
     timer = new QTimer(this);
     assert( timer );
     connect(timer, SIGNAL(timeout()), this, SLOT(timeout()));
@@ -97,7 +97,7 @@ KThinkBat::KThinkBat(const QString& configFile, Type type, int actions, QWidget 
 
 KThinkBat::~KThinkBat() {
 
-    if( timer ) {
+    if (timer) {
         timer->stop();
         delete timer; 
     }
@@ -106,27 +106,36 @@ KThinkBat::~KThinkBat() {
     // Save Config values
     KThinkBatConfig::writeConfig();
 
-    if( contextMenu ) delete contextMenu; contextMenu = NULL;
-    if( toolTipTimer ) delete toolTipTimer; toolTipTimer = NULL;
-    if( toolTip ) delete toolTip; toolTip = NULL;
+    if (contextMenu) {
+        delete contextMenu;
+        contextMenu = NULL;
+    }
+    if (toolTipTimer) {
+        delete toolTipTimer;
+        toolTipTimer = NULL;
+    }
+    if (toolTip) {
+        delete toolTip;
+        toolTip = NULL;
+    }
 }
 
 void
 KThinkBat::slotPreferences() {
-    if ( KConfigDialog::showDialog( "KThinkBatSettings" ) ) {
+    if (KConfigDialog::showDialog("KThinkBatSettings")) {
         return;
     }
 
-    KConfigDialog* dialog = new KConfigDialog( this, "KThinkBatSettings", KThinkBatConfig::self(), KDialogBase::Plain );
+    KConfigDialog* dialog = new KConfigDialog(this, "KThinkBatSettings", KThinkBatConfig::self(), KDialogBase::Plain);
 
-    Prefs* prefs = new Prefs( this );
-    assert( prefs );
+    Prefs* prefs = new Prefs(this);
+    assert(prefs);
 
-    dialog->addPage( prefs, i18n("KThinkBat Preferences"), "configure" ); 
+    dialog->addPage(prefs, i18n("KThinkBat Preferences"), "configure");
 
     //User edited the configuration - update your local copies of the 
     //configuration data 
-    connect( dialog, SIGNAL(settingsChanged()), this, SLOT(slotUpdateConfiguration()) );
+    connect(dialog, SIGNAL(settingsChanged()), this, SLOT(slotUpdateConfiguration()));
 
     dialog->show();
 }
@@ -134,26 +143,26 @@ KThinkBat::slotPreferences() {
 void
 KThinkBat::slotUpdateConfiguration() {
 
-    timeout();
+    readBatteryInfoTimeout();
     update();
 }
 
 void 
 KThinkBat::slotAbout() {
 
-    KAboutData aboutData( "KThinkBat", "KThinkBat", VERSION,
-                          I18N_NOOP("A KDE panel applet to display the current laptop battery status."),
-                          KAboutData::License_GPL_V2, 
-                          "(c) 2005-2007, Tobias Roeser",
-                          "", 
-                          "https://lepetitfou.dyndns.org/KThinkBat",
-                          "le.petit.fou@web.de" );
+    KAboutData aboutData("KThinkBat", "KThinkBat", VERSION,
+                         I18N_NOOP("A KDE panel applet to display the current laptop battery status."),
+                         KAboutData::License_GPL_V2,
+                         "(c) 2005-2007, Tobias Roeser",
+                         "",
+                         "https://lepetitfou.dyndns.org/KThinkBat",
+                         "le.petit.fou@web.de");
 
-    aboutData.addAuthor( "Tobias Roeser", "", "le.petit.fou@web.de",
-                         "https://lepetitfou.dyndns.org/KThinkBat" );
+    aboutData.addAuthor("Tobias Roeser", "", "le.petit.fou@web.de",
+                        "https://lepetitfou.dyndns.org/KThinkBat");
 
-    KAboutApplication about( &aboutData, this, NULL, 0 );
-    about.setIcon( KGlobal::instance()->iconLoader()->iconPath( "kthinkbat", -KIcon::SizeLarge ) );
+    KAboutApplication about(&aboutData, this, NULL, 0);
+    about.setIcon(KGlobal::instance()->iconLoader()->iconPath( "kthinkbat", -KIcon::SizeLarge));
     about.exec();
 }
 
@@ -175,36 +184,36 @@ KThinkBat::heightForWidth(int width) const {
 }
 
 QString
-KThinkBat::createPowerTimeLabel( int batteryNr ) {
+KThinkBat::createPowerTimeLabel(int batteryNr) {
 
-    if( batteryNr < 1 || batteryNr > 2 ) {  return ""; }
+    if (batteryNr < 1 || batteryNr > 2) {  return ""; }
 
     QString label = "";
 
-    if( KThinkBatConfig::showPowerMeter() ) {
+    if (KThinkBatConfig::showPowerMeter()) {
         QString powerUnit;
         float curPower;
 
-        if( 1 == batteryNr ) { 
+        if (1 == batteryNr) {
             powerUnit = powerUnit1;
             curPower = curPower1;
         }
-        else if( 2 == batteryNr ) { 
+        else if (2 == batteryNr) { 
             powerUnit = powerUnit2;
             curPower = curPower2;
         }
 
-        label = BatInfo::formatPowerUnit( curPower, powerUnit );
+        label = BatInfo::formatPowerUnit(curPower, powerUnit);
     }
 
-    if( KThinkBatConfig::showRemainingTime() ) {
+    if (KThinkBatConfig::showRemainingTime()) {
         int mins;
         bool full;
-        if( KThinkBatConfig::summarizeBatteries() ) {
+        if (KThinkBatConfig::summarizeBatteries()) {
             full = (!batInfo1.isInstalled() || batInfo1.isFull()) && (!batInfo2.isInstalled() || batInfo2.isFull());
             mins = batInfo1.getRemainingTimeInMin() + batInfo2.getRemainingTimeInMin();
         }
-        else if( 1 == batteryNr ) {
+        else if(1 == batteryNr) {
             full = batInfo1.isFull();
             mins = batInfo1.getRemainingTimeInMin();
         }
@@ -212,7 +221,7 @@ KThinkBat::createPowerTimeLabel( int batteryNr ) {
             full = batInfo2.isFull();
             mins = batInfo2.getRemainingTimeInMin();
         }
-        if( KThinkBatConfig::showPowerMeter() ) {
+        if (KThinkBatConfig::showPowerMeter()) {
             label += " / ";
         }
         label += (full) ? "full" : BatInfo::formatRemainingTime(mins);
@@ -223,111 +232,111 @@ KThinkBat::createPowerTimeLabel( int batteryNr ) {
 void 
 KThinkBat::paintEvent(QPaintEvent* event) {
 
-    gauge1.setOrientation( KThinkBatConfig::drawBatteryUpright() ? Qt::Vertical : Qt::Horizontal );
-    gauge1.setSize( KThinkBatConfig::gaugeWidth(), KThinkBatConfig::gaugeHeight() );
-    gauge2.setOrientation( KThinkBatConfig::drawBatteryUpright() ? Qt::Vertical : Qt::Horizontal );
-    gauge2.setSize( KThinkBatConfig::gaugeWidth(), KThinkBatConfig::gaugeHeight() );
+    gauge1.setOrientation(KThinkBatConfig::drawBatteryUpright() ? Qt::Vertical : Qt::Horizontal);
+    gauge1.setSize(KThinkBatConfig::gaugeWidth(), KThinkBatConfig::gaugeHeight());
+    gauge2.setOrientation(KThinkBatConfig::drawBatteryUpright() ? Qt::Vertical : Qt::Horizontal);
+    gauge2.setSize(KThinkBatConfig::gaugeWidth(), KThinkBatConfig::gaugeHeight());
 
     QPixmap pixmap(width(), height());
     pixmap.fill(this, 0, 0);
     QPainter painter(&pixmap);
-    painter.setFont( KThinkBatConfig::gaugeFont() );
+    painter.setFont(KThinkBatConfig::gaugeFont());
 
     // this is the (minimal) needed Space by the Applet
-    QSize realNeededSpace = QSize( (2 * KThinkBatConfig::borderSize().width()) + KThinkBatConfig::gaugeWidth(),
-                                   (2 * KThinkBatConfig::borderSize().height()) + KThinkBatConfig::gaugeHeight() );
+    QSize realNeededSpace = QSize((2 * KThinkBatConfig::borderSize().width()) + KThinkBatConfig::gaugeWidth(),
+                                   (2 * KThinkBatConfig::borderSize().height()) + KThinkBatConfig::gaugeHeight());
 
-    gauge1.drawGauge( painter, KThinkBatConfig::borderSize() );
+    gauge1.drawGauge(painter, KThinkBatConfig::borderSize());
 
-    QSize nextSouth = QSize( KThinkBatConfig::borderSize().width(), KThinkBatConfig::borderSize().height() + padding.height() + KThinkBatConfig::gaugeHeight() );
-    QSize nextEast = QSize( KThinkBatConfig::borderSize().width() + padding.width() + KThinkBatConfig::gaugeWidth(), KThinkBatConfig::borderSize().height() );
+    QSize nextSouth = QSize(KThinkBatConfig::borderSize().width(), KThinkBatConfig::borderSize().height() + padding.height() + KThinkBatConfig::gaugeHeight());
+    QSize nextEast = QSize(KThinkBatConfig::borderSize().width() + padding.width() + KThinkBatConfig::gaugeWidth(), KThinkBatConfig::borderSize().height());
 
-    if( ! KThinkBatConfig::summarizeBatteries() ) {
+    if (!KThinkBatConfig::summarizeBatteries()) {
         // If we have to draw two batteries
-        if( KThinkBatConfig::powerMeterBelowGauge() ) {
-            gauge2.drawGauge( painter, nextEast );
-            realNeededSpace = QSize( realNeededSpace.width() + padding.width() + KThinkBatConfig::gaugeWidth(), realNeededSpace.height() );
+        if (KThinkBatConfig::powerMeterBelowGauge()) {
+            gauge2.drawGauge(painter, nextEast);
+            realNeededSpace = QSize(realNeededSpace.width() + padding.width() + KThinkBatConfig::gaugeWidth(), realNeededSpace.height());
         }
         else {
-            gauge2.drawGauge( painter, nextSouth );
-            realNeededSpace = QSize( realNeededSpace.width(), realNeededSpace.height() + padding.height()  + KThinkBatConfig::gaugeHeight() );
+            gauge2.drawGauge(painter, nextSouth);
+            realNeededSpace = QSize(realNeededSpace.width(), realNeededSpace.height() + padding.height()  + KThinkBatConfig::gaugeHeight());
         }
     }
 
-    if( KThinkBatConfig::showPowerMeter() || KThinkBatConfig::showRemainingTime() ) {
+    if (KThinkBatConfig::showPowerMeter() || KThinkBatConfig::showRemainingTime()) {
         // We have to draw some text below or beside the Gauge Symbol
 
-        painter.setFont( KThinkBatConfig::powerMeterFont() );
+        painter.setFont(KThinkBatConfig::powerMeterFont());
 
         // Position for power consumtion display
         // Power consumption label: For correct rounding we add 500 mW (resp. 50 mA)
-        QString powerLabel1 = createPowerTimeLabel( 1 );
+        QString powerLabel1 = createPowerTimeLabel(1);
         // Needed Space for Power Consumption Label
-        QRect powerTextExtend1 = painter.boundingRect( 0, 0, 1, 1, Qt::AlignLeft | Qt::AlignTop, powerLabel1 );
+        QRect powerTextExtend1 = painter.boundingRect(0, 0, 1, 1, Qt::AlignLeft | Qt::AlignTop, powerLabel1);
 
         QString powerLabel2("");
         QRect powerTextExtend2(0,0,0,0);
-        QSize maxPowerExtend = QSize( powerTextExtend1.width(), powerTextExtend1.height() );
+        QSize maxPowerExtend = QSize(powerTextExtend1.width(), powerTextExtend1.height());
     
-        if( ! KThinkBatConfig::summarizeBatteries() ) {
+        if (!KThinkBatConfig::summarizeBatteries()) {
             powerLabel2 = createPowerTimeLabel( 2 );
             powerTextExtend2 = painter.boundingRect( 0, 0, 1, 1, Qt::AlignLeft | Qt::AlignTop, powerLabel2 );
-            maxPowerExtend = QSize( powerTextExtend1.width() > powerTextExtend2.width() ? powerTextExtend1.width() : powerTextExtend2.width(),
-                                    powerTextExtend1.height() > powerTextExtend2.height() ? powerTextExtend1.height() : powerTextExtend2.height() );
+            maxPowerExtend = QSize(powerTextExtend1.width() > powerTextExtend2.width() ? powerTextExtend1.width() : powerTextExtend2.width(),
+                                    powerTextExtend1.height() > powerTextExtend2.height() ? powerTextExtend1.height() : powerTextExtend2.height());
         }
 
         // Painting the Text
         QPen origPen = painter.pen();
-        painter.setPen( KThinkBatConfig::powerMeterColor() );
+        painter.setPen(KThinkBatConfig::powerMeterColor());
 
         QSize powerPos1;
         // left upper corner of power consumption label
-        if( KThinkBatConfig::powerMeterBelowGauge() ) {
+        if(KThinkBatConfig::powerMeterBelowGauge()) {
             // Verbrauchsanzeige unterhalb der Gauge
             //         wastePos = QSize( KThinkBatConfig::borderSize().width(), KThinkBatConfig::borderSize().height() + gaugeSize.height() + 12 );
-            powerPos1 = QSize( KThinkBatConfig::borderSize().width(), 
-                               KThinkBatConfig::borderSize().height() + padding.height() + KThinkBatConfig::gaugeHeight() );
-            realNeededSpace = QSize( realNeededSpace.width() > maxPowerExtend.width() ? realNeededSpace.width() : ((2 * KThinkBatConfig::borderSize().width()) + maxPowerExtend.width())
-                                    , realNeededSpace.height() + padding.height() + maxPowerExtend.height() );
+            powerPos1 = QSize(KThinkBatConfig::borderSize().width(), 
+                              KThinkBatConfig::borderSize().height() + padding.height() + KThinkBatConfig::gaugeHeight());
+            realNeededSpace = QSize(realNeededSpace.width() > maxPowerExtend.width() ? realNeededSpace.width() : ((2 * KThinkBatConfig::borderSize().width()) + maxPowerExtend.width())
+                                    , realNeededSpace.height() + padding.height() + maxPowerExtend.height());
         } else {
             // Verbrauchsanzeige rechts von der Gauge
             //         wastePos = QSize( ( 3 * border.width() ) + gaugeSize.width(), border.height() );
-            powerPos1 = QSize( KThinkBatConfig::borderSize().width() + padding.width() + KThinkBatConfig::gaugeWidth(),
-                                KThinkBatConfig::borderSize().height() + ((KThinkBatConfig::gaugeHeight() - powerTextExtend1.height()) / 2 ) );
-            realNeededSpace = QSize( realNeededSpace.width() + padding.width() + maxPowerExtend.width(), realNeededSpace.height() );
+            powerPos1 = QSize(KThinkBatConfig::borderSize().width() + padding.width() + KThinkBatConfig::gaugeWidth(),
+                                KThinkBatConfig::borderSize().height() + ((KThinkBatConfig::gaugeHeight() - powerTextExtend1.height()) / 2 ));
+            realNeededSpace = QSize(realNeededSpace.width() + padding.width() + maxPowerExtend.width(), realNeededSpace.height());
         }
 
         // Draw the Power Consumption at position @c wastePos.
-        painter.drawText( powerPos1.width(), powerPos1.height(), 
+        painter.drawText(powerPos1.width(), powerPos1.height(), 
                               powerTextExtend1.width(), powerTextExtend1.height(),
                               Qt::AlignTop | Qt::AlignLeft, 
-                              powerLabel1 );
-        if( ! KThinkBatConfig::summarizeBatteries() ) { 
+                              powerLabel1);
+        if (!KThinkBatConfig::summarizeBatteries()) { 
             QSize powerPos2;
 
-            if( KThinkBatConfig::powerMeterBelowGauge() ) {
+            if (KThinkBatConfig::powerMeterBelowGauge()) {
                 // Verbrauchsanzeige unterhalb der Gauge
 //                 powerPos2 = QSize( KThinkBatConfig::borderSize().width() + padding.width() + KThinkBatConfig::gaugeWidth() > powerTextExtend1.width() ? KThinkBatConfig::gaugeWidth() : powerTextExtend1.width(),
-                powerPos2 = QSize( KThinkBatConfig::borderSize().width() + padding.width() + KThinkBatConfig::gaugeWidth(),
-                                   KThinkBatConfig::borderSize().height() + padding.height() + KThinkBatConfig::gaugeHeight() );
+                powerPos2 = QSize(KThinkBatConfig::borderSize().width() + padding.width() + KThinkBatConfig::gaugeWidth(),
+                                   KThinkBatConfig::borderSize().height() + padding.height() + KThinkBatConfig::gaugeHeight());
             } else {
                 // Verbrauchsanzeige rechts von der Gauge
-                powerPos2 = QSize( KThinkBatConfig::borderSize().width() + padding.width() + KThinkBatConfig::gaugeWidth(),
-                                   KThinkBatConfig::borderSize().height() + padding.height() + KThinkBatConfig::gaugeHeight() + ((KThinkBatConfig::gaugeHeight() - powerTextExtend2.height()) / 2 ) );
+                powerPos2 = QSize(KThinkBatConfig::borderSize().width() + padding.width() + KThinkBatConfig::gaugeWidth(),
+                                  KThinkBatConfig::borderSize().height() + padding.height() + KThinkBatConfig::gaugeHeight() + ((KThinkBatConfig::gaugeHeight() - powerTextExtend2.height()) / 2));
             }
 
-            painter.drawText( powerPos2.width(), powerPos2.height(), 
-                              powerTextExtend2.width(), powerTextExtend2.height(),
-                              Qt::AlignTop | Qt::AlignLeft, 
-                              powerLabel2 );
+            painter.drawText(powerPos2.width(), powerPos2.height(), 
+                             powerTextExtend2.width(), powerTextExtend2.height(),
+                             Qt::AlignTop | Qt::AlignLeft, 
+                             powerLabel2);
         }
-        painter.setPen( origPen );
+        painter.setPen(origPen);
 
     }
     painter.end();
     bitBlt(this, 0, 0, &pixmap);
 
-     if( neededSize != realNeededSpace ) {
+     if(neededSize != realNeededSpace) {
         // new needed Size for the applet
         neededSize = realNeededSpace;
         emit updateLayout();
@@ -339,7 +348,7 @@ KThinkBat::paintEvent(QPaintEvent* event) {
 }
 
 void 
-KThinkBat::timeout() {
+KThinkBat::readBatteryInfoTimeout() {
     float lastFuel = 0;
     float curFuel = 0;
 //     float critFuel = 0;
@@ -437,32 +446,40 @@ KThinkBat::timeout() {
     // force a repaint of the Applet
     update();
 
-    if( toolTip && toolTip->isShown() ) {
-        toolTip->setText( createToolTipText( battery1, battery2 ) );
+    if (toolTip && toolTip->isShown()) {
+        toolTip->setText(createToolTipText(battery1, battery2));
     }
 }
 
 QString
-KThinkBat::createToolTipText( bool battery1, bool battery2 ) {
+KThinkBat::createToolTipText(bool battery1, bool battery2) {
     toolTipText = "";
     BatInfo* batInfo;
     bool battery;
 
-    for( int bat = 1; bat <= 2; ++bat ) {
+    for (int bat = 1; bat <= 2; ++bat) {
 
-        if( bat == 1 ) { batInfo = &batInfo1; battery = battery1; }
-        else if( bat == 2 ) { batInfo = &batInfo2; battery = battery2; }
-        else { break; }
+        if (bat == 1) { 
+            batInfo = &batInfo1;
+            battery = battery1;
+        }
+        else if (bat == 2) {
+            batInfo = &batInfo2;
+            battery = battery2;
+        }
+        else {
+            break;
+        }
         assert( batInfo );
 
         toolTipText += "<table cellspacing=\"0\" cellpadding=\"0\">";
         toolTipText += "<tr><td><b>" + i18n("Battery %1").arg( bat );
-        if( batInfo->getLastSuccessfulReadMethod() != "" ) {
+        if (batInfo->getLastSuccessfulReadMethod() != "") {
             toolTipText += " (" + batInfo->getLastSuccessfulReadMethod() + ")";
         }
         toolTipText += ":</b></td>";
 
-        if( batInfo && battery && batInfo->isInstalled() ) {
+        if (batInfo && battery && batInfo->isInstalled()) {
             toolTipText += "<td>" + QString().number((int) batInfo->getChargeLevel()) + "%</td></tr>";
             toolTipText += "<tr><td>" + i18n("Current Consumption: ") + "</td><td>" + batInfo->getPowerConsumptionFormated() + "</td></tr>";
             toolTipText += "<tr><td>" + i18n("Current Fuel: ") + "</td><td>" + QString().number((float) batInfo->getCurFuel()) + " m" + batInfo->getPowerUnit() + "h</td></tr>";
@@ -493,11 +510,11 @@ KThinkBat::mousePressEvent(QMouseEvent* e) {
 
 void
 KThinkBat::enterEvent( QEvent* e) {
-    if( KThinkBatConfig::showToolTip() && toolTipTimer && toolTip && ! toolTip->isShown() ) {
+    if (KThinkBatConfig::showToolTip() && toolTipTimer && toolTip && !toolTip->isShown()) {
         // FIXME read the system time preferences for ToolTip times
         // in msek
-        toolTip->setText( createToolTipText() );
-        toolTipTimer->start( 500 );
+        toolTip->setText(createToolTipText());
+        toolTipTimer->start(KThinkBatConfig::toolTipTimeout());
     }
 }
 

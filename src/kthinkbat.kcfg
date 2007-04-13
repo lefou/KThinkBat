@@ -47,11 +47,18 @@
             <whatsthis>If selected, the remaining time is shown in hours (h:mm), else in minures (m min).</whatsthis>
             <default>true</default>
         </entry>
+
         <entry name="ShowToolTip" type="Bool">
             <label>Show ToolTip.</label>
             <whatsthis>If selected, shows a ToolTip after holding the mouse cursor over the Applet.</whatsthis>
             <default>true</default>
         </entry>
+        <entry name="ToolTipTimeout" type="Int">
+            <label>ToolTip timeout (msec).</label>
+            <whatsthis>Timeout for the ToolTip.</whatsthis>
+            <default>500</default>
+        </entry>
+
         <entry name="PrecisionPowerUnitW" type="Int">
             <label>Power unit precision for Watt</label>
             <default>0</default>
