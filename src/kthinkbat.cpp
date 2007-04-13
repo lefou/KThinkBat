@@ -349,6 +349,9 @@ KThinkBat::paintEvent(QPaintEvent* event) {
 
 void 
 KThinkBat::readBatteryInfoTimeout() {
+    // Collect battery info. If both batteries should be summarized, the values
+    // are saved in the variables for battery 1.
+
     float lastFuel = 0;
     float curFuel = 0;
 //     float critFuel = 0;
@@ -359,8 +362,8 @@ KThinkBat::readBatteryInfoTimeout() {
     // 1. First try TP SMAPI on BAT0
     // 2. If that fails try ACPI /proc interface for BAT0
     bool battery1 = batInfo1.parseSysfsTP() || batInfo1.parseProcACPI();
-    if( battery1 && batInfo1.isInstalled() ) {
-        if( ! KThinkBatConfig::summarizeBatteries() ) {
+    if (battery1 && batInfo1.isInstalled()) {
+        if (!KThinkBatConfig::summarizeBatteries()) {
             gauge1.setColors( QColor( KThinkBatConfig::batBackgroundColor() ),
                               QColor( ((int) batInfo1.getChargeLevel()) <= KThinkBatConfig::criticalFill() ? KThinkBatConfig::batCriticalColor() : KThinkBatConfig::batChargedColor() ),
                               QColor( batInfo1.isOnline() ? KThinkBatConfig::batDotOnlineColor() : KThinkBatConfig::batBackgroundColor() ) );
@@ -483,9 +486,9 @@ KThinkBat::createToolTipText(bool battery1, bool battery2) {
             toolTipText += "<td>" + QString().number((int) batInfo->getChargeLevel()) + "%</td></tr>";
             toolTipText += "<tr><td>" + i18n("Current Consumption: ") + "</td><td>" + batInfo->getPowerConsumptionFormated() + "</td></tr>";
             toolTipText += "<tr><td>" + i18n("Current Fuel: ") + "</td><td>" + QString().number((float) batInfo->getCurFuel()) + " m" + batInfo->getPowerUnit() + "h</td></tr>";
-            toolTipText += "<tr><td>" + i18n("Crit Fuel: ") + "</td><td>" + QString().number((float) batInfo->getCriticalFuel()) + " m" + batInfo->getPowerUnit() + "h</td></tr>";
             toolTipText += "<tr><td>" + i18n("Last Fuel: ") + "</td><td>" + QString().number((float) batInfo->getLastFuel()) + " m" + batInfo->getPowerUnit() + "h</td></tr>";
             toolTipText += "<tr><td>" + i18n("Design Fuel: ") + "</td><td>" + QString().number((float) batInfo->getDesignFuel()) + " m" + batInfo->getPowerUnit() + "h</td></tr>";
+            toolTipText += "<tr><td>" + i18n("Crit Fuel: ") + "</td><td>" + QString().number((float) batInfo->getCriticalFuel()) + " m" + batInfo->getPowerUnit() + "h</td></tr>";
             toolTipText += "<tr><td>" + i18n("State: ") + "</td><td>" + i18n(batInfo->getState()) + "</td></tr>";
             toolTipText += "<tr><td>" + i18n("Remaining Time: ") + "</td><td>" + ( batInfo->isFull() ? i18n("full charged") : batInfo->getRemainingTimeFormated()) + "</td></tr>";
         }
@@ -499,8 +502,8 @@ KThinkBat::createToolTipText(bool battery1, bool battery2) {
 
 void 
 KThinkBat::mousePressEvent(QMouseEvent* e) {
-    if ( e->button() != RightButton ) {
-        KPanelApplet::mousePressEvent( e );
+    if (e->button() != RightButton) {
+        KPanelApplet::mousePressEvent(e);
         return;
     }
 
@@ -511,7 +514,7 @@ KThinkBat::mousePressEvent(QMouseEvent* e) {
 void
 KThinkBat::enterEvent( QEvent* e) {
     if (KThinkBatConfig::showToolTip() && toolTipTimer && toolTip && !toolTip->isShown()) {
-        // FIXME read the system time preferences for ToolTip times
+        // TODO read the system time preferences for ToolTip times
         // in msek
         toolTip->setText(createToolTipText());
         toolTipTimer->start(KThinkBatConfig::toolTipTimeout());
@@ -520,18 +523,18 @@ KThinkBat::enterEvent( QEvent* e) {
 
 void
 KThinkBat::leaveEvent( QEvent* e) {
-    if( toolTipTimer ) {
+    if (toolTipTimer) {
         toolTipTimer->stop();
     }
-    if( toolTip ) {
+    if (toolTip) {
         toolTip->hide();
     }
 }
 
 void
 KThinkBat::slotToolTip() {
-    if( KThinkBatConfig::showToolTip() && toolTip ) {
-        toolTip->setText( toolTipText );
+    if (KThinkBatConfig::showToolTip() && toolTip) {
+        toolTip->setText(toolTipText);
         toolTip->show();
     }
 }
