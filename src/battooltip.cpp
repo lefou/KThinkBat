@@ -47,8 +47,8 @@ BatToolTip::~BatToolTip()
 
 void
 BatToolTip::setText( const QString& text ) {
-    if( this->text ) {
-        this->text->setText( text );
+    if (this->text) {
+        this->text->setText(text);
         layout();
     }
 }
