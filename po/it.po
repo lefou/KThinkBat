@@ -31,7 +31,7 @@ msgid ""
 "Your emails"
 msgstr ""
 "_: EMAIL DEL TRADUTTORE\n"
-"anselmo@gmail.com"
+"omlesna@gmail.com"
 
 #: kthinkbat.cpp:72
 msgid "KThinkBat %1"
@@ -91,7 +91,6 @@ msgid "Battery %1"
 msgstr "Batteria %1"
 
 #: kthinkbat.cpp:472
-#, fuzzy
 msgid "Current Consumption: "
 msgstr "Poten&za Istantanea"
 
@@ -121,7 +120,7 @@ msgstr "Tempo rimanente:"
 
 #: kthinkbat.cpp:478
 msgid "full charged"
-msgstr ""
+msgstr "carica completa"
 
 #. i18n: file ./prefs.ui line 50
 #: rc.cpp:6
