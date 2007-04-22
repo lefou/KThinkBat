@@ -364,10 +364,10 @@
                                         <cstring>kcfg_GaugeContentTime</cstring>
                                     </property>
                                     <property name="text">
-                                        <string>Remaining Time</string>
+                                        <string>Re&amp;maining Time</string>
                                     </property>
                                     <property name="accel">
-                                        <string></string>
+                                        <string>Alt+M</string>
                                     </property>
                                 </widget>
                                 <widget class="QRadioButton" row="0" column="0">
@@ -409,77 +409,7 @@
                 <property name="name">
                     <cstring>unnamed</cstring>
                 </property>
-                <widget class="QLayoutWidget" row="1" column="0">
-                    <property name="name">
-                        <cstring>layout8</cstring>
-                    </property>
-                    <grid>
-                        <property name="name">
-                            <cstring>unnamed</cstring>
-                        </property>
-                        <widget class="KFontCombo" row="1" column="2">
-                            <property name="name">
-                                <cstring>kcfg_PowerMeterFont</cstring>
-                            </property>
-                        </widget>
-                        <widget class="QLabel" row="1" column="0">
-                            <property name="name">
-                                <cstring>textLabel2_3</cstring>
-                            </property>
-                            <property name="text">
-                                <string>Power Meter Font</string>
-                            </property>
-                        </widget>
-                        <widget class="KFontCombo" row="0" column="2">
-                            <property name="name">
-                                <cstring>kcfg_GaugeFont</cstring>
-                            </property>
-                        </widget>
-                        <spacer row="0" column="1">
-                            <property name="name">
-                                <cstring>spacer10</cstring>
-                            </property>
-                            <property name="orientation">
-                                <enum>Horizontal</enum>
-                            </property>
-                            <property name="sizeType">
-                                <enum>Expanding</enum>
-                            </property>
-                            <property name="sizeHint">
-                                <size>
-                                    <width>16</width>
-                                    <height>20</height>
-                                </size>
-                            </property>
-                        </spacer>
-                        <spacer row="1" column="1">
-                            <property name="name">
-                                <cstring>spacer11</cstring>
-                            </property>
-                            <property name="orientation">
-                                <enum>Horizontal</enum>
-                            </property>
-                            <property name="sizeType">
-                                <enum>Expanding</enum>
-                            </property>
-                            <property name="sizeHint">
-                                <size>
-                                    <width>20</width>
-                                    <height>21</height>
-                                </size>
-                            </property>
-                        </spacer>
-                        <widget class="QLabel" row="0" column="0">
-                            <property name="name">
-                                <cstring>textLabel1_2</cstring>
-                            </property>
-                            <property name="text">
-                                <string>Gauge Font (Percentage Value)</string>
-                            </property>
-                        </widget>
-                    </grid>
-                </widget>
-                <widget class="QLayoutWidget" row="0" column="0">
+                <widget class="QLayoutWidget" row="0" column="0" rowspan="1" colspan="3">
                     <property name="name">
                         <cstring>layout10</cstring>
                     </property>
@@ -690,6 +620,66 @@
                         </spacer>
                     </grid>
                 </widget>
+                <widget class="QLabel" row="2" column="0">
+                    <property name="name">
+                        <cstring>textLabel2_3</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Power Meter Font</string>
+                    </property>
+                </widget>
+                <spacer row="2" column="1">
+                    <property name="name">
+                        <cstring>spacer11</cstring>
+                    </property>
+                    <property name="orientation">
+                        <enum>Horizontal</enum>
+                    </property>
+                    <property name="sizeType">
+                        <enum>Expanding</enum>
+                    </property>
+                    <property name="sizeHint">
+                        <size>
+                            <width>30</width>
+                            <height>21</height>
+                        </size>
+                    </property>
+                </spacer>
+                <spacer row="1" column="1">
+                    <property name="name">
+                        <cstring>spacer10</cstring>
+                    </property>
+                    <property name="orientation">
+                        <enum>Horizontal</enum>
+                    </property>
+                    <property name="sizeType">
+                        <enum>Expanding</enum>
+                    </property>
+                    <property name="sizeHint">
+                        <size>
+                            <width>20</width>
+                            <height>20</height>
+                        </size>
+                    </property>
+                </spacer>
+                <widget class="KFontRequester" row="2" column="2">
+                    <property name="name">
+                        <cstring>kcfg_PowerMeterFont</cstring>
+                    </property>
+                </widget>
+                <widget class="KFontRequester" row="1" column="2">
+                    <property name="name">
+                        <cstring>kcfg_GaugeFont</cstring>
+                    </property>
+                </widget>
+                <widget class="QLabel" row="1" column="0">
+                    <property name="name">
+                        <cstring>textLabel1_2</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Gauge Font (Percentage Value)</string>
+                    </property>
+                </widget>
             </grid>
         </widget>
     </grid>
@@ -722,13 +712,11 @@
 </slots>
 <layoutdefaults spacing="6" margin="11"/>
 <includehints>
-    <includehint>kfontcombo.h</includehint>
-    <includehint>klineedit.h</includehint>
-    <includehint>kfontcombo.h</includehint>
-    <includehint>klineedit.h</includehint>
     <includehint>kcolorbutton.h</includehint>
     <includehint>kcolorbutton.h</includehint>
     <includehint>kcolorbutton.h</includehint>
     <includehint>kcolorbutton.h</includehint>
+    <includehint>kfontrequester.h</includehint>
+    <includehint>kfontrequester.h</includehint>
 </includehints>
 </UI>
