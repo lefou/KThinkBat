@@ -445,6 +445,14 @@ KThinkBat::readBatteryInfoTimeout() {
             gauge1.setPercentValueString((int)percent, "");
         }
     }
+    else {
+        if( !batInfo1.isInstalled()) {
+            gauge1.setPercentValue(-1);
+        }
+        if( !batInfo2.isInstalled()) {
+            gauge2.setPercentValue(-1);
+        }
+    }
 
     // force a repaint of the Applet
     update();
