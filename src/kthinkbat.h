@@ -129,7 +129,7 @@ public slots:
     /** Called, when Configuration is changed. Forces an update of the widget to reflect changes. */
     void slotUpdateConfiguration();
 
-    /// Popup a pasive Message about the current batteries
+    /// Popup a passive Message about the current batteries
     void slotToolTip();
 
     /**

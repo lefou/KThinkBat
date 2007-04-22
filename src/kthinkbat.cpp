@@ -268,7 +268,7 @@ KThinkBat::paintEvent(QPaintEvent* event) {
 
         painter.setFont(KThinkBatConfig::powerMeterFont());
 
-        // Position for power consumtion display
+        // Position for power consumption display
         // Power consumption label: For correct rounding we add 500 mW (resp. 50 mA)
         QString powerLabel1 = createPowerTimeLabel(1);
         // Needed Space for Power Consumption Label
@@ -389,8 +389,8 @@ KThinkBat::readBatteryInfoTimeout() {
         }
     }
 
-    // 3. Now try BAT1, first TP SMAPI agian
-    // 4. And, if that failed, try ACPi /proc interface for BAT1
+    // 3. Now try BAT1, first TP SMAPI again
+    // 4. And, if that failed, try ACPI /proc interface for BAT1
     bool battery2 = batInfo2.parseSysfsTP() || batInfo2.parseProcACPI();
     if (battery2 && batInfo2.isInstalled()) {
         if (!KThinkBatConfig::summarizeBatteries()) {

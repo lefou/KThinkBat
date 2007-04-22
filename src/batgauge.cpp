@@ -108,7 +108,7 @@ BatGauge::drawGauge( QPainter& painter, QSize gaugePos ) {
     // Paint Border
     painter.drawPolyline( border );
 
-    // Calculate, haw much space is needed by the Text string
+    // Calculate, how much space is needed by the Text string
     QRect reqTextSize = painter.boundingRect( 1,1,1,1, Qt::AlignHCenter | Qt::AlignVCenter, percentString );
 
     // Draw text

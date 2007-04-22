@@ -43,7 +43,7 @@ public:
     virtual ~BatInfo();
 
     /** Get the current charge level.
-        @return the carge level between 0 and 100, or a negative value, if there are errors
+        @return the charge level between 0 and 100, or a negative value, if there are errors
     */
     float getChargeLevel();
 
