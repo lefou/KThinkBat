@@ -212,6 +212,7 @@ BatInfo::calculateRemainingTime() {
 
     // Calculate remaining time
     if( isDischarging() ) {
+        // discharging
         if( getCurFuel() > 0 && getPowerConsumption() > 0 ) {
             double remain = getCurFuel() / getPowerConsumption();
             remainingTime = (int) (remain * 60.0);
@@ -249,6 +250,7 @@ BatInfo::calculateRemainingTime() {
         }
     }
     else {
+        // not charging
         remTimeForecastCap = 0;
         if( isCharging() ) {
             if( getPowerConsumption() > 0 && (getLastFuel() - getCurFuel()) > 0 ) {

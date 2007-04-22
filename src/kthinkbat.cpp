@@ -78,7 +78,7 @@ KThinkBat::KThinkBat(const QString& configFile, Type type, int actions, QWidget 
     readBatteryInfoTimeout();
     timer = new QTimer(this);
     assert( timer );
-    connect(timer, SIGNAL(timeout()), this, SLOT(timeout()));
+    connect(timer, SIGNAL(timeout()), this, SLOT(readBatteryInfoTimeout()));
     timer->start( KThinkBatConfig::updateIntervalMsek() );
 
     toolTipTimer = new QTimer(this);
