@@ -4,5 +4,3 @@
 KDE_LANG = en
 KDE_DOCS = kthinkbat
 SUBDIRS = $(AUTODIRS)  
-
-EXTRA_DIST = KThinkBat.pdf
