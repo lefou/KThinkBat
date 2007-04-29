@@ -1,4 +1,5 @@
 KThinkBat 0.2.6 - 29.04.2007:
+   * Added Slowak Translation provided by Jozef Riha
    * #13: Display of remaining time when bios/acpi report no power consumption
    * Added more translated battery status strings
    * enhanced BatInfo API
