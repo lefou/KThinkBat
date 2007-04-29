@@ -3,7 +3,7 @@ KThinkBat 0.2.6 - not released yet:
    * Added more translated battery status strings
    * enhanced BatInfo API
    * more API documentation
-   * power consumption appearence can be configured
+   * power consumption appearance can be configured
 
 KThinkBat 0.2.5 - 03.04.2007:
    * #20: New translation for Bulgarian from Aleksandar Tsankov
