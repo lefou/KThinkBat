@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-04-11 22:31+0200\n"
+"POT-Creation-Date: 2007-05-03 22:35+0200\n"
 "PO-Revision-Date: 2006-01-30 17:57+0100\n"
 "Last-Translator: Adam Golebiowski <adamg@pld-linux.org>\n"
 "Language-Team: Polish <pl@li.org>\n"
@@ -26,6 +26,10 @@ msgid ""
 "_: EMAIL OF TRANSLATORS\n"
 "Your emails"
 msgstr "adamg@pld-linux.org"
+
+#: batinfo.cpp:505
+msgid "nA"
+msgstr ""
 
 #: kthinkbat.cpp:72
 msgid "KThinkBat %1"
@@ -55,21 +59,21 @@ msgstr ""
 msgid "idle"
 msgstr ""
 
-#: kthinkbat.cpp:95 kthinkbat.cpp:481
+#: kthinkbat.cpp:95 kthinkbat.cpp:507
 msgid "not installed"
 msgstr ""
 
 #. i18n: file ./prefs.ui line 22
-#: kthinkbat.cpp:125 rc.cpp:3
+#: kthinkbat.cpp:134 rc.cpp:3
 #, no-c-format
 msgid "KThinkBat Preferences"
 msgstr "Opcje KThinkBat"
 
-#: kthinkbat.cpp:145
+#: kthinkbat.cpp:154
 msgid "A KDE panel applet to display the current laptop battery status."
 msgstr "Aplet panelu KDE wyświetlający status baterii w laptopie."
 
-#: kthinkbat.cpp:162
+#: kthinkbat.cpp:171
 msgid ""
 "A KDE panel applet to display the current laptop battery status.\n"
 "\n"
@@ -79,40 +83,44 @@ msgstr ""
 "\n"
 "Jak na razie aplet ten nie posiada pomocy"
 
-#: kthinkbat.cpp:464
+#: kthinkbat.cpp:487
 #, fuzzy
 msgid "Battery %1"
 msgstr "Ustawienia baterii"
 
-#: kthinkbat.cpp:472
+#: kthinkbat.cpp:495
 msgid "Current Consumption: "
 msgstr ""
 
-#: kthinkbat.cpp:473
+#: kthinkbat.cpp:496
 msgid "Current Fuel: "
 msgstr ""
 
-#: kthinkbat.cpp:474
-msgid "Crit Fuel: "
-msgstr ""
-
-#: kthinkbat.cpp:475
+#: kthinkbat.cpp:497
 msgid "Last Fuel: "
 msgstr ""
 
-#: kthinkbat.cpp:476
+#: kthinkbat.cpp:498
 msgid "Design Fuel: "
 msgstr ""
 
-#: kthinkbat.cpp:477
+#: kthinkbat.cpp:499
+msgid "Crit Fuel: "
+msgstr ""
+
+#: kthinkbat.cpp:501
+msgid "Cycle Count: "
+msgstr ""
+
+#: kthinkbat.cpp:503
 msgid "State: "
 msgstr ""
 
-#: kthinkbat.cpp:478
+#: kthinkbat.cpp:504
 msgid "Remaining Time: "
 msgstr ""
 
-#: kthinkbat.cpp:478
+#: kthinkbat.cpp:504
 msgid "full charged"
 msgstr ""
 
@@ -233,68 +241,74 @@ msgstr "Po&zycja miernika mocy poniżej wykresu baterii"
 #. i18n: file ./prefs.ui line 367
 #: rc.cpp:76
 #, no-c-format
-msgid "Remaining Time"
+msgid "Re&maining Time"
 msgstr ""
 
+#. i18n: file ./prefs.ui line 370
+#: rc.cpp:79
+#, fuzzy, no-c-format
+msgid "Alt+M"
+msgstr "Alt+Z"
+
 #. i18n: file ./prefs.ui line 378
-#: rc.cpp:80
+#: rc.cpp:82
 #, no-c-format
 msgid "Remaining Power in Percent"
 msgstr ""
 
 #. i18n: file ./prefs.ui line 389
-#: rc.cpp:84
+#: rc.cpp:86
 #, no-c-format
 msgid "&None"
 msgstr ""
 
 #. i18n: file ./prefs.ui line 392
-#: rc.cpp:87
+#: rc.cpp:89
 #, fuzzy, no-c-format
 msgid "Alt+N"
 msgstr "Alt+Z"
 
 #. i18n: file ./prefs.ui line 406
-#: rc.cpp:90
+#: rc.cpp:92
 #, no-c-format
 msgid "Color and Font"
 msgstr ""
 
-#. i18n: file ./prefs.ui line 430
-#: rc.cpp:93
-#, no-c-format
-msgid "Power Meter Font"
-msgstr "Czcionka miernika mocy"
-
-#. i18n: file ./prefs.ui line 477
-#: rc.cpp:96
-#, no-c-format
-msgid "Gauge Font (Percentage Value)"
-msgstr "Wielkość czcionki wykresu (procentowo):"
-
-#. i18n: file ./prefs.ui line 495
-#: rc.cpp:99
+#. i18n: file ./prefs.ui line 425
+#: rc.cpp:95
 #, no-c-format
 msgid "Power Meter Text Color"
 msgstr "Kolor tekstu miernika mocy"
 
-#. i18n: file ./prefs.ui line 520
-#: rc.cpp:102
+#. i18n: file ./prefs.ui line 450
+#: rc.cpp:98
 #, no-c-format
 msgid "Gauge Critical Fuell Color"
 msgstr "Kolor krytycznego poziomu baterii"
 
-#. i18n: file ./prefs.ui line 561
-#: rc.cpp:106
+#. i18n: file ./prefs.ui line 491
+#: rc.cpp:102
 #, no-c-format
 msgid "Gauge Background Color"
 msgstr "Kolor tła poziomu baterii"
 
-#. i18n: file ./prefs.ui line 605
-#: rc.cpp:110
+#. i18n: file ./prefs.ui line 535
+#: rc.cpp:106
 #, no-c-format
 msgid "Gauge Fuel Color"
 msgstr "Kolor poziomu baterii"
+
+#. i18n: file ./prefs.ui line 628
+#: rc.cpp:111
+#, no-c-format
+msgid "Power Meter Font"
+msgstr "Czcionka miernika mocy"
+
+#. i18n: file ./prefs.ui line 680
+#: rc.cpp:114
+#, no-c-format
+msgid "Gauge Font (Percentage Value)"
+msgstr "Wielkość czcionki wykresu (procentowo):"
 
 #~ msgid "Color"
 #~ msgstr "Kolor"

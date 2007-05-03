@@ -47,6 +47,7 @@ BatInfo::resetValues() {
     curFuel = 0;
     curPower = 0;
     remainingTime = 0;
+    cycleCount = -1;
     batInstalled = false;
     batCharging = false;
     powerUnit = "W";
@@ -65,6 +66,9 @@ BatInfo::getChargeLevel() {
 
 bool
 BatInfo::parseProcACPI() {
+
+    // not evalueated at the current state
+    cycleCount = -1;
 
     // the currently read line
     QString line = "";
@@ -298,7 +302,7 @@ bool
 BatInfo::parseSysfsTP() {
 
     powerUnit = "W";
-    QString tpPath = KThinkBatConfig::smapiPath() + "/BAT" + QString::number(batNr) + "/";
+    const QString tpPath = KThinkBatConfig::smapiPath() + "/BAT" + QString::number(batNr) + "/";
     QFile file;
     QTextStream stream;
     QString line;
@@ -364,7 +368,7 @@ BatInfo::parseSysfsTP() {
         stream.setDevice( &file );
         line = stream.readLine();
         if (-1 != mWh.search(line)) {
-            curFuel = mWh.cap(1).toInt( &check );
+            curFuel = mWh.cap(1).toInt(&check);
             if (!check) { curFuel = 0; }
         }
         file.close();
@@ -373,11 +377,11 @@ BatInfo::parseSysfsTP() {
         curFuel = -1;
     }
     
-    file.setName( tpPath + "power_now" );
+    file.setName(tpPath + "power_now");
     if (file.exists() && file.open(IO_ReadOnly)) {
         stream.setDevice( &file );
         line = stream.readLine();
-        if (-1 != mW.search( line )) {
+        if (-1 != mW.search(line)) {
             curPower = mW.cap(1).toInt( &check );
             if (!check) { curPower = 0; }
             else if (curPower < 0) { curPower = (0 - curPower); }
@@ -388,9 +392,9 @@ BatInfo::parseSysfsTP() {
         curPower = -1;
     }
 
-    file.setName( tpPath + "state" );
+    file.setName(tpPath + "state");
     if (file.exists() && file.open(IO_ReadOnly)) {
-        stream.setDevice( &file );
+        stream.setDevice(&file);
         batState = stream.readLine();
         file.close();
     }
@@ -398,27 +402,40 @@ BatInfo::parseSysfsTP() {
         batState = "";
     }
 
-    batCharging = ( batState == "charging" );
+    file.setName(tpPath + "cycle_count");
+    if (file.exists() && file.open(IO_ReadOnly)) {
+        stream.setDevice(&file);
+        cycleCount = stream.readLine().toInt(&check);
+        if(!check) {
+            cycleCount = -1;
+        }
+        file.close();
+    }
+    else {
+        cycleCount = -1;
+    }
+
+    batCharging = (batState == "charging");
 
     bool oldAcCon = isOnline();
     file.setName( KThinkBatConfig::smapiPath() + "/ac_connected" );
     if (file.exists() && file.open(IO_ReadOnly)) {
         stream.setDevice( &file );
-        acConnected = stream.readLine().toInt( &check );
+        acConnected = stream.readLine().toInt(&check);
         file.close();
     }
     else {
         acConnected = false;
     }
     if (oldAcCon != acConnected) {
-       emit onlineModeChanged( acConnected );
+       emit onlineModeChanged(acConnected);
     }
 
     if (isCharging()) {
         file.setName( tpPath + "remaining_charging_time" );
         if (file.exists() && file.open(IO_ReadOnly)) {
-            stream.setDevice( &file );
-            remainingTime = stream.readLine().toInt( &check );
+            stream.setDevice(&file);
+            remainingTime = stream.readLine().toInt(&check);
             if (!check) { remainingTime = 0; }
             file.close();
         }

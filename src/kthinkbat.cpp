@@ -497,6 +497,9 @@ KThinkBat::createToolTipText(bool battery1, bool battery2) {
             toolTipText += "<tr><td>" + i18n("Last Fuel: ") + "</td><td>" + QString().number((float) batInfo->getLastFuel()) + " m" + batInfo->getPowerUnit() + "h</td></tr>";
             toolTipText += "<tr><td>" + i18n("Design Fuel: ") + "</td><td>" + QString().number((float) batInfo->getDesignFuel()) + " m" + batInfo->getPowerUnit() + "h</td></tr>";
             toolTipText += "<tr><td>" + i18n("Crit Fuel: ") + "</td><td>" + QString().number((float) batInfo->getCriticalFuel()) + " m" + batInfo->getPowerUnit() + "h</td></tr>";
+            if(batInfo->getCycleCount() >= 0 ) {
+                toolTipText += "<tr><td>" + i18n("Cycle Count: ") + "</td><td>" + QString().number(batInfo->getCycleCount()) + "</td></hr>";
+            }
             toolTipText += "<tr><td>" + i18n("State: ") + "</td><td>" + i18n(batInfo->getState()) + "</td></tr>";
             toolTipText += "<tr><td>" + i18n("Remaining Time: ") + "</td><td>" + ( batInfo->isFull() ? i18n("full charged") : batInfo->getRemainingTimeFormated()) + "</td></tr>";
         }

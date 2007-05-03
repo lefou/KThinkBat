@@ -1,3 +1,8 @@
+KThinkBat 0.2.7 - unreleased:
+   * Added battery recharge cycle count to the ToolTip (if available, currently
+     only when using SMAPI on ThinkPads)
+   * API documentation and refinements
+
 KThinkBat 0.2.6 - 29.04.2007:
    * Added Slowak Translation provided by Jozef Riha
    * #13: Display of remaining time when bios/acpi report no power consumption

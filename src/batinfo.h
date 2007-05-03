@@ -36,7 +36,6 @@ class BatInfo : public QObject {
 
 public:
     /** Constructor.
-
         @param number The number of the battery, starting with 1
     */
     BatInfo( int number = 1 );
@@ -59,24 +58,25 @@ public:
     /** Get the last fuel state of the battery. */
     float getLastFuel() { return lastFuel; }
 
-    /** Get the current power consumptions. The unit of this value can be retrieved 
-     *  with getPowerUnit().
+    /**
+     * Get the current power consumptions. The unit of this value can be retrieved 
+     * with getPowerUnit().
      */
     float getPowerConsumption() { return curPower; }
 
     QString getPowerConsumptionFormated();
 
-    /** Get the power unit this battery uses. 
-     */
+    /** Get the power unit this battery uses. */
     QString getPowerUnit() { return powerUnit; }
 
+    /** Get the remaining battery time in minutes. */
     int getRemainingTimeInMin();
 
+    /** Get the remaining time as string in h:mm format. */
     QString getRemainingTimeInHours();
 
+    /** Get the remaining time as string in the preferred (configurred) format. */
     QString getRemainingTimeFormated();
-
-    void invalidateAll();
 
     /** Returns true if the battery is installed. */
     bool isInstalled() { return batInstalled; }
@@ -106,8 +106,13 @@ public:
     /** Get battery info form tp_smapi sysfs interface. */
     bool parseSysfsTP();
 
+    /** Set the number of the battery in the system (1 or 2). */
     void setBatNr( int number ) { batNr = number; }
 
+    /**
+     * Returns the last successful used method to retriev battery 
+     * information. This could be e.g. "ACPI" or "SMAPI".
+     */
     QString getLastSuccessfulReadMethod() { return lastSuccessfulReadMethod; }
 
     /** Format the given time into a representable string according to configuration. */
@@ -118,6 +123,11 @@ public:
      * with the right pricision according on configruation.
      */
     static QString formatPowerUnit(float power, const QString& powerUnit);
+
+    /**
+     * Get the rechange cycle count of the battery or -1 if not available.
+     */
+    int getCycleCount() { return cycleCount; }
 
 signals:
     void onlineModeChanged( bool batOnline );
@@ -135,17 +145,21 @@ private:
     float curPower;
     /** Remaining time in minutes. */
     int remainingTime;
+    /** Cycle count of the battery. */
+    int cycleCount;
 
     QTime remTimeForecastTimestamp;
     float remTimeForecastCap;
 
+    /** Battery number, 1 or 2. */
     int batNr;
+
     bool batInstalled;
     bool batCharging;
 
-    /** Note: On Acer and Asus Laptops we have mA(h) instead of mW(h),
-        so @c powerUnit is "W" or "A", depending on the battery and 
-        laptop type. */
+    /** Note: On Acer, Asus and some other laptop brands we have mA(h) 
+        instead of mW(h), so @c powerUnit is "W" or "A", depending on the 
+        battery and laptop type. */
     QString powerUnit;
     QString batState;
     bool acConnected;

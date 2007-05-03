@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-04-11 22:31+0200\n"
+"POT-Creation-Date: 2007-05-03 22:35+0200\n"
 "PO-Revision-Date: 2007-04-03 11:29-0500\n"
 "Last-Translator: Luis Guillermo Sobalvarro <lgsobalvarro@e-genieria.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -31,6 +31,10 @@ msgid ""
 msgstr ""
 "_: EMAIL OF TRANSLATORS\n"
 "lgsobalvarro@e-genieria.com"
+
+#: batinfo.cpp:505
+msgid "nA"
+msgstr ""
 
 #: kthinkbat.cpp:72
 msgid "KThinkBat %1"
@@ -62,21 +66,21 @@ msgstr "descargando"
 msgid "idle"
 msgstr "idle"
 
-#: kthinkbat.cpp:95 kthinkbat.cpp:481
+#: kthinkbat.cpp:95 kthinkbat.cpp:507
 msgid "not installed"
 msgstr "no instalada"
 
 #. i18n: file ./prefs.ui line 22
-#: kthinkbat.cpp:125 rc.cpp:3
+#: kthinkbat.cpp:134 rc.cpp:3
 #, no-c-format
 msgid "KThinkBat Preferences"
 msgstr "Preferencias de KThinkBat"
 
-#: kthinkbat.cpp:145
+#: kthinkbat.cpp:154
 msgid "A KDE panel applet to display the current laptop battery status."
 msgstr "Un applet para el panel de KDE que muestra el estado de la batería."
 
-#: kthinkbat.cpp:162
+#: kthinkbat.cpp:171
 msgid ""
 "A KDE panel applet to display the current laptop battery status.\n"
 "\n"
@@ -86,39 +90,43 @@ msgstr ""
 "\n"
 "No hay un diálogo de ayuda por el momento"
 
-#: kthinkbat.cpp:464
+#: kthinkbat.cpp:487
 msgid "Battery %1"
 msgstr "Batería %1"
 
-#: kthinkbat.cpp:472
+#: kthinkbat.cpp:495
 msgid "Current Consumption: "
 msgstr "Consumo actual:"
 
-#: kthinkbat.cpp:473
+#: kthinkbat.cpp:496
 msgid "Current Fuel: "
 msgstr "Capacidad actual: "
 
-#: kthinkbat.cpp:474
-msgid "Crit Fuel: "
-msgstr "Capacidad crítica: "
-
-#: kthinkbat.cpp:475
+#: kthinkbat.cpp:497
 msgid "Last Fuel: "
 msgstr "Última capacidad: "
 
-#: kthinkbat.cpp:476
+#: kthinkbat.cpp:498
 msgid "Design Fuel: "
 msgstr "Capacidad original: "
 
-#: kthinkbat.cpp:477
+#: kthinkbat.cpp:499
+msgid "Crit Fuel: "
+msgstr "Capacidad crítica: "
+
+#: kthinkbat.cpp:501
+msgid "Cycle Count: "
+msgstr ""
+
+#: kthinkbat.cpp:503
 msgid "State: "
 msgstr "Estado: "
 
-#: kthinkbat.cpp:478
+#: kthinkbat.cpp:504
 msgid "Remaining Time: "
 msgstr "Tiempo restante: "
 
-#: kthinkbat.cpp:478
+#: kthinkbat.cpp:504
 msgid "full charged"
 msgstr "Carga completa"
 
@@ -238,66 +246,72 @@ msgstr "Contenido del medidor"
 
 #. i18n: file ./prefs.ui line 367
 #: rc.cpp:76
-#, no-c-format
-msgid "Remaining Time"
+#, fuzzy, no-c-format
+msgid "Re&maining Time"
 msgstr "Tiempo restante"
 
+#. i18n: file ./prefs.ui line 370
+#: rc.cpp:79
+#, fuzzy, no-c-format
+msgid "Alt+M"
+msgstr "Alt+T"
+
 #. i18n: file ./prefs.ui line 378
-#: rc.cpp:80
+#: rc.cpp:82
 #, no-c-format
 msgid "Remaining Power in Percent"
 msgstr "Batería restante en porcentaje"
 
 #. i18n: file ./prefs.ui line 389
-#: rc.cpp:84
+#: rc.cpp:86
 #, no-c-format
 msgid "&None"
 msgstr "&Ninguno"
 
 #. i18n: file ./prefs.ui line 392
-#: rc.cpp:87
+#: rc.cpp:89
 #, no-c-format
 msgid "Alt+N"
 msgstr "Alt+N"
 
 #. i18n: file ./prefs.ui line 406
-#: rc.cpp:90
+#: rc.cpp:92
 #, no-c-format
 msgid "Color and Font"
 msgstr "Color y fuente"
 
-#. i18n: file ./prefs.ui line 430
-#: rc.cpp:93
-#, no-c-format
-msgid "Power Meter Font"
-msgstr "Fuente del medidor"
-
-#. i18n: file ./prefs.ui line 477
-#: rc.cpp:96
-#, no-c-format
-msgid "Gauge Font (Percentage Value)"
-msgstr "Fuente del medidor (Valor en porcentaje)"
-
-#. i18n: file ./prefs.ui line 495
-#: rc.cpp:99
+#. i18n: file ./prefs.ui line 425
+#: rc.cpp:95
 #, no-c-format
 msgid "Power Meter Text Color"
 msgstr "Color del texto del medidor"
 
-#. i18n: file ./prefs.ui line 520
-#: rc.cpp:102
+#. i18n: file ./prefs.ui line 450
+#: rc.cpp:98
 #, no-c-format
 msgid "Gauge Critical Fuell Color"
 msgstr "Fondo del medidor cuando esta a nivel crítico"
 
-#. i18n: file ./prefs.ui line 561
-#: rc.cpp:106
+#. i18n: file ./prefs.ui line 491
+#: rc.cpp:102
 #, no-c-format
 msgid "Gauge Background Color"
 msgstr "Fondo del medidor"
 
-#. i18n: file ./prefs.ui line 605
-#: rc.cpp:110
+#. i18n: file ./prefs.ui line 535
+#: rc.cpp:106
 #, no-c-format
 msgid "Gauge Fuel Color"
 msgstr "Color de la batería"
+
+#. i18n: file ./prefs.ui line 628
+#: rc.cpp:111
+#, no-c-format
+msgid "Power Meter Font"
+msgstr "Fuente del medidor"
+
+#. i18n: file ./prefs.ui line 680
+#: rc.cpp:114
+#, no-c-format
+msgid "Gauge Font (Percentage Value)"
+msgstr "Fuente del medidor (Valor en porcentaje)"
