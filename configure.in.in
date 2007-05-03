@@ -1,5 +1,5 @@
 #MIN_CONFIG(3.2.0)
 
-AM_INIT_AUTOMAKE( [kthinkbat], [0.2.6] )
+AM_INIT_AUTOMAKE( [kthinkbat], [0.2.7-svn] )
 AC_C_BIGENDIAN
 AC_CHECK_KDEMAXPATHLEN
