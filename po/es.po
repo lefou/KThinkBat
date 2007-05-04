@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-05-03 22:35+0200\n"
-"PO-Revision-Date: 2007-04-03 11:29-0500\n"
+"PO-Revision-Date: 2007-05-03 19:56+0000\n"
 "Last-Translator: Luis Guillermo Sobalvarro <lgsobalvarro@e-genieria.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -34,7 +34,7 @@ msgstr ""
 
 #: batinfo.cpp:505
 msgid "nA"
-msgstr ""
+msgstr "nA"
 
 #: kthinkbat.cpp:72
 msgid "KThinkBat %1"
@@ -49,7 +49,6 @@ msgid "&Configure %1..."
 msgstr "&Configurar %1..."
 
 #: kthinkbat.cpp:91
-#, fuzzy
 msgid "charged"
 msgstr "Carga completa"
 
@@ -115,8 +114,9 @@ msgid "Crit Fuel: "
 msgstr "Capacidad crítica: "
 
 #: kthinkbat.cpp:501
+#, fuzzy
 msgid "Cycle Count: "
-msgstr ""
+msgstr "Cuenta de ciclos:"
 
 #: kthinkbat.cpp:503
 msgid "State: "
@@ -246,15 +246,15 @@ msgstr "Contenido del medidor"
 
 #. i18n: file ./prefs.ui line 367
 #: rc.cpp:76
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Re&maining Time"
-msgstr "Tiempo restante"
+msgstr "Tie&mpo restante"
 
 #. i18n: file ./prefs.ui line 370
 #: rc.cpp:79
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Alt+M"
-msgstr "Alt+T"
+msgstr "Alt+M"
 
 #. i18n: file ./prefs.ui line 378
 #: rc.cpp:82
@@ -315,3 +315,4 @@ msgstr "Fuente del medidor"
 #, no-c-format
 msgid "Gauge Font (Percentage Value)"
 msgstr "Fuente del medidor (Valor en porcentaje)"
+
