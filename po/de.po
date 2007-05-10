@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-05-03 22:35+0200\n"
-"PO-Revision-Date: 2007-05-03 22:37+0200\n"
+"POT-Creation-Date: 2007-05-10 20:33+0200\n"
+"PO-Revision-Date: 2007-05-10 20:35+0200\n"
 "Last-Translator: Tobias Roeser <le.petit.fou@web.de>\n"
 "Language-Team: Deutsch\n"
 "MIME-Version: 1.0\n"
@@ -122,188 +122,189 @@ msgstr "Verbleibende Zeit: "
 msgid "full charged"
 msgstr "voll geladen"
 
-#. i18n: file ./prefs.ui line 50
+#. i18n: file ./prefs.ui line 47
 #: rc.cpp:6
 #, no-c-format
-msgid "General"
-msgstr "Allgemein"
+msgid "Ge&neral"
+msgstr "Allgemei&n"
 
-#. i18n: file ./prefs.ui line 61
+#. i18n: file ./prefs.ui line 83
 #: rc.cpp:9
-#, no-c-format
-msgid "Battery Critical Fill"
-msgstr "Kritischer Akkustand"
-
-#. i18n: file ./prefs.ui line 69
-#: rc.cpp:12
-#, no-c-format
-msgid "Battery Update Interval (in milliseconds)"
-msgstr "Aktualisierungsintervall für Akku-Werte (in Millisekunden)"
-
-#. i18n: file ./prefs.ui line 108
-#: rc.cpp:15
 #, no-c-format
 msgid "Show &ToolTip"
 msgstr "Zeige ToolTip"
 
-#. i18n: file ./prefs.ui line 111
-#: rc.cpp:18
+#. i18n: file ./prefs.ui line 86
+#. i18n: file ./prefs.ui line 350
+#: rc.cpp:12 rc.cpp:63
 #, no-c-format
 msgid "Alt+T"
 msgstr "Alt+T"
 
-#. i18n: file ./prefs.ui line 141
-#: rc.cpp:21
+#. i18n: file ./prefs.ui line 128
+#: rc.cpp:15
+#, no-c-format
+msgid "Battery Critical Fill"
+msgstr "Kritischer Akkustand"
+
+#. i18n: file ./prefs.ui line 136
+#: rc.cpp:18
 #, no-c-format
 msgid "Summari&ze all Batteries"
 msgstr "Werte aller Akkus zusammenfassen"
 
-#. i18n: file ./prefs.ui line 144
-#: rc.cpp:24
+#. i18n: file ./prefs.ui line 139
+#: rc.cpp:21
 #, no-c-format
 msgid "Alt+Z"
 msgstr "Alt+Z"
 
-#. i18n: file ./prefs.ui line 154
-#: rc.cpp:27
+#. i18n: file ./prefs.ui line 147
+#: rc.cpp:24
 #, no-c-format
-msgid "Battery Settings"
-msgstr "Akku Einstellungen"
+msgid "Battery Update Interval (in milliseconds)"
+msgstr "Aktualisierungsintervall für Akku-Werte (in Millisekunden)"
 
-#. i18n: file ./prefs.ui line 211
-#: rc.cpp:36
+#. i18n: file ./prefs.ui line 189
+#: rc.cpp:30
+#, no-c-format
+msgid "Battery Gauge"
+msgstr "Akkuanzeige"
+
+#. i18n: file ./prefs.ui line 200
+#: rc.cpp:33
 #, no-c-format
 msgid "Gauge Dot Size:"
 msgstr "Größe des Akku-Pols"
 
-#. i18n: file ./prefs.ui line 219
-#: rc.cpp:39
+#. i18n: file ./prefs.ui line 240
+#: rc.cpp:45
 #, no-c-format
 msgid "Gauge Size:"
 msgstr "Größe der Akkuanzeige:"
 
-#. i18n: file ./prefs.ui line 288
-#: rc.cpp:48
-#, no-c-format
-msgid "Info Field below of Battery Gauge"
-msgstr "Zeige erweiterte Informationen unterhalb der Akkuanzeige an"
-
-#. i18n: file ./prefs.ui line 299
-#: rc.cpp:52
+#. i18n: file ./prefs.ui line 323
+#: rc.cpp:51
 #, no-c-format
 msgid "Draw Batter&y upright"
 msgstr "Zeichne Akku aufrecht"
 
-#. i18n: file ./prefs.ui line 302
-#: rc.cpp:55
+#. i18n: file ./prefs.ui line 326
+#: rc.cpp:54
 #, no-c-format
 msgid "Alt+Y"
 msgstr "Alt+Y"
 
-#. i18n: file ./prefs.ui line 318
-#: rc.cpp:58
-#, no-c-format
-msgid "Content of Info Field"
-msgstr "Inhalt des Info-Feldes"
-
-#. i18n: file ./prefs.ui line 332
-#: rc.cpp:61
-#, no-c-format
-msgid "&Remaining Time"
-msgstr "Verbleibende Zeit"
-
-#. i18n: file ./prefs.ui line 335
-#: rc.cpp:64
-#, no-c-format
-msgid "Alt+R"
-msgstr "Alt+R"
-
-#. i18n: file ./prefs.ui line 343
-#: rc.cpp:67
-#, no-c-format
-msgid "Current Po&wer Consumption"
-msgstr "Aktueller Energieverbrauch"
-
-#. i18n: file ./prefs.ui line 346
-#: rc.cpp:70
-#, no-c-format
-msgid "Alt+W"
-msgstr "Alt+W"
-
-#. i18n: file ./prefs.ui line 356
-#: rc.cpp:73
+#. i18n: file ./prefs.ui line 336
+#: rc.cpp:57
 #, no-c-format
 msgid "Content of Battery Gauge"
 msgstr "Inhalt der Akkuanzeige"
 
-#. i18n: file ./prefs.ui line 367
-#: rc.cpp:76
-#, fuzzy, no-c-format
-msgid "Re&maining Time"
-msgstr "Verbleibende Zeit"
-
-#. i18n: file ./prefs.ui line 370
-#: rc.cpp:79
+#. i18n: file ./prefs.ui line 347
+#: rc.cpp:60
 #, no-c-format
-msgid "Alt+M"
-msgstr "Alt+M"
+msgid "Remaining &Time"
+msgstr "Verbleibende Zei&t"
 
-#. i18n: file ./prefs.ui line 378
-#: rc.cpp:82
-#, no-c-format
-msgid "Remaining Power in Percent"
-msgstr "Verbleibende Energie in Prozent"
-
-#. i18n: file ./prefs.ui line 389
-#: rc.cpp:86
+#. i18n: file ./prefs.ui line 358
+#: rc.cpp:66
 #, no-c-format
 msgid "&None"
 msgstr "Nichts"
 
-#. i18n: file ./prefs.ui line 392
-#: rc.cpp:89
+#. i18n: file ./prefs.ui line 361
+#: rc.cpp:69
 #, no-c-format
 msgid "Alt+N"
 msgstr "Alt+N"
 
-#. i18n: file ./prefs.ui line 406
+#. i18n: file ./prefs.ui line 369
+#: rc.cpp:72
+#, no-c-format
+msgid "Remaining Power in Percent"
+msgstr "Verbleibende Energie in Prozent"
+
+#. i18n: file ./prefs.ui line 382
+#: rc.cpp:76
+#, no-c-format
+msgid "Content of Info Field"
+msgstr "Inhalt des Info-Feldes"
+
+#. i18n: file ./prefs.ui line 393
+#: rc.cpp:79
+#, no-c-format
+msgid "Info Field below of Battery Gauge"
+msgstr "Zeige erweiterte Informationen unterhalb der Akkuanzeige an"
+
+#. i18n: file ./prefs.ui line 407
+#: rc.cpp:83
+#, no-c-format
+msgid "&Remaining Time"
+msgstr "Verbleibende Zeit"
+
+#. i18n: file ./prefs.ui line 410
+#: rc.cpp:86
+#, no-c-format
+msgid "Alt+R"
+msgstr "Alt+R"
+
+#. i18n: file ./prefs.ui line 418
+#: rc.cpp:89
+#, no-c-format
+msgid "Current Po&wer Consumption"
+msgstr "Aktueller Energieverbrauch"
+
+#. i18n: file ./prefs.ui line 421
 #: rc.cpp:92
 #, no-c-format
-msgid "Color and Font"
-msgstr "Farbe und Schrift"
-
-#. i18n: file ./prefs.ui line 425
-#: rc.cpp:95
-#, no-c-format
-msgid "Power Meter Text Color"
-msgstr "Verbrauchsanzeige Textfarbe"
+msgid "Alt+W"
+msgstr "Alt+W"
 
 #. i18n: file ./prefs.ui line 450
+#: rc.cpp:95
+#, no-c-format
+msgid "&Color and Font"
+msgstr "Farbe und S&chrift"
+
+#. i18n: file ./prefs.ui line 469
 #: rc.cpp:98
 #, no-c-format
-msgid "Gauge Critical Fuell Color"
-msgstr "Farbe für kritischen Akkustand"
+msgid "Color"
+msgstr "Farbe"
 
-#. i18n: file ./prefs.ui line 491
-#: rc.cpp:102
-#, no-c-format
-msgid "Gauge Background Color"
-msgstr "Akkuanzeige Hintergrundfarbe"
-
-#. i18n: file ./prefs.ui line 535
-#: rc.cpp:106
+#. i18n: file ./prefs.ui line 480
+#: rc.cpp:101
 #, no-c-format
 msgid "Gauge Fuel Color"
 msgstr "Farbe für normalen Akkustand"
 
-#. i18n: file ./prefs.ui line 628
+#. i18n: file ./prefs.ui line 555
+#: rc.cpp:108
+#, no-c-format
+msgid "Gauge Background Color"
+msgstr "Akkuanzeige Hintergrundfarbe"
+
+#. i18n: file ./prefs.ui line 563
 #: rc.cpp:111
+#, no-c-format
+msgid "Power Meter Text Color"
+msgstr "Verbrauchsanzeige Textfarbe"
+
+#. i18n: file ./prefs.ui line 639
+#: rc.cpp:114
+#, no-c-format
+msgid "Gauge Critical Fuell Color"
+msgstr "Farbe für kritischen Akkustand"
+
+#. i18n: file ./prefs.ui line 660
+#: rc.cpp:120
 #, no-c-format
 msgid "Power Meter Font"
 msgstr "Schriftart Verbrauchsanzeige"
 
-#. i18n: file ./prefs.ui line 680
-#: rc.cpp:114
+#. i18n: file ./prefs.ui line 712
+#: rc.cpp:123
 #, no-c-format
 msgid "Gauge Font (Percentage Value)"
 msgstr "Schriftart Akkuanzeige (Prozentangabe)"
