@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-05-10 20:33+0200\n"
+"POT-Creation-Date: 2007-05-17 11:41+0200\n"
 "PO-Revision-Date: 2007-05-03 19:56+0000\n"
 "Last-Translator: Luis Guillermo Sobalvarro <lgsobalvarro@e-genieria.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -32,7 +32,7 @@ msgstr ""
 "_: EMAIL OF TRANSLATORS\n"
 "lgsobalvarro@e-genieria.com"
 
-#: batinfo.cpp:505
+#: batinfo.cpp:511
 msgid "nA"
 msgstr "nA"
 
@@ -65,7 +65,7 @@ msgstr "descargando"
 msgid "idle"
 msgstr "idle"
 
-#: kthinkbat.cpp:95 kthinkbat.cpp:507
+#: kthinkbat.cpp:95 kthinkbat.cpp:511
 msgid "not installed"
 msgstr "no instalada"
 
@@ -89,44 +89,44 @@ msgstr ""
 "\n"
 "No hay un diálogo de ayuda por el momento"
 
-#: kthinkbat.cpp:487
+#: kthinkbat.cpp:491
 msgid "Battery %1"
 msgstr "Batería %1"
 
-#: kthinkbat.cpp:495
+#: kthinkbat.cpp:499
 msgid "Current Consumption: "
 msgstr "Consumo actual:"
 
-#: kthinkbat.cpp:496
+#: kthinkbat.cpp:500
 msgid "Current Fuel: "
 msgstr "Capacidad actual: "
 
-#: kthinkbat.cpp:497
+#: kthinkbat.cpp:501
 msgid "Last Fuel: "
 msgstr "Última capacidad: "
 
-#: kthinkbat.cpp:498
+#: kthinkbat.cpp:502
 msgid "Design Fuel: "
 msgstr "Capacidad original: "
 
-#: kthinkbat.cpp:499
+#: kthinkbat.cpp:503
 msgid "Crit Fuel: "
 msgstr "Capacidad crítica: "
 
-#: kthinkbat.cpp:501
+#: kthinkbat.cpp:505
 #, fuzzy
 msgid "Cycle Count: "
 msgstr "Cuenta de ciclos:"
 
-#: kthinkbat.cpp:503
+#: kthinkbat.cpp:507
 msgid "State: "
 msgstr "Estado: "
 
-#: kthinkbat.cpp:504
+#: kthinkbat.cpp:508
 msgid "Remaining Time: "
 msgstr "Tiempo restante: "
 
-#: kthinkbat.cpp:504
+#: kthinkbat.cpp:508
 msgid "full charged"
 msgstr "Carga completa"
 
@@ -198,7 +198,8 @@ msgid "Draw Batter&y upright"
 msgstr "Dibujado horizontal del medidor"
 
 #. i18n: file ./prefs.ui line 326
-#: rc.cpp:54
+#. i18n: file ./prefs.ui line 931
+#: rc.cpp:54 rc.cpp:165
 #, no-c-format
 msgid "Alt+Y"
 msgstr "Alt+Y"
@@ -316,6 +317,96 @@ msgstr "Fuente del medidor"
 #, no-c-format
 msgid "Gauge Font (Percentage Value)"
 msgstr "Fuente del medidor (Valor en porcentaje)"
+
+#. i18n: file ./prefs.ui line 743
+#: rc.cpp:126
+#, no-c-format
+msgid "Ad&vanced"
+msgstr ""
+
+#. i18n: file ./prefs.ui line 754
+#: rc.cpp:129
+#, no-c-format
+msgid "ACPI"
+msgstr ""
+
+#. i18n: file ./prefs.ui line 765
+#: rc.cpp:132
+#, no-c-format
+msgid "Path to ACPI battery information"
+msgstr ""
+
+#. i18n: file ./prefs.ui line 773
+#: rc.cpp:135
+#, no-c-format
+msgid "Directory for battery one"
+msgstr ""
+
+#. i18n: file ./prefs.ui line 781
+#: rc.cpp:138
+#, no-c-format
+msgid "Directory for battery two"
+msgstr ""
+
+#. i18n: file ./prefs.ui line 840
+#: rc.cpp:141
+#, no-c-format
+msgid "Enable ACPI"
+msgstr ""
+
+#. i18n: file ./prefs.ui line 846
+#: rc.cpp:144
+#, no-c-format
+msgid "BAT0"
+msgstr ""
+
+#. i18n: file ./prefs.ui line 851
+#: rc.cpp:147
+#, no-c-format
+msgid "CMB1"
+msgstr ""
+
+#. i18n: file ./prefs.ui line 870
+#: rc.cpp:150
+#, no-c-format
+msgid "BAT1"
+msgstr ""
+
+#. i18n: file ./prefs.ui line 875
+#: rc.cpp:153
+#, no-c-format
+msgid "CMB2"
+msgstr ""
+
+#. i18n: file ./prefs.ui line 894
+#: rc.cpp:156
+#, no-c-format
+msgid "/proc/acpi/battery"
+msgstr ""
+
+#. i18n: file ./prefs.ui line 917
+#: rc.cpp:159
+#, no-c-format
+msgid "SMAPI"
+msgstr ""
+
+#. i18n: file ./prefs.ui line 928
+#: rc.cpp:162
+#, no-c-format
+msgid "Enable SMAPI (IBM/Lenovo ThinkPads onl&y)"
+msgstr ""
+
+#. i18n: file ./prefs.ui line 939
+#: rc.cpp:168
+#, no-c-format
+msgid "Path to SMAPI information"
+msgstr ""
+
+#. i18n: file ./prefs.ui line 945
+#: rc.cpp:171
+#, no-c-format
+msgid "/sys/devices/platform/smapi"
+msgstr ""
 
 #~ msgid "Battery Settings"
 #~ msgstr "Propiedades del medidor"

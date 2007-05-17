@@ -7,13 +7,29 @@
     <kcfgfile arg="true"/>
     
     <group name="ACPI">
+        <entry name="EnableAcpi" type="Bool">
+            <label>Use the Advanced Configuration and Powermanagement Interface (ACPI) to get battery information.</label>
+            <default>true</default>
+        </entry>
         <entry name="AcpiBatteryPath" type="String"> 
             <label>The path where ACPI information for batteries can be found. Default is /proc/acpi/battery.</label>
             <default>/proc/acpi/battery</default>
         </entry>
+        <entry name="AcpiBat1Dir" type="String">
+            <label>The directory (relative to the ACPI battery path) where information about Battery One can be found.</label>
+            <default>BAT0</default>
+        </entry>
+        <entry name="AcpiBat2Dir" type="String">
+            <label>The directory (relative to the ACPI battery path) where information about Battery Two can be found.</label>
+            <default>BAT1</default>
+        </entry>
     </group>
 
     <group name="SMAPI">
+        <entry name="EnableSmapi" type="Bool">
+            <label>Use the SM API Bios information found on IBM/Lenovo ThinkPads to get battery information.</label>
+            <default>true</default>
+        </entry>
         <entry name="SmapiPath" type="String"> 
             <label>The path where SMAPI information for batteries can be found. Default is /sys/devices/platform/smapi.</label>
             <default>/sys/devices/platform/smapi</default>

@@ -31,7 +31,7 @@
 #include "kthinkbatconfig.h"
 
 BatInfo::BatInfo( int number ) 
-: batNr( number - 1 ) {
+: batNr(number) {
 
     resetValues();
 }
@@ -84,7 +84,9 @@ BatInfo::parseProcACPI() {
     QRegExp rxDesignCap("^design capacity:\\s*(\\d{1,5})\\s*m(A|W)h");
     QRegExp rxDesignCapLow("^design capacity warning:\\s*(\\d{1,5})\\s*m(A|W)h");
 
-    QString filename = KThinkBatConfig::acpiBatteryPath() + "/BAT" + QString::number(batNr) + "/info";
+    QString filename = KThinkBatConfig::acpiBatteryPath() + "/" 
+           + ((1 == batNr) ? KThinkBatConfig::acpiBat1Dir() : KThinkBatConfig::acpiBat2Dir())
+           + "/info";
     QFile file( filename );
     if (!file.exists() || !file.open(IO_ReadOnly)) {
         // this is nothing unexpected, so say it only once
@@ -127,7 +129,9 @@ BatInfo::parseProcACPI() {
         return true;
     }
 
-    filename = KThinkBatConfig::acpiBatteryPath() + "/BAT" + QString::number(batNr) + "/state";
+    filename = KThinkBatConfig::acpiBatteryPath() + "/" 
+          + ((1 == batNr) ? KThinkBatConfig::acpiBat1Dir() : KThinkBatConfig::acpiBat2Dir())
+          + "/state";
     file.setName(filename);
     if (!file.exists() || !file.open(IO_ReadOnly)) {
         static bool sayTheProblem2 = true;
@@ -274,7 +278,9 @@ BatInfo::parseProcAcpiBatAlarm() {
     QRegExp rxWarnCap("^alarm:\\s*(\\d{1,5})\\s*m" + powerUnit + "h");
 
     // Get Alarm Fuel
-    QString filename = KThinkBatConfig::acpiBatteryPath() + "/BAT" + QString::number( batNr ) + "/alarm";
+    QString filename = KThinkBatConfig::acpiBatteryPath() + "/"
+         + ((1 == batNr) ? KThinkBatConfig::acpiBat1Dir() : KThinkBatConfig::acpiBat2Dir())
+         + "/alarm";
     QFile file( filename );
     if( ! file.exists() || ! file.open(IO_ReadOnly) ) {
         criticalFuel = 0;
@@ -302,7 +308,7 @@ bool
 BatInfo::parseSysfsTP() {
 
     powerUnit = "W";
-    const QString tpPath = KThinkBatConfig::smapiPath() + "/BAT" + QString::number(batNr) + "/";
+    const QString tpPath = KThinkBatConfig::smapiPath() + "/BAT" + QString::number(batNr-1) + "/";
     QFile file;
     QTextStream stream;
     QString line;

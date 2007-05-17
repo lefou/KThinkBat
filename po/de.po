@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-05-10 20:33+0200\n"
+"POT-Creation-Date: 2007-05-17 11:41+0200\n"
 "PO-Revision-Date: 2007-05-10 20:35+0200\n"
 "Last-Translator: Tobias Roeser <le.petit.fou@web.de>\n"
 "Language-Team: Deutsch\n"
@@ -27,7 +27,7 @@ msgid ""
 "Your emails"
 msgstr "le.petit.fou@web.de"
 
-#: batinfo.cpp:505
+#: batinfo.cpp:511
 msgid "nA"
 msgstr "kA"
 
@@ -59,7 +59,7 @@ msgstr "entladen"
 msgid "idle"
 msgstr "inaktiv"
 
-#: kthinkbat.cpp:95 kthinkbat.cpp:507
+#: kthinkbat.cpp:95 kthinkbat.cpp:511
 msgid "not installed"
 msgstr "nicht installiert"
 
@@ -71,7 +71,8 @@ msgstr "KThinkBat Einstellungen"
 
 #: kthinkbat.cpp:154
 msgid "A KDE panel applet to display the current laptop battery status."
-msgstr "Ein KDE Panel Applet zur Anzeige des aktuellen Akku-Zusandes eines Laptops."
+msgstr ""
+"Ein KDE Panel Applet zur Anzeige des aktuellen Akku-Zusandes eines Laptops."
 
 #: kthinkbat.cpp:171
 msgid ""
@@ -82,43 +83,43 @@ msgstr ""
 "Ein KDE Panel Applet zur Anzeige des aktuellen Akku-Zusandes eines Laptops.\n"
 "Es gibt zur Zeit noch keine Hilfe-Box."
 
-#: kthinkbat.cpp:487
+#: kthinkbat.cpp:491
 msgid "Battery %1"
 msgstr "Akku %1"
 
-#: kthinkbat.cpp:495
+#: kthinkbat.cpp:499
 msgid "Current Consumption: "
 msgstr "Aktueller Verbrauch: "
 
-#: kthinkbat.cpp:496
+#: kthinkbat.cpp:500
 msgid "Current Fuel: "
 msgstr "Aktuelle Kapazität: "
 
-#: kthinkbat.cpp:497
+#: kthinkbat.cpp:501
 msgid "Last Fuel: "
 msgstr "Letze erreichte Kapazität: "
 
-#: kthinkbat.cpp:498
+#: kthinkbat.cpp:502
 msgid "Design Fuel: "
 msgstr "Design-Kapazität: "
 
-#: kthinkbat.cpp:499
+#: kthinkbat.cpp:503
 msgid "Crit Fuel: "
 msgstr "Kritische Kapazität: "
 
-#: kthinkbat.cpp:501
+#: kthinkbat.cpp:505
 msgid "Cycle Count: "
 msgstr "Ladezyklen"
 
-#: kthinkbat.cpp:503
+#: kthinkbat.cpp:507
 msgid "State: "
 msgstr "Status: "
 
-#: kthinkbat.cpp:504
+#: kthinkbat.cpp:508
 msgid "Remaining Time: "
 msgstr "Verbleibende Zeit: "
 
-#: kthinkbat.cpp:504
+#: kthinkbat.cpp:508
 msgid "full charged"
 msgstr "voll geladen"
 
@@ -190,7 +191,8 @@ msgid "Draw Batter&y upright"
 msgstr "Zeichne Akku aufrecht"
 
 #. i18n: file ./prefs.ui line 326
-#: rc.cpp:54
+#. i18n: file ./prefs.ui line 931
+#: rc.cpp:54 rc.cpp:165
 #, no-c-format
 msgid "Alt+Y"
 msgstr "Alt+Y"
@@ -309,3 +311,92 @@ msgstr "Schriftart Verbrauchsanzeige"
 msgid "Gauge Font (Percentage Value)"
 msgstr "Schriftart Akkuanzeige (Prozentangabe)"
 
+#. i18n: file ./prefs.ui line 743
+#: rc.cpp:126
+#, no-c-format
+msgid "Ad&vanced"
+msgstr ""
+
+#. i18n: file ./prefs.ui line 754
+#: rc.cpp:129
+#, no-c-format
+msgid "ACPI"
+msgstr ""
+
+#. i18n: file ./prefs.ui line 765
+#: rc.cpp:132
+#, no-c-format
+msgid "Path to ACPI battery information"
+msgstr ""
+
+#. i18n: file ./prefs.ui line 773
+#: rc.cpp:135
+#, no-c-format
+msgid "Directory for battery one"
+msgstr ""
+
+#. i18n: file ./prefs.ui line 781
+#: rc.cpp:138
+#, no-c-format
+msgid "Directory for battery two"
+msgstr ""
+
+#. i18n: file ./prefs.ui line 840
+#: rc.cpp:141
+#, no-c-format
+msgid "Enable ACPI"
+msgstr ""
+
+#. i18n: file ./prefs.ui line 846
+#: rc.cpp:144
+#, no-c-format
+msgid "BAT0"
+msgstr ""
+
+#. i18n: file ./prefs.ui line 851
+#: rc.cpp:147
+#, no-c-format
+msgid "CMB1"
+msgstr ""
+
+#. i18n: file ./prefs.ui line 870
+#: rc.cpp:150
+#, no-c-format
+msgid "BAT1"
+msgstr ""
+
+#. i18n: file ./prefs.ui line 875
+#: rc.cpp:153
+#, no-c-format
+msgid "CMB2"
+msgstr ""
+
+#. i18n: file ./prefs.ui line 894
+#: rc.cpp:156
+#, no-c-format
+msgid "/proc/acpi/battery"
+msgstr ""
+
+#. i18n: file ./prefs.ui line 917
+#: rc.cpp:159
+#, no-c-format
+msgid "SMAPI"
+msgstr ""
+
+#. i18n: file ./prefs.ui line 928
+#: rc.cpp:162
+#, no-c-format
+msgid "Enable SMAPI (IBM/Lenovo ThinkPads onl&y)"
+msgstr ""
+
+#. i18n: file ./prefs.ui line 939
+#: rc.cpp:168
+#, no-c-format
+msgid "Path to SMAPI information"
+msgstr ""
+
+#. i18n: file ./prefs.ui line 945
+#: rc.cpp:171
+#, no-c-format
+msgid "/sys/devices/platform/smapi"
+msgstr ""

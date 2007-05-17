@@ -735,6 +735,267 @@
                     </spacer>
                 </vbox>
             </widget>
+            <widget class="QWidget">
+                <property name="name">
+                    <cstring>TabPage</cstring>
+                </property>
+                <attribute name="title">
+                    <string>Ad&amp;vanced</string>
+                </attribute>
+                <vbox>
+                    <property name="name">
+                        <cstring>unnamed</cstring>
+                    </property>
+                    <widget class="QGroupBox">
+                        <property name="name">
+                            <cstring>groupBox3_3</cstring>
+                        </property>
+                        <property name="title">
+                            <string>ACPI</string>
+                        </property>
+                        <grid>
+                            <property name="name">
+                                <cstring>unnamed</cstring>
+                            </property>
+                            <widget class="QLabel" row="1" column="0">
+                                <property name="name">
+                                    <cstring>textLabel1_2</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>Path to ACPI battery information</string>
+                                </property>
+                            </widget>
+                            <widget class="QLabel" row="2" column="0">
+                                <property name="name">
+                                    <cstring>textLabel2</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>Directory for battery one</string>
+                                </property>
+                            </widget>
+                            <widget class="QLabel" row="3" column="0">
+                                <property name="name">
+                                    <cstring>textLabel3</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>Directory for battery two</string>
+                                </property>
+                            </widget>
+                            <spacer row="1" column="1">
+                                <property name="name">
+                                    <cstring>spacer15_2</cstring>
+                                </property>
+                                <property name="orientation">
+                                    <enum>Horizontal</enum>
+                                </property>
+                                <property name="sizeType">
+                                    <enum>Expanding</enum>
+                                </property>
+                                <property name="sizeHint">
+                                    <size>
+                                        <width>40</width>
+                                        <height>20</height>
+                                    </size>
+                                </property>
+                            </spacer>
+                            <spacer row="2" column="1">
+                                <property name="name">
+                                    <cstring>spacer16_3</cstring>
+                                </property>
+                                <property name="orientation">
+                                    <enum>Horizontal</enum>
+                                </property>
+                                <property name="sizeType">
+                                    <enum>Expanding</enum>
+                                </property>
+                                <property name="sizeHint">
+                                    <size>
+                                        <width>40</width>
+                                        <height>20</height>
+                                    </size>
+                                </property>
+                            </spacer>
+                            <spacer row="3" column="1">
+                                <property name="name">
+                                    <cstring>spacer17</cstring>
+                                </property>
+                                <property name="orientation">
+                                    <enum>Horizontal</enum>
+                                </property>
+                                <property name="sizeType">
+                                    <enum>Expanding</enum>
+                                </property>
+                                <property name="sizeHint">
+                                    <size>
+                                        <width>20</width>
+                                        <height>20</height>
+                                    </size>
+                                </property>
+                            </spacer>
+                            <widget class="QCheckBox" row="0" column="0" rowspan="1" colspan="3">
+                                <property name="name">
+                                    <cstring>kcfg_EnableAcpi</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>Enable ACPI</string>
+                                </property>
+                            </widget>
+                            <widget class="QComboBox" row="2" column="2">
+                                <item>
+                                    <property name="text">
+                                        <string>BAT0</string>
+                                    </property>
+                                </item>
+                                <item>
+                                    <property name="text">
+                                        <string>CMB1</string>
+                                    </property>
+                                </item>
+                                <property name="name">
+                                    <cstring>kcfg_AcpiBat1Dir</cstring>
+                                </property>
+                                <property name="minimumSize">
+                                    <size>
+                                        <width>120</width>
+                                        <height>0</height>
+                                    </size>
+                                </property>
+                                <property name="editable">
+                                    <bool>true</bool>
+                                </property>
+                            </widget>
+                            <widget class="QComboBox" row="3" column="2">
+                                <item>
+                                    <property name="text">
+                                        <string>BAT1</string>
+                                    </property>
+                                </item>
+                                <item>
+                                    <property name="text">
+                                        <string>CMB2</string>
+                                    </property>
+                                </item>
+                                <property name="name">
+                                    <cstring>kcfg_AcpiBat2Dir</cstring>
+                                </property>
+                                <property name="minimumSize">
+                                    <size>
+                                        <width>120</width>
+                                        <height>0</height>
+                                    </size>
+                                </property>
+                                <property name="editable">
+                                    <bool>true</bool>
+                                </property>
+                            </widget>
+                            <widget class="QComboBox" row="1" column="2">
+                                <item>
+                                    <property name="text">
+                                        <string>/proc/acpi/battery</string>
+                                    </property>
+                                </item>
+                                <property name="name">
+                                    <cstring>kcfg_AcpiBatteryPath</cstring>
+                                </property>
+                                <property name="minimumSize">
+                                    <size>
+                                        <width>120</width>
+                                        <height>0</height>
+                                    </size>
+                                </property>
+                                <property name="editable">
+                                    <bool>true</bool>
+                                </property>
+                            </widget>
+                        </grid>
+                    </widget>
+                    <widget class="QGroupBox">
+                        <property name="name">
+                            <cstring>groupBox4</cstring>
+                        </property>
+                        <property name="title">
+                            <string>SMAPI</string>
+                        </property>
+                        <grid>
+                            <property name="name">
+                                <cstring>unnamed</cstring>
+                            </property>
+                            <widget class="QCheckBox" row="0" column="0" rowspan="1" colspan="3">
+                                <property name="name">
+                                    <cstring>kcfg_EnableSmapi</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>Enable SMAPI (IBM/Lenovo ThinkPads onl&amp;y)</string>
+                                </property>
+                                <property name="accel">
+                                    <string>Alt+Y</string>
+                                </property>
+                            </widget>
+                            <widget class="QLabel" row="1" column="0">
+                                <property name="name">
+                                    <cstring>textLabel4</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>Path to SMAPI information</string>
+                                </property>
+                            </widget>
+                            <widget class="QComboBox" row="1" column="2">
+                                <item>
+                                    <property name="text">
+                                        <string>/sys/devices/platform/smapi</string>
+                                    </property>
+                                </item>
+                                <property name="name">
+                                    <cstring>kcfg_SmapiPath</cstring>
+                                </property>
+                                <property name="minimumSize">
+                                    <size>
+                                        <width>120</width>
+                                        <height>0</height>
+                                    </size>
+                                </property>
+                                <property name="editable">
+                                    <bool>true</bool>
+                                </property>
+                            </widget>
+                            <spacer row="1" column="1">
+                                <property name="name">
+                                    <cstring>spacer18</cstring>
+                                </property>
+                                <property name="orientation">
+                                    <enum>Horizontal</enum>
+                                </property>
+                                <property name="sizeType">
+                                    <enum>Expanding</enum>
+                                </property>
+                                <property name="sizeHint">
+                                    <size>
+                                        <width>31</width>
+                                        <height>20</height>
+                                    </size>
+                                </property>
+                            </spacer>
+                        </grid>
+                    </widget>
+                    <spacer>
+                        <property name="name">
+                            <cstring>spacer14_3</cstring>
+                        </property>
+                        <property name="orientation">
+                            <enum>Vertical</enum>
+                        </property>
+                        <property name="sizeType">
+                            <enum>Expanding</enum>
+                        </property>
+                        <property name="sizeHint">
+                            <size>
+                                <width>20</width>
+                                <height>40</height>
+                            </size>
+                        </property>
+                    </spacer>
+                </vbox>
+            </widget>
         </widget>
     </vbox>
 </widget>
@@ -743,6 +1004,36 @@
         <data format="PNG" length="908">89504e470d0a1a0a0000000d49484452000000300000003008060000005702f98700000353494441546881ed97bfaa244514c67f3db784d362d00d1bdcc96e2686770303034103837d009f61f10d641fc3d04c30936523615134d34070330d3b732610aa8259eac0ad9d32e8eab9d5bdd5e3ddc5651bec03355f7dfdf77c73fe5435acb6da6aabadb6da6aabfd7fad1a268f7effe2f3ad6caf300241591a5af4e6d9dfbf7cfdf8e39f0fb900334cae9bfb0f3f6a3efd44f188a9d1f0ba086298e584feadafcabb4377d31dbaef80b200206ab06004d5190c16c8d10314b89ee5fc2b27dd97731ffbe78ced24c0a98d56148203641e99a2de9d8fd2223b3ff049da88915ebc11acba081a6705288a0bbbd12b7b14147b077e070cb6774a134ef9045dc6158da788940458dd452f5b2c8a206f0ec3ebe15e7751cf46c0687461779beb4b4334fa7335a0c145c5a19a8e6aea1e6f14050dae4fc790d27186fb6037dfdebbfeb2f9e3c1f3da8077cf7e78f7c3ef7f3c09f0e8d106db3b9f5a972f606dc0fea7bc4f93e1f82c4737cdbdeb8775f3c10541a9c3ee39702b40b1514d529eaa5f0adc9de582cbbac7abf0391cba90061b0902da01353e74c7510a814687ed9d8245a1028d2162f611d3007b6a431c0970ec624b8bc5f70af1d4d48be1049fbcedd3dce3c61150601786feae69e9d1c570204207d22f72b569c711b0ba4fb94796db0b42a5badd11a4c632ae01b0aa7d78522b5d126e1108422f026a5a609fd540a06a52ff6781e882a2da82eb5bb1573640ff039c160f20db0d2e894ba5da40b8c41f1a304d05790d04aa360986f1866e09bcdf46b4951e404c8bea6e2ca0464e5f67a49b97c46b23155c21d20e8b6b05bf8e8ab8129ad4c264716883be5075df68c00b80badf20fb26befee9f2a918f92cdf0b2d0ae1d01df6efef1fe85f7964c61130ed698fb234746a2b3179554c048869ab1aa13682075a2343ee2d8237a6ad6c70a33a9d444010d3425af9f2f02d816bf055fd52696702b6665b5d9aabbefc038b437dcf559dfe391f814ebbaf6cb04fde76b799c5a037809d0a7849d18c55771c1430b798e1dc289d3febd8809b342ee82333a0991c2b8d4d86c3980a189c39a6f122c3d2089379989c3f02c721853605670df0ce8497aeb9a02c701032385f7236143014f8f0cc8157096329cc4334f2a894fee1e9b1fcbe695a9552658844ccffd1c27c7aedb1e0f36aabadb6da5bb27f00d613a18f49cbbbc90000000049454e44ae426082</data>
     </image>
 </images>
+<tabstops>
+    <tabstop>kcfg_SummarizeBatteries</tabstop>
+    <tabstop>kcfg_ShowToolTip</tabstop>
+    <tabstop>kcfg_CriticalFill</tabstop>
+    <tabstop>kcfg_UpdateIntervalMsek</tabstop>
+    <tabstop>kcfg_DrawBatteryUpright</tabstop>
+    <tabstop>kcfg_GaugeWidth</tabstop>
+    <tabstop>kcfg_GaugeHeight</tabstop>
+    <tabstop>kcfg_GaugeDotWidth</tabstop>
+    <tabstop>kcfg_GaugeDotHeight</tabstop>
+    <tabstop>kcfg_GaugeContentPercent</tabstop>
+    <tabstop>kcfg_GaugeContentTime</tabstop>
+    <tabstop>kcfg_GaugeContentNone</tabstop>
+    <tabstop>kcfg_PowerMeterBelowGauge</tabstop>
+    <tabstop>kcfg_ShowRemainingTime</tabstop>
+    <tabstop>kcfg_ShowPowerMeter</tabstop>
+    <tabstop>kcfg_BatBackgroundColor</tabstop>
+    <tabstop>kcfg_BatChargedColor</tabstop>
+    <tabstop>kcfg_PowerMeterColor</tabstop>
+    <tabstop>kcfg_BatCriticalColor</tabstop>
+    <tabstop>kcfg_GaugeFont</tabstop>
+    <tabstop>kcfg_PowerMeterFont</tabstop>
+    <tabstop>kcfg_EnableAcpi</tabstop>
+    <tabstop>kcfg_AcpiBatteryPath</tabstop>
+    <tabstop>kcfg_AcpiBat1Dir</tabstop>
+    <tabstop>kcfg_AcpiBat2Dir</tabstop>
+    <tabstop>kcfg_EnableSmapi</tabstop>
+    <tabstop>kcfg_SmapiPath</tabstop>
+    <tabstop>tabWidget2_</tabstop>
+</tabstops>
 <slots>
     <slot>kcfg_GaugeContentPercent_toggled(bool)</slot>
 </slots>

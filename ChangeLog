@@ -3,6 +3,7 @@ KThinkBat 0.2.7 - unreleased:
      only when using SMAPI on ThinkPads)
    * API documentation and refinements
    * New tab-splitted config dialog
+   * #25: Made all paths configurable (ACPI, SMAPI)
 
 KThinkBat 0.2.6 - 29.04.2007:
    * Added Slowak Translation provided by Jozef Riha
