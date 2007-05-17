@@ -19,6 +19,7 @@
  ***************************************************************************/
 
 // Qt
+#include <qcombobox.h>
 #include <qpainter.h>
 #include <qfile.h>
 #include <qtimer.h>
@@ -130,6 +131,12 @@ KThinkBat::slotPreferences() {
 
     Prefs* prefs = new Prefs(this);
     assert(prefs);
+
+    prefs->kcfg_AcpiBatteryPath->setEnabled(KThinkBatConfig::enableAcpi());
+    prefs->kcfg_AcpiBat1Dir->setEnabled(KThinkBatConfig::enableAcpi());
+    prefs->kcfg_AcpiBat2Dir->setEnabled(KThinkBatConfig::enableAcpi());
+
+    prefs->kcfg_SmapiPath->setEnabled(KThinkBatConfig::enableSmapi());
 
     dialog->addPage(prefs, i18n("KThinkBat Preferences"), "configure");
 

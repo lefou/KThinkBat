@@ -54,16 +54,16 @@ DIST_SOURCES =
 #>- DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 #>+ 1
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST) $(KDE_DIST)
-ACLOCAL = ${SHELL} /home/lefou/dev/kthinkbat-config-branch/admin/missing --run aclocal-1.9
+ACLOCAL = ${SHELL} /home/lefou/dev/kthinkbat/admin/missing --run aclocal-1.9
 AMDEP_FALSE = #
 AMDEP_TRUE = 
-AMTAR = ${SHELL} /home/lefou/dev/kthinkbat-config-branch/admin/missing --run tar
+AMTAR = ${SHELL} /home/lefou/dev/kthinkbat/admin/missing --run tar
 AR = ar
 ARTSCCONFIG = 
 AUTOCONF = $(SHELL) $(top_srcdir)/admin/cvs.sh configure || touch configure
 AUTODIRS = 
-AUTOHEADER = ${SHELL} /home/lefou/dev/kthinkbat-config-branch/admin/missing --run autoheader
-AUTOMAKE = ${SHELL} /home/lefou/dev/kthinkbat-config-branch/admin/missing --run automake-1.9
+AUTOHEADER = ${SHELL} /home/lefou/dev/kthinkbat/admin/missing --run autoheader
+AUTOMAKE = ${SHELL} /home/lefou/dev/kthinkbat/admin/missing --run automake-1.9
 AWK = gawk
 CC = gcc
 CCDEPMODE = depmode=gcc3
@@ -167,7 +167,7 @@ LIB_XEXT = -lXext
 LIB_XRENDER = 
 LN_S = ln -s
 LTLIBOBJS = 
-MAKEINFO = ${SHELL} /home/lefou/dev/kthinkbat-config-branch/admin/missing --run makeinfo
+MAKEINFO = ${SHELL} /home/lefou/dev/kthinkbat/admin/missing --run makeinfo
 MAKEKDEWIDGETS = 
 MCOPIDL = 
 MEINPROC = /usr/kde/3.5/bin/meinproc
@@ -246,7 +246,7 @@ include_x11_FALSE = #
 include_x11_TRUE = 
 includedir = ${prefix}/include
 infodir = ${datarootdir}/info
-install_sh = /home/lefou/dev/kthinkbat-config-branch/admin/install-sh
+install_sh = /home/lefou/dev/kthinkbat/admin/install-sh
 kde_appsdir = ${datadir}/applnk
 kde_bindir = ${exec_prefix}/bin
 kde_confdir = ${datadir}/config
@@ -494,7 +494,7 @@ uninstall-local:
 .NOEXPORT:
 
 #>+ 2
-KDE_DIST=configure.in.bot.end bcheck.pl Makefile.in Doxyfile.global deps.am configure.in.min pkg.m4.in detect-autoconf.pl acinclude.m4.in doxygen.sh nmcheck debianrules libtool.m4.in cvs.sh config.pl Doxyfile.am oldinclude.m4.in Makefile.am am_edit conf.change.pl Makefile.common 
+KDE_DIST=configure.in.bot.end bcheck.pl Makefile.in Doxyfile.global deps.am pkg.m4.in detect-autoconf.pl configure.in.min acinclude.m4.in doxygen.sh nmcheck libtool.m4.in debianrules cvs.sh config.pl Doxyfile.am oldinclude.m4.in Makefile.am conf.change.pl am_edit Makefile.common 
 
 #>+ 2
 docs-am:

@@ -33,7 +33,7 @@
         </property>
         <widget class="QTabWidget">
             <property name="name">
-                <cstring>tabWidget2_</cstring>
+                <cstring>Tabs</cstring>
             </property>
             <property name="font">
                 <font>
@@ -366,10 +366,10 @@
                                     <cstring>kcfg_GaugeContentPercent</cstring>
                                 </property>
                                 <property name="text">
-                                    <string>Remaining Power in Percent</string>
+                                    <string>Re&amp;maining Power in Percent</string>
                                 </property>
                                 <property name="accel">
-                                    <string></string>
+                                    <string>Alt+M</string>
                                 </property>
                             </widget>
                         </grid>
@@ -1004,6 +1004,32 @@
         <data format="PNG" length="908">89504e470d0a1a0a0000000d49484452000000300000003008060000005702f98700000353494441546881ed97bfaa244514c67f3db784d362d00d1bdcc96e2686770303034103837d009f61f10d641fc3d04c30936523615134d34070330d3b732610aa8259eac0ad9d32e8eab9d5bdd5e3ddc5651bec03355f7dfdf77c73fe5435acb6da6aabadb6da6aabfd7fad1a268f7effe2f3ad6caf300241591a5af4e6d9dfbf7cfdf8e39f0fb900334cae9bfb0f3f6a3efd44f188a9d1f0ba086298e584feadafcabb4377d31dbaef80b200206ab06004d5190c16c8d10314b89ee5fc2b27dd97731ffbe78ced24c0a98d56148203641e99a2de9d8fd2223b3ff049da88915ebc11acba081a6705288a0bbbd12b7b14147b077e070cb6774a134ef9045dc6158da788940458dd452f5b2c8a206f0ec3ebe15e7751cf46c0687461779beb4b4334fa7335a0c145c5a19a8e6aea1e6f14050dae4fc790d27186fb6037dfdebbfeb2f9e3c1f3da8077cf7e78f7c3ef7f3c09f0e8d106db3b9f5a972f606dc0fea7bc4f93e1f82c4737cdbdeb8775f3c10541a9c3ee39702b40b1514d529eaa5f0adc9de582cbbac7abf0391cba90061b0902da01353e74c7510a814687ed9d8245a1028d2162f611d3007b6a431c0970ec624b8bc5f70af1d4d48be1049fbcedd3dce3c61150601786feae69e9d1c570204207d22f72b569c711b0ba4fb94796db0b42a5badd11a4c632ae01b0aa7d78522b5d126e1108422f026a5a609fd540a06a52ff6781e882a2da82eb5bb1573640ff039c160f20db0d2e894ba5da40b8c41f1a304d05790d04aa360986f1866e09bcdf46b4951e404c8bea6e2ca0464e5f67a49b97c46b23155c21d20e8b6b05bf8e8ab8129ad4c264716883be5075df68c00b80badf20fb26befee9f2a918f92cdf0b2d0ae1d01df6efef1fe85f7964c61130ed698fb234746a2b3179554c048869ab1aa13682075a2343ee2d8237a6ad6c70a33a9d444010d3425af9f2f02d816bf055fd52696702b6665b5d9aabbefc038b437dcf559dfe391f814ebbaf6cb04fde76b799c5a037809d0a7849d18c55771c1430b798e1dc289d3febd8809b342ee82333a0991c2b8d4d86c3980a189c39a6f122c3d2089379989c3f02c721853605670df0ce8497aeb9a02c701032385f7236143014f8f0cc8157096329cc4334f2a894fee1e9b1fcbe695a9552658844ccffd1c27c7aedb1e0f36aabadb6da5bb27f00d613a18f49cbbbc90000000049454e44ae426082</data>
     </image>
 </images>
+<connections>
+    <connection>
+        <sender>kcfg_EnableAcpi</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>kcfg_AcpiBatteryPath</receiver>
+        <slot>setEnabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>kcfg_EnableAcpi</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>kcfg_AcpiBat1Dir</receiver>
+        <slot>setEnabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>kcfg_EnableAcpi</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>kcfg_AcpiBat2Dir</receiver>
+        <slot>setEnabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>kcfg_EnableSmapi</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>kcfg_SmapiPath</receiver>
+        <slot>setEnabled(bool)</slot>
+    </connection>
+</connections>
 <tabstops>
     <tabstop>kcfg_SummarizeBatteries</tabstop>
     <tabstop>kcfg_ShowToolTip</tabstop>
@@ -1032,11 +1058,8 @@
     <tabstop>kcfg_AcpiBat2Dir</tabstop>
     <tabstop>kcfg_EnableSmapi</tabstop>
     <tabstop>kcfg_SmapiPath</tabstop>
-    <tabstop>tabWidget2_</tabstop>
+    <tabstop>Tabs</tabstop>
 </tabstops>
-<slots>
-    <slot>kcfg_GaugeContentPercent_toggled(bool)</slot>
-</slots>
 <layoutdefaults spacing="6" margin="11"/>
 <includehints>
     <includehint>kcolorbutton.h</includehint>
