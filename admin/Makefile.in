@@ -494,7 +494,7 @@ uninstall-local:
 .NOEXPORT:
 
 #>+ 2
-KDE_DIST=configure.in.bot.end bcheck.pl Makefile.in Doxyfile.global deps.am configure.in.min pkg.m4.in detect-autoconf.pl acinclude.m4.in doxygen.sh nmcheck debianrules libtool.m4.in cvs.sh config.pl Doxyfile.am oldinclude.m4.in Makefile.am am_edit conf.change.pl Makefile.common 
+KDE_DIST=configure.in.bot.end bcheck.pl Makefile.in Doxyfile.global deps.am pkg.m4.in detect-autoconf.pl configure.in.min acinclude.m4.in doxygen.sh nmcheck libtool.m4.in debianrules cvs.sh config.pl Doxyfile.am oldinclude.m4.in Makefile.am conf.change.pl am_edit Makefile.common 
 
 #>+ 2
 docs-am:

@@ -366,19 +366,19 @@ KThinkBat::readBatteryInfoTimeout() {
 
     if (battery1 && batInfo1.isInstalled()) {
         if (!KThinkBatConfig::summarizeBatteries()) {
-            gauge1.setColors( QColor( KThinkBatConfig::batBackgroundColor() ),
-                              QColor( ((int) batInfo1.getChargeLevel()) <= KThinkBatConfig::criticalFill() ? KThinkBatConfig::batCriticalColor() : KThinkBatConfig::batChargedColor() ),
-                              QColor( batInfo1.isOnline() ? KThinkBatConfig::batDotOnlineColor() : KThinkBatConfig::batBackgroundColor() ) );
+            gauge1.setColors( QColor(KThinkBatConfig::batBackgroundColor()),
+                              QColor(((int) batInfo1.getChargeLevel()) <= KThinkBatConfig::criticalFill() ? KThinkBatConfig::batCriticalColor() : KThinkBatConfig::batChargedColor()),
+                              QColor(batInfo1.isOnline() ? KThinkBatConfig::batDotOnlineColor() : KThinkBatConfig::batBackgroundColor()));
             curPower1 = batInfo1.getPowerConsumption();
             powerUnit1 = batInfo1.getPowerUnit();
             if( KThinkBatConfig::gaugeContentPercent() ) {
-                gauge1.setPercentValue( (int) batInfo1.getChargeLevel() );
+                gauge1.setPercentValue((int) batInfo1.getChargeLevel());
             }
             else if( KThinkBatConfig::gaugeContentTime() ) {
-                gauge1.setPercentValueString( (int) batInfo1.getChargeLevel(), batInfo1.isFull() ? "full" : batInfo1.getRemainingTimeFormated() );
+                gauge1.setPercentValueString((int) batInfo1.getChargeLevel(), batInfo1.isFull() ? "full" : batInfo1.getRemainingTimeFormated());
             }
             else {
-                gauge1.setPercentValueString( (int) batInfo1.getChargeLevel(), "" );
+                gauge1.setPercentValueString((int) batInfo1.getChargeLevel(), "");
             }
         }
         else {
@@ -398,9 +398,9 @@ KThinkBat::readBatteryInfoTimeout() {
 
     if (battery2 && batInfo2.isInstalled()) {
         if (!KThinkBatConfig::summarizeBatteries()) {
-            gauge2.setColors( QColor( KThinkBatConfig::batBackgroundColor() ),
-                              QColor( ((int) batInfo2.getChargeLevel()) <= KThinkBatConfig::criticalFill() ? KThinkBatConfig::batCriticalColor() : KThinkBatConfig::batChargedColor() ),
-                              QColor( batInfo2.isOnline() ? KThinkBatConfig::batDotOnlineColor() : KThinkBatConfig::batBackgroundColor() ) );
+            gauge2.setColors(QColor(KThinkBatConfig::batBackgroundColor()),
+                             QColor(((int) batInfo2.getChargeLevel()) <= KThinkBatConfig::criticalFill() ? KThinkBatConfig::batCriticalColor() : KThinkBatConfig::batChargedColor()),
+                             QColor(batInfo2.isOnline() ? KThinkBatConfig::batDotOnlineColor() : KThinkBatConfig::batBackgroundColor()));
             curPower2 = batInfo2.getPowerConsumption();
             powerUnit2 = batInfo2.getPowerUnit();
             if (KThinkBatConfig::gaugeContentPercent()) {
@@ -440,8 +440,8 @@ KThinkBat::readBatteryInfoTimeout() {
                 gauge1.setPercentValueString((int)batInfo1.getChargeLevel(), "full");
             }
             else {
-
-                int min = batInfo1.getRemainingTimeInMin() + batInfo2.getRemainingTimeInMin();
+                // int min = batInfo1.getRemainingTimeInMin() + batInfo2.getRemainingTimeInMin();
+                int min = BatInfo::calculateRemainingTimeInMinutes(&batInfo1, &batInfo2);
                 gauge1.setPercentValueString((int)percent, BatInfo::formatRemainingTime(min));
             }
         }

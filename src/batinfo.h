@@ -129,6 +129,8 @@ public:
      */
     int getCycleCount() { return cycleCount; }
 
+    static int calculateRemainingTimeInMinutes(BatInfo* batInfo1, BatInfo* batInfo2 = 0L);
+
 signals:
     void onlineModeChanged(bool batOnline);
 

@@ -213,6 +213,41 @@ BatInfo::parseProcACPI() {
     return true;
 }
 
+/**
+ * This implementation caclulates currently no forecast if the batInfo did not report a current power consumption.
+ */
+int
+BatInfo::calculateRemainingTimeInMinutes(BatInfo* batInfo1, BatInfo* batInfo2) {
+    double remaining = 0;
+    
+    if(!batInfo1) {
+        return (int) remaining;
+    }
+
+    float curFuel = batInfo1->getCurFuel();
+    float lastFuel = batInfo1->getLastFuel();
+    float powerConsumption = batInfo1->getPowerConsumption();
+
+    if(batInfo2) {
+        curFuel += batInfo2->getCurFuel();
+        lastFuel += batInfo2->getLastFuel();
+        powerConsumption += batInfo2->getPowerConsumption();
+    }
+
+    if (batInfo1->isDischarging()) {
+        if(curFuel > 0 && powerConsumption > 0) {
+            remaining = (curFuel / powerConsumption) * 60.0;
+        }
+    }
+    else if (batInfo1->isCharging()) {
+        if( powerConsumption > 0 && (lastFuel - curFuel) > 0 ) {
+            remaining = ((lastFuel - curFuel) / powerConsumption) * 60.0;
+        }
+    }
+
+    return (int) remaining;
+}
+
 void
 BatInfo::calculateRemainingTime() {
 
