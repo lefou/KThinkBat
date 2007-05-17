@@ -107,7 +107,7 @@ public:
     bool parseSysfsTP();
 
     /** Set the number of the battery in the system (1 or 2). */
-    void setBatNr( int number ) { batNr = number; }
+    void setBatNr(int number) { batNr = number; }
 
     /**
      * Returns the last successful used method to retriev battery 
@@ -130,7 +130,7 @@ public:
     int getCycleCount() { return cycleCount; }
 
 signals:
-    void onlineModeChanged( bool batOnline );
+    void onlineModeChanged(bool batOnline);
 
 protected:
     void resetValues();

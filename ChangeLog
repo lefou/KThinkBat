@@ -2,6 +2,10 @@ KThinkBat 0.2.7 - unreleased:
    * Added battery recharge cycle count to the ToolTip (if available, currently
      only when using SMAPI on ThinkPads)
    * API documentation and refinements
+   * New tab-splitted config dialog
+   * Made all information paths configurable (ACPI, SMAPI)
+   * #25: support for uncommon battery information locations
+   * ACPI and SMAPI can be be separately enabled and disabled
 
 KThinkBat 0.2.6 - 29.04.2007:
    * Added Slowak Translation provided by Jozef Riha
