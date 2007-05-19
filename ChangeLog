@@ -7,6 +7,7 @@ KThinkBat 0.2.7 - unreleased:
    * #25: support for uncommon battery information locations
    * ACPI and SMAPI can be be separately enabled and disabled
    * changed the calculation for remaining time when in summarized mode
+   * more general switch to use default power settings or configured one
 
 KThinkBat 0.2.6 - 29.04.2007:
    * Added Slowak Translation provided by Jozef Riha

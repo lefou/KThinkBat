@@ -67,6 +67,8 @@ BatInfo::getChargeLevel() {
 bool
 BatInfo::parseProcACPI() {
 
+    QString filePrefix = getAcpiFilePrefix() + "/";
+
     // not evalueated at the current state
     cycleCount = -1;
 
@@ -84,10 +86,7 @@ BatInfo::parseProcACPI() {
     QRegExp rxDesignCap("^design capacity:\\s*(\\d{1,5})\\s*m(A|W)h");
     QRegExp rxDesignCapLow("^design capacity warning:\\s*(\\d{1,5})\\s*m(A|W)h");
 
-    QString filename = KThinkBatConfig::acpiBatteryPath() + "/" 
-           + ((1 == batNr) ? KThinkBatConfig::acpiBat1Dir() : KThinkBatConfig::acpiBat2Dir())
-           + "/info";
-    QFile file( filename );
+    QFile file( filePrefix + "info" );
     if (!file.exists() || !file.open(IO_ReadOnly)) {
         // this is nothing unexpected, so say it only once
         static bool sayTheProblem = true;
@@ -129,10 +128,7 @@ BatInfo::parseProcACPI() {
         return true;
     }
 
-    filename = KThinkBatConfig::acpiBatteryPath() + "/" 
-          + ((1 == batNr) ? KThinkBatConfig::acpiBat1Dir() : KThinkBatConfig::acpiBat2Dir())
-          + "/state";
-    file.setName(filename);
+    file.setName(filePrefix + "state");
     if (!file.exists() || !file.open(IO_ReadOnly)) {
         static bool sayTheProblem2 = true;
         if( sayTheProblem2 ) {
@@ -295,8 +291,8 @@ BatInfo::calculateRemainingTime() {
     else {
         // not charging
         remTimeForecastCap = 0;
-        if( isCharging() ) {
-            if( getPowerConsumption() > 0 && (getLastFuel() - getCurFuel()) > 0 ) {
+        if (isCharging()) {
+            if (getPowerConsumption() > 0 && (getLastFuel() - getCurFuel()) > 0) {
                 double remain = (getLastFuel() - getCurFuel()) / getPowerConsumption();
                 remainingTime = (int) (remain * 60.0);
             }
@@ -313,26 +309,24 @@ BatInfo::parseProcAcpiBatAlarm() {
     QRegExp rxWarnCap("^alarm:\\s*(\\d{1,5})\\s*m" + powerUnit + "h");
 
     // Get Alarm Fuel
-    QString filename = KThinkBatConfig::acpiBatteryPath() + "/"
-         + ((1 == batNr) ? KThinkBatConfig::acpiBat1Dir() : KThinkBatConfig::acpiBat2Dir())
-         + "/alarm";
-    QFile file( filename );
-    if( ! file.exists() || ! file.open(IO_ReadOnly) ) {
+    QString filename = getAcpiFilePrefix() + "/alarm";
+    QFile file(filename);
+    if (!file.exists() || !file.open(IO_ReadOnly)) {
         criticalFuel = 0;
         return false;
     }
 
-    QTextStream stream( (QIODevice*) &file );
-    while( ! stream.atEnd() ) {
+    QTextStream stream((QIODevice*) &file);
+    while (!stream.atEnd()) {
         QString line = stream.readLine();
-        if( -1 != rxWarnCap.search( line ) ) {
+        if (-1 != rxWarnCap.search(line)) {
             QString warnCap = rxWarnCap.cap(1);
             criticalFuel = warnCap.toInt(&ok);
         }
     }
     file.close();
 
-    if( ! ok ) {
+    if (!ok) {
         criticalFuel = 0;
     }
 
@@ -343,7 +337,7 @@ bool
 BatInfo::parseSysfsTP() {
 
     powerUnit = "W";
-    const QString tpPath = KThinkBatConfig::smapiPath() + "/BAT" + QString::number(batNr-1) + "/";
+    const QString tpPath = getSmapiFilePrefix() + "/";
     QFile file;
     QTextStream stream;
     QString line;
@@ -582,4 +576,26 @@ BatInfo::formatPowerUnit(float power, const QString& powerUnit) {
     }
 
     return (formatString + " " + powerUnit);
+}
+
+QString
+BatInfo::getAcpiFilePrefix() {
+    if(KThinkBatConfig::overridePowerSettings()) {
+        return KThinkBatConfig::acpiBatteryPath() + "/"
+            + ((1 == batNr) ? KThinkBatConfig::acpiBat1Dir() : KThinkBatConfig::acpiBat2Dir());
+    }
+    else {
+        return "/proc/acpi/battery/BAT" + QString::number(batNr -1);
+    }
+}
+
+QString
+BatInfo::getSmapiFilePrefix() {
+    if(KThinkBatConfig::overridePowerSettings()) {
+        return KThinkBatConfig::smapiPath() + "/BAT" + QString::number(batNr-1);
+    }
+    else {
+        return "/sys/devices/platform/smapi/BAT" + QString::number(batNr - 1);
+    }
+
 }

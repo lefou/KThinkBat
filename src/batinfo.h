@@ -139,6 +139,10 @@ protected:
 
     void calculateRemainingTime();
 
+    QString getAcpiFilePrefix();
+
+    QString getSmapiFilePrefix();
+
 private:
     float lastFuel;
     float designFuel;

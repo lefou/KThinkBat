@@ -19,7 +19,7 @@
  ***************************************************************************/
 
 // Qt
-#include <qcombobox.h>
+#include <qgroupbox.h>
 #include <qpainter.h>
 #include <qfile.h>
 #include <qtimer.h>
@@ -132,11 +132,11 @@ KThinkBat::slotPreferences() {
     Prefs* prefs = new Prefs(this);
     assert(prefs);
 
-    prefs->kcfg_AcpiBatteryPath->setEnabled(KThinkBatConfig::enableAcpi());
-    prefs->kcfg_AcpiBat1Dir->setEnabled(KThinkBatConfig::enableAcpi());
-    prefs->kcfg_AcpiBat2Dir->setEnabled(KThinkBatConfig::enableAcpi());
+    prefs->advancedAcpiGroup->setEnabled(KThinkBatConfig::overridePowerSettings());
+    prefs->advancedSmapiGroup->setEnabled(KThinkBatConfig::overridePowerSettings());
 
-    prefs->kcfg_SmapiPath->setEnabled(KThinkBatConfig::enableSmapi());
+    prefs->enableAcpiFrame->setEnabled(KThinkBatConfig::enableAcpi());
+    prefs->enableSmapiFrame->setEnabled(KThinkBatConfig::enableSmapi());
 
     dialog->addPage(prefs, i18n("KThinkBat Preferences"), "configure");
 
@@ -359,6 +359,10 @@ KThinkBat::readBatteryInfoTimeout() {
     // Collect battery info. If both batteries should be summarized, the values
     // are saved in the variables for battery 1.
 
+    bool overrideSettings = KThinkBatConfig::overridePowerSettings();
+    bool enableSmapi = !overrideSettings || KThinkBatConfig::enableSmapi();
+    bool enableAcpi = !overrideSettings || KThinkBatConfig::enableAcpi();
+
     float lastFuel = 0;
     float curFuel = 0;
 //     float critFuel = 0;
@@ -368,8 +372,8 @@ KThinkBat::readBatteryInfoTimeout() {
 
     // 1. First try TP SMAPI on BAT0
     // 2. If that fails try ACPI /proc interface for BAT0
-    bool battery1 = (KThinkBatConfig::enableSmapi() && batInfo1.parseSysfsTP()) 
-                    || (KThinkBatConfig::enableAcpi() && batInfo1.parseProcACPI());
+    bool battery1 = (enableSmapi && batInfo1.parseSysfsTP()) 
+                    || (enableAcpi && batInfo1.parseProcACPI());
 
     if (battery1 && batInfo1.isInstalled()) {
         if (!KThinkBatConfig::summarizeBatteries()) {
@@ -400,8 +404,8 @@ KThinkBat::readBatteryInfoTimeout() {
 
     // 3. Now try BAT1, first TP SMAPI again
     // 4. And, if that failed, try ACPI /proc interface for BAT1
-    bool battery2 = (KThinkBatConfig::enableSmapi() && batInfo2.parseSysfsTP()) 
-                    || (KThinkBatConfig::enableAcpi() && batInfo2.parseProcACPI());
+    bool battery2 = (enableSmapi && batInfo2.parseSysfsTP()) 
+                    || (enableAcpi && batInfo2.parseProcACPI());
 
     if (battery2 && batInfo2.isInstalled()) {
         if (!KThinkBatConfig::summarizeBatteries()) {
@@ -468,6 +472,7 @@ KThinkBat::readBatteryInfoTimeout() {
     // force a repaint of the Applet
     update();
 
+    // refresh the tooltip, if shown
     if (toolTip && toolTip->isShown()) {
         toolTip->setText(createToolTipText(battery1, battery2));
     }

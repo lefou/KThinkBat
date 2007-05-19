@@ -6,6 +6,13 @@
 
     <kcfgfile arg="true"/>
     
+    <group name="Advanced">
+        <entry name="OverridePowerSettings" type="Bool">
+            <label>Manually define power management information sources.</label>
+            <default>false</default>
+        </entry>
+    </group>
+
     <group name="ACPI">
         <entry name="EnableAcpi" type="Bool">
             <label>Use the Advanced Configuration and Powermanagement Interface (ACPI) to get battery information.</label>
@@ -45,7 +52,7 @@
 
         <entry name="SummarizeBatteries" type="Bool">
             <label>Display two separate batteries.</label>
-            <whatsthis>If selected and there are more than one battery installed, als battery values will be summarized and shown as "one" battery.</whatsthis>
+            <whatsthis>If selected and there are more than one battery installed, all battery values will be summarized and shown as "one" battery.</whatsthis>
             <default>true</default>
         </entry>
         <entry name="ShowPowerMeter" type="Bool">
