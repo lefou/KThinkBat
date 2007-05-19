@@ -11,6 +11,14 @@
             <label>Manually define power management information sources.</label>
             <default>false</default>
         </entry>
+        <entry name="UpdateIntervalMsek" type="Int">
+            <label>Update Interval between new information will be retrieved from the battery.</label>
+            <default>3000</default>
+        </entry>
+        <entry name="CriticalFill" type="Int">
+            <label>Critical Fill</label>
+            <default>10</default>
+        </entry>
     </group>
 
     <group name="ACPI">
@@ -44,11 +52,6 @@
     </group>
 
     <group name="General">
-
-        <entry name="UpdateIntervalMsek" type="Int">
-            <label>Update Interval between new information will be retrieved from the battery.</label>
-            <default>3000</default>
-        </entry>
 
         <entry name="SummarizeBatteries" type="Bool">
             <label>Display two separate batteries.</label>
@@ -131,11 +134,6 @@
         <entry name="BorderSize" type="Size">
             <label>Battery Gauge Size.</label>
             <default>QSize(3,3)</default>
-        </entry>
-
-        <entry name="CriticalFill" type="Int">
-            <label>Critical Fill</label>
-            <default>10</default>
         </entry>
 
         <entry name="PowerMeterBelowGauge" type="Bool">
