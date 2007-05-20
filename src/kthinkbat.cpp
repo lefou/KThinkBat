@@ -52,15 +52,14 @@ extern "C" {
 
 KThinkBat::KThinkBat(const QString& configFile, Type type, int actions, QWidget *parent, const char *name)
 : KPanelApplet(configFile, type, actions, parent, name)
-// , config( NULL )
-, padding( QSize( 5, 2 ) )
-, timer( NULL )
-, batInfo1( 1 )
-, batInfo2( 2 )
-, powerPosID( 0 )
-, contextMenu( NULL )
-, toolTipTimer( NULL )
-, toolTip( NULL ) 
+, padding(QSize(5, 2))
+, timer(NULL)
+, batInfo1(1)
+, batInfo2(2)
+, powerPosID(0)
+, contextMenu(NULL)
+, toolTipTimer(NULL)
+, toolTip(NULL) 
 , toolTipText("") {
 
     KThinkBatConfig::instance( configFile );
@@ -75,8 +74,9 @@ KThinkBat::KThinkBat(const QString& configFile, Type type, int actions, QWidget 
     contextMenu->insertItem( SmallIcon( "configure" ), i18n("&Configure %1...").arg("KThinkBat"), this, SLOT(slotPreferences()) );
     setCustomMenu( contextMenu );
 
-    // Timer der die Aktualisierung von ACPI/SMAPI-Werten und deren Anzeige veranlasst.
+    // read initial battery data
     readBatteryInfoTimeout();
+    // create a timer to read battery data
     timer = new QTimer(this);
     assert( timer );
     connect(timer, SIGNAL(timeout()), this, SLOT(readBatteryInfoTimeout()));
@@ -162,11 +162,13 @@ KThinkBat::slotAbout() {
                          KAboutData::License_GPL_V2,
                          "(c) 2005-2007, Tobias Roeser",
                          "",
-                         "https://lepetitfou.dyndns.org/KThinkBat",
+                         "https://lepetitfou.dyndns.org/kthinkbat",
                          "le.petit.fou@web.de");
 
     aboutData.addAuthor("Tobias Roeser", "", "le.petit.fou@web.de",
-                        "https://lepetitfou.dyndns.org/KThinkBat");
+                        "https://lepetitfou.dyndns.org/kthinkbat");
+
+    aboutData.addCredit("Luis Guillermo Sobalvarro", "Icon design and Spanish translation.", "lgsobalvarro@e-genieria.com");
 
     KAboutApplication about(&aboutData, this, NULL, 0);
     about.setIcon(KGlobal::instance()->iconLoader()->iconPath( "kthinkbat", -KIcon::SizeLarge));

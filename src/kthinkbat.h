@@ -156,9 +156,6 @@ protected:
     QString createPowerTimeLabel( int batteryNr );
 
 private:
-//     KConfig *ksConfig;
-//     KThinkBatConfig* config;
-
     /// The space between gauge and power consuption label
     QSize padding;
 

@@ -6,7 +6,8 @@ KThinkBat 0.2.7 - unreleased:
    * Made all information paths configurable (ACPI, SMAPI)
    * #25: support for uncommon battery information locations
    * ACPI and SMAPI can be be separately enabled and disabled
-   * changed the calculation for remaining time when in summarized mode
+   * changed the calculation for remaining time when in summarized mode 
+     (thanks to marsark for the advise)
    * more general switch to use default power settings or configured one
 
 KThinkBat 0.2.6 - 29.04.2007:
