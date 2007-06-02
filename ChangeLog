@@ -1,4 +1,4 @@
-KThinkBat 0.2.7 - unreleased:
+KThinkBat 0.2.7 - 02.06.2007:
    * Added battery recharge cycle count to the ToolTip (if available, currently
      only when using SMAPI on ThinkPads)
    * API documentation and refinements
