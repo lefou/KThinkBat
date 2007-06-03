@@ -1,0 +1,422 @@
+# translation of kthinkbat.po to Czech
+# This file is put in the public domain.
+#
+# Martin Samek <martin@marsark.sytes.net>, 2007.
+msgid ""
+msgstr ""
+"Project-Id-Version: kthinkbat\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2007-05-19 13:13+0200\n"
+"PO-Revision-Date: 2007-06-03 13:25+0200\n"
+"Last-Translator: Martin Samek <martin@marsark.sytes.net>\n"
+"Language-Team: Czech <cs@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
+
+#: _translatorinfo.cpp:1
+msgid ""
+"_: NAME OF TRANSLATORS\n"
+"Your names"
+msgstr ""
+"_: NAME OF TRANSLATORS\n"
+"Martin (MarSarK) Samek"
+
+#: _translatorinfo.cpp:3
+msgid ""
+"_: EMAIL OF TRANSLATORS\n"
+"Your emails"
+msgstr ""
+
+#: batinfo.cpp:540
+msgid "nA"
+msgstr "není"
+
+#: kthinkbat.cpp:73
+msgid "KThinkBat %1"
+msgstr "KThinkBat %1"
+
+#: kthinkbat.cpp:74
+msgid "&About %1"
+msgstr "&O aplikaci %1"
+
+#: kthinkbat.cpp:75
+msgid "&Configure %1..."
+msgstr "&Nastavení %1..."
+
+#: kthinkbat.cpp:92
+msgid "charged"
+msgstr "úplně nabitá"
+
+#: kthinkbat.cpp:93
+msgid "charging"
+msgstr "nabíjí se "
+
+#: kthinkbat.cpp:94
+msgid "discharging"
+msgstr "vybíjí se"
+
+#: kthinkbat.cpp:95
+msgid "idle"
+msgstr "nečinná"
+
+#: kthinkbat.cpp:96 kthinkbat.cpp:523
+msgid "not installed"
+msgstr "není přítomna"
+
+#. i18n: file ./prefs.ui line 16
+#: kthinkbat.cpp:141 rc.cpp:3
+#, no-c-format
+msgid "KThinkBat Preferences"
+msgstr "Nastavení KThinkBat"
+
+#: kthinkbat.cpp:161
+msgid "A KDE panel applet to display the current laptop battery status."
+msgstr "Applet pro KDE panel zobrazující informace o okamžitém stavu baterií notebooku."
+
+#: kthinkbat.cpp:178
+msgid ""
+"A KDE panel applet to display the current laptop battery status.\n"
+"\n"
+"There is no real help box at the moment"
+msgstr "Applet pro KDE panel zobrazující informace o okamžitém stavu baterií notebooku. <br> <br> Nápověda zatím neexistuje."
+
+#: kthinkbat.cpp:503
+msgid "Battery %1"
+msgstr "Baterie %1"
+
+#: kthinkbat.cpp:511
+msgid "Current Consumption: "
+msgstr "Vybíjecí proud:"
+
+#: kthinkbat.cpp:512
+msgid "Current Fuel: "
+msgstr "Zbývající energie:"
+
+#: kthinkbat.cpp:513
+msgid "Last Fuel: "
+msgstr "Zjištěná max. kapacita:"
+
+#: kthinkbat.cpp:514
+msgid "Design Fuel: "
+msgstr "Udávaná max. kapacita:"
+
+#: kthinkbat.cpp:515
+msgid "Crit Fuel: "
+msgstr "Kritická úroveň:"
+
+#: kthinkbat.cpp:517
+msgid "Cycle Count: "
+msgstr "Počet cyklů:"
+
+#: kthinkbat.cpp:519
+msgid "State: "
+msgstr "Stav:"
+
+#: kthinkbat.cpp:520
+msgid "Remaining Time: "
+msgstr "Zbývající čas:"
+
+#: kthinkbat.cpp:520
+msgid "full charged"
+msgstr "plně nabitá"
+
+#. i18n: file ./prefs.ui line 41
+#: rc.cpp:6
+#, no-c-format
+msgid "Ge&neral"
+msgstr "Obecné"
+
+#. i18n: file ./prefs.ui line 63
+#: rc.cpp:10
+#, no-c-format
+msgid "Summari&ze all Batteries"
+msgstr "Souhrnný ukazatel pro obě baterie"
+
+#. i18n: file ./prefs.ui line 66
+#: rc.cpp:13
+#, no-c-format
+msgid "Alt+Z"
+msgstr ""
+
+#. i18n: file ./prefs.ui line 74
+#: rc.cpp:16
+#, no-c-format
+msgid "Show &ToolTip"
+msgstr "&Zobrazovat podrobné informace po najetí myší"
+
+#. i18n: file ./prefs.ui line 77
+#. i18n: file ./prefs.ui line 101
+#: rc.cpp:19 rc.cpp:28
+#, no-c-format
+msgid "Alt+T"
+msgstr ""
+
+#. i18n: file ./prefs.ui line 87
+#: rc.cpp:22
+#, no-c-format
+msgid "Content of Battery Gauge"
+msgstr "Obsah ukazatele baterie"
+
+#. i18n: file ./prefs.ui line 98
+#: rc.cpp:25
+#, no-c-format
+msgid "Remaining &Time"
+msgstr "Zbývající &čas"
+
+#. i18n: file ./prefs.ui line 109
+#: rc.cpp:31
+#, no-c-format
+msgid "&None"
+msgstr "Žádný"
+
+#. i18n: file ./prefs.ui line 112
+#: rc.cpp:34
+#, no-c-format
+msgid "Alt+N"
+msgstr ""
+
+#. i18n: file ./prefs.ui line 120
+#: rc.cpp:37
+#, no-c-format
+msgid "Re&maining Power in Percent"
+msgstr "Zbývající energie v procentech"
+
+#. i18n: file ./prefs.ui line 123
+#: rc.cpp:40
+#, no-c-format
+msgid "Alt+M"
+msgstr ""
+
+#. i18n: file ./prefs.ui line 133
+#: rc.cpp:43
+#, no-c-format
+msgid "Content of Info Field"
+msgstr "Obsah informačního pole"
+
+#. i18n: file ./prefs.ui line 144
+#: rc.cpp:46
+#, no-c-format
+msgid "Info Field below of Batter&y Gauge"
+msgstr "Umístit informační pole pod ukazatel baterie"
+
+#. i18n: file ./prefs.ui line 147
+#. i18n: file ./prefs.ui line 349
+#. i18n: file ./prefs.ui line 849
+#: rc.cpp:49 rc.cpp:91 rc.cpp:167
+#, no-c-format
+msgid "Alt+Y"
+msgstr ""
+
+#. i18n: file ./prefs.ui line 158
+#: rc.cpp:52
+#, no-c-format
+msgid "&Remaining Time"
+msgstr "&Zbývající čas"
+
+#. i18n: file ./prefs.ui line 161
+#: rc.cpp:55
+#, no-c-format
+msgid "Alt+R"
+msgstr ""
+
+#. i18n: file ./prefs.ui line 169
+#: rc.cpp:58
+#, no-c-format
+msgid "Current Po&wer Consumption"
+msgstr "Vybíjecí proud"
+
+#. i18n: file ./prefs.ui line 172
+#. i18n: file ./prefs.ui line 645
+#: rc.cpp:61 rc.cpp:128
+#, no-c-format
+msgid "Alt+W"
+msgstr ""
+
+#. i18n: file ./prefs.ui line 212
+#: rc.cpp:67
+#, no-c-format
+msgid "Battery Gauge"
+msgstr "Ukazatel baterie"
+
+#. i18n: file ./prefs.ui line 223
+#: rc.cpp:70
+#, no-c-format
+msgid "Gauge Dot Size:"
+msgstr "Velikost kladného pólu ukazatele"
+
+#. i18n: file ./prefs.ui line 263
+#: rc.cpp:82
+#, no-c-format
+msgid "Gauge Size:"
+msgstr "Velikost ukazatele"
+
+#. i18n: file ./prefs.ui line 346
+#: rc.cpp:88
+#, no-c-format
+msgid "Draw Batter&y upright"
+msgstr "Vykreslit ukazatel svisle"
+
+#. i18n: file ./prefs.ui line 359
+#: rc.cpp:94
+#, no-c-format
+msgid "Color"
+msgstr "Barva"
+
+#. i18n: file ./prefs.ui line 370
+#: rc.cpp:97
+#, no-c-format
+msgid "Gauge Fuel Color"
+msgstr "Barva výplně"
+
+#. i18n: file ./prefs.ui line 410
+#: rc.cpp:102
+#, no-c-format
+msgid "Gauge Background Color"
+msgstr "Barva pozadí ukazatele"
+
+#. i18n: file ./prefs.ui line 469
+#: rc.cpp:105
+#, no-c-format
+msgid "Gauge Critical Fuell Color"
+msgstr "Barva výplně při kritické úrovni"
+
+#. i18n: file ./prefs.ui line 493
+#: rc.cpp:109
+#, no-c-format
+msgid "Power Meter Text Color"
+msgstr "Barva informačního textu"
+
+#. i18n: file ./prefs.ui line 550
+#: rc.cpp:116
+#, no-c-format
+msgid "Power Meter Font"
+msgstr "Font informačního textu"
+
+#. i18n: file ./prefs.ui line 602
+#: rc.cpp:119
+#, no-c-format
+msgid "Gauge Font (Percentage Value)"
+msgstr "Font ukazatele"
+
+#. i18n: file ./prefs.ui line 631
+#: rc.cpp:122
+#, no-c-format
+msgid "Ad&vanced"
+msgstr "&Pokročilé"
+
+#. i18n: file ./prefs.ui line 642
+#: rc.cpp:125
+#, no-c-format
+msgid "Manually define po&wer management information sources"
+msgstr "Zvolit ručně zdroj informací o bateriích"
+
+#. i18n: file ./prefs.ui line 653
+#: rc.cpp:131
+#, no-c-format
+msgid "ACPI"
+msgstr "ACPI"
+
+#. i18n: file ./prefs.ui line 664
+#: rc.cpp:134
+#, no-c-format
+msgid "Enable ACPI"
+msgstr "Použít ACPI"
+
+#. i18n: file ./prefs.ui line 689
+#: rc.cpp:137
+#, no-c-format
+msgid "Directory for battery one"
+msgstr "Adresář první baterie"
+
+#. i18n: file ./prefs.ui line 697
+#: rc.cpp:140
+#, no-c-format
+msgid "Directory for battery two"
+msgstr "Adresář druhé baterie"
+
+#. i18n: file ./prefs.ui line 754
+#: rc.cpp:143
+#, no-c-format
+msgid "BAT0"
+msgstr "BAT0"
+
+#. i18n: file ./prefs.ui line 759
+#: rc.cpp:146
+#, no-c-format
+msgid "CMB1"
+msgstr "CMB1"
+
+#. i18n: file ./prefs.ui line 778
+#: rc.cpp:149
+#, no-c-format
+msgid "BAT1"
+msgstr "BAT1"
+
+#. i18n: file ./prefs.ui line 783
+#: rc.cpp:152
+#, no-c-format
+msgid "CMB2"
+msgstr "CMB2"
+
+#. i18n: file ./prefs.ui line 802
+#: rc.cpp:155
+#, no-c-format
+msgid "/proc/acpi/battery"
+msgstr "/proc/acpi/battery"
+
+#. i18n: file ./prefs.ui line 823
+#: rc.cpp:158
+#, no-c-format
+msgid "Path to ACPI battery information"
+msgstr "Cesta k informacím o baterii (ACPI)"
+
+#. i18n: file ./prefs.ui line 835
+#: rc.cpp:161
+#, no-c-format
+msgid "SMAPI"
+msgstr "SMAPI"
+
+#. i18n: file ./prefs.ui line 846
+#: rc.cpp:164
+#, no-c-format
+msgid "Enable SMAPI (IBM/Lenovo ThinkPads onl&y)"
+msgstr "Použít SMAPI (&pouze IBM/Lenovo ThinkPady)"
+
+#. i18n: file ./prefs.ui line 874
+#: rc.cpp:170
+#, no-c-format
+msgid "Path to SMAPI information"
+msgstr "Cesta k informacím o baterii (SMAPI)"
+
+#. i18n: file ./prefs.ui line 880
+#: rc.cpp:173
+#, no-c-format
+msgid "/sys/devices/platform/smapi"
+msgstr "/sys/devices/platform/smapi"
+
+#. i18n: file ./prefs.ui line 922
+#: rc.cpp:176
+#, no-c-format
+msgid "Display"
+msgstr "Zobrazení"
+
+#. i18n: file ./prefs.ui line 933
+#: rc.cpp:179
+#, no-c-format
+msgid "Battery Update Interval (in milliseconds)"
+msgstr "Interval aktualizace (v ms)"
+
+#. i18n: file ./prefs.ui line 941
+#: rc.cpp:182
+#, no-c-format
+msgid "Battery Critical Fill"
+msgstr "Kritická úroveň"
+
+#. i18n: file ./prefs.ui line 949
+#: rc.cpp:185
+#, no-c-format
+msgid "%"
+msgstr "%"
+
