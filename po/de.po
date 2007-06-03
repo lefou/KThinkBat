@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-05-19 13:13+0200\n"
-"PO-Revision-Date: 2007-05-17 15:09+0200\n"
+"PO-Revision-Date: 2007-06-03 20:31+0200\n"
 "Last-Translator: Tobias Roeser <le.petit.fou@web.de>\n"
 "Language-Team: Deutsch\n"
 "MIME-Version: 1.0\n"
@@ -71,8 +71,7 @@ msgstr "KThinkBat Einstellungen"
 
 #: kthinkbat.cpp:161
 msgid "A KDE panel applet to display the current laptop battery status."
-msgstr ""
-"Ein KDE Panel Applet zur Anzeige des aktuellen Akku-Zusandes eines Laptops."
+msgstr "Ein KDE Panel Applet zur Anzeige des aktuellen Akku-Zusandes eines Laptops."
 
 #: kthinkbat.cpp:178
 msgid ""
@@ -311,7 +310,7 @@ msgstr "Erweitert"
 #: rc.cpp:125
 #, no-c-format
 msgid "Manually define po&wer management information sources"
-msgstr ""
+msgstr "Überschreibe Einstellungen für Power-Management Informationsquellen"
 
 #. i18n: file ./prefs.ui line 653
 #: rc.cpp:131
@@ -341,31 +340,31 @@ msgstr "Verzeichnis für zweites Akku"
 #: rc.cpp:143
 #, no-c-format
 msgid "BAT0"
-msgstr ""
+msgstr "BAT0"
 
 #. i18n: file ./prefs.ui line 759
 #: rc.cpp:146
 #, no-c-format
 msgid "CMB1"
-msgstr ""
+msgstr "CMB1"
 
 #. i18n: file ./prefs.ui line 778
 #: rc.cpp:149
 #, no-c-format
 msgid "BAT1"
-msgstr ""
+msgstr "BAT1"
 
 #. i18n: file ./prefs.ui line 783
 #: rc.cpp:152
 #, no-c-format
 msgid "CMB2"
-msgstr ""
+msgstr "CMB2"
 
 #. i18n: file ./prefs.ui line 802
 #: rc.cpp:155
 #, no-c-format
 msgid "/proc/acpi/battery"
-msgstr ""
+msgstr "/proc/acpi/battery"
 
 #. i18n: file ./prefs.ui line 823
 #: rc.cpp:158
@@ -377,7 +376,7 @@ msgstr "Pfad zu ACPI Akkuinformationen"
 #: rc.cpp:161
 #, no-c-format
 msgid "SMAPI"
-msgstr ""
+msgstr "SMAPI"
 
 #. i18n: file ./prefs.ui line 846
 #: rc.cpp:164
@@ -395,13 +394,13 @@ msgstr "Pfad zu SMAPI-Informationen"
 #: rc.cpp:173
 #, no-c-format
 msgid "/sys/devices/platform/smapi"
-msgstr ""
+msgstr "/sys/devices/platform/smapi"
 
 #. i18n: file ./prefs.ui line 922
 #: rc.cpp:176
 #, no-c-format
 msgid "Display"
-msgstr ""
+msgstr "Anzeige"
 
 #. i18n: file ./prefs.ui line 933
 #: rc.cpp:179
@@ -419,7 +418,5 @@ msgstr "Kritischer Akkustand"
 #: rc.cpp:185
 #, no-c-format
 msgid "%"
-msgstr ""
+msgstr "%"
 
-#~ msgid "&Color and Font"
-#~ msgstr "Farbe und S&chrift"
