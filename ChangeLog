@@ -1,5 +1,10 @@
 KThinkBat 0.2.8 - unreleased:
    * #26: Added Czech translation send by Martin Samek
+   * Refactored complete internal battery handling
+   * Introduced new abstract base class for BatInfo
+   * Added new BatInfoSum class
+   * #28: Fixed bug with wrong calculation remaining time when using two 
+     battertes
 
 KThinkBat 0.2.7 - 02.06.2007:
    * Added battery recharge cycle count to the ToolTip (if available, currently

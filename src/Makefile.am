@@ -4,8 +4,8 @@ METASOURCES = AUTO
 
 lib_LTLIBRARIES = kthinkbat_panelapplet.la
 
-kthinkbat_panelapplet_la_SOURCES = kthinkbat.cpp batinfo.cpp batgauge.cpp \
-		kthinkbatconfig.kcfgc prefs.ui battooltip.cpp
+kthinkbat_panelapplet_la_SOURCES = batgauge.cpp batinfo.cpp batinfobase.cpp \
+	batinfosum.cpp battooltip.cpp kthinkbat.cpp kthinkbatconfig.kcfgc prefs.ui
 kthinkbat_panelapplet_la_LDFLAGS = -avoid-version -module $(all_libraries)
 kthinkbat_panelapplet_la_LIBADD = $(LIB_KDEUI) 
 
@@ -17,4 +17,4 @@ kde_kcfg_DATA = kthinkbat.kcfg
 messages: rc.cpp
 	$(EXTRACTRC) `find . -name \*.ui -o -name \*.rc` > rc.cpp
 	$(XGETTEXT) *.cpp -o $(podir)/kthinkbat.pot
-noinst_HEADERS = batinfo.h batgauge.h battooltip.h
+noinst_HEADERS = batgauge.h batinfo.h batinfobase.h batinfosum.h battooltip.h

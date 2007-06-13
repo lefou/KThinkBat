@@ -31,37 +31,29 @@
 #include "kthinkbatconfig.h"
 
 BatInfo::BatInfo( int number ) 
-: batNr(number) {
+: m_batNr(number) {
 
-    resetValues();
+    reset();
 }
 
 BatInfo::~BatInfo() {
 }
 
 void 
-BatInfo::resetValues() {
-    lastFuel = 0;
-    designFuel = 0;
-    criticalFuel = 0;
-    curFuel = 0;
-    curPower = 0;
-    remainingTime = 0;
-    cycleCount = -1;
-    batInstalled = false;
-    batCharging = false;
-    powerUnit = "W";
-    batState = "not installed";
-    lastSuccessfulReadMethod = "";
-    remTimeForecastCap = 0;
-}
-
-float
-BatInfo::getChargeLevel() {
-    if (curFuel >= 0 && lastFuel > 0) {
-        return ( 100.0 / lastFuel ) * curFuel;
-    }
-    return -1;
+BatInfo::reset() {
+    m_lastFuel = 0;
+    m_designFuel = 0;
+    m_criticalFuel = 0;
+    m_curFuel = 0;
+    m_curPower = 0;
+    m_remainingTime = 0;
+    m_cycleCount = 0;
+    m_batInstalled = false;
+    m_batCharging = false;
+    m_powerUnit = "W";
+    m_batState = "not installed";
+    m_lastSuccessfulReadMethod = "";
+    m_remTimeForecastCap = 0;
 }
 
 bool
@@ -70,7 +62,7 @@ BatInfo::parseProcACPI() {
     QString filePrefix = getAcpiFilePrefix() + "/";
 
     // not evalueated at the current state
-    cycleCount = -1;
+    m_cycleCount = 0;
 
     // the currently read line
     QString line = "";
@@ -94,23 +86,23 @@ BatInfo::parseProcACPI() {
             qDebug( "KThinkBat: could not open %s", file.name().latin1() );
             sayTheProblem = false;
         }
-        resetValues();
+        reset();
         return false;
     }
 
     // we assume, that no battery is installed rather than beeing optimistic, see Ticket #11
-    batInstalled = false;
+    m_batInstalled = false;
 
     QTextStream stream( (QIODevice*) &file );
     while (!stream.atEnd()) {
         // parse output line-wise
         line = stream.readLine();
         if (-1 != rxInstalled.search( line ) && "yes" == rxInstalled.cap(1)) {
-            batInstalled = true;
+            m_batInstalled = true;
         }
         if (-1 != rxCap.search(line)) {
             cap = rxCap.cap(1);
-            powerUnit = rxCap.cap(2);
+            m_powerUnit = rxCap.cap(2);
         }
         if (-1 != rxDesignCap.search(line)) {
             designCap = rxDesignCap.cap(1);
@@ -121,9 +113,9 @@ BatInfo::parseProcACPI() {
     }
     file.close();
 
-    if (!batInstalled) {
-        resetValues();
-        batInstalled = false;
+    if (!m_batInstalled) {
+        reset();
+        m_batInstalled = false;
         // we return true, as no other backend should detect the fact, that there is no battery again.
         return true;
     }
@@ -135,15 +127,15 @@ BatInfo::parseProcACPI() {
             qDebug( "KThinkBat: could not open %s", file.name().latin1() );
             sayTheProblem2 = false;
         }
-        resetValues();
+        reset();
         return false;
     }
     stream.setDevice( &file );
 
     // Pattern for /proc/acpi/battery/BATx/state
-    QRegExp rxCur("^remaining capacity:\\s*(\\d{1,5})\\s*m" + powerUnit + "h");
+    QRegExp rxCur("^remaining capacity:\\s*(\\d{1,5})\\s*m" + m_powerUnit + "h");
     QRegExp rxOffline("^charging state:\\s*(discharging|charging|charged|not installed)");
-    QRegExp rxMWH("^present rate:\\s*(\\d{1,5})\\s*m" + powerUnit );
+    QRegExp rxMWH("^present rate:\\s*(\\d{1,5})\\s*m" + m_powerUnit );
 
     while( ! stream.atEnd() ) {
         line = stream.readLine();
@@ -152,11 +144,11 @@ BatInfo::parseProcACPI() {
             //KMessageBox::information(0, "found cur: "+cur);
         }
         if( -1 != rxOffline.search( line ) ) {
-            batState = rxOffline.cap(1);
+            m_batState = rxOffline.cap(1);
             // we check again for a not installed battery, see Ticket #11
-            if( "not installed" == batState ) {
-                resetValues();
-                batInstalled = false;
+            if( "not installed" == m_batState ) {
+                reset();
+                m_batInstalled = false;
                 // we return true, as we know that no battery is installed and
                 // no other backend should detect the fact again.
                 return true;
@@ -170,34 +162,34 @@ BatInfo::parseProcACPI() {
 
     // Read current capacity
     bool ok = true;
-    curFuel = cur.toInt(&ok);
-    if( ! ok ) { curFuel = 0; }
+    m_curFuel = cur.toInt(&ok);
+    if (!ok) { m_curFuel = 0; }
 
     // Read last full capacity
     ok = true;
-    lastFuel = cap.toInt(&ok);
-    if( ! ok ) { lastFuel = 0; }
+    m_lastFuel = cap.toInt(&ok);
+    if (!ok) { m_lastFuel = 0; }
 
     // Read battery design capacity
     ok = true;
-    designFuel = designCap.toInt(&ok);
-    if( ! ok ) { designFuel = 0; }
+    m_designFuel = designCap.toInt(&ok);
+    if (!ok) { m_designFuel = 0; }
 
     // Read battery disign critical capacity
     ok = true;
-    criticalFuel = criticalCap.toInt(&ok);
-    if( ! ok ) { criticalFuel = 0; }
+    m_criticalFuel = criticalCap.toInt(&ok);
+    if (!ok) { m_criticalFuel = 0; }
 
     // current cosumption
     ok = true;
-    curPower = mWHstring.toInt(&ok);
-    if( ! ok ) { curPower = 0; }
+    m_curPower = mWHstring.toInt(&ok);
+    if (!ok) { m_curPower = 0; }
 
     // TODO better read /proc/acpi/ac_adapter/AC/state and evaluate "on-line"
     bool oldAcCon = isOnline();
-    acConnected = (batState != "discharging");
-    if( oldAcCon != acConnected ) {
-        emit onlineModeChanged( acConnected );
+    m_acConnected = (m_batState != "discharging");
+    if( oldAcCon != m_acConnected ) {
+        emit onlineModeChanged( m_acConnected );
     }
 
     // no need to read these values as we dont use them currently
@@ -205,44 +197,10 @@ BatInfo::parseProcACPI() {
 
     calculateRemainingTime();
 
-    lastSuccessfulReadMethod = "ACPI";
+    m_lastSuccessfulReadMethod = "ACPI";
     return true;
 }
 
-/**
- * This implementation caclulates currently no forecast if the batInfo did not report a current power consumption.
- */
-int
-BatInfo::calculateRemainingTimeInMinutes(BatInfo* batInfo1, BatInfo* batInfo2) {
-    double remaining = 0;
-    
-    if(!batInfo1) {
-        return (int) remaining;
-    }
-
-    float curFuel = batInfo1->getCurFuel();
-    float lastFuel = batInfo1->getLastFuel();
-    float powerConsumption = batInfo1->getPowerConsumption();
-
-    if(batInfo2) {
-        curFuel += batInfo2->getCurFuel();
-        lastFuel += batInfo2->getLastFuel();
-        powerConsumption += batInfo2->getPowerConsumption();
-    }
-
-    if (batInfo1->isDischarging()) {
-        if(curFuel > 0 && powerConsumption > 0) {
-            remaining = (curFuel / powerConsumption) * 60.0;
-        }
-    }
-    else if (batInfo1->isCharging()) {
-        if( powerConsumption > 0 && (lastFuel - curFuel) > 0 ) {
-            remaining = ((lastFuel - curFuel) / powerConsumption) * 60.0;
-        }
-    }
-
-    return (int) remaining;
-}
 
 void
 BatInfo::calculateRemainingTime() {
@@ -262,7 +220,7 @@ BatInfo::calculateRemainingTime() {
             // time. See Ticket #13
 
             // Calculate remaining time the hard way without using the current power 
-            // consumption which means we have to log the short history of this battery and 
+            // consumption which means we have to  the short history of this battery and 
             // make a forecast.
             // TODO find good shapshots for reliable forcasts.
 
@@ -273,14 +231,14 @@ BatInfo::calculateRemainingTime() {
             // Idea: remember more than one pair to straigten out consumption pitches
 
             // FIXME prove of concept code
-            if(remTimeForecastCap <= 0 ) {
+            if(m_remTimeForecastCap <= 0 ) {
                 // Take a new shapshot
-                remTimeForecastTimestamp = QTime::currentTime();
-                remTimeForecastCap = getCurFuel();
+                m_remTimeForecastTimestamp = QTime::currentTime();
+                m_remTimeForecastCap = getCurFuel();
             }
             else {
-                int secsGone = remTimeForecastTimestamp.secsTo(QTime::currentTime());
-                float capGone = remTimeForecastCap - getCurFuel();
+                int secsGone = m_remTimeForecastTimestamp.secsTo(QTime::currentTime());
+                float capGone = m_remTimeForecastCap - getCurFuel();
                 if( secsGone > 1 && capGone > 0 ) {
                     float secsPerCap = ((float) secsGone) / capGone;
                     remainingTime = (int) ((getCurFuel() * secsPerCap) / 60);
@@ -290,7 +248,7 @@ BatInfo::calculateRemainingTime() {
     }
     else {
         // not charging
-        remTimeForecastCap = 0;
+        m_remTimeForecastCap = 0;
         if (isCharging()) {
             if (getPowerConsumption() > 0 && (getLastFuel() - getCurFuel()) > 0) {
                 double remain = (getLastFuel() - getCurFuel()) / getPowerConsumption();
@@ -299,20 +257,20 @@ BatInfo::calculateRemainingTime() {
         }
     }
 
-    this->remainingTime = remainingTime;
+    this->m_remainingTime = remainingTime;
 }
 
 bool 
 BatInfo::parseProcAcpiBatAlarm() {
 
     bool ok = false;
-    QRegExp rxWarnCap("^alarm:\\s*(\\d{1,5})\\s*m" + powerUnit + "h");
+    QRegExp rxWarnCap("^alarm:\\s*(\\d{1,5})\\s*m" + m_powerUnit + "h");
 
     // Get Alarm Fuel
     QString filename = getAcpiFilePrefix() + "/alarm";
     QFile file(filename);
     if (!file.exists() || !file.open(IO_ReadOnly)) {
-        criticalFuel = 0;
+        m_criticalFuel = 0;
         return false;
     }
 
@@ -321,13 +279,13 @@ BatInfo::parseProcAcpiBatAlarm() {
         QString line = stream.readLine();
         if (-1 != rxWarnCap.search(line)) {
             QString warnCap = rxWarnCap.cap(1);
-            criticalFuel = warnCap.toInt(&ok);
+            m_criticalFuel = warnCap.toInt(&ok);
         }
     }
     file.close();
 
     if (!ok) {
-        criticalFuel = 0;
+        m_criticalFuel = 0;
     }
 
     return ok;
@@ -336,7 +294,7 @@ BatInfo::parseProcAcpiBatAlarm() {
 bool 
 BatInfo::parseSysfsTP() {
 
-    powerUnit = "W";
+    m_powerUnit = "W";
     const QString tpPath = getSmapiFilePrefix() + "/";
     QFile file;
     QTextStream stream;
@@ -357,15 +315,15 @@ BatInfo::parseSysfsTP() {
     file.setName( tpPath + "installed" );
     if (file.exists() && file.open(IO_ReadOnly)) {
         stream.setDevice( &file );
-        batInstalled = ( 1 == stream.readLine().toInt( &check ) ? true : false );
+        m_batInstalled = ( 1 == stream.readLine().toInt( &check ) ? true : false );
         file.close();
-        if(!batInstalled) {
-            resetValues();
+        if(!m_batInstalled) {
+            reset();
             return true;
         }
     }
     else {
-        resetValues();
+        reset();
         return false;
 //         batInstalled = false;
     }
@@ -375,13 +333,13 @@ BatInfo::parseSysfsTP() {
         stream.setDevice( &file );
         line = stream.readLine();
         if (-1 != mWh.search(line)) {
-            lastFuel = mWh.cap(1).toInt( &check );
-            if (!check) { lastFuel = 0; }
+            m_lastFuel = mWh.cap(1).toInt( &check );
+            if (!check) { m_lastFuel = 0; }
         }
         file.close();
     }
     else {
-        lastFuel = 0;
+        m_lastFuel = 0;
     }
 
     file.setName( tpPath + "design_capacity" );
@@ -389,13 +347,13 @@ BatInfo::parseSysfsTP() {
         stream.setDevice( &file );
         line = stream.readLine();
         if (-1 != mWh.search(line)) {
-            designFuel = mWh.cap(1).toInt( &check );
-            if (!check) { designFuel = 0; }
+            m_designFuel = mWh.cap(1).toInt( &check );
+            if (!check) { m_designFuel = 0; }
         }
         file.close();
     }
     else {
-        designFuel = 0;
+        m_designFuel = 0;
     }
     
     file.setName( tpPath + "remaining_capacity" );
@@ -403,13 +361,13 @@ BatInfo::parseSysfsTP() {
         stream.setDevice( &file );
         line = stream.readLine();
         if (-1 != mWh.search(line)) {
-            curFuel = mWh.cap(1).toInt(&check);
-            if (!check) { curFuel = 0; }
+            m_curFuel = mWh.cap(1).toInt(&check);
+            if (!check) { m_curFuel = 0; }
         }
         file.close();
     }
     else {
-        curFuel = -1;
+        m_curFuel = -1;
     }
     
     file.setName(tpPath + "power_now");
@@ -417,61 +375,61 @@ BatInfo::parseSysfsTP() {
         stream.setDevice( &file );
         line = stream.readLine();
         if (-1 != mW.search(line)) {
-            curPower = mW.cap(1).toInt( &check );
-            if (!check) { curPower = 0; }
-            else if (curPower < 0) { curPower = (0 - curPower); }
+            m_curPower = mW.cap(1).toInt( &check );
+            if (!check) { m_curPower = 0; }
+            else if (m_curPower < 0) { m_curPower = (0 - m_curPower); }
         }
         file.close();
     }
     else {
-        curPower = -1;
+        m_curPower = -1;
     }
 
     file.setName(tpPath + "state");
     if (file.exists() && file.open(IO_ReadOnly)) {
         stream.setDevice(&file);
-        batState = stream.readLine();
+        m_batState = stream.readLine();
         file.close();
     }
     else {
-        batState = "";
+        m_batState = "";
     }
 
     file.setName(tpPath + "cycle_count");
     if (file.exists() && file.open(IO_ReadOnly)) {
         stream.setDevice(&file);
-        cycleCount = stream.readLine().toInt(&check);
+        m_cycleCount = stream.readLine().toInt(&check);
         if(!check) {
-            cycleCount = -1;
+            m_cycleCount = 0;
         }
         file.close();
     }
     else {
-        cycleCount = -1;
+        m_cycleCount = 0;
     }
 
-    batCharging = (batState == "charging");
+    m_batCharging = (m_batState == "charging");
 
     bool oldAcCon = isOnline();
     file.setName( KThinkBatConfig::smapiPath() + "/ac_connected" );
     if (file.exists() && file.open(IO_ReadOnly)) {
         stream.setDevice( &file );
-        acConnected = stream.readLine().toInt(&check);
+        m_acConnected = stream.readLine().toInt(&check);
         file.close();
     }
     else {
-        acConnected = false;
+        m_acConnected = false;
     }
-    if (oldAcCon != acConnected) {
-       emit onlineModeChanged(acConnected);
+    if (oldAcCon != m_acConnected) {
+       emit onlineModeChanged(m_acConnected);
     }
 
     if (isCharging()) {
         file.setName( tpPath + "remaining_charging_time" );
         if (file.exists() && file.open(IO_ReadOnly)) {
             stream.setDevice(&file);
-            remainingTime = stream.readLine().toInt(&check);
-            if (!check) { remainingTime = 0; }
+            m_remainingTime = stream.readLine().toInt(&check);
+            if (!check) { m_remainingTime = 0; }
             file.close();
         }
         else {
@@ -482,8 +440,8 @@ BatInfo::parseSysfsTP() {
         file.setName( tpPath + "remaining_running_time" );
         if (file.exists() && file.open(IO_ReadOnly)) {
             stream.setDevice( &file );
-            remainingTime = stream.readLine().toInt( &check );
-            if (!check) { remainingTime = 0; }
+            m_remainingTime = stream.readLine().toInt( &check );
+            if (!check) { m_remainingTime = 0; }
             file.close();
         }
         else {
@@ -491,111 +449,134 @@ BatInfo::parseSysfsTP() {
         }
     }
     else {
-        remainingTime = 0;
+        m_remainingTime = 0;
     }
 
     // critical Fuel can not be set via tp_smapi, so we try to read /proc/acpi for that
 //     parseProcAcpiBatAlarm();
 
-    lastSuccessfulReadMethod = "SMAPI";
+    m_lastSuccessfulReadMethod = "SMAPI";
     return true;
-}
-
-QString
-BatInfo::getPowerConsumptionFormated() {
-    return BatInfo::formatPowerUnit( getPowerConsumption(), getPowerUnit() );
 }
 
 int 
 BatInfo::getRemainingTimeInMin() {
-    return remainingTime;
-}
-
-QString
-BatInfo::getRemainingTimeFormated() {
-    return formatRemainingTime(getRemainingTimeInMin());
-}
-
-QString
-BatInfo::formatRemainingTime(int timeInMin) {
-    if (!KThinkBatConfig::remainingTimeInHours()) {
-        return QString().number((int) timeInMin) + " min";
-    }
-    int hours = timeInMin / 60;
-    QString out = QString().number(hours) + ":";
-    int min = timeInMin - (hours * 60);
-    if (min > 9) {
-        out += QString().number(min);
-    }
-    else {
-        out += "0" + QString().number(min);
-    }
-    return out;
-}
-
-QString
-BatInfo::formatPowerUnit(float power, const QString& powerUnit) {
-
-    if (power < 0 || powerUnit.isEmpty()) {
-        return i18n("nA");
-    }
-
-    QString formatString = "0";
-    int precision = ("W" == powerUnit) ? KThinkBatConfig::precisionPowerUnitW() : KThinkBatConfig::precisionPowerUnitA();
-
-    if (power > 0) {
-        switch (precision) {
-        case 0:
-            formatString = QString().number((int)(power + 500)/1000);
-            break;
-        case 1:
-            formatString = QString().number((float) (((int)power + 50)/100) / 10 );
-            break;
-        case 2:
-            formatString = QString().number((float) (((int)power + 5)/10) / 100 );
-            break;
-        case 3:
-            formatString = QString().number((float) ((int)(power + 0.5)) / 1000 );
-            break;
-        }
-    }
-
-    // Append zeros and point if neccessary
-    if (precision >= 1 && precision <= 3) {
-        int pos = formatString.find('.');
-        if (pos == -1) {
-            formatString += ".";
-            pos = 0;
-        }
-        else {
-            pos = formatString.length() - pos - 1;
-        }
-        for ( ; pos < precision; ++pos) {
-            formatString += "0";
-        }
-    }
-
-    return (formatString + " " + powerUnit);
+    return m_remainingTime;
 }
 
 QString
 BatInfo::getAcpiFilePrefix() {
     if(KThinkBatConfig::overridePowerSettings()) {
         return KThinkBatConfig::acpiBatteryPath() + "/"
-            + ((1 == batNr) ? KThinkBatConfig::acpiBat1Dir() : KThinkBatConfig::acpiBat2Dir());
+            + ((1 == m_batNr) ? KThinkBatConfig::acpiBat1Dir() : KThinkBatConfig::acpiBat2Dir());
     }
     else {
-        return "/proc/acpi/battery/BAT" + QString::number(batNr -1);
+        return "/proc/acpi/battery/BAT" + QString::number(m_batNr -1);
     }
 }
 
 QString
 BatInfo::getSmapiFilePrefix() {
     if(KThinkBatConfig::overridePowerSettings()) {
-        return KThinkBatConfig::smapiPath() + "/BAT" + QString::number(batNr-1);
+        return KThinkBatConfig::smapiPath() + "/BAT" + QString::number(m_batNr-1);
     }
     else {
-        return "/sys/devices/platform/smapi/BAT" + QString::number(batNr - 1);
+        return "/sys/devices/platform/smapi/BAT" + QString::number(m_batNr - 1);
     }
 
+}
+
+void
+BatInfo::refresh() {
+
+    bool overrideSettings = KThinkBatConfig::overridePowerSettings();
+    bool enableSmapi = !overrideSettings || KThinkBatConfig::enableSmapi();
+    bool enableAcpi = !overrideSettings || KThinkBatConfig::enableAcpi();
+
+    // 1. First try TP SMAPI
+    // 2. If that fails try ACPI /proc
+    bool success = (enableSmapi && parseSysfsTP()) || (enableAcpi && parseProcACPI());
+    if (!success) {
+        reset();
+    }
+}
+
+float 
+BatInfo::getCriticalFuel() {
+    return m_criticalFuel;
+}
+
+float 
+BatInfo::getCurFuel() {
+    return m_curFuel;
+}
+
+float 
+BatInfo::getDesignFuel() {
+    return m_designFuel;
+}
+
+float 
+BatInfo::getLastFuel() {
+    return m_lastFuel;
+}
+
+float 
+BatInfo::getPowerConsumption() {
+    return m_curPower;
+}
+
+QString 
+BatInfo::getPowerUnit() {
+    return m_powerUnit;
+}
+
+bool 
+BatInfo::isInstalled() {
+    return m_batInstalled;
+}
+
+bool 
+BatInfo::isOnline() {
+    return isInstalled() && m_acConnected;
+}
+
+bool 
+BatInfo::isCharging() {
+    return isInstalled() && isOnline() && m_batCharging;
+}
+
+bool 
+BatInfo::isDischarging() { 
+    return isInstalled() && !isOnline() && !m_batCharging;
+}
+
+bool 
+BatInfo::isFull() { 
+    return isIdle() && 100.0 == getChargeLevel(); 
+}
+
+bool 
+BatInfo::isIdle() { 
+    return isInstalled() && !isCharging() && !isDischarging(); 
+}
+
+QString 
+BatInfo::getState() {
+    return m_batState;
+}
+
+QString 
+BatInfo::getLastSuccessfulReadMethod() {
+    return m_lastSuccessfulReadMethod;
+}
+
+int 
+BatInfo::getCycleCount() {
+    return m_cycleCount;
+}
+
+void 
+BatInfo::setBatNr(int number) { 
+    m_batNr = number; 
 }

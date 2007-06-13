@@ -39,6 +39,7 @@
 
 // KThinkBat
 #include "batinfo.h"
+#include "batinfosum.h"
 #include "batgauge.h"
 #include "kthinkbatconfig.h"
 #include "battooltip.h"
@@ -151,10 +152,11 @@ protected:
     void leaveEvent(QEvent* e);
 
     /** Construct the (HTML) tooltip text. */
-    QString createToolTipText( bool battery1 = true, bool battery2 = true );
+    QString createToolTipText();
 
-    QString createPowerTimeLabel( int batteryNr );
+    QString createPowerTimeLabel(BatInfoBase* batInfo);
 
+    void fillBatGauge(BatGauge* gauge, BatInfoBase* info);
 private:
     /// The space between gauge and power consuption label
     QSize padding;
@@ -162,27 +164,23 @@ private:
     /// The timer, that controls the update of the battery values
     QTimer* timer;
 
-    BatInfo batInfo1;
-    BatInfo batInfo2;
+    BatInfo m_batInfo1;
+    BatInfo m_batInfo2;
+    BatInfoSum m_batInfoSum;
 
-    BatGauge gauge1;
-    BatGauge gauge2;
-
-    float curPower1;
-    float curPower2;
-    QString powerUnit1;
-    QString powerUnit2;
+    BatGauge m_gauge1;
+    BatGauge m_gauge2;
 
     /** The (maximal) needed size of the panel applet. */
     QSize neededSize;
 
     int powerPosID;
 
-    KPopupMenu* contextMenu;
-    QTimer* toolTipTimer;
+    KPopupMenu* m_contextMenu;
+    QTimer* m_toolTipTimer;
 
-    BatToolTip* toolTip;
-    QString toolTipText;
+    BatToolTip* m_toolTip;
+    QString m_toolTipText;
 
 };
 
