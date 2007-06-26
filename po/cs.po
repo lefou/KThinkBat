@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: kthinkbat\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-05-19 13:13+0200\n"
+"Report-Msgid-Bugs-To: Tobias Roeser <le.petit.fou@web.de>\n"
+"POT-Creation-Date: 2007-06-26 20:36+0200\n"
 "PO-Revision-Date: 2007-06-03 13:25+0200\n"
 "Last-Translator: Martin Samek <martin@marsark.sytes.net>\n"
 "Language-Team: Czech <cs@li.org>\n"
@@ -29,96 +29,100 @@ msgid ""
 "Your emails"
 msgstr ""
 
-#: batinfo.cpp:540
+#: batinfobase.cpp:88
 msgid "nA"
 msgstr "není"
 
-#: kthinkbat.cpp:73
+#: kthinkbat.cpp:74
 msgid "KThinkBat %1"
 msgstr "KThinkBat %1"
 
-#: kthinkbat.cpp:74
+#: kthinkbat.cpp:75
 msgid "&About %1"
 msgstr "&O aplikaci %1"
 
-#: kthinkbat.cpp:75
+#: kthinkbat.cpp:76
 msgid "&Configure %1..."
 msgstr "&Nastavení %1..."
 
-#: kthinkbat.cpp:92
+#: kthinkbat.cpp:94
 msgid "charged"
 msgstr "úplně nabitá"
 
-#: kthinkbat.cpp:93
+#: kthinkbat.cpp:95
 msgid "charging"
 msgstr "nabíjí se "
 
-#: kthinkbat.cpp:94
+#: kthinkbat.cpp:96
 msgid "discharging"
 msgstr "vybíjí se"
 
-#: kthinkbat.cpp:95
+#: kthinkbat.cpp:97
 msgid "idle"
 msgstr "nečinná"
 
-#: kthinkbat.cpp:96 kthinkbat.cpp:523
+#: kthinkbat.cpp:98 kthinkbat.cpp:418
 msgid "not installed"
 msgstr "není přítomna"
 
 #. i18n: file ./prefs.ui line 16
-#: kthinkbat.cpp:141 rc.cpp:3
+#: kthinkbat.cpp:143 rc.cpp:3
 #, no-c-format
 msgid "KThinkBat Preferences"
 msgstr "Nastavení KThinkBat"
 
-#: kthinkbat.cpp:161
+#: kthinkbat.cpp:163
 msgid "A KDE panel applet to display the current laptop battery status."
-msgstr "Applet pro KDE panel zobrazující informace o okamžitém stavu baterií notebooku."
+msgstr ""
+"Applet pro KDE panel zobrazující informace o okamžitém stavu baterií "
+"notebooku."
 
-#: kthinkbat.cpp:178
+#: kthinkbat.cpp:182
 msgid ""
 "A KDE panel applet to display the current laptop battery status.\n"
 "\n"
 "There is no real help box at the moment"
-msgstr "Applet pro KDE panel zobrazující informace o okamžitém stavu baterií notebooku. <br> <br> Nápověda zatím neexistuje."
+msgstr ""
+"Applet pro KDE panel zobrazující informace o okamžitém stavu baterií "
+"notebooku. <br> <br> Nápověda zatím neexistuje."
 
-#: kthinkbat.cpp:503
+#: kthinkbat.cpp:398
 msgid "Battery %1"
 msgstr "Baterie %1"
 
-#: kthinkbat.cpp:511
+#: kthinkbat.cpp:406
 msgid "Current Consumption: "
 msgstr "Vybíjecí proud:"
 
-#: kthinkbat.cpp:512
+#: kthinkbat.cpp:407
 msgid "Current Fuel: "
 msgstr "Zbývající energie:"
 
-#: kthinkbat.cpp:513
+#: kthinkbat.cpp:408
 msgid "Last Fuel: "
 msgstr "Zjištěná max. kapacita:"
 
-#: kthinkbat.cpp:514
+#: kthinkbat.cpp:409
 msgid "Design Fuel: "
 msgstr "Udávaná max. kapacita:"
 
-#: kthinkbat.cpp:515
+#: kthinkbat.cpp:410
 msgid "Crit Fuel: "
 msgstr "Kritická úroveň:"
 
-#: kthinkbat.cpp:517
+#: kthinkbat.cpp:412
 msgid "Cycle Count: "
 msgstr "Počet cyklů:"
 
-#: kthinkbat.cpp:519
+#: kthinkbat.cpp:414
 msgid "State: "
 msgstr "Stav:"
 
-#: kthinkbat.cpp:520
+#: kthinkbat.cpp:415
 msgid "Remaining Time: "
 msgstr "Zbývající čas:"
 
-#: kthinkbat.cpp:520
+#: kthinkbat.cpp:415
 msgid "full charged"
 msgstr "plně nabitá"
 
@@ -419,4 +423,3 @@ msgstr "Kritická úroveň"
 #, no-c-format
 msgid "%"
 msgstr "%"
-

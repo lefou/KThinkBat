@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-05-19 13:13+0200\n"
+"Report-Msgid-Bugs-To: Tobias Roeser <le.petit.fou@web.de>\n"
+"POT-Creation-Date: 2007-06-26 20:36+0200\n"
 "PO-Revision-Date: 2007-06-02 23:47+0200\n"
 "Last-Translator: Jozef Riha <jose1711@gmail.com\n"
 "Language-Team: Slovak <sk@li.org>\n"
@@ -27,53 +27,53 @@ msgid ""
 "Your emails"
 msgstr "jose1711@gmail.com"
 
-#: batinfo.cpp:540
+#: batinfobase.cpp:88
 msgid "nA"
 msgstr "nA"
 
-#: kthinkbat.cpp:73
+#: kthinkbat.cpp:74
 msgid "KThinkBat %1"
 msgstr "KThinkBat %1"
 
-#: kthinkbat.cpp:74
+#: kthinkbat.cpp:75
 msgid "&About %1"
 msgstr "&O programe %1"
 
-#: kthinkbat.cpp:75
+#: kthinkbat.cpp:76
 msgid "&Configure %1..."
 msgstr "&Nastaviť %1..."
 
-#: kthinkbat.cpp:92
+#: kthinkbat.cpp:94
 msgid "charged"
 msgstr "nabitá"
 
-#: kthinkbat.cpp:93
+#: kthinkbat.cpp:95
 msgid "charging"
 msgstr "nabíjanie"
 
-#: kthinkbat.cpp:94
+#: kthinkbat.cpp:96
 msgid "discharging"
 msgstr "vybíjanie"
 
-#: kthinkbat.cpp:95
+#: kthinkbat.cpp:97
 msgid "idle"
 msgstr "nečinné"
 
-#: kthinkbat.cpp:96 kthinkbat.cpp:523
+#: kthinkbat.cpp:98 kthinkbat.cpp:418
 msgid "not installed"
 msgstr "nie je inštalovaná"
 
 #. i18n: file ./prefs.ui line 16
-#: kthinkbat.cpp:141 rc.cpp:3
+#: kthinkbat.cpp:143 rc.cpp:3
 #, no-c-format
 msgid "KThinkBat Preferences"
 msgstr "Nastavenia KThinkBat"
 
-#: kthinkbat.cpp:161
+#: kthinkbat.cpp:163
 msgid "A KDE panel applet to display the current laptop battery status."
 msgstr "Applet pre KDE panel, ktorý zobrazuje aktuálny stav batérie laptopu."
 
-#: kthinkbat.cpp:178
+#: kthinkbat.cpp:182
 msgid ""
 "A KDE panel applet to display the current laptop battery status.\n"
 "\n"
@@ -83,43 +83,43 @@ msgstr ""
 "\n"
 "Momentálne neexistuje žiadne okno s pomocou"
 
-#: kthinkbat.cpp:503
+#: kthinkbat.cpp:398
 msgid "Battery %1"
 msgstr "Batéria %1"
 
-#: kthinkbat.cpp:511
+#: kthinkbat.cpp:406
 msgid "Current Consumption: "
 msgstr "Aktuálna spotreba: "
 
-#: kthinkbat.cpp:512
+#: kthinkbat.cpp:407
 msgid "Current Fuel: "
 msgstr "Aktuálna zásoba: "
 
-#: kthinkbat.cpp:513
+#: kthinkbat.cpp:408
 msgid "Last Fuel: "
 msgstr "Posledná zásoba: "
 
-#: kthinkbat.cpp:514
+#: kthinkbat.cpp:409
 msgid "Design Fuel: "
 msgstr "Plánovaná spotreba: "
 
-#: kthinkbat.cpp:515
+#: kthinkbat.cpp:410
 msgid "Crit Fuel: "
 msgstr "Kritická zásoba: "
 
-#: kthinkbat.cpp:517
+#: kthinkbat.cpp:412
 msgid "Cycle Count: "
 msgstr "Počet cyklov: "
 
-#: kthinkbat.cpp:519
+#: kthinkbat.cpp:414
 msgid "State: "
 msgstr "Stav: "
 
-#: kthinkbat.cpp:520
+#: kthinkbat.cpp:415
 msgid "Remaining Time: "
 msgstr "Zostávajúci čas: "
 
-#: kthinkbat.cpp:520
+#: kthinkbat.cpp:415
 msgid "full charged"
 msgstr "plne nabitá"
 
