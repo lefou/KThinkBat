@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: Tobias Roeser <le.petit.fou@web.de>\n"
 "POT-Creation-Date: 2007-05-19 13:13+0200\n"
 "PO-Revision-Date: 2007-06-03 20:31+0200\n"
 "Last-Translator: Tobias Roeser <le.petit.fou@web.de>\n"
