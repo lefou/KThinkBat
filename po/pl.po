@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-06-27 21:01+0200\n"
+"POT-Creation-Date: 2007-07-01 18:09+0200\n"
 "PO-Revision-Date: 2006-01-30 17:57+0100\n"
 "Last-Translator: Adam Golebiowski <adamg@pld-linux.org>\n"
 "Language-Team: Polish <pl@li.org>\n"
@@ -59,7 +59,7 @@ msgstr ""
 msgid "idle"
 msgstr ""
 
-#: kthinkbat.cpp:99 kthinkbat.cpp:419
+#: kthinkbat.cpp:99 kthinkbat.cpp:430
 msgid "not installed"
 msgstr ""
 
@@ -83,44 +83,49 @@ msgstr ""
 "\n"
 "Jak na razie aplet ten nie posiada pomocy"
 
-#: kthinkbat.cpp:399
+#: kthinkbat.cpp:402
 #, fuzzy
 msgid "Battery %1"
 msgstr "Ustawienia baterii"
 
-#: kthinkbat.cpp:407
-msgid "Current Consumption: "
-msgstr ""
-
-#: kthinkbat.cpp:408
-msgid "Current Fuel: "
-msgstr ""
-
-#: kthinkbat.cpp:409
-msgid "Last Fuel: "
-msgstr ""
-
-#: kthinkbat.cpp:410
-msgid "Design Fuel: "
+#: kthinkbat.cpp:411
+msgid "Current Charge Rate"
 msgstr ""
 
 #: kthinkbat.cpp:411
-msgid "Crit Fuel: "
+msgid "Current Consumption"
 msgstr ""
 
 #: kthinkbat.cpp:413
-msgid "Cycle Count: "
+msgid "Current Fuel"
 msgstr ""
 
 #: kthinkbat.cpp:415
-msgid "State: "
+msgid "Last Fuel"
 msgstr ""
 
-#: kthinkbat.cpp:416
-msgid "Remaining Time: "
+#: kthinkbat.cpp:417
+msgid "Design Fuel"
 msgstr ""
 
-#: kthinkbat.cpp:416
+#: kthinkbat.cpp:419
+#, fuzzy
+msgid "Critical Fuel"
+msgstr "Kolor krytycznego poziomu baterii"
+
+#: kthinkbat.cpp:422
+msgid "Cycle Count"
+msgstr ""
+
+#: kthinkbat.cpp:425
+msgid "State"
+msgstr ""
+
+#: kthinkbat.cpp:427
+msgid "Remaining Time"
+msgstr ""
+
+#: kthinkbat.cpp:427
 msgid "full charged"
 msgstr ""
 

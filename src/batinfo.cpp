@@ -504,27 +504,52 @@ BatInfo::refresh() {
 
 float 
 BatInfo::getCriticalFuel() {
-    return m_criticalFuel;
+    if(isInstalled()) {
+        return m_criticalFuel;
+    }
+    else {
+        return 0;
+    }
 }
 
 float 
 BatInfo::getCurFuel() {
-    return m_curFuel;
+    if(isInstalled()) {
+        return m_curFuel;
+    }
+    else {
+        return 0;
+    }
 }
 
 float 
 BatInfo::getDesignFuel() {
-    return m_designFuel;
+    if(isInstalled()) {
+        return m_designFuel;
+    }
+    else {
+        return 0;
+    }
 }
 
 float 
 BatInfo::getLastFuel() {
-    return m_lastFuel;
+    if(isInstalled()) {
+        return m_lastFuel;
+    }
+    else {
+        return 0;
+    }
 }
 
 float 
 BatInfo::getPowerConsumption() {
-    return m_curPower;
+    if(isInstalled()) {
+        return m_curPower;
+    }
+    else {
+        return 0;
+    }
 }
 
 QString 

@@ -160,6 +160,10 @@ protected:
     void fillBatGauge(BatGauge* gauge, BatInfoBase* info);
 
 private:
+
+    /** Add a formated label value pair line to the tooltip. */
+    QString toolTipLine(const QString& label, const QString& value);
+
     /// The space between gauge and power consuption label
     QSize padding;
 
@@ -182,7 +186,6 @@ private:
     QTimer* m_toolTipTimer;
 
     BatToolTip* m_toolTip;
-    QString m_toolTipText;
 
 };
 

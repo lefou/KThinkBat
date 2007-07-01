@@ -87,18 +87,33 @@ int
 BatInfoSum::getRemainingTimeInMin() {
     double remaining = 0;
 
-    float curFuel = getCurFuel();
-    float powerConsumption = getPowerConsumption();
-
-    if (isDischarging()) {
-        if(curFuel > 0 && powerConsumption > 0) {
-            remaining = (curFuel / powerConsumption) * 60.0;
+    // The chance that there is only on battery is high, so we try to avoid
+    // a recalculation of the remaining time if there is only one battery
+    bool batCount = 0;
+    for(BatInfoBase* bat = m_bats.first(); bat; bat = m_bats.next()) {
+        if(bat->isInstalled()) {
+            batCount++;
+            remaining = bat->getRemainingTimeInMin();
         }
     }
-    else if (isCharging()) {
-        float lastFuel = getLastFuel();
-        if( powerConsumption > 0 && (lastFuel - curFuel) > 0 ) {
-            remaining = ((lastFuel - curFuel) / powerConsumption) * 60.0;
+
+    if(batCount > 1) {
+        // if we have more than one battery, calculate the remaining time new
+
+        remaining = 0;
+        float curFuel = getCurFuel();
+        float powerConsumption = getPowerConsumption();
+
+        if (isDischarging()) {
+            if(curFuel > 0 && powerConsumption > 0) {
+                remaining = (curFuel / powerConsumption) * 60.0;
+            }
+        }
+        else if (isCharging()) {
+            float lastFuel = getLastFuel();
+            if( powerConsumption > 0 && (lastFuel - curFuel) > 0 ) {
+                remaining = ((lastFuel - curFuel) / powerConsumption) * 60.0;
+            }
         }
     }
 

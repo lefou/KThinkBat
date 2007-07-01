@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bg\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-06-27 21:01+0200\n"
+"POT-Creation-Date: 2007-07-01 18:09+0200\n"
 "PO-Revision-Date: 2007-06-16 20:38+0300\n"
 "Last-Translator: Aleksandar Tsankov <al.tsankov@gmail.com>\n"
 "Language-Team: Bulgarian <bg@li.org>\n"
@@ -60,7 +60,7 @@ msgstr "разреждане"
 msgid "idle"
 msgstr "в покой"
 
-#: kthinkbat.cpp:99 kthinkbat.cpp:419
+#: kthinkbat.cpp:99 kthinkbat.cpp:430
 msgid "not installed"
 msgstr "не е инсталирана"
 
@@ -84,43 +84,56 @@ msgstr ""
 "\n"
 "За момента все още няма истински помощен прозорец"
 
-#: kthinkbat.cpp:399
+#: kthinkbat.cpp:402
 msgid "Battery %1"
 msgstr "Батерия %1"
 
-#: kthinkbat.cpp:407
-msgid "Current Consumption: "
-msgstr "Текуща консумация:"
-
-#: kthinkbat.cpp:408
-msgid "Current Fuel: "
+#: kthinkbat.cpp:411
+#, fuzzy
+msgid "Current Charge Rate"
 msgstr "Текущ заряд:"
 
-#: kthinkbat.cpp:409
-msgid "Last Fuel: "
-msgstr "Максимален заряд:"
-
-#: kthinkbat.cpp:410
-msgid "Design Fuel: "
-msgstr "Фабричен заряд:"
-
 #: kthinkbat.cpp:411
-msgid "Crit Fuel: "
-msgstr "Критичен заряд:"
+#, fuzzy
+msgid "Current Consumption"
+msgstr "Текуща консумация:"
 
 #: kthinkbat.cpp:413
-msgid "Cycle Count: "
-msgstr "Брой цикли:"
+#, fuzzy
+msgid "Current Fuel"
+msgstr "Текущ заряд:"
 
 #: kthinkbat.cpp:415
-msgid "State: "
+#, fuzzy
+msgid "Last Fuel"
+msgstr "Максимален заряд:"
+
+#: kthinkbat.cpp:417
+#, fuzzy
+msgid "Design Fuel"
+msgstr "Фабричен заряд:"
+
+#: kthinkbat.cpp:419
+#, fuzzy
+msgid "Critical Fuel"
+msgstr "Критичен заряд:"
+
+#: kthinkbat.cpp:422
+#, fuzzy
+msgid "Cycle Count"
+msgstr "Брой цикли:"
+
+#: kthinkbat.cpp:425
+#, fuzzy
+msgid "State"
 msgstr "Състояние:"
 
-#: kthinkbat.cpp:416
-msgid "Remaining Time: "
-msgstr "Оставащо време:"
+#: kthinkbat.cpp:427
+#, fuzzy
+msgid "Remaining Time"
+msgstr "Оставащо време"
 
-#: kthinkbat.cpp:416
+#: kthinkbat.cpp:427
 msgid "full charged"
 msgstr "напълно заредена"
 
@@ -428,3 +441,6 @@ msgstr "Критичен заряд на батерията"
 #, no-c-format
 msgid "%"
 msgstr ""
+
+#~ msgid "Remaining Time: "
+#~ msgstr "Оставащо време:"

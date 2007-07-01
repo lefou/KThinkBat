@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: it\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-06-27 21:01+0200\n"
+"POT-Creation-Date: 2007-07-01 18:09+0200\n"
 "PO-Revision-Date: 2007-03-13 17:10+0100\n"
 "Last-Translator: Anselmo Luginbühl <omlesna@gmail.com>\n"
 "Language-Team:  <it@li.org>\n"
@@ -65,7 +65,7 @@ msgstr ""
 msgid "idle"
 msgstr ""
 
-#: kthinkbat.cpp:99 kthinkbat.cpp:419
+#: kthinkbat.cpp:99 kthinkbat.cpp:430
 msgid "not installed"
 msgstr "non installato"
 
@@ -90,43 +90,55 @@ msgstr ""
 "\n"
 "Al momento non esiste un riquadro di aiuto"
 
-#: kthinkbat.cpp:399
+#: kthinkbat.cpp:402
 msgid "Battery %1"
 msgstr "Batteria %1"
 
-#: kthinkbat.cpp:407
-msgid "Current Consumption: "
-msgstr "Poten&za Istantanea"
-
-#: kthinkbat.cpp:408
-msgid "Current Fuel: "
+#: kthinkbat.cpp:411
+#, fuzzy
+msgid "Current Charge Rate"
 msgstr "Carica attuale:"
 
-#: kthinkbat.cpp:409
-msgid "Last Fuel: "
-msgstr "Ultima carica:"
-
-#: kthinkbat.cpp:410
-msgid "Design Fuel: "
-msgstr "Carica di targa:"
-
 #: kthinkbat.cpp:411
-msgid "Crit Fuel: "
-msgstr "Carica critica:"
+#, fuzzy
+msgid "Current Consumption"
+msgstr "Poten&za Istantanea"
 
 #: kthinkbat.cpp:413
-msgid "Cycle Count: "
-msgstr ""
+#, fuzzy
+msgid "Current Fuel"
+msgstr "Carica attuale:"
 
 #: kthinkbat.cpp:415
-msgid "State: "
+#, fuzzy
+msgid "Last Fuel"
+msgstr "Ultima carica:"
+
+#: kthinkbat.cpp:417
+#, fuzzy
+msgid "Design Fuel"
+msgstr "Carica di targa:"
+
+#: kthinkbat.cpp:419
+#, fuzzy
+msgid "Critical Fuel"
+msgstr "Carica critica:"
+
+#: kthinkbat.cpp:422
+msgid "Cycle Count"
+msgstr ""
+
+#: kthinkbat.cpp:425
+#, fuzzy
+msgid "State"
 msgstr "Stato:"
 
-#: kthinkbat.cpp:416
-msgid "Remaining Time: "
-msgstr "Tempo rimanente:"
+#: kthinkbat.cpp:427
+#, fuzzy
+msgid "Remaining Time"
+msgstr "Tempo &Rimanente"
 
-#: kthinkbat.cpp:416
+#: kthinkbat.cpp:427
 msgid "full charged"
 msgstr "carica completa"
 
@@ -433,6 +445,9 @@ msgstr "Carica critica della batteria"
 #, no-c-format
 msgid "%"
 msgstr ""
+
+#~ msgid "Remaining Time: "
+#~ msgstr "Tempo rimanente:"
 
 #, fuzzy
 #~ msgid "&Color and Font"

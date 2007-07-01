@@ -61,8 +61,7 @@ KThinkBat::KThinkBat(const QString& configFile, Type type, int actions, QWidget 
 , powerPosID(0)
 , m_contextMenu(NULL)
 , m_toolTipTimer(NULL)
-, m_toolTip(NULL)
-, m_toolTipText("") {
+, m_toolTip(NULL) {
 
 
     KThinkBatConfig::instance( configFile );
@@ -398,32 +397,46 @@ KThinkBat::createToolTipText() {
         }
         assert(batInfo);
 
-        toolTipText += "<table cellspacing=\"0\" cellpadding=\"0\">";
-        toolTipText += "<tr><td><b>" + i18n("Battery %1").arg( bat );
-        if (batInfo->getLastSuccessfulReadMethod() != "") {
-            toolTipText += " (" + batInfo->getLastSuccessfulReadMethod() + ")";
-        }
-        toolTipText += ":</b></td>";
 
+        QString batHeader = "<b>" + i18n("Battery %1").arg( bat );
+        if (batInfo->getLastSuccessfulReadMethod() != "") {
+            batHeader += " (" + batInfo->getLastSuccessfulReadMethod() + ")";
+        }
+        batHeader += "</b>";
+
+        toolTipText += "<table cellspacing=\"0\" cellpadding=\"0\">";
         if (batInfo && batInfo->isInstalled()) {
-            toolTipText += "<td>" + QString().number((int) batInfo->getChargeLevel()) + "%</td></tr>";
-            toolTipText += "<tr><td>" + i18n("Current Consumption: ") + "</td><td>" + batInfo->getPowerConsumptionFormated() + "</td></tr>";
-            toolTipText += "<tr><td>" + i18n("Current Fuel: ") + "</td><td>" + QString().number((float) batInfo->getCurFuel()) + " m" + batInfo->getPowerUnit() + "h</td></tr>";
-            toolTipText += "<tr><td>" + i18n("Last Fuel: ") + "</td><td>" + QString().number((float) batInfo->getLastFuel()) + " m" + batInfo->getPowerUnit() + "h</td></tr>";
-            toolTipText += "<tr><td>" + i18n("Design Fuel: ") + "</td><td>" + QString().number((float) batInfo->getDesignFuel()) + " m" + batInfo->getPowerUnit() + "h</td></tr>";
-            toolTipText += "<tr><td>" + i18n("Crit Fuel: ") + "</td><td>" + QString().number((float) batInfo->getCriticalFuel()) + " m" + batInfo->getPowerUnit() + "h</td></tr>";
-            if(batInfo->getCycleCount() >= 0 ) {
-                toolTipText += "<tr><td>" + i18n("Cycle Count: ") + "</td><td>" + QString().number(batInfo->getCycleCount()) + "</td></hr>";
+            toolTipText += toolTipLine(batHeader, QString().number((int) batInfo->getChargeLevel()) + "%");
+
+            toolTipText += toolTipLine( batInfo->isCharging() ? i18n("Current Charge Rate") : i18n("Current Consumption"), batInfo->getPowerConsumptionFormated());
+
+            toolTipText += toolTipLine( i18n("Current Fuel"), QString().number((float)  batInfo->getCurFuel()) + " m" + batInfo->getPowerUnit());
+
+            toolTipText += toolTipLine( i18n("Last Fuel"), QString().number((float) batInfo->getLastFuel()) + " m" + batInfo->getPowerUnit());
+
+            toolTipText += toolTipLine( i18n("Design Fuel"), QString().number((float) batInfo->getDesignFuel()) + " m" + batInfo->getPowerUnit());
+
+            toolTipText += toolTipLine( i18n("Critical Fuel"), QString().number((float) batInfo->getCriticalFuel()) + " m" + batInfo->getPowerUnit());
+
+            if(batInfo->getCycleCount() > 0 ) {
+                toolTipText += toolTipLine( i18n("Cycle Count"), QString().number(batInfo->getCycleCount()));
             }
-            toolTipText += "<tr><td>" + i18n("State: ") + "</td><td>" + i18n(batInfo->getState()) + "</td></tr>";
-            toolTipText += "<tr><td>" + i18n("Remaining Time: ") + "</td><td>" + ( batInfo->isFull() ? i18n("full charged") : batInfo->getRemainingTimeFormated()) + "</td></tr>";
+
+            toolTipText += toolTipLine( i18n("State"), i18n(batInfo->getState()));
+
+            toolTipText += toolTipLine( i18n("Remaining Time"), batInfo->isFull() ? i18n("full charged") : batInfo->getRemainingTimeFormated());
         }
         else {
-            toolTipText += "<td>" + i18n("not installed") + "</td></tr>";
+            toolTipText += toolTipLine(batHeader, i18n("not installed"));
         } 
         toolTipText += "</table>";
     }
     return toolTipText;
+}
+
+QString
+KThinkBat::toolTipLine(const QString& label, const QString& value) {
+    return "<tr><td>" + label + ": </td><td>" + value + "</td></tr>";
 }
 
 void 
@@ -442,8 +455,7 @@ KThinkBat::enterEvent( QEvent* e) {
     if (KThinkBatConfig::showToolTip() && m_toolTipTimer && m_toolTip && !m_toolTip->isShown()) {
         // TODO read the system time preferences for ToolTip times
         // in msek
-        m_toolTipText = createToolTipText();
-        m_toolTip->setText(m_toolTipText);
+        m_toolTip->setText(createToolTipText());
         m_toolTipTimer->start(KThinkBatConfig::toolTipTimeout());
     }
 }
@@ -461,7 +473,8 @@ KThinkBat::leaveEvent( QEvent* e) {
 void
 KThinkBat::slotToolTip() {
     if (KThinkBatConfig::showToolTip() && m_toolTip) {
-        m_toolTip->setText(m_toolTipText);
+//         m_toolTip->setText(m_toolTipText);
+        m_toolTip->setText(createToolTipText());
         m_toolTip->show();
     }
 }

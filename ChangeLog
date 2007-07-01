@@ -4,9 +4,13 @@ KThinkBat 0.2.8 - unreleased:
    * Introduced new abstract base class for BatInfo
    * Added new BatInfoSum class
    * #28: Fixed bug with wrong calculation remaining time when using two 
-     battertes
+     batteries
    * Translation updates: Bulgarian (by Aleksandar Tsankov), German, Slovak (by 
      Jozef Riha)
+   * #27: show current power consuption as 'current charge rate' if charging
+   * More intelligent remaining time calculation in 'battery summary' mode
+     (if only one battery present, use the more accurate value from this battery 
+     instead of generic recalculation)
 
 KThinkBat 0.2.7 - 02.06.2007:
    * Added battery recharge cycle count to the ToolTip (if available, currently

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-06-27 21:01+0200\n"
+"POT-Creation-Date: 2007-07-01 18:09+0200\n"
 "PO-Revision-Date: 2007-05-03 19:56+0000\n"
 "Last-Translator: Luis Guillermo Sobalvarro <lgsobalvarro@e-genieria.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -65,7 +65,7 @@ msgstr "descargando"
 msgid "idle"
 msgstr "idle"
 
-#: kthinkbat.cpp:99 kthinkbat.cpp:419
+#: kthinkbat.cpp:99 kthinkbat.cpp:430
 msgid "not installed"
 msgstr "no instalada"
 
@@ -89,44 +89,56 @@ msgstr ""
 "\n"
 "No hay un diálogo de ayuda por el momento"
 
-#: kthinkbat.cpp:399
+#: kthinkbat.cpp:402
 msgid "Battery %1"
 msgstr "Batería %1"
 
-#: kthinkbat.cpp:407
-msgid "Current Consumption: "
-msgstr "Consumo actual:"
-
-#: kthinkbat.cpp:408
-msgid "Current Fuel: "
+#: kthinkbat.cpp:411
+#, fuzzy
+msgid "Current Charge Rate"
 msgstr "Capacidad actual: "
 
-#: kthinkbat.cpp:409
-msgid "Last Fuel: "
-msgstr "Última capacidad: "
-
-#: kthinkbat.cpp:410
-msgid "Design Fuel: "
-msgstr "Capacidad original: "
-
 #: kthinkbat.cpp:411
-msgid "Crit Fuel: "
-msgstr "Capacidad crítica: "
+#, fuzzy
+msgid "Current Consumption"
+msgstr "Consumo actual:"
 
 #: kthinkbat.cpp:413
 #, fuzzy
-msgid "Cycle Count: "
-msgstr "Cuenta de ciclos:"
+msgid "Current Fuel"
+msgstr "Capacidad actual: "
 
 #: kthinkbat.cpp:415
-msgid "State: "
+#, fuzzy
+msgid "Last Fuel"
+msgstr "Última capacidad: "
+
+#: kthinkbat.cpp:417
+#, fuzzy
+msgid "Design Fuel"
+msgstr "Capacidad original: "
+
+#: kthinkbat.cpp:419
+#, fuzzy
+msgid "Critical Fuel"
+msgstr "Capacidad crítica: "
+
+#: kthinkbat.cpp:422
+#, fuzzy
+msgid "Cycle Count"
+msgstr "Cuenta de ciclos:"
+
+#: kthinkbat.cpp:425
+#, fuzzy
+msgid "State"
 msgstr "Estado: "
 
-#: kthinkbat.cpp:416
-msgid "Remaining Time: "
-msgstr "Tiempo restante: "
+#: kthinkbat.cpp:427
+#, fuzzy
+msgid "Remaining Time"
+msgstr "Tiempo &restante"
 
-#: kthinkbat.cpp:416
+#: kthinkbat.cpp:427
 msgid "full charged"
 msgstr "Carga completa"
 
@@ -433,6 +445,9 @@ msgstr "Campo de la batería crítica"
 #, no-c-format
 msgid "%"
 msgstr ""
+
+#~ msgid "Remaining Time: "
+#~ msgstr "Tiempo restante: "
 
 #, fuzzy
 #~ msgid "&Color and Font"
