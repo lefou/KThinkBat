@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
-"Report-Msgid-Bugs-To: Tobias Roeser <le.petit.fou@web.de>\n"
-"POT-Creation-Date: 2007-06-26 20:36+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2007-06-27 21:01+0200\n"
 "PO-Revision-Date: 2007-05-03 19:56+0000\n"
 "Last-Translator: Luis Guillermo Sobalvarro <lgsobalvarro@e-genieria.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -32,54 +32,54 @@ msgstr ""
 "_: EMAIL OF TRANSLATORS\n"
 "lgsobalvarro@e-genieria.com"
 
-#: batinfobase.cpp:88
+#: batinfobase.cpp:89
 msgid "nA"
 msgstr "nA"
 
-#: kthinkbat.cpp:74
+#: kthinkbat.cpp:75
 msgid "KThinkBat %1"
 msgstr "KThinkBat %1"
 
-#: kthinkbat.cpp:75
+#: kthinkbat.cpp:76
 msgid "&About %1"
 msgstr "&Acerca %1"
 
-#: kthinkbat.cpp:76
+#: kthinkbat.cpp:77
 msgid "&Configure %1..."
 msgstr "&Configurar %1..."
 
-#: kthinkbat.cpp:94
+#: kthinkbat.cpp:95
 msgid "charged"
 msgstr "Carga completa"
 
-#: kthinkbat.cpp:95
+#: kthinkbat.cpp:96
 msgid "charging"
 msgstr "cargando"
 
-#: kthinkbat.cpp:96
+#: kthinkbat.cpp:97
 msgid "discharging"
 msgstr "descargando"
 
-#: kthinkbat.cpp:97
+#: kthinkbat.cpp:98
 #, fuzzy
 msgid "idle"
 msgstr "idle"
 
-#: kthinkbat.cpp:98 kthinkbat.cpp:418
+#: kthinkbat.cpp:99 kthinkbat.cpp:419
 msgid "not installed"
 msgstr "no instalada"
 
 #. i18n: file ./prefs.ui line 16
-#: kthinkbat.cpp:143 rc.cpp:3
+#: kthinkbat.cpp:144 rc.cpp:3
 #, no-c-format
 msgid "KThinkBat Preferences"
 msgstr "Preferencias de KThinkBat"
 
-#: kthinkbat.cpp:163
+#: kthinkbat.cpp:164
 msgid "A KDE panel applet to display the current laptop battery status."
 msgstr "Un applet para el panel de KDE que muestra el estado de la batería."
 
-#: kthinkbat.cpp:182
+#: kthinkbat.cpp:183
 msgid ""
 "A KDE panel applet to display the current laptop battery status.\n"
 "\n"
@@ -89,51 +89,51 @@ msgstr ""
 "\n"
 "No hay un diálogo de ayuda por el momento"
 
-#: kthinkbat.cpp:398
+#: kthinkbat.cpp:399
 msgid "Battery %1"
 msgstr "Batería %1"
 
-#: kthinkbat.cpp:406
+#: kthinkbat.cpp:407
 msgid "Current Consumption: "
 msgstr "Consumo actual:"
 
-#: kthinkbat.cpp:407
+#: kthinkbat.cpp:408
 msgid "Current Fuel: "
 msgstr "Capacidad actual: "
 
-#: kthinkbat.cpp:408
+#: kthinkbat.cpp:409
 msgid "Last Fuel: "
 msgstr "Última capacidad: "
 
-#: kthinkbat.cpp:409
+#: kthinkbat.cpp:410
 msgid "Design Fuel: "
 msgstr "Capacidad original: "
 
-#: kthinkbat.cpp:410
+#: kthinkbat.cpp:411
 msgid "Crit Fuel: "
 msgstr "Capacidad crítica: "
 
-#: kthinkbat.cpp:412
+#: kthinkbat.cpp:413
 #, fuzzy
 msgid "Cycle Count: "
 msgstr "Cuenta de ciclos:"
 
-#: kthinkbat.cpp:414
+#: kthinkbat.cpp:415
 msgid "State: "
 msgstr "Estado: "
 
-#: kthinkbat.cpp:415
+#: kthinkbat.cpp:416
 msgid "Remaining Time: "
 msgstr "Tiempo restante: "
 
-#: kthinkbat.cpp:415
+#: kthinkbat.cpp:416
 msgid "full charged"
 msgstr "Carga completa"
 
 #. i18n: file ./prefs.ui line 41
 #: rc.cpp:6
 #, fuzzy, no-c-format
-msgid "Ge&neral"
+msgid "&General"
 msgstr "General"
 
 #. i18n: file ./prefs.ui line 63
@@ -241,6 +241,12 @@ msgstr "Consumo actual de batería"
 #, no-c-format
 msgid "Alt+W"
 msgstr "Alt+W"
+
+#. i18n: file ./prefs.ui line 201
+#: rc.cpp:64
+#, no-c-format
+msgid "&Appearance"
+msgstr ""
 
 #. i18n: file ./prefs.ui line 212
 #: rc.cpp:67

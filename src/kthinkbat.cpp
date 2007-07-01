@@ -1,6 +1,7 @@
 /***************************************************************************
  *   Copyright (C) 2005-2007 by Tobias Roeser   *
  *   le.petit.fou@web.de   *
+ *   $Id$   *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -335,11 +336,14 @@ KThinkBat::paintEvent(QPaintEvent* event) {
 
 void 
 KThinkBat::fillBatGauge(BatGauge* gauge, BatInfoBase* info) {
-    if (info->isInstalled()) {
-         gauge->setColors(QColor(KThinkBatConfig::batBackgroundColor()),
-                          QColor(((int) info->getChargeLevel()) <= KThinkBatConfig::criticalFill() ? KThinkBatConfig::batCriticalColor() : KThinkBatConfig::batChargedColor()),
-                          QColor(info->isOnline() ? KThinkBatConfig::batDotOnlineColor() : KThinkBatConfig::batBackgroundColor()));
 
+    // Colors
+    gauge->setColors(QColor(KThinkBatConfig::batBackgroundColor()),
+                     QColor(((int) info->getChargeLevel()) <= KThinkBatConfig::criticalFill() ? KThinkBatConfig::batCriticalColor() : KThinkBatConfig::batChargedColor()),
+                     QColor(info->isOnline() ? KThinkBatConfig::batDotOnlineColor() : KThinkBatConfig::batBackgroundColor()));
+
+    // Percentages
+    if (info->isInstalled()) {
         if (KThinkBatConfig::gaugeContentPercent()) {
             gauge->setPercentValue((int) info->getChargeLevel());
         }

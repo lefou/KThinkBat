@@ -5,9 +5,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
-"Report-Msgid-Bugs-To: Tobias Roeser <le.petit.fou@web.de>\n"
-"POT-Creation-Date: 2007-06-26 20:36+0200\n"
-"PO-Revision-Date: 2007-06-03 20:31+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2007-06-27 21:01+0200\n"
+"PO-Revision-Date: 2007-06-27 21:03+0200\n"
 "Last-Translator: Tobias Roeser <le.petit.fou@web.de>\n"
 "Language-Team: Deutsch\n"
 "MIME-Version: 1.0\n"
@@ -27,54 +27,53 @@ msgid ""
 "Your emails"
 msgstr "le.petit.fou@web.de"
 
-#: batinfobase.cpp:88
+#: batinfobase.cpp:89
 msgid "nA"
 msgstr "kA"
 
-#: kthinkbat.cpp:74
+#: kthinkbat.cpp:75
 msgid "KThinkBat %1"
 msgstr "KThinkBat %1"
 
-#: kthinkbat.cpp:75
+#: kthinkbat.cpp:76
 msgid "&About %1"
 msgstr "Ü&ber %1"
 
-#: kthinkbat.cpp:76
+#: kthinkbat.cpp:77
 msgid "&Configure %1..."
 msgstr "%1 ein&richten..."
 
-#: kthinkbat.cpp:94
+#: kthinkbat.cpp:95
 msgid "charged"
 msgstr "geladen"
 
-#: kthinkbat.cpp:95
+#: kthinkbat.cpp:96
 msgid "charging"
 msgstr "aufladen"
 
-#: kthinkbat.cpp:96
+#: kthinkbat.cpp:97
 msgid "discharging"
 msgstr "entladen"
 
-#: kthinkbat.cpp:97
+#: kthinkbat.cpp:98
 msgid "idle"
 msgstr "inaktiv"
 
-#: kthinkbat.cpp:98 kthinkbat.cpp:418
+#: kthinkbat.cpp:99 kthinkbat.cpp:419
 msgid "not installed"
 msgstr "nicht installiert"
 
 #. i18n: file ./prefs.ui line 16
-#: kthinkbat.cpp:143 rc.cpp:3
+#: kthinkbat.cpp:144 rc.cpp:3
 #, no-c-format
 msgid "KThinkBat Preferences"
 msgstr "KThinkBat Einstellungen"
 
-#: kthinkbat.cpp:163
+#: kthinkbat.cpp:164
 msgid "A KDE panel applet to display the current laptop battery status."
-msgstr ""
-"Ein KDE Panel Applet zur Anzeige des aktuellen Akku-Zusandes eines Laptops."
+msgstr "Ein KDE Panel Applet zur Anzeige des aktuellen Akku-Zusandes eines Laptops."
 
-#: kthinkbat.cpp:182
+#: kthinkbat.cpp:183
 msgid ""
 "A KDE panel applet to display the current laptop battery status.\n"
 "\n"
@@ -83,51 +82,51 @@ msgstr ""
 "Ein KDE Panel Applet zur Anzeige des aktuellen Akku-Zusandes eines Laptops.\n"
 "Es gibt zur Zeit noch keine Hilfe-Box."
 
-#: kthinkbat.cpp:398
+#: kthinkbat.cpp:399
 msgid "Battery %1"
 msgstr "Akku %1"
 
-#: kthinkbat.cpp:406
+#: kthinkbat.cpp:407
 msgid "Current Consumption: "
 msgstr "Aktueller Verbrauch: "
 
-#: kthinkbat.cpp:407
+#: kthinkbat.cpp:408
 msgid "Current Fuel: "
 msgstr "Aktuelle Kapazität: "
 
-#: kthinkbat.cpp:408
+#: kthinkbat.cpp:409
 msgid "Last Fuel: "
 msgstr "Letze erreichte Kapazität: "
 
-#: kthinkbat.cpp:409
+#: kthinkbat.cpp:410
 msgid "Design Fuel: "
 msgstr "Design-Kapazität: "
 
-#: kthinkbat.cpp:410
+#: kthinkbat.cpp:411
 msgid "Crit Fuel: "
 msgstr "Kritische Kapazität: "
 
-#: kthinkbat.cpp:412
+#: kthinkbat.cpp:413
 msgid "Cycle Count: "
-msgstr "Ladezyklen"
+msgstr "Ladezyklen:"
 
-#: kthinkbat.cpp:414
+#: kthinkbat.cpp:415
 msgid "State: "
 msgstr "Status: "
 
-#: kthinkbat.cpp:415
+#: kthinkbat.cpp:416
 msgid "Remaining Time: "
 msgstr "Verbleibende Zeit: "
 
-#: kthinkbat.cpp:415
+#: kthinkbat.cpp:416
 msgid "full charged"
 msgstr "voll geladen"
 
 #. i18n: file ./prefs.ui line 41
 #: rc.cpp:6
 #, no-c-format
-msgid "Ge&neral"
-msgstr "Allgemei&n"
+msgid "&General"
+msgstr "All&gemein"
 
 #. i18n: file ./prefs.ui line 63
 #: rc.cpp:10
@@ -234,6 +233,12 @@ msgstr "Aktueller Energieverbrauch"
 #, no-c-format
 msgid "Alt+W"
 msgstr "Alt+W"
+
+#. i18n: file ./prefs.ui line 201
+#: rc.cpp:64
+#, no-c-format
+msgid "&Appearance"
+msgstr "&Erscheinungsbild"
 
 #. i18n: file ./prefs.ui line 212
 #: rc.cpp:67
@@ -420,3 +425,4 @@ msgstr "Kritischer Akkustand"
 #, no-c-format
 msgid "%"
 msgstr "%"
+
