@@ -27,12 +27,12 @@
 
 QString
 BatInfoBase::getPowerConsumptionFormated() {
-    return BatInfoBase::formatPowerUnit( getPowerConsumption(), getPowerUnit() );
+    return BatInfoBase::formatPowerUnit(getPowerConsumption(), getPowerUnit());
 }
 
 QString
 BatInfoBase::getRemainingTimeFormated() {
-    return formatRemainingTime(getRemainingTimeInMin());
+    return BatInfoBase::formatRemainingTime(getRemainingTimeInMin());
 }
 
 QString

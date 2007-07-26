@@ -527,9 +527,7 @@ BatInfo::getDesignFuel() {
     if(isInstalled()) {
         return m_designFuel;
     }
-    else {
-        return 0;
-    }
+    return 0;
 }
 
 float 
@@ -537,9 +535,7 @@ BatInfo::getLastFuel() {
     if(isInstalled()) {
         return m_lastFuel;
     }
-    else {
-        return 0;
-    }
+    return 0;
 }
 
 float 
@@ -547,9 +543,7 @@ BatInfo::getPowerConsumption() {
     if(isInstalled()) {
         return m_curPower;
     }
-    else {
-        return 0;
-    }
+    return 0;
 }
 
 QString 
@@ -599,7 +593,10 @@ BatInfo::getLastSuccessfulReadMethod() {
 
 int 
 BatInfo::getCycleCount() {
-    return m_cycleCount;
+    if(isInstalled()) {
+        return m_cycleCount;
+    }
+    return 0;
 }
 
 void 
