@@ -15,7 +15,7 @@ package-messages:
 	cd $(top_srcdir) && $(MAKE) -f admin/Makefile.common package-messages
 	$(MAKE) -C po merge
 
-EXTRA_DIST = admin COPYING configure.in.in ChangeLog TODO
+EXTRA_DIST = admin COPYING COPYING.LIB COPYING.DOC configure.in.in ChangeLog TODO
 
 dist-hook:
 	cd $(top_distdir) && perl admin/am_edit -padmin
