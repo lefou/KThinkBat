@@ -6,11 +6,13 @@ KThinkBat 0.2.8 - unreleased:
    * #28: Fixed bug with wrong calculation remaining time when using two 
      batteries
    * Translation updates: Bulgarian (by Aleksandar Tsankov), German, Slovak (by 
-     Jozef Riha)
+     Jozef Riha), Spanish (Luis Sobalvarro)
    * #27: show current power consuption as 'current charge rate' if charging
    * More intelligent remaining time calculation in 'battery summary' mode
      (if only one battery present, use the more accurate value from this battery 
      instead of generic recalculation)
+   * #31: Added LICENSE.LIB (LGPL) and LICENSE.DOC (GNU FDL) as some files are
+     released under these licenses (thanks to Harald Sitter from Kubuntu team)
 
 KThinkBat 0.2.7 - 02.06.2007:
    * Added battery recharge cycle count to the ToolTip (if available, currently
