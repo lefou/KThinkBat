@@ -1,19 +1,19 @@
-# SOME DESCRIPTIVE TITLE.
+# translation of fr.po to Deutsch
 # This file is put in the public domain.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
+# Tobias Roeser <le.petit.fou@web.de>, 2007.
 msgid ""
 msgstr ""
 "Project-Id-Version: KThinkBat-fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-07-01 20:55+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Anne Roeser <anne_schrade@web.de>\n"
-"Language-Team: fr <fr@li.org>\n"
+"PO-Revision-Date: 2007-07-28 21:38+0200\n"
+"Last-Translator: Tobias Roeser <le.petit.fou@web.de>\n"
+"Language-Team: Deutsch\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
 
 #: _translatorinfo.cpp:1
 msgid ""
@@ -37,7 +37,7 @@ msgstr "KThinkBat %1"
 
 #: kthinkbat.cpp:75
 msgid "&About %1"
-msgstr ""
+msgstr "Concernant %1"
 
 #: kthinkbat.cpp:76
 msgid "&Configure %1..."
@@ -427,3 +427,4 @@ msgstr ""
 #, no-c-format
 msgid "Ad&vanced"
 msgstr ""
+

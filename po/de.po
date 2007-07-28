@@ -4,7 +4,7 @@
 # Tobias Roeser <le.petit.fou@web.de>, 2006, 2007.
 msgid ""
 msgstr ""
-"Project-Id-Version: de\n"
+"Project-Id-Version: KThinkBat-de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-07-28 00:08+0200\n"
 "PO-Revision-Date: 2007-07-01 18:10+0200\n"
