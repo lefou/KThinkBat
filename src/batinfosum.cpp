@@ -157,7 +157,13 @@ BatInfoSum::isInstalled() {
 
 bool 
 BatInfoSum::isOnline() {
-    // TODO
+    bool isOnline = false;
+    for(BatInfoBase* bat = m_bats.first(); bat; bat = m_bats.next()) {
+        if(bat->isOnline()) {
+            isOnline = true;
+        }
+    }
+    return isOnline;
 }
 
 void 

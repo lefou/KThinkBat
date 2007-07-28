@@ -11,7 +11,7 @@ KThinkBat 0.2.8 - unreleased:
    * More intelligent remaining time calculation in 'battery summary' mode
      (if only one battery present, use the more accurate value from this battery 
      instead of generic recalculation)
-   * #31: Added LICENSE.LIB (LGPL) and LICENSE.DOC (GNU FDL) as some files are
+   * #31: Added COPYING.LIB (LGPL) and COPYING.DOC (GNU FDL) as some files are
      released under these licenses (thanks to Harald Sitter from Kubuntu team)
 
 KThinkBat 0.2.7 - 02.06.2007:
