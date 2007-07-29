@@ -1,4 +1,4 @@
-KThinkBat 0.2.8 - unreleased:
+KThinkBat 0.2.8 - 28.07.2007:
    * #26: Added Czech translation send by Martin Samek
    * Refactored complete internal battery handling
    * Introduced new abstract base class for BatInfo

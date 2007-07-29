@@ -218,6 +218,7 @@ KThinkBat::createPowerTimeLabel(BatInfoBase* batInfo) {
 void 
 KThinkBat::paintEvent(QPaintEvent* event) {
 
+    // Gauge size and orientation
     m_gauge1.setOrientation(KThinkBatConfig::drawBatteryUpright() ? Qt::Vertical : Qt::Horizontal);
     m_gauge1.setSize(KThinkBatConfig::gaugeWidth(), KThinkBatConfig::gaugeHeight());
     m_gauge2.setOrientation(KThinkBatConfig::drawBatteryUpright() ? Qt::Vertical : Qt::Horizontal);
