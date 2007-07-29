@@ -2,7 +2,7 @@ SUBDIRS = icons
 INCLUDES= $(all_includes)
 METASOURCES = AUTO
 
-lib_LTLIBRARIES = kthinkbat_panelapplet.la
+kde_module_LTLIBRARIES = kthinkbat_panelapplet.la
 
 kthinkbat_panelapplet_la_SOURCES = batgauge.cpp batinfo.cpp batinfobase.cpp \
 	batinfosum.cpp battooltip.cpp kthinkbat.cpp kthinkbatconfig.kcfgc prefs.ui
