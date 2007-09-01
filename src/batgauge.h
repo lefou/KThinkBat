@@ -21,7 +21,11 @@
 #ifndef KTHINKBAT_BATGAUGE_H
 #define KTHINKBAT_BATGAUGE_H
 
-#include <qpainter.h>
+#include <qnamespace.h>
+#include <qcolor.h>
+#include <qsize.h>
+class QString;
+class QPainter;
 
 /**
 	@author Tobias Roeser <le.petit.fou@web.de>

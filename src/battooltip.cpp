@@ -21,7 +21,7 @@
 #include "battooltip.h"
 
 #include <qvbox.h>
-
+#include <qlabel.h>
 
 BatToolTip::BatToolTip( QWidget* parent, const char* name )
 : KPassivePopup( parent, name )

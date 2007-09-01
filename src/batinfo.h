@@ -27,8 +27,8 @@
 
 #include "batinfobase.h"
 
-#include <qstring.h>
-#include <qdatetime.h>
+class QString;
+class QTime;
 
 /**
     @author Tobias Roeser <le.petit.fou@web.de>

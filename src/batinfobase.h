@@ -27,7 +27,7 @@
 #endif
 
 #include <qobject.h>
-#include <qstring.h>
+class QString;
 
 /**
     @author Tobias Roeser <le.petit.fou@web.de>

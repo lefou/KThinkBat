@@ -26,25 +26,21 @@
 #endif
 
 // Qt
-#include <qstring.h>
-#include <qtimer.h>
-#include <qpainter.h>
-#include <qcolor.h>
 #include <qvaluevector.h>
+class QString;
+class QTimer;
+class QPainter;
+class QColor;
 
 // KDE
-#include <kconfig.h>
 #include <kpanelapplet.h>
-#include <kpopupmenu.h>
-#include <kcolordialog.h>
+class KPopupMenu;
+class KConfig;
 
 // KThinkBat
 #include "batinfo.h"
 #include "batinfosum.h"
 #include "batgauge.h"
-#include "kthinkbatconfig.h"
-#include "battooltip.h"
-
 class KThinkBatConfig;
 class BatToolTip;
 

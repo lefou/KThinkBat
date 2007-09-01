@@ -1,6 +1,7 @@
 KThinkBat HEAD:
    * make install installs kthinkbat_panelapplet.{la,so} now into $PREFIX/lib/kdeX
    * Translation updates: Slovak (Jozef Riha)
+   * Use forward declarations instead of includes where possible (compile speedup)
 
 KThinkBat 0.2.8 - 28.07.2007:
    * #26: Added Czech translation send by Martin Samek

@@ -25,9 +25,11 @@
 #include <config.h>
 #endif
 
+// Qt
+#include <qptrlist.h>
+
 #include "batinfobase.h"
 
-#include <qptrlist.h>
 
 /**
     @author Tobias Roeser <le.petit.fou@web.de>

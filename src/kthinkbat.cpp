@@ -36,6 +36,7 @@
 #include <kaboutapplication.h>
 #include <kconfigdialog.h>
 #include <kiconloader.h>
+#include <kpopupmenu.h>
 
 // other libs 
 #include <assert.h>
@@ -43,6 +44,8 @@
 // KThinkkBat
 #include "kthinkbat.h"
 #include "prefs.h"
+#include "kthinkbatconfig.h"
+#include "battooltip.h"
 
 extern "C" {
     KPanelApplet* init( QWidget *parent, const QString& configFile) {
@@ -90,15 +93,15 @@ KThinkBat::KThinkBat(const QString& configFile, Type type, int actions, QWidget 
     m_toolTip = new BatToolTip( this );
     assert(m_toolTip);
 
+}
+
+KThinkBat::~KThinkBat() {
     // Trigger some translations
     i18n("charged");
     i18n("charging");
     i18n("discharging");
     i18n("idle");
     i18n("not installed");
-}
-
-KThinkBat::~KThinkBat() {
 
     if (timer) {
         timer->stop();

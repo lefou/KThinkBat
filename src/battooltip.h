@@ -21,8 +21,12 @@
 #ifndef KTHINKBAT_BATTOOLTIP_H
 #define KTHINKBAT_BATTOOLTIP_H
 
+// Qt
+class QLabel;
+class QString;
+
+// KDE
 #include <kpassivepopup.h>
-#include <qlabel.h>
 
 /**
 	@author Tobias Roeser <le.petit.fou@web.de>
