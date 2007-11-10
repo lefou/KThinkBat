@@ -1,0 +1,6 @@
+present:                 yes
+capacity state:          ok
+charging state:          discharging
+present rate:            5562 mW
+remaining capacity:      25520 mWh
+present voltage:         11400 mV
