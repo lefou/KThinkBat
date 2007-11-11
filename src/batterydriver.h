@@ -18,39 +18,42 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
-#ifndef KTHINKBAT_BATINFO_H
-#define KTHINKBAT_BATINFO_H
+#ifndef KTHINKBAT_BATTERYDRIVER_H
+#define KTHINKBAT_BATTERYDRIVER_H
 
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
 
-#include "batinfobase.h"
-
 // Qt
 class QString;
-class QTime;
+#include <qdatetime.h>
 
 // KThinkBat
-class BatteryDriver;
+#include "driverdata.h"
 
 /**
     @author Tobias Roeser <le.petit.fou@web.de>
 */
-class BatInfo : public BatInfoBase {
+class BatteryDriver {
 
 public:
-    /** Constructor.
-        @param number The number of the battery, starting with 1
-    */
-    BatInfo(int number = 1);
-    virtual ~BatInfo();
+
+    BatteryDriver(const QString& driverName);
+
+    /** The name of the battery driver. */
+    QString name();
 
     /** Get the critcal fuel of the battery. */
     virtual float getCriticalFuel();
 
     /** Get the current capacity of the battery. */
     virtual float getCurFuel();
+
+    /**
+     * Get the rechrnge cycle count of the battery or -1 if not available.
+     */
+    virtual int getCycleCount();
 
     /** Get the max. design capacity of the battery. */
     virtual float getDesignFuel();
@@ -70,11 +73,8 @@ public:
     /** Get the remaining battery time in minutes. */
     virtual int getRemainingTimeInMin();
 
-    /** Returns true if the battery is installed. */
-    virtual bool isInstalled();
-
-    /** Returns true if the battery is online, means AC connected. */
-    virtual bool isOnline();
+    /** Get the current battery state. */
+    virtual QString getState();
 
     /** Returns true if the battery is charging. */
     virtual bool isCharging();
@@ -82,50 +82,31 @@ public:
     /** Returns true if the battery is discarging. */
     virtual bool isDischarging();
 
-    /** Return true if the battery is full. */
-    virtual bool isFull();
+    /** Returns true if the battery is installed. */
+    virtual bool isInstalled();
 
-    /** Return true if the battery is idle, thus neighter charging nor discharging. */
-    virtual bool isIdle();
+    /** Returns true if the battery is online, means AC connected. */
+    virtual bool isOnline();
 
-    /** Get the current battery state. */
-    virtual QString getState();
+    /** Refresh the battery values. */
+    virtual void read();
 
-    /** Set the number of the battery in the system (1 or 2). */
-    void setBatNr(int number);
-
-    /**
-     * Returns the last successful used method to retriev battery 
-     * information. This could be e.g. "ACPI" or "SMAPI".
-     */
-    virtual QString getLastSuccessfulReadMethod();
-
-    /**
-     * Get the rechange cycle count of the battery or -1 if not available.
-     */
-    virtual int getCycleCount();
-
-    virtual void refresh();
-
+    /** Reset all values of the battery. */
     virtual void reset();
 
+    /** Return true, if the driver reports usable (valid) data. */
+    virtual bool isValid();
+
 protected:
-    QString getAcpiFilePrefix();
+    void calculateRemainingTime();
 
-    QString getSmapiFilePrefix();
+    DriverData m_driverData;
 
-    QString getSmapiBatFilePrefix();
+    QString m_driverName;
 
-private:
+    QTime m_remTimeForecastTimestamp;
+    float m_remTimeForecastCap;
 
-    /** Battery number, 1 or 2. */
-    int m_batNr;
-
-    BatteryDriver* m_currentDriver;
-
-    BatteryDriver* m_acpiDriver;
-    BatteryDriver* m_acpiNewDriver;
-    BatteryDriver* m_smapiDriver;
 };
 
-#endif // KTHINKBAT_BATINFO_H
+#endif // KTHINKBAT_BATTERYDRIVER_H
