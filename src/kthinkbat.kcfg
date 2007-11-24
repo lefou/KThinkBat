@@ -38,6 +38,14 @@
             <label>The directory (relative to the ACPI battery path) where information about Battery Two can be found.</label>
             <default>BAT1</default>
         </entry>
+        <entry name="EnableAcpiSysfs" type="Bool">
+            <label>Use the Advanced Configuration and Powermanagement Interface (ACPI) provided through the sysfs interface of the kernel to get battery information.</label>
+            <default>true</default>
+        </entry>
+        <entry name="AcpiSysfsPrefix" type="String"> 
+            <label>The path where ACPI information for batteries can be found. Default is /sys/class/power_supply.</label>
+            <default>/sys/class/power_supply</default>
+        </entry>
     </group>
 
     <group name="SMAPI">

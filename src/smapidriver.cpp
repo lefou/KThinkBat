@@ -27,8 +27,8 @@
 #include <qdir.h>
 
 // KThinkBat
-#include "smapidriver.h"
 #include "driverdata.h"
+#include "smapidriver.h"
 #include "debug.h"
 
 SmapiDriver::SmapiDriver(const QString& smapiPrefix, const QString& batSuffix)

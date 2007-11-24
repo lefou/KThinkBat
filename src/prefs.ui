@@ -198,7 +198,7 @@
                     <cstring>tab</cstring>
                 </property>
                 <attribute name="title">
-                    <string>&amp;Appearance</string>
+                    <string>Appearan&amp;ce</string>
                 </attribute>
                 <vbox>
                     <property name="name">
@@ -652,19 +652,11 @@
                         <property name="title">
                             <string>ACPI</string>
                         </property>
-                        <vbox>
+                        <grid>
                             <property name="name">
                                 <cstring>unnamed</cstring>
                             </property>
-                            <widget class="QCheckBox">
-                                <property name="name">
-                                    <cstring>kcfg_EnableAcpi</cstring>
-                                </property>
-                                <property name="text">
-                                    <string>Enable ACPI</string>
-                                </property>
-                            </widget>
-                            <widget class="QFrame">
+                            <widget class="QFrame" row="2" column="0">
                                 <property name="name">
                                     <cstring>enableAcpiFrame</cstring>
                                 </property>
@@ -825,7 +817,29 @@
                                     </widget>
                                 </grid>
                             </widget>
-                        </vbox>
+                            <widget class="QCheckBox" row="1" column="0">
+                                <property name="name">
+                                    <cstring>kcfg_EnableAcpi</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>E&amp;nable ACPI</string>
+                                </property>
+                                <property name="accel">
+                                    <string>Alt+N</string>
+                                </property>
+                            </widget>
+                            <widget class="QCheckBox" row="0" column="0">
+                                <property name="name">
+                                    <cstring>kcfg_EnableAcpiSysfs</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>Enable new ACPI sysfs interface (Linux Kernel &gt;=&amp;2.6.24)</string>
+                                </property>
+                                <property name="accel">
+                                    <string>Alt+2</string>
+                                </property>
+                            </widget>
+                        </grid>
                     </widget>
                     <widget class="QGroupBox">
                         <property name="name">

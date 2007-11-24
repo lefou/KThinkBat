@@ -18,8 +18,8 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
-#ifndef KTHINKBAT_ACPIDRIVER_H
-#define KTHINKBAT_ACPIDRIVER_H
+#ifndef KTHINKBAT_ACPIDSYSFSRIVER_H
+#define KTHINKBAT_ACPISYSFSDRIVER_H
 
 #ifdef HAVE_CONFIG_H
 #include <config.h>
@@ -35,11 +35,11 @@ class QTime;
 /**
     @author Tobias Roeser <le.petit.fou@web.de>
 */
-class AcpiDriver : public BatteryDriver {
+class AcpiSysfsDriver : public BatteryDriver {
 
 public:
 
-    AcpiDriver(const QString& procAcpiBatPrefix);
+    AcpiSysfsDriver(const QString& sysfsPrefix);
 
     virtual void read();
 
@@ -48,17 +48,15 @@ public:
     virtual bool isValid();
 
 private:
-    /** Parse the proc interface of the Linux Kernel (in most cases /proc/acpi/battery) and try to read the battery information. If this is successfull, return with true, if this failes or any other indication for a invalid battery/interface is determined, this method will return false.
 
-    @return true if the parsing was successful, else false.
-    */
-    bool parseProcACPI();
+    float myToMilly(int value);
 
-    bool parseProcAcpiBatAlarm();
+    /** Read a value in My (10^-6) as milli (10^-3). */
+    float readMyNumberAsMilli(const QString& filePath, float defaultValue);
 
-    QString m_procAcpiBatPrefix;
+    QString m_sysfsPrefix;
 
     bool m_valid;
 };
 
-#endif // KTHINKBAT_ACPIDRIVER_H
+#endif // KTHINKBAT_ACPISYSFSDRIVER_H

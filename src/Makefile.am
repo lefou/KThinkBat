@@ -4,7 +4,8 @@ METASOURCES = AUTO
 
 kde_module_LTLIBRARIES = kthinkbat_panelapplet.la
 
-kthinkbat_panelapplet_la_SOURCES = acpidriver.cpp batgauge.cpp batterydriver.cpp batinfo.cpp \
+kthinkbat_panelapplet_la_SOURCES = acpidriver.cpp acpisysfsdriver.cpp batgauge.cpp \
+	batterydriver.cpp batinfo.cpp \
 	batinfobase.cpp batinfosum.cpp battooltip.cpp driverdata.cpp kthinkbat.cpp \
 	kthinkbatconfig.kcfgc prefs.ui smapidriver.cpp
 kthinkbat_panelapplet_la_LDFLAGS = -avoid-version -module $(all_libraries)
@@ -18,5 +19,6 @@ kde_kcfg_DATA = kthinkbat.kcfg
 messages: rc.cpp
 	$(EXTRACTRC) `find . -name \*.ui -o -name \*.rc` > rc.cpp
 	$(XGETTEXT) *.cpp -o $(podir)/kthinkbat.pot
-noinst_HEADERS = acpidriver.h batgauge.h batterydriver.h batinfo.h batinfobase.h batinfosum.h \
+noinst_HEADERS = acpidriver.h acpisysfsdriver.h batgauge.h batterydriver.h batinfo.h \
+	batinfobase.h batinfosum.h \
 	batterydriver.h battooltip.h debug.h driverdata.h smapidriver.h

@@ -100,6 +100,8 @@ public:
 protected:
     void calculateRemainingTime();
 
+    int readNumber(const QString& filePath, int defaultValue);
+
     DriverData m_driverData;
 
     QString m_driverName;

@@ -56,7 +56,6 @@ void
 AcpiDriver::reset() {
     debug("Reseting driver data...");
     BatteryDriver::reset();
-    m_remTimeForecastCap = 0;
     m_valid = false;
 }
 

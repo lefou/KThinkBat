@@ -137,10 +137,12 @@ KThinkBat::slotPreferences() {
     Prefs* prefs = new Prefs(this);
     assert(prefs);
 
+    // Override Power Settings switch
     prefs->advancedAcpiGroup->setEnabled(KThinkBatConfig::overridePowerSettings());
     prefs->advancedSmapiGroup->setEnabled(KThinkBatConfig::overridePowerSettings());
-
+    // Enable ACPI switch
     prefs->enableAcpiFrame->setEnabled(KThinkBatConfig::enableAcpi());
+    // Enable SMAPI switch
     prefs->enableSmapiFrame->setEnabled(KThinkBatConfig::enableSmapi());
 
     dialog->addPage(prefs, i18n("KThinkBat Preferences"), "configure");
@@ -167,11 +169,11 @@ KThinkBat::slotAbout() {
                          KAboutData::License_GPL_V2,
                          "(c) 2005-2007, Tobias Roeser",
                          "",
-                         "https://lepetitfou.dyndns.org/kthinkbat",
+                         "http://lepetitfou.dyndns.org/kthinkbat",
                          "le.petit.fou@web.de");
 
     aboutData.addAuthor("Tobias Roeser", "", "le.petit.fou@web.de",
-                        "https://lepetitfou.dyndns.org/kthinkbat");
+                        "http://lepetitfou.dyndns.org/kthinkbat");
 
     aboutData.addCredit("Luis Guillermo Sobalvarro", "Icon design and Spanish translation.", "lgsobalvarro@e-genieria.com");
 

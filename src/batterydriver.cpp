@@ -19,6 +19,12 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
+// Qt
+#include <qfile.h>
+#include <qstring.h>
+#include <qtextstream.h>
+
+// // KThinkBat
 #include "batterydriver.h"
 #include "driverdata.h"
 #include "debug.h"
@@ -174,4 +180,23 @@ BatteryDriver::calculateRemainingTime() {
     }
 
     m_driverData.remaining_minutes = remainingTime;
+}
+
+int
+BatteryDriver::readNumber(const QString& filePath, int defaultValue) {
+
+    QFile file(filePath);
+    bool check = false;
+    int result;
+
+    if (file.exists() && file.open(IO_ReadOnly)) {
+        QTextStream stream(&file);
+        result = stream.readLine().toInt(&check);
+        file.close();
+    }
+    else {
+        debug(QString.("Could not read file '%1'.").arg(filePath));
+    }
+
+    return check ? result : defaultValue;
 }

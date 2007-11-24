@@ -28,6 +28,7 @@
 #include <klocale.h>
 
 #include "acpidriver.h"
+#include "acpisysfsdriver.h"
 #include "batinfo.h"
 #include "batterydriver.h"
 #include "kthinkbatconfig.h"
@@ -39,7 +40,7 @@ BatInfo::BatInfo( int number )
 , m_currentDriver(NULL)
 , m_acpiDriver(NULL)
 , m_smapiDriver(NULL)
-, m_acpiNewDriver(NULL) {
+, m_acpiSysfsDriver(NULL) {
 
     reset();
 }
@@ -57,9 +58,9 @@ BatInfo::~BatInfo() {
         m_smapiDriver = NULL;
     }
 
-    if(m_acpiNewDriver) {
-        delete m_acpiNewDriver;
-        m_acpiNewDriver = NULL;
+    if(m_acpiSysfsDriver) {
+        delete m_acpiSysfsDriver;
+        m_acpiSysfsDriver = NULL;
     }
 }
 
@@ -107,6 +108,9 @@ BatInfo::refresh() {
     bool overrideSettings = KThinkBatConfig::overridePowerSettings();
     bool enableSmapi = !overrideSettings || KThinkBatConfig::enableSmapi();
     bool enableAcpi = !overrideSettings || KThinkBatConfig::enableAcpi();
+    bool enableAcpiSysfs = !overrideSettings || KThinkBatConfig::enableAcpiSysfs();
+
+    QString acpiSysfsPefix = overrideSettings ? KThinkBatConfig::acpiSysfsPrefix() : "/sys/class/power_supply";
 
     bool success = false;
 
@@ -134,6 +138,21 @@ BatInfo::refresh() {
         m_acpiDriver->read();
         if(m_acpiDriver->isValid()) {
             m_currentDriver = m_acpiDriver;
+            success = true;
+        }
+    }
+
+    // 3. If that fails try ACPI /sys
+    // TODO If the new kernel is stable for a longer time, raise the priority of this backend
+    if(!success && enableAcpiSysfs) {
+        debug("About to use ACPI backend.");
+        if(!m_acpiSysfsDriver) {
+            debug("ACPI driver is NULL. Instantiating a new driver.");
+            m_acpiSysfsDriver = new AcpiSysfsDriver(acpiSysfsPefix);
+        }
+        m_acpiSysfsDriver->read();
+        if(m_acpiSysfsDriver->isValid()) {
+            m_currentDriver = m_acpiSysfsDriver;
             success = true;
         }
     }

@@ -124,7 +124,7 @@ private:
     BatteryDriver* m_currentDriver;
 
     BatteryDriver* m_acpiDriver;
-    BatteryDriver* m_acpiNewDriver;
+    BatteryDriver* m_acpiSysfsDriver;
     BatteryDriver* m_smapiDriver;
 };
 
