@@ -25,7 +25,8 @@
 #include <config.h>
 #endif
 
-// #define USE_LOG 1
+#define USE_LOG 1
+
 #if USE_LOG
 #  include <kdebug.h>
 #  define debug(x) \

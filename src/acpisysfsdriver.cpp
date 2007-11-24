@@ -35,7 +35,7 @@ AcpiSysfsDriver::AcpiSysfsDriver(const QString& sysfsPrefix)
 , m_sysfsPrefix(sysfsPrefix + "/")
 , m_valid(false) {
 
-    debug("This is NewAcpiDriver, $Id$. Using sysfs prefix: " + m_sysfsPrefix);
+    debug("This is AcpiSysfsDriver, $Id$. Using sysfs prefix: " + m_sysfsPrefix);
     reset();
 }
 
@@ -54,11 +54,15 @@ AcpiSysfsDriver::read() {
             // No value for current energy available
             m_valid = false;
         }
-        m_driverData.power_unit = "A";
+        else {
+            m_driverData.power_unit = "A";
+            m_valid = true;
+        }
     }
     else {
         // Values in W
         m_driverData.power_unit = "W";
+        m_valid = true;
     }
 
     if (!m_valid) {
@@ -66,9 +70,6 @@ AcpiSysfsDriver::read() {
         reset();
         m_valid = false;
         return;
-    }
-    else {
-        m_valid = true;
     }
 
     m_driverData.last_full = readMyNumberAsMilli(energyOrChargePrefix + "_full", 0);
@@ -105,6 +106,8 @@ AcpiSysfsDriver::myToMilly(int value) {
 
 float
 AcpiSysfsDriver::readMyNumberAsMilli(const QString& filePath, float defaultValue) {
-    return myToMilly(readNumber(filePath, defaultValue * 1000));
+    debug(QString("Reading value from '%1' with default '%2'").arg(filePath).arg(defaultValue));
+    float ret = myToMilly(readNumber(filePath, defaultValue * 1000));
+    return ret;
 }
 

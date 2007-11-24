@@ -130,7 +130,7 @@ BatInfo::refresh() {
 
     // 2. If that fails try ACPI /proc
     if(!success && enableAcpi) {
-        debug("About to use ACPI backend.");
+        debug("About to use ACPI /proc backend.");
         if(!m_acpiDriver) {
             debug("ACPI driver is NULL. Instantiating a new driver.");
             m_acpiDriver = new AcpiDriver(getAcpiFilePrefix());
@@ -145,10 +145,10 @@ BatInfo::refresh() {
     // 3. If that fails try ACPI /sys
     // TODO If the new kernel is stable for a longer time, raise the priority of this backend
     if(!success && enableAcpiSysfs) {
-        debug("About to use ACPI backend.");
+        debug("About to use new ACPI sysfs backend.");
         if(!m_acpiSysfsDriver) {
             debug("ACPI driver is NULL. Instantiating a new driver.");
-            m_acpiSysfsDriver = new AcpiSysfsDriver(acpiSysfsPefix);
+            m_acpiSysfsDriver = new AcpiSysfsDriver(acpiSysfsPefix + "/BAT" + QString::number(m_batNr - 1));
         }
         m_acpiSysfsDriver->read();
         if(m_acpiSysfsDriver->isValid()) {

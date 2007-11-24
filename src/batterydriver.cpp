@@ -187,16 +187,23 @@ BatteryDriver::readNumber(const QString& filePath, int defaultValue) {
 
     QFile file(filePath);
     bool check = false;
-    int result;
+    int result = defaultValue;
 
     if (file.exists() && file.open(IO_ReadOnly)) {
         QTextStream stream(&file);
-        result = stream.readLine().toInt(&check);
+        QString line = stream.readLine();
+        result = line.toInt(&check);
+        if(check) {
+            debug(QString("Read value: %1").arg(result));
+        }
+        else {
+            debug(QString("Could not parse line '%1'.").arg(line));
+        }
         file.close();
     }
     else {
-        debug(QString.("Could not read file '%1'.").arg(filePath));
+        debug(QString("Could not read file '%1'.").arg(filePath));
     }
 
-    return check ? result : defaultValue;
+    return result;
 }
