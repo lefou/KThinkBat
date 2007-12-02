@@ -416,13 +416,13 @@ KThinkBat::createToolTipText() {
 
             toolTipText += toolTipLine( batInfo->isCharging() ? i18n("Current Charge Rate") : i18n("Current Consumption"), batInfo->getPowerConsumptionFormated());
 
-            toolTipText += toolTipLine( i18n("Current Fuel"), QString().number((float)  batInfo->getCurFuel()) + " m" + batInfo->getPowerUnit());
+            toolTipText += toolTipLine( i18n("Current Fuel"), QString().number((float)  batInfo->getCurFuel()) + " m" + batInfo->getPowerUnit() + "h");
 
-            toolTipText += toolTipLine( i18n("Last Fuel"), QString().number((float) batInfo->getLastFuel()) + " m" + batInfo->getPowerUnit());
+            toolTipText += toolTipLine( i18n("Last Fuel"), QString().number((float) batInfo->getLastFuel()) + " m" + batInfo->getPowerUnit() + "h");
 
-            toolTipText += toolTipLine( i18n("Design Fuel"), QString().number((float) batInfo->getDesignFuel()) + " m" + batInfo->getPowerUnit());
+            toolTipText += toolTipLine( i18n("Design Fuel"), QString().number((float) batInfo->getDesignFuel()) + " m" + batInfo->getPowerUnit() + "h");
 
-            toolTipText += toolTipLine( i18n("Critical Fuel"), QString().number((float) batInfo->getCriticalFuel()) + " m" + batInfo->getPowerUnit());
+            toolTipText += toolTipLine( i18n("Critical Fuel"), QString().number((float) batInfo->getCriticalFuel()) + " m" + batInfo->getPowerUnit() + "h");
 
             if(batInfo->getCycleCount() > 0 ) {
                 toolTipText += toolTipLine( i18n("Cycle Count"), QString().number(batInfo->getCycleCount()));
