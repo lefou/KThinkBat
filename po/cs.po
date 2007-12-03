@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kthinkbat\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-12-02 12:44+0100\n"
+"POT-Creation-Date: 2007-12-04 00:11+0100\n"
 "PO-Revision-Date: 2007-06-03 13:25+0200\n"
 "Last-Translator: Martin Samek <martin@marsark.sytes.net>\n"
 "Language-Team: Czech <cs@li.org>\n"
@@ -50,34 +50,48 @@ msgid "charged"
 msgstr "úplně nabitá"
 
 #: kthinkbat.cpp:101
-msgid "charging"
+#, fuzzy
+msgid "Charging"
 msgstr "nabíjí se "
 
 #: kthinkbat.cpp:102
+msgid "charging"
+msgstr "nabíjí se "
+
+#: kthinkbat.cpp:103
+#, fuzzy
+msgid "Discharging"
+msgstr "vybíjí se"
+
+#: kthinkbat.cpp:104
 msgid "discharging"
 msgstr "vybíjí se"
 
-#: kthinkbat.cpp:103
+#: kthinkbat.cpp:105
 msgid "idle"
 msgstr "nečinná"
 
-#: kthinkbat.cpp:104 kthinkbat.cpp:436
+#: kthinkbat.cpp:106 kthinkbat.cpp:439
 msgid "not installed"
 msgstr "není přítomna"
 
+#: kthinkbat.cpp:107
+msgid "Full"
+msgstr ""
+
 #. i18n: file ./prefs.ui line 16
-#: kthinkbat.cpp:148 rc.cpp:3
+#: kthinkbat.cpp:151 rc.cpp:3
 #, no-c-format
 msgid "KThinkBat Preferences"
 msgstr "Nastavení KThinkBat"
 
-#: kthinkbat.cpp:168
+#: kthinkbat.cpp:171
 msgid "A KDE panel applet to display the current laptop battery status."
 msgstr ""
 "Applet pro KDE panel zobrazující informace o okamžitém stavu baterií "
 "notebooku."
 
-#: kthinkbat.cpp:187
+#: kthinkbat.cpp:190
 msgid ""
 "A KDE panel applet to display the current laptop battery status.\n"
 "\n"
@@ -86,56 +100,56 @@ msgstr ""
 "Applet pro KDE panel zobrazující informace o okamžitém stavu baterií "
 "notebooku. <br> <br> Nápověda zatím neexistuje."
 
-#: kthinkbat.cpp:407
+#: kthinkbat.cpp:410
 msgid "Battery %1"
 msgstr "Baterie %1"
 
-#: kthinkbat.cpp:417
+#: kthinkbat.cpp:420
 #, fuzzy
 msgid "Current Charge Rate"
 msgstr "Zbývající energie:"
 
-#: kthinkbat.cpp:417
+#: kthinkbat.cpp:420
 #, fuzzy
 msgid "Current Consumption"
 msgstr "Vybíjecí proud:"
 
-#: kthinkbat.cpp:419
+#: kthinkbat.cpp:422
 #, fuzzy
 msgid "Current Fuel"
 msgstr "Zbývající energie:"
 
-#: kthinkbat.cpp:421
+#: kthinkbat.cpp:424
 #, fuzzy
 msgid "Last Fuel"
 msgstr "Zjištěná max. kapacita:"
 
-#: kthinkbat.cpp:423
+#: kthinkbat.cpp:426
 #, fuzzy
 msgid "Design Fuel"
 msgstr "Udávaná max. kapacita:"
 
-#: kthinkbat.cpp:425
+#: kthinkbat.cpp:428
 #, fuzzy
 msgid "Critical Fuel"
 msgstr "Kritická úroveň:"
 
-#: kthinkbat.cpp:428
+#: kthinkbat.cpp:431
 #, fuzzy
 msgid "Cycle Count"
 msgstr "Počet cyklů:"
 
-#: kthinkbat.cpp:431
+#: kthinkbat.cpp:434
 #, fuzzy
 msgid "State"
 msgstr "Stav:"
 
-#: kthinkbat.cpp:433
+#: kthinkbat.cpp:436
 #, fuzzy
 msgid "Remaining Time"
 msgstr "Zbývající &čas"
 
-#: kthinkbat.cpp:433
+#: kthinkbat.cpp:436
 msgid "full charged"
 msgstr "plně nabitá"
 

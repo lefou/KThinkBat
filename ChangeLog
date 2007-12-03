@@ -1,11 +1,12 @@
 KThinkBat HEAD:
-   * New ACPI battery backend for new sysfs ACPI interface for Linux Kernels
-     >=2.6.24_rc1
+   * #36: New ACPI battery backend for new sysfs ACPI interface 'power_supply' 
+     for Linux Kernels >=2.6.24_rc1
    * Refactored battery backend: Each backend has it's own driver
    * Available battery drivers: ACPI, ACPI_SYSFS (alpha), SMAPI
    * make install installs kthinkbat_panelapplet.{la,so} now into $PREFIX/lib/kdeX
    * Translation updates: German, Italian (Anselmo Luginbühl), Slovak (Jozef Riha)
    * Use forward declarations instead of includes where possible (compile speedup)
+   * Fixed regression bug #38: mW to mWh in some places
 
 KThinkBat 0.2.8 - 28.07.2007:
    * #26: Added Czech translation send by Martin Samek
