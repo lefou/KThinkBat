@@ -4,10 +4,10 @@
 # Tobias Roeser <le.petit.fou@web.de>, 2006, 2007.
 msgid ""
 msgstr ""
-"Project-Id-Version: KThinkBat-de\n"
+"Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-12-02 12:44+0100\n"
-"PO-Revision-Date: 2007-07-01 18:10+0200\n"
+"PO-Revision-Date: 2007-12-03 22:25+0100\n"
 "Last-Translator: Tobias Roeser <le.petit.fou@web.de>\n"
 "Language-Team: Deutsch\n"
 "MIME-Version: 1.0\n"
@@ -71,8 +71,7 @@ msgstr "KThinkBat Einstellungen"
 
 #: kthinkbat.cpp:168
 msgid "A KDE panel applet to display the current laptop battery status."
-msgstr ""
-"Ein KDE Panel Applet zur Anzeige des aktuellen Akku-Zusandes eines Laptops."
+msgstr "Ein KDE Panel Applet zur Anzeige des aktuellen Akku-Zusandes eines Laptops."
 
 #: kthinkbat.cpp:187
 msgid ""
@@ -242,7 +241,7 @@ msgstr "Alt+W"
 
 #. i18n: file ./prefs.ui line 201
 #: rc.cpp:64
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Appearan&ce"
 msgstr "&Erscheinungsbild"
 
@@ -380,21 +379,21 @@ msgstr "Pfad zu ACPI Akkuinformationen"
 
 #. i18n: file ./prefs.ui line 825
 #: rc.cpp:158
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "E&nable ACPI"
-msgstr "Verwende ACPI"
+msgstr "Verwe&nde ACPI"
 
 #. i18n: file ./prefs.ui line 836
 #: rc.cpp:164
 #, no-c-format
 msgid "Enable new ACPI sysfs interface (Linux Kernel >=&2.6.24)"
-msgstr ""
+msgstr "Verwendet neue ACPI sysfs Schnittstelle (ab Linux Kernel &2.6.24)"
 
 #. i18n: file ./prefs.ui line 839
 #: rc.cpp:167
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Alt+2"
-msgstr "Alt+Z"
+msgstr "Alt+2"
 
 #. i18n: file ./prefs.ui line 849
 #: rc.cpp:170
@@ -443,3 +442,4 @@ msgstr "Kritischer Akkustand"
 #, no-c-format
 msgid "%"
 msgstr "%"
+
