@@ -99,7 +99,7 @@ BatteryDriver::isOnline() {
 void
 BatteryDriver::read() {
     // Default impl. does nothing.
-    debug("Possible programming error! The called method BatteryDriver::read() from does nothing.");
+    debug("Possible programming error! The called method BatteryDriver::read() does nothing.");
 }
 
 void
@@ -205,5 +205,23 @@ BatteryDriver::readNumber(const QString& filePath, int defaultValue) {
         debug(QString("Could not read file '%1'.").arg(filePath));
     }
 
+    return result;
+}
+
+QString
+BatteryDriver::readString(const QString& filePath, QString defaultValue) {
+
+    QFile file(filePath);
+    QString result = defaultValue;
+
+    if (file.exists() && file.open(IO_ReadOnly)) {
+        QTextStream stream(&file);
+        result = stream.readLine();
+        file.close();
+    }
+    else {
+        debug(QString("Could not read file '%1'.").arg(filePath));
+        result = defaultValue;
+    }
     return result;
 }

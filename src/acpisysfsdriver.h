@@ -39,7 +39,7 @@ class AcpiSysfsDriver : public BatteryDriver {
 
 public:
 
-    AcpiSysfsDriver(const QString& sysfsPrefix);
+    AcpiSysfsDriver(const QString& sysfsPrefix, const QString& batSuffix);
 
     virtual void read();
 
@@ -54,7 +54,8 @@ private:
     /** Read a value in My (10^-6) as milli (10^-3). */
     float readMyNumberAsMilli(const QString& filePath, float defaultValue);
 
-    QString m_sysfsPrefix;
+    QString m_sysfsAcPrefix;
+    QString m_sysfsBatPrefix;
 
     bool m_valid;
 };

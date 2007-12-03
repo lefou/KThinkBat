@@ -98,10 +98,13 @@ KThinkBat::KThinkBat(const QString& configFile, Type type, int actions, QWidget 
 KThinkBat::~KThinkBat() {
     // Trigger some translations
     i18n("charged");
+    i18n("Charging");
     i18n("charging");
+    i18n("Discharging");
     i18n("discharging");
     i18n("idle");
     i18n("not installed");
+    i18n("Full");
 
     if (timer) {
         timer->stop();

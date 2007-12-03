@@ -30,25 +30,26 @@
 #include "driverdata.h"
 #include "debug.h"
 
-AcpiSysfsDriver::AcpiSysfsDriver(const QString& sysfsPrefix)
+AcpiSysfsDriver::AcpiSysfsDriver(const QString& sysfsPrefix, const QString& batSuffix)
 : BatteryDriver("acpi_new")
-, m_sysfsPrefix(sysfsPrefix + "/")
+, m_sysfsAcPrefix(sysfsPrefix + "/AC/")
+, m_sysfsBatPrefix(sysfsPrefix + "/" + batSuffix + "/")
 , m_valid(false) {
 
-    debug("This is AcpiSysfsDriver, $Id$. Using sysfs prefix: " + m_sysfsPrefix);
+    debug("This is AcpiSysfsDriver, $Id$. Using sysfs prefix: " + m_sysfsBatPrefix);
     reset();
 }
 
 void
 AcpiSysfsDriver::read() {
     debug("About to read ACPI values.");
-    QString energyOrChargePrefix = m_sysfsPrefix + "energy";
+    QString energyOrChargePrefix = m_sysfsBatPrefix + "energy";
 
     m_driverData.current_full = readMyNumberAsMilli(energyOrChargePrefix + "_now", -1);
 
     if(-1 == m_driverData.current_full) {
         // Values in A
-        energyOrChargePrefix = m_sysfsPrefix + "charge";
+        energyOrChargePrefix = m_sysfsBatPrefix + "charge";
         m_driverData.current_full = readMyNumberAsMilli(energyOrChargePrefix + "_now", -1);
         if(-1 == m_driverData.current_full) {
             // No value for current energy available
@@ -66,7 +67,7 @@ AcpiSysfsDriver::read() {
     }
 
     if (!m_valid) {
-        debug("Reading of ACPI values from prefix '" + m_sysfsPrefix + "' failed. This driver is invalid.");
+        debug("Reading of ACPI values from prefix '" + m_sysfsBatPrefix + "' failed. This driver is invalid.");
         reset();
         m_valid = false;
         return;
@@ -75,9 +76,13 @@ AcpiSysfsDriver::read() {
     m_driverData.last_full = readMyNumberAsMilli(energyOrChargePrefix + "_full", 0);
     m_driverData.design_full = readMyNumberAsMilli(energyOrChargePrefix + "_full_design", 0);
 
-    m_driverData.current_power_consumption = readMyNumberAsMilli(m_sysfsPrefix + "current_now", 0);
+    m_driverData.current_power_consumption = readMyNumberAsMilli(m_sysfsBatPrefix + "current_now", 0);
 
-    m_driverData.battery_installed = (1 == readNumber(m_sysfsPrefix + "present", 0));
+    m_driverData.battery_installed = (1 == readNumber(m_sysfsBatPrefix + "present", 0));
+
+    m_driverData.ac_connected = (1 == readNumber(m_sysfsAcPrefix + "online", 0));
+
+    m_driverData.state = readString(m_sysfsBatPrefix + "status", "");
 
     debug("Read values: " + m_driverData.dump());
 }

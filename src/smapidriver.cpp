@@ -46,7 +46,7 @@ SmapiDriver::read() {
     debug("About to read SMAPI values.");
     m_valid = parseSysfsTP();
     if (!m_valid) {
-        debug("Reading of SMAPI values from prefix '" + m_smapiBatPrefix + "' failed. This driver is invalid.");
+        debug(QString("Reading of SMAPI values from prefix '%1' failed. This driver is invalid.").arg(m_smapiBatPrefix));
         reset();
     }
     else {
@@ -65,7 +65,7 @@ SmapiDriver::isValid() {
     return m_valid;
 }
 
-bool 
+bool
 SmapiDriver::parseSysfsTP() {
 
     m_driverData.power_unit = "W";
@@ -77,7 +77,8 @@ SmapiDriver::parseSysfsTP() {
     bool check;
 
     if (!QDir().exists(m_smapiBatPrefix)) {
-        static bool sayTheProblem = true;
+        debug(QString("Prefix directory '%1' does not exists.").arg(m_smapiBatPrefix));
+        static bool sayTheProblem = false;
         if (sayTheProblem) {
             qDebug( "KThinkBat: There is no directory %s. Do you have tp_smapi loaded?", m_smapiBatPrefix );
             sayTheProblem = false;

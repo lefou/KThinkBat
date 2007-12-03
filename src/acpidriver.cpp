@@ -81,8 +81,9 @@ AcpiDriver::parseProcACPI() {
 
     QFile file( m_procAcpiBatPrefix + "info" );
     if (!file.exists() || !file.open(IO_ReadOnly)) {
+        debug(QString("KThinkBat: could not open %s").arg(m_procAcpiBatPrefix + "info"));
         // this is nothing unexpected, so say it only once
-        static bool sayTheProblem = true;
+        static bool sayTheProblem = false;
         if (sayTheProblem) {
             qDebug( "KThinkBat: could not open %s", file.name().latin1() );
             sayTheProblem = false;
@@ -128,7 +129,8 @@ AcpiDriver::parseProcACPI() {
 
     file.setName(m_procAcpiBatPrefix + "state");
     if (!file.exists() || !file.open(IO_ReadOnly)) {
-        static bool sayTheProblem2 = true;
+        debug(QString("KThinkBat: could not open '%s'.").arg(m_procAcpiBatPrefix + "state"));
+        static bool sayTheProblem2 = false;
         if( sayTheProblem2 ) {
             qDebug( "KThinkBat: could not open %s", file.name().latin1() );
             sayTheProblem2 = false;

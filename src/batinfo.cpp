@@ -148,7 +148,7 @@ BatInfo::refresh() {
         debug("About to use new ACPI sysfs backend.");
         if(!m_acpiSysfsDriver) {
             debug("ACPI driver is NULL. Instantiating a new driver.");
-            m_acpiSysfsDriver = new AcpiSysfsDriver(acpiSysfsPefix + "/BAT" + QString::number(m_batNr - 1));
+            m_acpiSysfsDriver = new AcpiSysfsDriver(acpiSysfsPefix, "BAT" + QString::number(m_batNr - 1));
         }
         m_acpiSysfsDriver->read();
         if(m_acpiSysfsDriver->isValid()) {
