@@ -1,4 +1,4 @@
-KThinkBat HEAD:
+KThinkBat 0.2.9 - 16.12.2007:
    * #36: New ACPI battery backend for new sysfs ACPI interface 'power_supply' 
      for Linux Kernels >=2.6.24_rc1
    * Refactored battery backend: Each backend has it's own driver

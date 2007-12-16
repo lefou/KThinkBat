@@ -1,8 +1,5 @@
 = TODOs for KThinkBat =
 
- - make backend selectable: tp_smapi or ACPI
- - Option to enable/disable: ACPI/TP_SMAPI/APM
- - #7: rework drawing alg for gauge dot
  - there should be a symbol such as power plug next to it when connected to AC
 
 (Feel free to open a ticket for these issues - if not already there - to show, that you want these features.)
