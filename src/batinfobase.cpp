@@ -85,14 +85,14 @@ BatInfoBase::formatRemainingTime(int timeInMin) {
 QString
 BatInfoBase::formatPowerUnit(float power, const QString& powerUnit) {
 
-    if (power < 0 || powerUnit.isEmpty()) {
+    if (power < 0.0 || powerUnit.isEmpty()) {
         return i18n("nA");
     }
 
     QString formatString = "0";
     int precision = ("W" == powerUnit) ? KThinkBatConfig::precisionPowerUnitW() : KThinkBatConfig::precisionPowerUnitA();
 
-    if (power > 0) {
+    if (power > 0.0) {
         switch (precision) {
         case 0:
             formatString = QString().number((int)(power + 500)/1000);
@@ -132,7 +132,7 @@ BatInfoBase::formatPowerUnit(float power, const QString& powerUnit) {
  */
 int
 BatInfoBase::calculateRemainingTimeInMinutes(BatInfoBase* batInfo1, BatInfoBase* batInfo2) {
-    double remaining = 0;
+    double remaining = 0.0;
     
     if(!batInfo1) {
         return (int) remaining;
@@ -149,12 +149,12 @@ BatInfoBase::calculateRemainingTimeInMinutes(BatInfoBase* batInfo1, BatInfoBase*
     }
 
     if (batInfo1->isDischarging()) {
-        if(curFuel > 0 && powerConsumption > 0) {
+        if(curFuel > 0.0 && powerConsumption > 0.0) {
             remaining = (curFuel / powerConsumption) * 60.0;
         }
     }
     else if (batInfo1->isCharging()) {
-        if( powerConsumption > 0 && (lastFuel - curFuel) > 0 ) {
+        if( powerConsumption > 0.0 && (lastFuel - curFuel) > 0.0 ) {
             remaining = ((lastFuel - curFuel) / powerConsumption) * 60.0;
         }
     }
@@ -166,8 +166,9 @@ float
 BatInfoBase::getChargeLevel() {
     float curFuel = getCurFuel();
     float lastFuel = getLastFuel();
-    if (curFuel >= 0 && lastFuel > 0) {
-        return ( 100.0 / lastFuel ) * curFuel;
+    if (curFuel >= 0.0 && lastFuel > 0.0) {
+        float level = ( 100.0 / lastFuel ) * curFuel;
+        return level <= 100.0 ? level : 100.0;
     }
-    return -1;
+    return -1.0;
 }

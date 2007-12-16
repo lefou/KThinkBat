@@ -7,6 +7,7 @@ KThinkBat HEAD:
    * Translation updates: German, Italian (Anselmo Luginbühl), Slovak (Jozef Riha)
    * Use forward declarations instead of includes where possible (compile speedup)
    * Fixed regression bug #38: mW to mWh in some places
+   * #39: Don't show percentage values greater than 100.
 
 KThinkBat 0.2.8 - 28.07.2007:
    * #26: Added Czech translation send by Martin Samek
