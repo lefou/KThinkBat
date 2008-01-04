@@ -89,7 +89,7 @@ BatInfoSum::getRemainingTimeInMin() {
 
     // The chance that there is only on battery is high, so we try to avoid
     // a recalculation of the remaining time if there is only one battery
-    bool batCount = 0;
+    int batCount = 0;
     for(BatInfoBase* bat = m_bats.first(); bat; bat = m_bats.next()) {
         if(bat->isInstalled()) {
             batCount++;
