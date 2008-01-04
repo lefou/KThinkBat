@@ -1,3 +1,6 @@
+KThinkBat 0.2.10:
+   * #40: Fixed variable type
+
 KThinkBat 0.2.9 - 16.12.2007:
    * #36: New ACPI battery backend for new sysfs ACPI interface 'power_supply' 
      for Linux Kernels >=2.6.24_rc1
