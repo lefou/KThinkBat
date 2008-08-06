@@ -79,7 +79,7 @@ msgstr "non installata"
 
 #: kthinkbat.cpp:107
 msgid "Full"
-msgstr ""
+msgstr "Carica"
 
 #. i18n: file ./prefs.ui line 16
 #: kthinkbat.cpp:151 rc.cpp:3
@@ -410,7 +410,7 @@ msgstr "Abilita ACPI"
 #: rc.cpp:164
 #, no-c-format
 msgid "Enable new ACPI sysfs interface (Linux Kernel >=&2.6.24)"
-msgstr ""
+msgstr "Abilita la nuova interfaccia ACPI sysfs (Kernel Linux >=&2.6.24)"
 
 #. i18n: file ./prefs.ui line 839
 #: rc.cpp:167
