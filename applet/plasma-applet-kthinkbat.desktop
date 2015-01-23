@@ -1,6 +1,6 @@
 [Desktop Entry]
+Encoding=UTF-8
 Name=KThinkBat - A KDE Battery Monitor
-
 Icon=battery
 Type=Service
 ServiceTypes=Plasma/Applet
@@ -9,7 +9,7 @@ X-KDE-Library=plasma_applet_kthinkbat
 X-KDE-PluginInfo-Author=Tobias Roeser
 X-KDE-PluginInfo-Email=le.petit.fou@web.de
 X-KDE-PluginInfo-Name=kthinkbat-plasma
-X-KDE-PluginInfo-Version=0.1
+X-KDE-PluginInfo-Version=0.4-svn
 X-KDE-PluginInfo-Website=http://lepetitfou.dyndns.org/kthinkbat
 X-KDE-PluginInfo-Category=System Information
 X-KDE-PluginInfo-Depends=
