@@ -18,52 +18,35 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
-#ifndef KTHINKBAT_DRIVERDATA_H
-#define KTHINKBAT_DRIVERDATA_H
+#ifndef KTHINKBAT_IDLEHANDLER_H
+#define KTHINKBAT_IDLEHANDLER_H
 
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
 
-#include <qstring.h>
+// Qt
+// this is needed to avoid typedef clash with X11
+//#ifndef QT_CLEAN_NAMESPACE
+//#  define QT_CLEAN_NAMESPACE
+//#endif
+
+// X
+#include <X11/X.h>
 
 /**
     @author Tobias Roeser <le.petit.fou@web.de>
 */
-class DriverData {
+class IdleHandler {
 
 public:
-    enum BatteryState {
-        UNKNOWN = 0,
-        NOT_PRESENT = 1,
-        IDLE = 2,
-        CHARGING = 3,
-        DISCHARGING = 4,
-    };
+    IdleHandler(Display* display);
 
-    DriverData();
+    virtual ~IdleHandler();
 
-    virtual void reset();
-
-    virtual QString dump();
-
-    bool battery_installed;
-    bool ac_connected;
-    bool charging;
-
-    float critical_full;
-    float current_full;
-    float design_full;
-    float last_full;
-    float current_power_consumption;
-
-    QString power_unit;
-    QString state;
-
-    int cycle_count;
-    int remaining_minutes;
-
-    BatteryState batState;
+private:
+    Display* m_display;
+    bool checked;
 };
 
-#endif // KTHINKBAT_DRIVERDATA_H
+#endif // KTHINKBAT_ACPIDRIVER_H

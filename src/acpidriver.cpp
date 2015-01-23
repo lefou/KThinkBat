@@ -122,7 +122,8 @@ AcpiDriver::parseProcACPI() {
     if (!m_driverData.battery_installed) {
         reset();
         m_driverData.battery_installed = false;
-        // we return true, as no other backend should detect the fact, that there is no battery again.
+        // We return true, as no other backend should detect the fact again,
+        // that there is no battery.
         debug("Battery is not installed but driver is valid.");
         return true;
     }
@@ -183,22 +184,37 @@ AcpiDriver::parseProcACPI() {
     m_driverData.design_full = designCap.toInt(&ok);
     if (!ok) { m_driverData.design_full = 0; }
 
-    // Read battery disign critical capacity
+    // Read battery design critical capacity
     ok = true;
     m_driverData.critical_full = criticalCap.toInt(&ok);
     if (!ok) { m_driverData.critical_full = 0; }
 
-    // current cosumption
+    // Read current power cosumption
     ok = true;
     m_driverData.current_power_consumption = mWHstring.toInt(&ok);
     if (!ok) { m_driverData.current_power_consumption = 0; }
 
-    // TODO better read /proc/acpi/ac_adapter/AC/state and evaluate "on-line"
-    bool oldAcCon = isOnline();
-    m_driverData.ac_connected = (m_driverData.state != "discharging");
-    if( oldAcCon != m_driverData.ac_connected ) {
-//  TODO       emit onlineModeChanged( m_driverData.ac_connected );
+    if(m_driverData.state == "idle") {
+        m_driverData.batState = DriverData::IDLE;
+    } else if(m_driverData.state == "charging") {
+        m_driverData.batState = DriverData::CHARGING;
+    } else if(m_driverData.state == "discharging") {
+        m_driverData.batState = DriverData::DISCHARGING;
+    } else if(m_driverData.state == "not present") {
+        m_driverData.batState = DriverData::NOT_PRESENT;
+    } else {
+        m_driverData.batState = DriverData::UNKNOWN;
     }
+
+    // Is AC connected (aka online)?
+    // TODO better read /proc/acpi/ac_adapter/AC/state and evaluate "on-line"
+    m_driverData.ac_connected = (m_driverData.batState != DriverData::DISCHARGING
+                                || m_driverData.batState == DriverData::CHARGING
+                                || m_driverData.batState == DriverData::IDLE);
+
+    // Is battery currently charging?
+    m_driverData.charging = (m_driverData.batState == DriverData::CHARGING);
+
 
     // no need to read these values as we dont use them currently
     // parseProcAcpiBatAlarm();

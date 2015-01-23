@@ -44,6 +44,7 @@ DriverData::reset() {
     state = "";
     cycle_count = 0;
     remaining_minutes = 0;
+    batState = UNKNOWN;
 }
 
 QString

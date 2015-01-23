@@ -18,52 +18,33 @@
  *   Free Software Foundation, Inc.,                                       *
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
-#ifndef KTHINKBAT_DRIVERDATA_H
-#define KTHINKBAT_DRIVERDATA_H
 
-#ifdef HAVE_CONFIG_H
-#include <config.h>
+// Qt
+// this is needed to avoid typedef clash with X11
+#ifndef QT_CLEAN_NAMESPACE
+#  define QT_CLEAN_NAMESPACE
 #endif
+#include <qwidget.h>
 
-#include <qstring.h>
+// KThinkBat
+#include "idlehandler.h"
 
-/**
-    @author Tobias Roeser <le.petit.fou@web.de>
-*/
-class DriverData {
+/* needed for lXext C library linkage */
+extern "C" {
+    #include <X11/Xproto.h>
+    #include <X11/extensions/dpms.h>
+    #include <X11/extensions/scrnsaver.h>
+}
 
-public:
-    enum BatteryState {
-        UNKNOWN = 0,
-        NOT_PRESENT = 1,
-        IDLE = 2,
-        CHARGING = 3,
-        DISCHARGING = 4,
-    };
+IdleHandler::IdleHandler(Display* display)
+: m_display(display)
+{
+    checked = m_display != NULL;
 
-    DriverData();
+    int dummy = 0;
+    checked &= XScreenSaverQueryExtension(m_display, &dummy, &dummy);
+}
 
-    virtual void reset();
-
-    virtual QString dump();
-
-    bool battery_installed;
-    bool ac_connected;
-    bool charging;
-
-    float critical_full;
-    float current_full;
-    float design_full;
-    float last_full;
-    float current_power_consumption;
-
-    QString power_unit;
-    QString state;
-
-    int cycle_count;
-    int remaining_minutes;
-
-    BatteryState batState;
-};
-
-#endif // KTHINKBAT_DRIVERDATA_H
+IdleHandler::~IdleHandler() {
+    m_display = NULL;
+}
