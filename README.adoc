@@ -1,1 +1,17 @@
+= KThinkBat
+
+
+
+_This Repository was converted from the original SVN repository, but unfortunatelly, not all (older release) tags could be restored._
+
+The original project homepage at http://lepetitfou.dyndns.org/KThinkBat no longer exists, but I tried to preserve as much information as possible here.
+
+There is als a Site in the ThinkWiki: http://www.thinkwiki.org/wiki/KThinkBat
+
+
+== Description
+
+KThinkBat is a laptop battery monitor for the KDE-Kicker (KDE 3). It is inspired by the Windows Application "Battery Maximizer" which is included with ThinkPads.
+
+It can use the SMAPI BIOS (through the http://www.thinkwiki.org/wiki/Tp_smapi[tp_smapi] driver) or http://www.thinkwiki.org/wiki/How_to_make_ACPI_work[ACPI] to collect the data. It shows you the current power consumption of the laptop and brings support for a second battery. It is fully customizable including sizes, color, fonts and battery number
 
